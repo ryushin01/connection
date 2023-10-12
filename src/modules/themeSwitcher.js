@@ -22,6 +22,7 @@ const ThemeSwitcherWrap = styled.div`
     appearance: none;
     width: 40px;
     height: 40px;
+    cursor: pointer;
     background-color: transparent;
     background-size: cover;
     background-position: center;
