@@ -1,7 +1,8 @@
 import React from 'react';
+import ProductList from '../../components/ProductList/ProductList';
 
 const Main = () => {
-  return <>1</>;
+  return <ProductList />;
 };
 
 export default Main;
