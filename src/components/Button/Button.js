@@ -12,12 +12,11 @@ const Button = ({
 }) => {
   return (
     <DefaultButton
-      className="btn"
       type={type}
-      shape={shape}
-      color={color}
-      size={size}
-      full={full}
+      dataShape={shape}
+      dataColor={color}
+      dataSize={size}
+      dataFull={full}
       aria-label={content}
       onClick={onClick}
       disabled={disabled}
@@ -39,6 +38,24 @@ const Button = ({
  * @property {boolean} disabled                             - 버튼의 비활성화 상태를 정의합니다.
  */
 
+const SIZE_STYLES_LIST = {
+  small: {
+    minWidth: '150px',
+    padding: '11px 10px',
+    fontSize: '14px',
+  },
+  medium: {
+    minWidth: '175px',
+    padding: '12px 10px',
+    fontSize: '16px',
+  },
+  large: {
+    minWidth: '200px',
+    padding: '13px 10px',
+    fontSize: '18px',
+  },
+};
+
 // 버튼 기본 구조를 스타일링합니다. 모든 버튼에서 사용할 수 있게 css로 처리하고, ${ButtonBasicStructure}처럼 mixin으로 꺼내쓰게 합니다.
 const DefaultButton = styled.button`
   display: flex;
@@ -48,25 +65,20 @@ const DefaultButton = styled.button`
   opacity: 0.9;
   cursor: pointer;
   width: ${props => (props.full ? '100%' : 'auto')};
-  min-width: ${props =>
-    (props.size === 'small' && '150px') ||
-    (props.size === 'medium' && '175px') ||
-    '200px'};
-  padding: ${props =>
-    (props.size === 'small' && '11px 10px') ||
-    (props.size === 'medium' && '12px 10px') ||
-    '13px 10px'};
-  font-size: ${props =>
-    (props.size === 'small' && '14px') ||
-    (props.size === 'medium' && '16px') ||
-    '18px'};
+
+  min-width: ${({ dataSize }) =>
+    SIZE_STYLES_LIST[dataSize]?.minWidth || '200px'};
+  padding: ${({ dataSize }) =>
+    SIZE_STYLES_LIST[dataSize]?.padding || '13px 10px'};
+  font-size: ${({ dataSize }) =>
+    SIZE_STYLES_LIST[dataSize]?.fontSize || '18px'};
+
   border-color: ${props =>
-    // theme는 theme.js에서 확인 가능한 미리 정의된 테마 컬러 셋입니다.
     (props.color === 'primary' && props.theme.primaryColor) ||
     (props.color === 'secondary' && props.theme.secondaryColor) ||
     props.theme.grayscaleC};
 
-  &[shape='solid'] {
+  &[dataShape='solid'] {
     background-color: ${props =>
       (props.color === 'primary' && props.theme.primaryColor) ||
       (props.color === 'secondary' && props.theme.secondaryColor) ||
@@ -74,13 +86,13 @@ const DefaultButton = styled.button`
     color: ${props => props.theme.grayscaleB};
   }
 
-  &[shape='outline'],
-  &[shape='round'] {
+  &[dataShape='outline'],
+  &[dataShape='round'] {
     background-color: ${props => props.theme.grayscaleB};
     color: ${props => props.theme.grayscaleC};
   }
 
-  &[shape='round'] {
+  &[dataShape='round'] {
     border-radius: 50px;
   }
 
@@ -94,4 +106,5 @@ const DefaultButton = styled.button`
     cursor: not-allowed;
   }
 `;
+
 export default Button;
