@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as MoreIcon } from '../../svg/icon_more.svg';
 import styled from 'styled-components';
@@ -12,7 +12,7 @@ const Band = ({ id, path, title }) => {
   return (
     <BandWrap>
       <div className="inner-wrap">
-        <h1>밴드 타이틀</h1>
+        <h1 tabIndex="0">밴드 타이틀</h1>
         <Swiper
           slidesPerView="5"
           modules={[Navigation]}
@@ -24,21 +24,7 @@ const Band = ({ id, path, title }) => {
           <SwiperSlide>
             <ProductListItem />
           </SwiperSlide>
-          <SwiperSlide>
-            <ProductListItem />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ProductListItem />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ProductListItem />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ProductListItem />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ProductListItem />
-          </SwiperSlide>
+
           <div className="controller" aria-hidden="true">
             <button type="button" className="swiper-prev-btn">
               이전

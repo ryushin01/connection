@@ -1,0 +1,94 @@
+[
+  {
+    "categoryId": 1,
+    "categoryName": "푸드",
+    "products": [
+      {
+        "productId": 1,
+        "productName": "상품 A",
+        "productImage": "/images/products/beef.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 2,
+        "productName": "상품 B",
+        "productImage": "/images/products/beef.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 3,
+        "productName": "상품 C",
+        "productImage": "/images/products/beef.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 4,
+        "productName": "상품 D",
+        "productImage": "/images/products/beef.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 5,
+        "productName": "상품 E",
+        "productImage": "/images/products/beef.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 6,
+        "productName": "상품 F",
+        "productImage": "/images/products/beef.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      }
+    ]
+  },
+  {
+    "categoryId": 2,
+    "categoryName": "디지털",
+    "products": [
+      {
+        "productId": 1,
+        "productName": "상품 A",
+        "productImage": "/images/products/pork.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 2,
+        "productName": "상품 B",
+        "productImage": "/images/products/pork.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 3,
+        "productName": "상품 C",
+        "productImage": "/images/products/pork.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 4,
+        "productName": "상품 D",
+        "productImage": "/images/products/pork.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      }
+    ]
+  }
+]
