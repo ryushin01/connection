@@ -28,7 +28,8 @@ const FlexCenter = css`
 const ProductImageWrap = styled.div`
   ${FlexCenter};
   position: relative;
-  width: 20vw;
+  // width: 20vw;
+  width: 100%;
   height: 20vw;
   background-color: #f9f9f9;
   a {
@@ -49,8 +50,8 @@ const ProductImageWrap = styled.div`
     &::before {
       content: '';
       display: block;
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
       background: url(/images/common/icon_star.png) no-repeat center/cover;
     }
   }

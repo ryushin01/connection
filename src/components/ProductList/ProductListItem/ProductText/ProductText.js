@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const ProductText = ({ id, path, title }) => {
   return (
     <ProductProductTextWrap>
-      <Link to={`/detail/${id}`}>
+      <Link to={`/detail/${id}`} aria-hidden="true">
         <h2>상품명 상품명 상품명 상품명 상품명 상품명</h2>
         <strong>
           <span>원가격</span>

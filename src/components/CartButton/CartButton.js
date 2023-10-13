@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as CartIcon } from '../../svg/cart.svg';
+import { ReactComponent as CartIcon } from '../../svg/icon_cart.svg';
 import styled from 'styled-components';
 
 const CartButton = ({ onClick }) => {
@@ -14,8 +14,8 @@ const CartButton = ({ onClick }) => {
 
 const CartButtonWrap = styled.div`
   button {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     border: 1px transparent solid;
     background-color: #fff;

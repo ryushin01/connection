@@ -12,8 +12,9 @@ const ProductListItem = ({ id, path, title }) => {
   );
 };
 
-const ProductListItemWrap = styled.li`
-  width: 20vw;
+const ProductListItemWrap = styled.div`
+  // width: 20vw;
+  width: 100%;
 `;
 
 export default ProductListItem;
