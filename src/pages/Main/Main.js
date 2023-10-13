@@ -17,17 +17,16 @@ const Main = () => {
       });
   };
 
-  console.log(bandData);
-
   useEffect(() => {
     getBandData();
   }, []);
 
   return (
     <main>
-      {/* map() */}
       <div>
-        <Band />
+        {bandData?.map((item, index) => {
+          return <Band key={index} item={item} />;
+        })}
       </div>
     </main>
   );

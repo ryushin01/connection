@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as MoreIcon } from '../../svg/icon_more.svg';
 import styled from 'styled-components';
@@ -8,11 +8,13 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-const Band = ({ id, path, title }) => {
+const Band = ({ item }) => {
+  const { categoryName, categoryId, products } = item;
+
   return (
     <BandWrap>
       <div className="inner-wrap">
-        <h1 tabIndex="0">밴드 타이틀</h1>
+        <h1 tabIndex="0">{categoryName}</h1>
         <Swiper
           slidesPerView="5"
           modules={[Navigation]}
@@ -21,9 +23,13 @@ const Band = ({ id, path, title }) => {
             nextEl: '.swiper-next-btn',
           }}
         >
-          <SwiperSlide>
-            <ProductListItem />
-          </SwiperSlide>
+          {products?.map((item, index) => {
+            return (
+              <SwiperSlide key={index}>
+                <ProductListItem item={item} />
+              </SwiperSlide>
+            );
+          })}
 
           <div className="controller" aria-hidden="true">
             <button type="button" className="swiper-prev-btn">
@@ -35,7 +41,7 @@ const Band = ({ id, path, title }) => {
             </button>
           </div>
         </Swiper>
-        <Link aria-label="밴드 목록 더보기">
+        <Link to={`/list/${categoryId}`} aria-label="밴드 목록 더보기">
           <MoreIcon />
         </Link>
       </div>

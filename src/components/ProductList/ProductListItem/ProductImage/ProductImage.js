@@ -3,17 +3,13 @@ import { Link } from 'react-router-dom';
 import CartButton from '../../../CartButton/CartButton';
 import styled, { css } from 'styled-components';
 
-const ProductImage = ({ id, path, title, rating }) => {
+const ProductImage = ({ productId, productImage, productName, rating }) => {
   return (
     <ProductImageWrap>
-      <Link to={`/detail/${id}`}>
-        {/* <img src={path} alt={title} /> */}
-        <img src="/images/products/milk.png" alt="샘플 이미지" />
+      <Link to={`/detail/${productId}`}>
+        <img src={productImage} alt={productName} />
       </Link>
-      <span>
-        4.5
-        {rating}
-      </span>
+      <span>{rating}</span>
       <CartButton />
     </ProductImageWrap>
   );
@@ -28,7 +24,6 @@ const FlexCenter = css`
 const ProductImageWrap = styled.div`
   ${FlexCenter};
   position: relative;
-  // width: 20vw;
   width: 100%;
   height: 20vw;
   background-color: #f9f9f9;

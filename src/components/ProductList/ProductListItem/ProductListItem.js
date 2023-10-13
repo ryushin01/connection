@@ -3,17 +3,35 @@ import ProductImage from './ProductImage/ProductImage';
 import ProductText from './ProductText/ProductText';
 import styled from 'styled-components';
 
-const ProductListItem = ({ id, path, title }) => {
+const ProductListItem = ({ item }) => {
+  const {
+    productId,
+    productName,
+    productImage,
+    originalPrice,
+    totalPrice,
+    rating,
+  } = item;
+
   return (
     <ProductListItemWrap>
-      <ProductImage />
-      <ProductText />
+      <ProductImage
+        productId={productId}
+        productImage={productImage}
+        productName={productName}
+        rating={rating}
+      />
+      <ProductText
+        productId={productId}
+        productName={productName}
+        originalPrice={originalPrice}
+        totalPrice={totalPrice}
+      />
     </ProductListItemWrap>
   );
 };
 
 const ProductListItemWrap = styled.div`
-  // width: 20vw;
   width: 100%;
 `;
 
