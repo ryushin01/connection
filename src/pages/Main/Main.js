@@ -1,8 +1,15 @@
 import React from 'react';
-import ProductList from '../../components/ProductList/ProductList';
+import Band from '../../components/Band/Band';
 
 const Main = () => {
-  return <ProductList />;
+  return (
+    <main>
+      {/* map() */}
+      <div>
+        <Band />
+      </div>
+    </main>
+  );
 };
 
 export default Main;

@@ -10,6 +10,8 @@ const ProductList = ({ id, path, title }) => {
   );
 };
 
+// ln15부터는 메인 화면에서만 사용하므로 display: grid 처리 필요
+
 const ProductListWrap = styled.ul`
   display: flex;
   overflow-x: auto;

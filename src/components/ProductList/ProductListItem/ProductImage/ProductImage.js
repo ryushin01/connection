@@ -43,16 +43,21 @@ const ProductImageWrap = styled.div`
   span {
     ${FlexCenter};
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
+    top: 8px;
+    right: 8px;
+    font-size: 20px;
     &::before {
       content: '';
       display: block;
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       background: url(/images/common/icon_star.png) no-repeat center/cover;
     }
+  }
+  div {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
   }
 `;
 

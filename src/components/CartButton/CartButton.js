@@ -13,12 +13,9 @@ const CartButton = ({ onClick }) => {
 };
 
 const CartButtonWrap = styled.div`
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
   button {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: 1px transparent solid;
     background-color: #fff;

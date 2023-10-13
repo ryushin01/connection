@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const ProductText = ({ id, path, title }) => {
   return (
     <ProductProductTextWrap>
-      <Link to={`/detail/${id}`} aria-hidden>
+      <Link to={`/detail/${id}`}>
         <h2>상품명 상품명 상품명 상품명 상품명 상품명</h2>
         <strong>
           <span>원가격</span>
@@ -23,8 +23,8 @@ const ProductProductTextWrap = styled.div`
   a {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 20px;
+    gap: 8px;
+    padding: 12px;
     h2,
     strong {
       display: block;
@@ -33,15 +33,15 @@ const ProductProductTextWrap = styled.div`
       white-space: nowrap;
     }
     h2 {
-      font-size: 30px;
+      font-size: 24px;
       font-weight: 700;
     }
     strong {
-      font-size: 24px;
+      font-size: 20px;
       span:first-child {
         text-decoration: line-through;
         & + span {
-          margin-left: 10px;
+          margin-left: 12px;
           font-weight: 700;
         }
       }
