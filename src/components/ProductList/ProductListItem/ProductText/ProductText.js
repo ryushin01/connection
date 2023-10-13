@@ -30,6 +30,7 @@ const ProductProductTextWrap = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      color: ${props => props.theme.grayscaleF};
     }
     h2 {
       font-size: 24px;

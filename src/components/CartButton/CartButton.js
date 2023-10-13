@@ -18,13 +18,16 @@ const CartButtonWrap = styled.div`
     height: 36px;
     border-radius: 50%;
     border: 1px transparent solid;
-    background-color: #fff;
+    background-color: ${props => props.theme.grayscaleB};
     box-shadow: 0 25px 10px -15px rgba(0, 0, 0, 0.12);
+    svg {
+      fill: ${props => props.theme.grayscaleE};
+    }
     &:hover,
     &:active {
-      background-color: #011627;
+      background-color: ${props => props.theme.grayscaleE};
       svg {
-        fill: #efffe9;
+        fill: ${props => props.theme.grayscaleB};
       }
     }
   }

@@ -5,10 +5,10 @@
     "products": [
       {
         "productId": 1,
-        "productName": "상품 A",
+        "productName": "상품명이 길어지면 말줄임이 됩니다.",
         "productImage": "/images/products/beef.png",
         "originalPrice": 10000,
-        "totalPrice": 9900,
+        "totalPrice": 100000000,
         "rating": 4.5
       },
       {

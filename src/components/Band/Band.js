@@ -17,6 +17,7 @@ const Band = ({ item }) => {
         <h1 tabIndex="0">{categoryName}</h1>
         <Swiper
           slidesPerView="5"
+          spaceBetween="12"
           modules={[Navigation]}
           navigation={{
             prevEl: '.swiper-prev-btn',
@@ -41,6 +42,7 @@ const Band = ({ item }) => {
             </button>
           </div>
         </Swiper>
+
         <Link to={`/list/${categoryId}`} aria-label="밴드 목록 더보기">
           <MoreIcon />
         </Link>
@@ -50,26 +52,11 @@ const Band = ({ item }) => {
 };
 
 const BandWrap = styled.section`
-  // display: flex;
-  // overflow-x: auto;
-  // width: 100%;
-  // -webkit-overflow-scrolling: touch;
-  // scrollbar-width: none;
-  // &::-webkit-scrollbar {
-  //   display: none;
-  //   background-color: transparent;
-  // }
-  // &::-webkit-scrollbar-track {
-  //   background-color: transparent;
-  // }
-  // &::-webkit-scrollbar-thumb {
-  //   background-color: transparent;
-  // }
-
   padding: 32px 20px;
 
   .inner-wrap {
     position: relative;
+
     & > h1 {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -77,20 +64,23 @@ const BandWrap = styled.section`
       padding-right: 64px;
       font-size: 32px;
       font-weight: 700;
+      color: ${props => props.theme.grayscaleF};
+
       & + div {
         margin-top: 8px;
       }
     }
+
     & > a {
       width: 32px;
       height: 32px;
       position: absolute;
       top: 0;
       right: 0;
+
       svg {
         path {
-          // 테마 적용
-          stroke: #f00;
+          stroke: ${props => props.theme.grayscaleF};
         }
       }
     }
@@ -105,7 +95,8 @@ const BandWrap = styled.section`
       transform: translateY(-50%);
       z-index: 1;
       border: 0;
-      background-color: transparent;
+      border-radius: 50%;
+      background-color: #eee;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -113,14 +104,17 @@ const BandWrap = styled.section`
       transition:
         left 0.2s ease-in-out,
         right 0.2s ease-in-out;
+
       &.swiper-prev-btn {
         left: -48px;
         background-image: url(/images/band/icon_prev.png);
       }
+
       &.swiper-next-btn {
         right: -48px;
         background-image: url(/images/band/icon_next.png);
       }
+
       &.swiper-button-disabled {
         opacity: 0.2;
       }
@@ -132,6 +126,7 @@ const BandWrap = styled.section`
       button.swiper-prev-btn {
         left: 0;
       }
+
       button.swiper-next-btn {
         right: 0;
       }

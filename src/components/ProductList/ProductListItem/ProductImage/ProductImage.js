@@ -25,8 +25,8 @@ const ProductImageWrap = styled.div`
   ${FlexCenter};
   position: relative;
   width: 100%;
-  height: 20vw;
-  background-color: #f9f9f9;
+  height: 19vw;
+  background-color: ${props => props.theme.grayscaleB};
   a {
     display: block;
     font-size: 0;
@@ -42,6 +42,7 @@ const ProductImageWrap = styled.div`
     top: 8px;
     right: 8px;
     font-size: 20px;
+    color: ${props => props.theme.grayscaleE};
     &::before {
       content: '';
       display: block;
