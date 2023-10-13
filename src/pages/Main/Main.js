@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Main = () => {
-  return <>매인</>;
+  return <></>;
 };
 
 export default Main;
