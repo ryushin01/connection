@@ -34,7 +34,7 @@ const Button = ({
 const SIZE_STYLES = {
   small: {
     padding: '11px 10px',
-    fontSize: '14px',
+    fontSize: '12px',
   },
   medium: {
     padding: '12px 10px',
@@ -42,7 +42,7 @@ const SIZE_STYLES = {
   },
   large: {
     padding: '13px 10px',
-    fontSize: '18px',
+    fontSize: '20px',
   },
 };
 
