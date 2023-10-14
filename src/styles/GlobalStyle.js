@@ -15,34 +15,6 @@ const GlobalStyle = createGlobalStyle`
     color : ${props => props.theme.grayscaleF};
     font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;;
   }
-
-  li {
-    list-style: none;
-  }
-
-  a {
-    color: initial;
-    text-decoration: none;
-  }
-
-  button {
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-  }
-
-  main {
-    position: relative;
-    z-index: 1;
-    flex: 1;
-    width: 100%;
-  }
-
-  #root {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
 `;
 
 export default GlobalStyle;

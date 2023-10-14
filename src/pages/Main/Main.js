@@ -24,7 +24,7 @@ const Main = () => {
   return (
     <main>
       <div>
-        {bandData?.map((item, index) => {
+        {bandData.map((item, index) => {
           return <Band key={index} item={item} />;
         })}
       </div>
