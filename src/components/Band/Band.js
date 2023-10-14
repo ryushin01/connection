@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Controller, Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { ReactComponent as MoreIcon } from '../../svg/icon_more.svg';
 import ProductListItem from '../ProductList/ProductListItem/ProductListItem';
 import styled from 'styled-components';
@@ -10,8 +10,6 @@ import 'swiper/css/navigation';
 
 const Band = ({ item }) => {
   const { categoryName, categoryId, products } = item;
-
-  const Link = ({ children }) => <a>{children}</a>;
 
   return (
     <BandWrap>

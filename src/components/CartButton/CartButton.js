@@ -21,11 +21,11 @@ const CartButtonWrap = styled.div`
     background-color: ${props => props.theme.grayscaleB};
     box-shadow: 0 25px 10px -15px rgba(0, 0, 0, 0.12);
     svg {
-      fill: ${props => props.theme.grayscaleE};
+      fill: ${props => props.theme.grayscaleF};
     }
     &:hover,
     &:active {
-      background-color: ${props => props.theme.grayscaleE};
+      background-color: ${props => props.theme.grayscaleF};
       svg {
         fill: ${props => props.theme.grayscaleB};
       }
