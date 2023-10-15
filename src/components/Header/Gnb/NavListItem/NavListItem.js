@@ -74,13 +74,29 @@ const ListItem = styled.li`
   cursor: pointer;
 
   a {
-    font-size: 20px;
+    position: relative;
+    font-size: 24px;
     color: ${props => props.theme.grayscaleA};
-  }
 
-  &:hover {
-    div {
-      display: block;
+    &::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      border-radius: 50%;
+      background-color: ${props => props.theme.primaryColor};
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      &::after {
+        opacity: 1;
+      }
     }
   }
 `;

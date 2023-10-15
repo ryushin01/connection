@@ -10,5 +10,5 @@
   "prettier.disableLanguages": ["js"],
   "eslint.alwaysShowStatus": true,
   "files.autoSave": "onFocusChange",
-  "cSpell.words": ["Hyeon", "mypage", "noreferrer", "Noto"]
+  "cSpell.words": ["bigbanner", "Hyeon", "mypage", "noreferrer", "Noto"]
 }
