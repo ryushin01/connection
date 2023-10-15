@@ -4,6 +4,8 @@ import ProductText from './ProductText/ProductText';
 import styled from 'styled-components';
 
 const ProductListItem = ({ item }) => {
+  console.log(item);
+
   const {
     productId,
     productName,

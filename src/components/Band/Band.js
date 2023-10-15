@@ -9,7 +9,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 const Band = ({ item }) => {
-  const { categoryName, categoryId, products } = item;
+  const { categoryName, categoryId, product } = item;
 
   return (
     <BandWrap>
@@ -25,7 +25,7 @@ const Band = ({ item }) => {
             nextEl: '.swiper-next-btn',
           }}
         >
-          {products?.map((item, index) => {
+          {product?.map((item, index) => {
             return (
               <SwiperSlide key={index}>
                 <ProductListItem item={item} />
@@ -42,7 +42,11 @@ const Band = ({ item }) => {
             </SwiperNextBtn>
           </SwiperController>
         </Swiper>
-        <BandListLink to={`/list/${categoryId}`} aria-label="밴드 목록 더보기">
+        <BandListLink
+          to={`/products/category/${categoryId}`}
+          // to={`/products/seller/${sellerId}`}
+          aria-label="밴드 목록 더보기"
+        >
           <MoreIcon />
         </BandListLink>
       </BandInnerWrap>
