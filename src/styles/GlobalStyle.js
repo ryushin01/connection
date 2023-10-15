@@ -31,8 +31,12 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   } 
 
+  img {
+    width: 100%;
+  }
+
   main {  
-    position: relative
+    position: relative;
     z-index: 1;
     flex: 1;
     width: 100%;

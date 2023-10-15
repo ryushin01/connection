@@ -18,23 +18,23 @@ const ThemeSwitcherWrap = styled.div`
   top: 50%;
   left: 0;
   z-index: 1;
-  width: 150px;
-  height: 150px;
-  border-top: 75px transparent solid;
-  border-right: 75px transparent solid;
-  border-bottom: 75px transparent solid;
-  border-left: 75px ${props => props.theme.grayscaleF} solid;
+  width: 100px;
+  height: 100px;
+  border-top: 50px transparent solid;
+  border-right: 50px transparent solid;
+  border-bottom: 50px transparent solid;
+  border-left: 50px ${props => props.theme.grayscaleF} solid;
   transform: translateY(-50%);
   opacity: 0.9;
 
   input[type='checkbox'] {
     position: absolute;
     top: -20px;
-    left: -65px;
+    left: -50px;
     transform: rotate(30deg);
     appearance: none;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     cursor: pointer;
     background-color: transparent;
     background-size: cover;

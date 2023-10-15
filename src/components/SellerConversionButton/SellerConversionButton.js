@@ -6,7 +6,7 @@ const SellerConversionButton = () => {
   return (
     <SellerConversionButtonWrap>
       <Link to="/">
-        판매자
+        셀러
         <br />
         전환
       </Link>
@@ -19,23 +19,26 @@ const SellerConversionButtonWrap = styled.div`
   top: 50%;
   right: 0;
   z-index: 1;
-  width: 150px;
-  height: 150px;
-  border-top: 75px transparent solid;
-  border-right: 75px transparent solid;
-  border-bottom: 75px transparent solid;
-  border-left: 75px ${props => props.theme.secondaryColor} solid;
+  width: 100px;
+  height: 100px;
+  border-top: 50px transparent solid;
+  border-right: 50px transparent solid;
+  border-bottom: 50px transparent solid;
+  border-left: 50px ${props => props.theme.secondaryColor} solid;
   transform: translateY(-50%) rotate(180deg);
   opacity: 0.9;
 
   a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     position: absolute;
-    top: -75px;
-    left: -75px;
+    top: -50px;
+    left: -120px;
     width: 100px;
     height: 100px;
     transform: rotate(180deg);
-    font-size: 20px;
+    font-size: 16px;
     color: #fff;
     line-height: 1.2;
     text-align: right;
