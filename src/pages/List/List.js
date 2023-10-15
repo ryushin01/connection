@@ -5,7 +5,7 @@ import ListTitle from './LIstTitle/ListTitle';
 import Filter from '../../components/Filter/Filter';
 import ProductList from '../../components/ProductList/ProductList';
 import Pagination from '../../components/Pagination/Pagination';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const List = () => {
   const [listData, setListData] = useState([]);
@@ -61,28 +61,6 @@ const List = () => {
     </main>
   );
 };
-
-const FlexCenter = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ListTitleSection = styled.section`
-  ${FlexCenter};
-  position: relative;
-  height: 12vw;
-  background-color: ${props => props.theme.primaryColor};
-
-  h2 {
-    font-size: 28px;
-  }
-`;
-
-const ListTitleSectionInnerWrap = styled.div`
-  width: 90%;
-  margin: 0 auto;
-`;
 
 const ListSection = styled.section`
   padding: 20px 0;

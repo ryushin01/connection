@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SkipNavigation from './components/SkipNavigation/SkipNavigation';
+import SellerConversionBanner from './components/SellerConversionBanner/SellerConversionBanner';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import SellerConversionButton from './components/SellerConversionButton/SellerConversionButton';
+import TopButton from './components/TopButton/TopButton';
 import Main from './pages/Main/Main';
 import List from './pages/List/List';
 import Login from './pages/Login/Login';
@@ -14,6 +15,8 @@ const Router = () => {
   return (
     <BrowserRouter>
       <SkipNavigation />
+      {/* 셀러 유무 체크 후 노출 여부 결정 */}
+      <SellerConversionBanner />
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
@@ -24,7 +27,7 @@ const Router = () => {
         <Route path="/auth" element={<Auth />} />
       </Routes>
       <Footer />
-      <SellerConversionButton />
+      <TopButton />
     </BrowserRouter>
   );
 };
