@@ -4,6 +4,7 @@ import SellerConversionButton from './components/SellerConversionButton/SellerCo
 import Footer from './components/Footer/Footer';
 import Main from './pages/Main/Main';
 import Login from './pages/Login/Login';
+import SignUp from './pages/SignUp/SignUp';
 
 const Router = () => {
   return (
@@ -11,6 +12,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
       <SellerConversionButton />
       <Footer />
