@@ -11,8 +11,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color : ${props => props.theme.grayscaleB};
-    color : ${props => props.theme.grayscaleC};
+    background-color : ${props => props.theme.grayscaleA};
+    color : ${props => props.theme.grayscaleF};
     font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;;
   }
 
