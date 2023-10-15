@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { API } from '../../config';
 import { useParams } from 'react-router-dom';
+import ListTitle from './LIstTitle/ListTitle';
 import Filter from '../../components/Filter/Filter';
 import ProductList from '../../components/ProductList/ProductList';
 import Pagination from '../../components/Pagination/Pagination';
@@ -9,10 +10,11 @@ import styled, { css } from 'styled-components';
 const List = () => {
   const [listData, setListData] = useState([]);
   const { id } = useParams();
-  // const categoryId = Number(id);
+  const categoryId = Number(id);
 
   const getListData = () => {
-    fetch(`${API.DETAIL}?categoryId=${id}`, {
+    // uri 재확인 필요
+    fetch(`${API.DETAIL}?categoryId=${categoryId}`, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -42,13 +44,11 @@ const List = () => {
     getListMockData();
   }, []);
 
+  const title = listData[0]?.categoryName;
+
   return (
     <main id="main">
-      <ListTitleSection>
-        <ListTitleSectionInnerWrap>
-          <h2>{listData[0]?.categoryName}</h2>
-        </ListTitleSectionInnerWrap>
-      </ListTitleSection>
+      <ListTitle categoryId={categoryId} title={title} />
       <div>
         <ListSection>
           <Filter />

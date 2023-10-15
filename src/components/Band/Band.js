@@ -42,6 +42,8 @@ const Band = ({ item }) => {
             </SwiperNextBtn>
           </SwiperController>
         </Swiper>
+
+        {/* categoryId와 sellerId 구분 필요 */}
         <BandListLink
           to={`/products/category/${categoryId}`}
           // to={`/products/seller/${sellerId}`}

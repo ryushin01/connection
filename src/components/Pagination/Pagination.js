@@ -36,13 +36,14 @@ const FlexCenter = css`
 
 const PaginationWrap = styled.div`
   ${FlexCenter};
-  gap: 4px;
+  gap: 8px;
   margin-top: 40px;
 
   button {
     width: 40px;
     height: 40px;
     border-radius: 4px;
+    font-size: 20px;
     color: ${props => props.theme.grayscaleF};
 
     &:hover {
@@ -65,11 +66,11 @@ const PaginationWrap = styled.div`
 `;
 
 const PrevButton = styled.button`
-  font-size: 0;
+  font-size: 0 !important;
 `;
 
 const NextButton = styled.button`
-  font-size: 0;
+  font-size: 0 !important;
 `;
 
 export default Pagination;
