@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import BigBanner from './BigBanner/BigBanner';
 import Band from '../../components/Band/Band';
 
 const Main = () => {
@@ -22,7 +23,8 @@ const Main = () => {
   }, []);
 
   return (
-    <main>
+    <main id="main">
+      <BigBanner />
       <div>
         {bandData.map((item, index) => {
           return <Band key={index} item={item} />;

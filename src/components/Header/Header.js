@@ -44,7 +44,6 @@ const HeaderWrap = styled.header`
   top: 0;
   z-index: 10;
   width: 100%;
-  padding-bottom: 10px;
   background-color: ${props => props.theme.grayscaleF};
   color: ${props => props.theme.grayscaleA};
 
@@ -52,6 +51,19 @@ const HeaderWrap = styled.header`
     path {
       fill: ${props => props.theme.grayscaleA};
     }
+  }
+
+  & > div:first-child::after {
+    content: '';
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    border-bottom: 1px #e2e2e2 solid;
+  }
+
+  & > div:last-child {
+    padding: 20px 0;
   }
 `;
 
