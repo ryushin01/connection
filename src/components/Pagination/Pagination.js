@@ -67,10 +67,22 @@ const PaginationWrap = styled.div`
 
 const PrevButton = styled.button`
   font-size: 0 !important;
+  svg {
+    fill: ${props => props.theme.grayscaleF};
+    path {
+      stroke: ${props => props.theme.grayscaleF};
+    }
+  }
 `;
 
 const NextButton = styled.button`
   font-size: 0 !important;
+  svg {
+    fill: ${props => props.theme.grayscaleF};
+    path {
+      stroke: ${props => props.theme.grayscaleF};
+    }
+  }
 `;
 
 export default Pagination;
