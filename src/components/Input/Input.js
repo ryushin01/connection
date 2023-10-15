@@ -24,6 +24,10 @@ function Input({
         placeholder={placeholder}
         {...props}
       />
+      {props.status === 'error' && (
+        <ErrorText {...props}>{props.error}</ErrorText>
+      )}
+      {props.status === 'done' && <DoneText {...props}>{props.done}</DoneText>}
     </FlexLabel>
   );
 }
@@ -55,6 +59,7 @@ const INPUT_SIZE = {
 };
 
 const FlexLabel = styled.label`
+  position: relative;
   display: flex;
   align-items: center;
   flex: ${({ labelFlex }) => labelFlex || '0'};
@@ -89,6 +94,20 @@ const DefaultInput = styled.input`
       `;
     }
   }}
+`;
+
+const ErrorText = styled.p`
+  position: absolute;
+  bottom: -20px;
+  font-size: 12px;
+  color: ${props => props.theme.secondaryColor};
+`;
+
+const DoneText = styled.p`
+  position: absolute;
+  bottom: -20px;
+  font-size: 12px;
+  color: ${props => props.theme.primaryColor};
 `;
 
 export default Input;
