@@ -92,8 +92,7 @@ const ListItem = styled.li`
     }
 
     &:hover,
-    &:focus,
-    &:active {
+    &:focus {
       &::after {
         opacity: 1;
       }
