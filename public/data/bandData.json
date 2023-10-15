@@ -90,5 +90,107 @@
         "rating": 4.5
       }
     ]
+  },
+  {
+    "categoryId": 3,
+    "categoryName": "리빙",
+    "products": [
+      {
+        "productId": 1,
+        "productName": "상품 A",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 2,
+        "productName": "상품 B",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 3,
+        "productName": "상품 C",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 4,
+        "productName": "상품 D",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 1,
+        "productName": "상품 A",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 5,
+        "productName": "상품 B",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 6,
+        "productName": "상품 C",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 7,
+        "productName": "상품 D",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 8,
+        "productName": "상품 A",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 9,
+        "productName": "상품 B",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 10,
+        "productName": "상품 C",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      },
+      {
+        "productId": 11,
+        "productName": "상품 D",
+        "productImage": "/images/products/milk.png",
+        "originalPrice": 10000,
+        "totalPrice": 9900,
+        "rating": 4.5
+      }
+    ]
   }
 ]

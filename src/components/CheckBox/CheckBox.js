@@ -78,7 +78,7 @@ const CheckBoxInput = styled.input`
     height: ${({ size }) =>
       CHECK_BOX_SIZE[size]?.height || CHECK_BOX_SIZE.medium.height};
     margin-right: 10px;
-    border: 1px solid #000;
+    border: 1px solid ${props => props.theme.grayscaleF};
     vertical-align: middle;
   }
 

@@ -26,7 +26,7 @@ const Footer = () => {
               <PhoneIcon />
               0000-0000
             </a>
-            <span>월-토요일 10:00 - 22:00</span>
+            <span>연중무휴 10:00 - 22:00</span>
           </Customer>
           <Contact>
             <button type="button">
@@ -56,9 +56,15 @@ const FlexCenter = css`
 `;
 
 const FooterWrap = styled.footer`
-  // PR#4 merge 후 수정 필요
-  border-top: 1px #000 solid;
-  color: #000;
+  margin-top: 100px;
+  border-top: 1px ${props => props.theme.grayscaleF} solid;
+  color: ${props => props.theme.grayscaleF};
+
+  svg {
+    path {
+      fill: ${props => props.theme.grayscaleF};
+    }
+  }
 `;
 
 const FooterInnerWrap = styled.div`
@@ -108,6 +114,7 @@ const Customer = styled.div`
   a {
     font-size: 28px;
     font-weight: 700;
+    color: ${props => props.theme.grayscaleF};
   }
 `;
 

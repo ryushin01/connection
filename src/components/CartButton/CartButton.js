@@ -19,7 +19,6 @@ const CartButtonWrap = styled.div`
     border-radius: 50%;
     border: 1px transparent solid;
     background-color: ${props => props.theme.grayscaleB};
-    box-shadow: 0 25px 10px -15px rgba(0, 0, 0, 0.12);
     svg {
       fill: ${props => props.theme.grayscaleF};
     }

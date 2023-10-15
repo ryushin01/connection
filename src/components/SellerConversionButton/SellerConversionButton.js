@@ -24,9 +24,9 @@ const SellerConversionButtonWrap = styled.div`
   border-top: 75px transparent solid;
   border-right: 75px transparent solid;
   border-bottom: 75px transparent solid;
-  border-left: 75px #e71d36 solid;
+  border-left: 75px ${props => props.theme.secondaryColor} solid;
   transform: translateY(-50%) rotate(180deg);
-  opacity: 0.7;
+  opacity: 0.9;
 
   a {
     position: absolute;

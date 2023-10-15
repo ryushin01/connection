@@ -50,7 +50,7 @@ const Band = ({ item }) => {
 };
 
 const BandWrap = styled.section`
-  padding: 32px 20px;
+  padding: 32px 0;
 
   &:hover {
     .swiper-prev-btn {
@@ -102,7 +102,7 @@ const SwiperController = styled.div`
     z-index: 1;
     border: 0;
     border-radius: 50%;
-    background-color: #eee;
+    background-color: ${props => props.theme.grayscaleC};
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
