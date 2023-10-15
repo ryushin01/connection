@@ -76,7 +76,7 @@ const ListItem = styled.li`
   a {
     position: relative;
     font-size: 24px;
-    color: ${props => props.theme.grayscaleA};
+    color: ${props => props.theme.grayscaleF};
 
     &::after {
       content: '';

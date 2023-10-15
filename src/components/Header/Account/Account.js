@@ -46,7 +46,7 @@ const AccountList = styled.ul`
   a,
   button {
     font-size: 16px;
-    color: ${props => props.theme.grayscaleA};
+    color: ${props => props.theme.grayscaleF};
   }
 `;
 

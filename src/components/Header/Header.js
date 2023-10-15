@@ -44,13 +44,22 @@ const HeaderWrap = styled.header`
   top: 0;
   z-index: 10;
   width: 100%;
-  background-color: ${props => props.theme.grayscaleF};
-  color: ${props => props.theme.grayscaleA};
+  background-color: ${props => props.theme.grayscaleA};
+  color: ${props => props.theme.grayscaleF};
 
   svg {
     path {
-      fill: ${props => props.theme.grayscaleA};
+      fill: ${props => props.theme.grayscaleF};
     }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px #e2e2e2 solid;
   }
 
   & > div:first-child::after {

@@ -18,7 +18,7 @@ const ListItem = styled.li`
 
   a {
     font-size: 20px;
-    color: ${props => props.theme.grayscaleA};
+    color: ${props => props.theme.grayscaleF};
   }
 `;
 
