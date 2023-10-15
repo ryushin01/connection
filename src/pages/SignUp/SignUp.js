@@ -50,7 +50,30 @@ const SignUp = props => {
     });
   };
 
-  console.log(userInfo);
+  const handleSubmit = e => {
+    e.preventDefault(); // submit 기본 이벤트 막기
+
+    // 회원가입 API 실행
+    fetch('API 주소', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        email: userInfo.email,
+        password: userInfo.password,
+        name: userInfo.name,
+        phoneNumber: userInfo.phone,
+        zipCode: userInfo.zipCode,
+        address: userInfo.address,
+        addressDetails: userInfo.addressDetail,
+      }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+      });
+  };
 
   return (
     <main>
@@ -60,7 +83,7 @@ const SignUp = props => {
             <span>회원가입</span>
           </SignUpLeftSection>
           <SignUpRightSection>
-            <SignUpForm onChange={handleUserInfo}>
+            <SignUpForm onChange={handleUserInfo} onSubmit={handleSubmit}>
               <fieldset>
                 <SignUpLegend>회원가입</SignUpLegend>
               </fieldset>
@@ -195,6 +218,13 @@ const SignUpInputWrap = styled.div`
 
   button {
     width: 150px;
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
   }
 `;
 
