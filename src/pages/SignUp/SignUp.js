@@ -93,7 +93,7 @@ const SignUp = props => {
   };
 
   return (
-    <main>
+    <Main id="main">
       <div>
         <SignUpContainer>
           <SignUpLeftSection>
@@ -206,11 +206,16 @@ const SignUp = props => {
           </SignUpRightSection>
         </SignUpContainer>
       </div>
-    </main>
+    </Main>
   );
 };
 
 export default SignUp;
+
+const Main = styled.main`
+  display: flex;
+  align-items: center;
+`;
 
 const SignUpContainer = styled.div`
   display: flex;
@@ -219,6 +224,8 @@ const SignUpContainer = styled.div`
 
 const SignUpLeftSection = styled.section`
   flex: 1;
+  background: url(/images/account/bg_signup.jpg) no-repeat center/cover;
+  font-size: 0;
 `;
 
 const SignUpRightSection = styled.section`
@@ -233,7 +240,7 @@ const SignUpForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0 20%;
+  padding: 80px 20%;
 `;
 
 const SignUpLegend = styled.legend`

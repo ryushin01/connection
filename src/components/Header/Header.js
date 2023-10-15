@@ -63,7 +63,7 @@ const HeaderWrap = styled.header`
   }
 
   & > div:last-child {
-    padding: 20px 0;
+    padding: 24px 0;
   }
 `;
 

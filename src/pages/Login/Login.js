@@ -63,7 +63,7 @@ const Login = () => {
   };
 
   return (
-    <main>
+    <Main id="main">
       <div>
         <LoginContainer>
           <LoginLeftSection>로그인</LoginLeftSection>
@@ -110,11 +110,16 @@ const Login = () => {
           </LoginRightSection>
         </LoginContainer>
       </div>
-    </main>
+    </Main>
   );
 };
 
 export default Login;
+
+const Main = styled.main`
+  display: flex;
+  align-items: center;
+`;
 
 const LoginContainer = styled.div`
   display: flex;
@@ -123,6 +128,8 @@ const LoginContainer = styled.div`
 
 const LoginLeftSection = styled.section`
   flex: 1;
+  background: url(/images/account/bg_login.jpg) no-repeat center/cover;
+  font-size: 0;
 `;
 
 const LoginRightSection = styled.section`
@@ -137,7 +144,7 @@ const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0 25%;
+  padding: 40px 20%;
 `;
 
 const LoginLegend = styled.legend`
