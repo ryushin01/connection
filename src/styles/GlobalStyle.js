@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color : ${props => props.theme.grayscaleA};
     color : ${props => props.theme.grayscaleF};
-    font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;;
+    font-family: 'Do Hyeon', "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
   }
 
   li {
@@ -28,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
   button {  
     border: 0;
     background-color: transparent;
+    font-family: 'Do Hyeon', "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
     cursor: pointer;
   } 
 

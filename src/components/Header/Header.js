@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Account from './Account/Account';
 import Gnb from './Gnb/Gnb';
 import CartButton from '../CartButton/CartButton';
 import SearchButton from '../SearchButton/SearchButton';
@@ -8,18 +10,22 @@ const Header = () => {
   return (
     <HeaderWrap>
       <HeaderInnerWrap>
-        <TopSection>로그인 / 어드민</TopSection>
+        <TopSection>
+          <Account />
+        </TopSection>
       </HeaderInnerWrap>
       <HeaderInnerWrap>
         <LeftSection>
           <Logo>
-            <img src="/images/logo.png" alt="커넥션 로고" />
-            <span>커넥션</span>
+            <Link to="/">
+              <img src="/images/logo.png" alt="커넥션 로고" />
+              <span>커넥션</span>
+            </Link>
           </Logo>
           <Gnb />
         </LeftSection>
         <RightSection>
-          <CartButton />
+          <CartButton count="0" />
           <SearchButton />
         </RightSection>
       </HeaderInnerWrap>
@@ -68,6 +74,7 @@ const TopSection = styled.div`
   align-items: center;
   gap: 4vw;
   width: 100%;
+  height: 30px;
 `;
 
 const LeftSection = styled.section`
@@ -75,15 +82,17 @@ const LeftSection = styled.section`
 `;
 
 const RightSection = styled.section`
-  text-align: right;
+  gap: 4vw;
 `;
 
 const Logo = styled.h1`
-  ${FlexCenter};
-  gap: 8px;
-  font-size: 32px;
-  font-weight: 700;
-  color: ${props => props.theme.primaryColor};
+  a {
+    ${FlexCenter};
+    gap: 12px;
+    font-size: 32px;
+    font-weight: 700;
+    color: ${props => props.theme.primaryColor};
+  }
 
   img {
     width: 48px;

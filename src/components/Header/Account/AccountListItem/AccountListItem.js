@@ -2,13 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const CategoryLIstItem = ({ text, path, image }) => {
+const CategoryLIstItem = ({ text, path }) => {
   return (
     <ListItem>
-      <Link to={path}>
-        <img src={image} alt={text} />
-        {text}
-      </Link>
+      <Link to={path}>{text}</Link>
     </ListItem>
   );
 };

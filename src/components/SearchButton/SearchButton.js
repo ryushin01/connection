@@ -18,15 +18,19 @@ const SearchButtonWrap = styled.div`
     height: 36px;
     border-radius: 50%;
     border: 1px transparent solid;
-    background-color: ${props => props.theme.grayscaleB};
     svg {
-      fill: ${props => props.theme.grayscaleF};
+      fill: ${props => props.theme.grayscaleE};
+      path {
+        stroke: ${props => props.theme.grayscaleE};
+      }
     }
     &:hover,
     &:active {
-      background-color: ${props => props.theme.grayscaleF};
       svg {
         fill: ${props => props.theme.grayscaleB};
+        path {
+          stroke: ${props => props.theme.grayscaleB};
+        }
       }
     }
   }

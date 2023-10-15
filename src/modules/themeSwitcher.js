@@ -29,12 +29,12 @@ const ThemeSwitcherWrap = styled.div`
 
   input[type='checkbox'] {
     position: absolute;
-    top: -20px;
-    left: -50px;
+    top: -17px;
+    left: -47px;
     transform: rotate(30deg);
     appearance: none;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
     background-color: transparent;
     background-size: cover;
