@@ -26,10 +26,11 @@ const SearchButtonWrap = styled.div`
     }
     &:hover,
     &:active {
+      background-color: ${props => props.theme.grayscaleF};
       svg {
-        fill: ${props => props.theme.grayscaleB};
+        fill: ${props => props.theme.grayscaleA};
         path {
-          stroke: ${props => props.theme.grayscaleB};
+          stroke: ${props => props.theme.grayscaleA};
         }
       }
     }

@@ -36,9 +36,9 @@ const CartButtonWrap = styled.div`
     &:active {
       background-color: ${props => props.theme.grayscaleF};
       svg {
-        fill: ${props => props.theme.grayscaleC};
+        fill: ${props => props.theme.grayscaleA};
         path {
-          stroke: ${props => props.theme.grayscaleC};
+          stroke: ${props => props.theme.grayscaleA};
         }
       }
     }
