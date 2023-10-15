@@ -1,7 +1,185 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Input from '../../components/Input/Input';
+import Button from '../../components/Button/Button';
 
 const Login = () => {
-  return <></>;
+  const [userInfo, setUserInfo] = useState({
+    // 로그인 Valid를 위한 state
+    email: '',
+    password: '',
+  });
+
+  // 카카오 소셜 로그인을 위한 변수
+  const RestApiKey = '47c1c31b666ba0dbbdda5fdb8ba16011'; // REST API KEY
+  const redirectUri = 'http://localhost:3000/Auth'; // REDIRECT URI
+  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${RestApiKey}&redirect_uri=${redirectUri}&response_type=code`;
+
+  // userInfo Email, Password Valid Check
+  const emailRegExp =
+    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; // 이메일 정규표현식
+  const passwordRegExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/; // 비밀번호 정규 표현식
+
+  // 실시간 유효성 검사
+  const isEmailValid = emailRegExp.test(userInfo.email); // 이메일 정규식 체크
+  const isPasswordValid = passwordRegExp.test(userInfo.password); // 비밀번호 정규식 체크
+
+  // 모든 조건이 만족하면 버튼 활성화
+  const isValidCheck = isEmailValid && isPasswordValid;
+
+  // 카카오 로그인 버튼 클릭 시 실행할 함수 (하이퍼 링크)
+  const handleLogin = () => {
+    window.location.href = kakaoURL;
+  };
+
+  // userInfo state onChange 핸들러 함수 정의
+  const handleUserInfo = e => {
+    const { name, value } = e.target; // e. target을 이용한 입력되는 값 Check
+    setUserInfo({ ...userInfo, [name]: value }); // name을 정의한 값에 value를 넣어준다.
+  };
+
+  const handleLoginSubmit = e => {
+    // 로그인 버튼 클릭 시 실행되는 함수
+    e.preventDefault();
+
+    fetch('API 주소', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        email: userInfo.email,
+        password: userInfo.password,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'SUCCESS') {
+          alert('로그인 성공');
+        } else {
+          alert('로그인 실패');
+        }
+      });
+  };
+
+  return (
+    <main>
+      <div>
+        <LoginContainer>
+          <LoginLeftSection>로그인</LoginLeftSection>
+          <LoginRightSection>
+            <LoginForm onChange={handleUserInfo} onSubmit={handleLoginSubmit}>
+              <fieldset>
+                <LoginLegend>로그인</LoginLegend>
+                <LoginInputWrap>
+                  <Input
+                    type="text"
+                    name="email"
+                    placeholder="이메일"
+                    borderRadius="4px"
+                  />
+                </LoginInputWrap>
+                <LoginInputWrap>
+                  <Input
+                    type="password"
+                    name="password"
+                    placeholder="비밀번호"
+                    borderRadius="4px"
+                  />
+                </LoginInputWrap>
+                <LoginButtonWrap>
+                  <Button
+                    type="submit"
+                    content="로그인"
+                    shape="solid"
+                    color="primary"
+                    disabled={!isValidCheck}
+                    onClick={handleLoginSubmit}
+                  />
+                </LoginButtonWrap>
+                <LoginSnsButtonWrap>
+                  <button type="button" onClick={handleLogin}>
+                    <img
+                      src="/images/kakao/kakao_login_medium_wide.png"
+                      alt="kakao"
+                    />
+                  </button>
+                </LoginSnsButtonWrap>
+              </fieldset>
+            </LoginForm>
+          </LoginRightSection>
+        </LoginContainer>
+      </div>
+    </main>
+  );
 };
 
 export default Login;
+
+const LoginContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const LoginLeftSection = styled.section`
+  flex: 1;
+`;
+
+const LoginRightSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`;
+
+const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 25%;
+`;
+
+const LoginLegend = styled.legend`
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+`;
+
+const LoginInputWrap = styled.div`
+  padding: 15px 0;
+`;
+
+const LoginButtonWrap = styled.div`
+  margin-top: 20px;
+`;
+
+const LoginSnsButtonWrap = styled.div`
+  position: relative;
+  width: 100%;
+  padding-top: 80px;
+
+  button {
+    width: 100%;
+    background: #fee500; // 이미지 빈 공간 같은 색으로 채우기
+
+    img {
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    width: 50%;
+    height: 1px;
+    margin: 0 auto;
+    background-color: ${props => props.theme.grayscaleE};
+  }
+`;
