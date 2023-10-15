@@ -1,28 +1,26 @@
 import React from 'react';
-import { ReactComponent as CartIcon } from '../../svg/icon_cart.svg';
+import { ReactComponent as SearchIcon } from '../../svg/icon_search.svg';
 import styled from 'styled-components';
 
-const CartButton = ({ onClick }) => {
+const SearchButton = ({ onClick }) => {
   return (
-    <CartButtonWrap>
+    <SearchButtonWrap>
       <button type="button" onClick={onClick}>
-        <CartIcon />
+        <SearchIcon />
       </button>
-    </CartButtonWrap>
+    </SearchButtonWrap>
   );
 };
 
-const CartButtonWrap = styled.div`
+const SearchButtonWrap = styled.div`
   button {
     width: 36px;
     height: 36px;
     border-radius: 50%;
     border: 1px transparent solid;
+    background-color: ${props => props.theme.grayscaleB};
     svg {
-      fill: ${props => props.theme.grayscaleE};
-      path {
-        stroke: ${props => props.theme.grayscaleE};
-      }
+      fill: ${props => props.theme.grayscaleF};
     }
     &:hover,
     &:active {
@@ -34,4 +32,4 @@ const CartButtonWrap = styled.div`
   }
 `;
 
-export default CartButton;
+export default SearchButton;

@@ -17,6 +17,7 @@ const Band = ({ item }) => {
         <BandTitle tabIndex="0">{categoryName}</BandTitle>
         <Swiper
           slidesPerView="5"
+          slidesPerGroup="5"
           spaceBetween="12"
           modules={[Navigation]}
           navigation={{
@@ -73,14 +74,14 @@ const BandTitle = styled.h1`
   text-overflow: ellipsis;
   white-space: nowrap;
   padding-right: 64px;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   color: ${props => props.theme.grayscaleF};
 `;
 
 const BandListLink = styled(Link)`
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   position: absolute;
   top: 0;
   right: 0;
@@ -102,7 +103,7 @@ const SwiperController = styled.div`
     z-index: 1;
     border: 0;
     border-radius: 50%;
-    background-color: ${props => props.theme.grayscaleC};
+    background-color: transparent;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
