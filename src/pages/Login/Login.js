@@ -82,6 +82,14 @@ const Login = () => {
                     name="email"
                     placeholder="이메일"
                     borderRadius="4px"
+                    status={
+                      (userInfo.email === '' && 'default') ||
+                      (!isEmailValid &&
+                        userInfo.email.length >= 1 &&
+                        'error') ||
+                      (isEmailValid && 'done')
+                    }
+                    error="이메일 형식에 맞지 않습니다."
                   />
                 </LoginInputWrap>
                 <LoginInputWrap>
@@ -90,6 +98,14 @@ const Login = () => {
                     name="password"
                     placeholder="비밀번호"
                     borderRadius="4px"
+                    status={
+                      (userInfo.password === '' && 'default') ||
+                      (!isPasswordValid &&
+                        userInfo.password.length >= 1 &&
+                        'error') ||
+                      (isPasswordValid && 'done')
+                    }
+                    error="비밀번호는 8~20자의 영문 대소문자, 숫자, 특수문자 입니다."
                   />
                 </LoginInputWrap>
                 <LoginButtonWrap>
