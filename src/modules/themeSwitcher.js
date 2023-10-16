@@ -15,8 +15,8 @@ const ThemeSwitcher = ({ switchTheme, isLightTheme }) => {
 
 const ThemeSwitcherWrap = styled.div`
   position: fixed;
-  top: 50%;
-  left: 0;
+  left: -50px;
+  bottom: -50px;
   z-index: 1;
   width: 100px;
   height: 100px;
@@ -24,17 +24,17 @@ const ThemeSwitcherWrap = styled.div`
   border-right: 50px transparent solid;
   border-bottom: 50px transparent solid;
   border-left: 50px ${props => props.theme.grayscaleF} solid;
-  transform: translateY(-50%);
+  transform: rotate(135deg);
   opacity: 0.9;
 
   input[type='checkbox'] {
-    position: absolute;
-    top: -20px;
-    left: -50px;
-    transform: rotate(30deg);
+    position: relative;
+    top: -15px;
+    left: -45px;
+    transform: rotate(-140deg);
     appearance: none;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
     background-color: transparent;
     background-size: cover;

@@ -1,5 +1,5 @@
 export const lightTheme = {
-  primaryColor: '#2ec4b6',
+  primaryColor: '#a29bfe',
   secondaryColor: '#e71d36',
   grayscaleA: '#fff',
   grayscaleB: '#efefef',
@@ -10,7 +10,7 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  primaryColor: '#2ec4b6',
+  primaryColor: '#a29bfe',
   secondaryColor: '#e71d36',
   grayscaleA: '#000',
   grayscaleB: '#b7b7b7',

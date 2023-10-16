@@ -2,7 +2,7 @@
   {
     "categoryId": 1,
     "categoryName": "푸드",
-    "products": [
+    "product": [
       {
         "productId": 1,
         "productName": "상품명이 길어지면 말줄임이 됩니다.",
@@ -56,7 +56,7 @@
   {
     "categoryId": 2,
     "categoryName": "디지털",
-    "products": [
+    "product": [
       {
         "productId": 1,
         "productName": "상품 A",
@@ -94,7 +94,7 @@
   {
     "categoryId": 3,
     "categoryName": "리빙",
-    "products": [
+    "product": [
       {
         "productId": 1,
         "productName": "상품 A",

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Account from './Account/Account';
 import Gnb from './Gnb/Gnb';
 import CartButton from '../CartButton/CartButton';
 import SearchButton from '../SearchButton/SearchButton';
@@ -8,18 +10,22 @@ const Header = () => {
   return (
     <HeaderWrap>
       <HeaderInnerWrap>
-        <TopSection>로그인 / 어드민</TopSection>
+        <TopSection>
+          <Account />
+        </TopSection>
       </HeaderInnerWrap>
       <HeaderInnerWrap>
         <LeftSection>
           <Logo>
-            <img src="/images/logo.png" alt="커넥션 로고" />
-            <span>커넥션</span>
+            <Link to="/">
+              <img src="/images/logo.png" alt="커넥션 로고" />
+              <span>커넥션</span>
+            </Link>
           </Logo>
           <Gnb />
         </LeftSection>
         <RightSection>
-          <CartButton />
+          <CartButton count="0" />
           <SearchButton />
         </RightSection>
       </HeaderInnerWrap>
@@ -38,14 +44,35 @@ const HeaderWrap = styled.header`
   top: 0;
   z-index: 10;
   width: 100%;
-  padding-bottom: 10px;
-  background-color: ${props => props.theme.grayscaleF};
-  color: ${props => props.theme.grayscaleA};
+  background-color: ${props => props.theme.grayscaleA};
+  color: ${props => props.theme.grayscaleF};
 
   svg {
     path {
-      fill: ${props => props.theme.grayscaleA};
+      fill: ${props => props.theme.grayscaleF};
     }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px #e2e2e2 solid;
+  }
+
+  & > div:first-child::after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    border-bottom: 1px #e2e2e2 solid;
+  }
+
+  & > div:last-child {
+    padding: 24px 0;
   }
 `;
 
@@ -68,6 +95,7 @@ const TopSection = styled.div`
   align-items: center;
   gap: 4vw;
   width: 100%;
+  height: 30px;
 `;
 
 const LeftSection = styled.section`
@@ -75,15 +103,17 @@ const LeftSection = styled.section`
 `;
 
 const RightSection = styled.section`
-  text-align: right;
+  gap: 4vw;
 `;
 
 const Logo = styled.h1`
-  ${FlexCenter};
-  gap: 8px;
-  font-size: 32px;
-  font-weight: 700;
-  color: ${props => props.theme.primaryColor};
+  a {
+    ${FlexCenter};
+    gap: 12px;
+    font-size: 32px;
+    font-weight: 700;
+    color: ${props => props.theme.primaryColor};
+  }
 
   img {
     width: 48px;

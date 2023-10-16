@@ -11,7 +11,7 @@ const GNB_LIST = [
 const Gnb = ({ isLogin }) => {
   return (
     <Nav>
-      <NavList>
+      <NavList id="menu-list">
         {GNB_LIST.map(item => {
           return (
             <NavListItem

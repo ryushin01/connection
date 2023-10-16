@@ -56,7 +56,7 @@ const FlexCenter = css`
 `;
 
 const FooterWrap = styled.footer`
-  margin-top: 100px;
+  height: 160px;
   border-top: 1px ${props => props.theme.grayscaleF} solid;
   color: ${props => props.theme.grayscaleF};
 

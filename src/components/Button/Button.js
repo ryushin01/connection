@@ -84,7 +84,7 @@ const DefaultButton = styled.button`
           props.theme.grayscaleC
         };
         
-        color: ${props.theme.grayscaleB};
+        color: ${props.theme.grayscaleA};
         `;
     } else {
       return `

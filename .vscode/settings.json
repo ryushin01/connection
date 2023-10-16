@@ -10,5 +10,16 @@
   "prettier.disableLanguages": ["js"],
   "eslint.alwaysShowStatus": true,
   "files.autoSave": "onFocusChange",
-  "cSpell.words": ["mypage", "noreferrer", "Noto"]
+  "cSpell.words": [
+    "bigbanner",
+    "checkduplicate",
+    "Daum",
+    "Hyeon",
+    "kakao",
+    "mypage",
+    "noreferrer",
+    "Noto",
+    "topupcredit",
+    "zonecode"
+  ]
 }

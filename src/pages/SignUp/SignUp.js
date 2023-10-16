@@ -50,114 +50,172 @@ const SignUp = props => {
     });
   };
 
-  console.log(userInfo);
+  const handleSubmitUserInfo = e => {
+    e.preventDefault(); // submit 기본 이벤트 막기
+
+    // 회원가입 API 실행
+    fetch('API 주소', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        email: userInfo.email,
+        password: userInfo.password,
+        name: userInfo.name,
+        phoneNumber: userInfo.phone,
+        zipCode: userInfo.zipCode,
+        address: userInfo.address,
+        addressDetails: userInfo.addressDetail,
+      }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+      });
+  };
+
+  const handleDuplicateCheck = () => {
+    // 이메일 중복체크 API 실행
+    fetch('API 주소', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        email: userInfo.email,
+      }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+      });
+  };
 
   return (
-    <main>
+    <Main id="main">
       <div>
         <SignUpContainer>
           <SignUpLeftSection>
             <span>회원가입</span>
           </SignUpLeftSection>
           <SignUpRightSection>
-            <SignUpForm onChange={handleUserInfo}>
+            <SignUpForm
+              onChange={handleUserInfo}
+              onSubmit={handleSubmitUserInfo}
+            >
               <fieldset>
                 <SignUpLegend>회원가입</SignUpLegend>
-              </fieldset>
-              <SignUpInputWrap>
-                <Input
-                  placeholder="이메일을 입력하세요."
-                  borderRadius="4px"
-                  name="email"
-                  status={
-                    (!isEmailValid && 'error') || (isEmailValid && 'done')
-                  }
-                  error="이메일 형식이 올바르지 않습니다."
-                  done="사용 가능한 이메일입니다."
-                />
-              </SignUpInputWrap>
-              <SignUpInputWrap>
-                <Input
-                  type="password"
-                  placeholder="패스워드를 입력하세요."
-                  borderRadius="4px"
-                  name="password"
-                  status={
-                    (!isPasswordValid && 'error') || (isPasswordValid && 'done')
-                  }
-                  error="비밀번호는 8~20자의 영문 대소문자, 숫자, 특수문자를 사용하세요."
-                  done="사용 가능한 비밀번호입니다."
-                />
-              </SignUpInputWrap>
-              <SignUpInputWrap>
-                <Input
-                  type="password"
-                  placeholder="패스워드를 다시 한번 입력하세요."
-                  borderRadius="4px"
-                  name="passwordCheck"
-                  status={
-                    (!isPasswordCheckValid && 'error') ||
-                    (isPasswordCheckValid && 'done')
-                  }
-                  error="비밀번호가 일치하지 않습니다."
-                  done="비밀번호가 일치합니다."
-                />
-              </SignUpInputWrap>
-              <SignUpInputWrap>
-                <Input
-                  placeholder="이름을 입력하세요."
-                  borderRadius="4px"
-                  name="name"
-                  status={userInfo.name.length < 1 && 'error'}
-                  error="이름을 한 글자 이상 입력하세요."
-                />
-              </SignUpInputWrap>
-              <SignUpInputWrap>
-                <SignUpAddressWrap>
+
+                <SignUpEmailWrap>
                   <Input
+                    placeholder="이메일을 입력하세요."
                     borderRadius="4px"
-                    value={userInfo.zipCode}
+                    name="email"
                     labelFlex="1"
+                    status={
+                      (!isEmailValid && 'error') || (isEmailValid && 'done')
+                    }
+                    error="이메일 형식이 올바르지 않습니다."
+                    done="사용 가능한 이메일입니다."
                   />
-                  <DaumPostCode onAddressSelect={handleAddressSelect} />
-                </SignUpAddressWrap>
-              </SignUpInputWrap>
-              <SignUpInputWrap>
-                <Input borderRadius="4px" value={userInfo.address} />
-              </SignUpInputWrap>
-              <SignUpInputWrap>
-                <Input
-                  placeholder="상세주소를 입력하세요."
-                  borderRadius="4px"
-                  name="addressDetail"
-                />
-              </SignUpInputWrap>
-              <SignUpInputWrap>
-                <Input
-                  type="number"
-                  placeholder="휴대폰번호를 입력하세요."
-                  borderRadius="4px"
-                  name="phone"
-                />
-              </SignUpInputWrap>
-              <SignUpButtonWrap>
-                <Button
-                  type="submit"
-                  disabled={!isValidCheck}
-                  content="회원가입"
-                  shape="solid"
-                  color="primary"
-                />
-              </SignUpButtonWrap>
+                  <Button
+                    content="중복확인"
+                    shape="solid"
+                    color="primary"
+                    onClick={handleDuplicateCheck}
+                  />
+                </SignUpEmailWrap>
+                <SignUpInputWrap>
+                  <Input
+                    type="password"
+                    placeholder="패스워드를 입력하세요."
+                    borderRadius="4px"
+                    name="password"
+                    status={
+                      (!isPasswordValid && 'error') ||
+                      (isPasswordValid && 'done')
+                    }
+                    error="비밀번호는 8~20자의 영문 대소문자, 숫자, 특수문자를 사용하세요."
+                    done="사용 가능한 비밀번호입니다."
+                  />
+                </SignUpInputWrap>
+                <SignUpInputWrap>
+                  <Input
+                    type="password"
+                    placeholder="패스워드를 다시 한번 입력하세요."
+                    borderRadius="4px"
+                    name="passwordCheck"
+                    status={
+                      (!isPasswordCheckValid && 'error') ||
+                      (isPasswordCheckValid && 'done')
+                    }
+                    error="비밀번호가 일치하지 않습니다."
+                    done="비밀번호가 일치합니다."
+                  />
+                </SignUpInputWrap>
+                <SignUpInputWrap>
+                  <Input
+                    placeholder="이름을 입력하세요."
+                    borderRadius="4px"
+                    name="name"
+                    status={userInfo.name.length < 1 && 'error'}
+                    error="이름을 한 글자 이상 입력하세요."
+                  />
+                </SignUpInputWrap>
+                <SignUpInputWrap>
+                  <SignUpAddressWrap>
+                    <Input
+                      borderRadius="4px"
+                      value={userInfo.zipCode}
+                      labelFlex="1"
+                    />
+                    <DaumPostCode onAddressSelect={handleAddressSelect} />
+                  </SignUpAddressWrap>
+                </SignUpInputWrap>
+                <SignUpInputWrap>
+                  <Input borderRadius="4px" value={userInfo.address} />
+                </SignUpInputWrap>
+                <SignUpInputWrap>
+                  <Input
+                    placeholder="상세주소를 입력하세요."
+                    borderRadius="4px"
+                    name="addressDetail"
+                  />
+                </SignUpInputWrap>
+                <SignUpInputWrap>
+                  <Input
+                    type="number"
+                    placeholder="휴대폰번호를 입력하세요."
+                    borderRadius="4px"
+                    name="phone"
+                  />
+                </SignUpInputWrap>
+                <SignUpButtonWrap>
+                  <Button
+                    type="submit"
+                    disabled={!isValidCheck}
+                    content="회원가입"
+                    shape="solid"
+                    color="primary"
+                    onClick={handleSubmitUserInfo}
+                  />
+                </SignUpButtonWrap>
+              </fieldset>
             </SignUpForm>
           </SignUpRightSection>
         </SignUpContainer>
       </div>
-    </main>
+    </Main>
   );
 };
 
 export default SignUp;
+
+const Main = styled.main`
+  display: flex;
+  align-items: center;
+`;
 
 const SignUpContainer = styled.div`
   display: flex;
@@ -166,6 +224,8 @@ const SignUpContainer = styled.div`
 
 const SignUpLeftSection = styled.section`
   flex: 1;
+  background: url(/images/account/bg_signup.jpg) no-repeat center/cover;
+  font-size: 0;
 `;
 
 const SignUpRightSection = styled.section`
@@ -180,7 +240,7 @@ const SignUpForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0 25%;
+  padding: 80px 20%;
 `;
 
 const SignUpLegend = styled.legend`
@@ -196,6 +256,13 @@ const SignUpInputWrap = styled.div`
   button {
     width: 150px;
   }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
 `;
 
 const SignUpButtonWrap = styled.div`
@@ -206,5 +273,16 @@ const SignUpButtonWrap = styled.div`
 
 const SignUpAddressWrap = styled.div`
   display: flex;
-  gap: 4px;
+
+  gap: 8px;
+`;
+
+const SignUpEmailWrap = styled.div`
+  display: flex;
+  padding: 15px 0;
+  gap: 8px;
+
+  button {
+    width: 100px;
+  }
 `;

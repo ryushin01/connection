@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color : ${props => props.theme.grayscaleA};
     color : ${props => props.theme.grayscaleF};
-    font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;;
+    font-family: 'Do Hyeon', "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
   }
 
   li {
@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
   } 
 
   a {
+    display: block;
     color: initial;
     text-decoration: none;
   }  
@@ -28,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
   button {  
     border: 0;
     background-color: transparent;
+    font-family: 'Do Hyeon', "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
     cursor: pointer;
   } 
 
@@ -40,6 +42,8 @@ const GlobalStyle = createGlobalStyle`
     z-index: 1;
     flex: 1;
     width: 100%;
+    padding-bottom: 100px;
+    
     & > div {
       width: 90%;
       margin: 0 auto;
