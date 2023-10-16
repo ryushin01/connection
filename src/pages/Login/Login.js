@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
@@ -9,6 +10,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   // 카카오 소셜 로그인을 위한 변수
   const RestApiKey = '47c1c31b666ba0dbbdda5fdb8ba16011'; // REST API KEY
@@ -38,11 +40,8 @@ const Login = () => {
     setUserInfo({ ...userInfo, [name]: value }); // name을 정의한 값에 value를 넣어준다.
   };
 
-  const handleLoginSubmit = e => {
-    // 로그인 버튼 클릭 시 실행되는 함수
-    e.preventDefault();
-
-    fetch('API 주소', {
+  const postUserInfo = () => {
+    fetch('http://10.58.52.73:8000/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -55,11 +54,17 @@ const Login = () => {
       .then(res => res.json())
       .then(res => {
         if (res.message === 'SUCCESS') {
-          alert('로그인 성공');
+          navigate('/');
         } else {
-          alert('로그인 실패');
+          alert('로그인 실패하였습니다. 다시 시도해주세요.');
         }
       });
+  };
+
+  const handleLoginSubmit = e => {
+    // 로그인 버튼 클릭 시 실행되는 함수
+    e.preventDefault();
+    postUserInfo();
   };
 
   return (
