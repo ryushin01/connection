@@ -1,19 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-function Filter() {
+const Filter = ({ categoryId }) => {
+  const [sort, setSort] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const selectList = ['별점순', '리뷰순', '최신순'];
+  const offset = searchParams.get('offset');
+  const limit = searchParams.get('limit');
+
+  const [posts, setPosts] = useState([]);
+
+  const getReviewSort = () => {
+    fetch(
+      `http://10.58.52.73:8000/products/category/:${categoryId}?sort=${sort}&offset=${offset}&limit=${limit}`,
+    )
+      .then(response => response.json())
+      .then(result => {
+        setPosts(result);
+      });
+  };
+
+  useEffect(() => {
+    getReviewSort();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [offset, limit, sort]);
+
+  const movePage = pageNumber => {
+    searchParams.set('offset', (pageNumber - 1) * 12);
+    setSearchParams(searchParams.toString());
+  };
+
+  const handleSelect = e => {
+    const selectedValue = e.target.value;
+
+    if (selectedValue === '별점순') {
+      return setSort('rating');
+    } else if (selectedValue === '리뷰순') {
+      return setSort('review');
+    } else if (selectedValue === '최신순') {
+      return setSort('created_at');
+    }
+  };
+
   return (
     <FilterWrap>
       <FilterInnerWrap>
-        <Select>
-          <Option>별점순</Option>
-          <Option>리뷰순</Option>
-          <Option>최신순</Option>
+        <Select onChange={handleSelect}>
+          {selectList.map(item => {
+            return (
+              <Option key={item} value={item}>
+                {item}
+              </Option>
+            );
+          })}
         </Select>
       </FilterInnerWrap>
     </FilterWrap>
   );
-}
+};
 
 const FilterWrap = styled.div`
   padding: 20px 0;

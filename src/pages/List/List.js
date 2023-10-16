@@ -51,7 +51,7 @@ const List = () => {
       <ListTitle categoryId={categoryId} title={title} />
       <div>
         <ListSection>
-          <Filter />
+          <Filter categoryId={categoryId} />
           {listData?.map((item, index) => {
             return <ProductList key={index} item={item} />;
           })}
