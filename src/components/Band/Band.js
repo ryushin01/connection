@@ -57,7 +57,7 @@ const Band = ({ item }) => {
 };
 
 const BandWrap = styled.section`
-  padding: 32px 0;
+  padding: 40px 0;
 
   &:hover {
     .swiper-prev-btn {

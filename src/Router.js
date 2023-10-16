@@ -10,6 +10,7 @@ import List from './pages/List/List';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import Auth from './pages/Login/Auth/Auth';
+import ScrollToTop from './components/ScrollTop/ScrollToTop';
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
       <SkipNavigation />
       {/* 셀러 유무 체크 후 노출 여부 결정 */}
       <SellerConversionBanner />
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
