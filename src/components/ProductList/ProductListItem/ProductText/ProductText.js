@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const ProductText = ({ productId, productName, totalPrice }) => {
+const ProductText = ({ productId, productName, originalPrice, totalPrice }) => {
   return (
     <ProductProductTextWrap>
       <Link to={`/detail/${productId}`} aria-hidden="true">
         <h2>{productName}</h2>
         <strong>
+          <span>{originalPrice.toLocaleString()}원</span>
           <span>{totalPrice.toLocaleString()}원</span>
         </strong>
       </Link>
@@ -38,6 +39,15 @@ const ProductProductTextWrap = styled.div`
     }
     strong {
       font-size: 16px;
+
+      span:first-child {
+        color: ${props => props.theme.grayscaleD};
+        text-decoration: line-through;
+        & + span {
+          margin-left: 8px;
+          font-size: 20px;
+        }
+      }
     }
   }
 `;
