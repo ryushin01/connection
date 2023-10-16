@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Account from './Account/Account';
 import Gnb from './Gnb/Gnb';
-import CartButton from '../CartButton/CartButton';
+import GnbCartButton from '../CartButton/GnbCartButton';
 import SearchButton from '../SearchButton/SearchButton';
 import styled, { css } from 'styled-components';
-// import { ReactComponent as AppIcon } from '../../svg/icon_app.svg';
+
 const Header = () => {
   return (
     <HeaderWrap>
@@ -25,7 +25,7 @@ const Header = () => {
           <Gnb />
         </LeftSection>
         <RightSection>
-          <CartButton count="0" />
+          <GnbCartButton />
           <SearchButton />
         </RightSection>
       </HeaderInnerWrap>
