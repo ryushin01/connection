@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import DaumPostCode from './DaumPostCode/DaumPostCode';
+import { useNavigate } from 'react-router';
 
 const SignUp = props => {
   // userInfo state 정의 (회원가입 정보)
@@ -18,6 +19,7 @@ const SignUp = props => {
   });
 
   const [onAddressSelect, setOnAddressSelect] = useState('');
+  const navigate = useNavigate();
 
   // userInfo state onChange 핸들러 함수 정의
   const handleUserInfo = e => {
@@ -50,11 +52,9 @@ const SignUp = props => {
     });
   };
 
-  const handleSubmitUserInfo = e => {
-    e.preventDefault(); // submit 기본 이벤트 막기
-
+  const postSignUp = () => {
     // 회원가입 API 실행
-    fetch('API 주소', {
+    fetch('http://10.58.52.173:8000/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -71,8 +71,17 @@ const SignUp = props => {
     })
       .then(res => res.json())
       .then(result => {
-        console.log(result);
+        if (result.message === 'SUCCESS') {
+          navigate('/login');
+        } else {
+          alert('회원가입에 실패하였습니다.');
+        }
       });
+  };
+
+  const handleSubmitUserInfo = e => {
+    e.preventDefault(); // submit 기본 이벤트 막기
+    postSignUp();
   };
 
   const handleDuplicateCheck = () => {
@@ -114,7 +123,11 @@ const SignUp = props => {
                     name="email"
                     labelFlex="1"
                     status={
-                      (!isEmailValid && 'error') || (isEmailValid && 'done')
+                      (userInfo.email.length === 0 && 'default') ||
+                      (!isEmailValid &&
+                        userInfo.email.length >= 1 &&
+                        'error') ||
+                      (isEmailValid && 'done')
                     }
                     error="이메일 형식이 올바르지 않습니다."
                     done="사용 가능한 이메일입니다."
@@ -133,7 +146,10 @@ const SignUp = props => {
                     borderRadius="4px"
                     name="password"
                     status={
-                      (!isPasswordValid && 'error') ||
+                      (userInfo.password.length === 0 && 'default') ||
+                      (!isPasswordValid &&
+                        userInfo.password.length >= 1 &&
+                        'error') ||
                       (isPasswordValid && 'done')
                     }
                     error="비밀번호는 8~20자의 영문 대소문자, 숫자, 특수문자를 사용하세요."
@@ -147,7 +163,10 @@ const SignUp = props => {
                     borderRadius="4px"
                     name="passwordCheck"
                     status={
-                      (!isPasswordCheckValid && 'error') ||
+                      (userInfo.passwordCheck.length === 0 && 'default') ||
+                      (!isPasswordCheckValid &&
+                        userInfo.passwordCheck.length >= 1 &&
+                        'error') ||
                       (isPasswordCheckValid && 'done')
                     }
                     error="비밀번호가 일치하지 않습니다."
