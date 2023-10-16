@@ -2,7 +2,7 @@ const BASE_URL = 'http://10.58.52.91:8000';
 
 export const API = {
   MAIN: `${BASE_URL}/products`,
-  LIST: `${BASE_URL}/list`,
+  LIST: `${BASE_URL}/products/category`,
 
   // SIGNUP: `${BASE_URL}/users/signup`,
   // CHECK_DUPLICATE: `${BASE_URL}/users/checkduplicate`,

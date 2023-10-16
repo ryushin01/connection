@@ -19,8 +19,14 @@ const Main = () => {
     })
       .then(response => response.json())
       .then(result => {
-        // setBandData(result.data);
+        // real data
+        // if (result.message === 'Success') {
+        //   setBandData(result.data);
+        // }
+
+        // mock data
         setBandData(result);
+
         setLoading(false);
       });
   };

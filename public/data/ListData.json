@@ -1,200 +1,28 @@
-[
-  {
-    "categoryId": 1,
-    "categoryName": "푸드",
-    "products": [
-      {
-        "productId": 1,
-        "productName": "상품명이 길어지면 말줄임이 됩니다.",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 100000000,
-        "rating": 4.5
-      },
-      {
-        "productId": 2,
-        "productName": "상품 B",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 3,
-        "productName": "상품 C",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 4,
-        "productName": "상품 D",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 5,
-        "productName": "상품 E",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 6,
-        "productName": "상품 F",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 1,
-        "productName": "상품명이 길어지면 말줄임이 됩니다.",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 100000000,
-        "rating": 4.5
-      },
-      {
-        "productId": 2,
-        "productName": "상품 B",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 3,
-        "productName": "상품 C",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 4,
-        "productName": "상품 D",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 5,
-        "productName": "상품 E",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 6,
-        "productName": "상품 F",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 1,
-        "productName": "상품명이 길어지면 말줄임이 됩니다.",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 100000000,
-        "rating": 4.5
-      },
-      {
-        "productId": 2,
-        "productName": "상품 B",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 3,
-        "productName": "상품 C",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 4,
-        "productName": "상품 D",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 5,
-        "productName": "상품 E",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 6,
-        "productName": "상품 F",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 1,
-        "productName": "상품명이 길어지면 말줄임이 됩니다.",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 100000000,
-        "rating": 4.5
-      },
-      {
-        "productId": 2,
-        "productName": "상품 B",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 3,
-        "productName": "상품 C",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 4,
-        "productName": "상품 D",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 5,
-        "productName": "상품 E",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      },
-      {
-        "productId": 6,
-        "productName": "상품 F",
-        "productImage": "/images/products/beef.png",
-        "originalPrice": 10000,
-        "totalPrice": 9900,
-        "rating": 4.5
-      }
-    ]
-  }
-]
+{
+  "message": "Success",
+  "categoryName": "디지털",
+  "data": [
+    {
+      "productId": 11,
+      "productName": "고기",
+      "productImg": "ㄴ",
+      "originalPrice": 20000,
+      "discountRate": 5,
+      "discountAmount": 1000,
+      "totalPrice": 19000,
+      "reviewNumber": 0,
+      "rating": 0
+    },
+    {
+      "productId": 12,
+      "productName": "고기",
+      "productImg": "ㄴ",
+      "originalPrice": 20000,
+      "discountRate": 5,
+      "discountAmount": 1000,
+      "totalPrice": 19000,
+      "reviewNumber": 0,
+      "rating": 0
+    }
+  ]
+}

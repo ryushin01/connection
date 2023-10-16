@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const ListTitle = ({ title, ...props }) => {
+const ListTitle = ({ productName, ...props }) => {
   return (
     <ListTitleSection {...props}>
       <ListTitleSectionInnerWrap>
-        <h2>{title}</h2>
+        <h2>{productName}</h2>
       </ListTitleSectionInnerWrap>
     </ListTitleSection>
   );
