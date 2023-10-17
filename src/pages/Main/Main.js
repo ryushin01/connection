@@ -75,7 +75,6 @@ const Main = () => {
             return <Band key={index} item={item} />;
           })}
         </div>
-        <Modal />
       </main>
     </>
   );
