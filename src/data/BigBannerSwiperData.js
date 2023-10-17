@@ -1,4 +1,4 @@
-const BIG_BANNER_bigbanner_DATA = [
+const BIG_BANNER_SWIPER_DATA = [
   {
     id: 1,
     path: '/products/category/1',
@@ -64,4 +64,4 @@ const BIG_BANNER_bigbanner_DATA = [
   },
 ];
 
-export default BIG_BANNER_bigbanner_DATA;
+export default BIG_BANNER_SWIPER_DATA;
