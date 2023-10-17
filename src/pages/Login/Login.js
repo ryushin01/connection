@@ -13,9 +13,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   // 카카오 소셜 로그인을 위한 변수
-  const RestApiKey = '47c1c31b666ba0dbbdda5fdb8ba16011'; // REST API KEY
-  const redirectUri = 'http://localhost:3000/Auth'; // REDIRECT URI
-  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${RestApiKey}&redirect_uri=${redirectUri}&response_type=code`;
+  const RestApiKey = process.env.REACT_APP_RestApiKey;
+  const RedirectUri = process.env.REACT_APP_RedirectUri;
+  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${RestApiKey}&redirect_uri=${RedirectUri}&response_type=code`;
 
   // userInfo Email, Password Valid Check
   const emailRegExp =
