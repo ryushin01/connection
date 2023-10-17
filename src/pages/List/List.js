@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API } from '../../config';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Loading from '../../pages/Loading/Loading';
 import ListTitle from './LIstTitle/ListTitle';
 import Filter from '../../components/Filter/Filter';
@@ -12,12 +12,30 @@ const List = () => {
   const [loading, setLoading] = useState(true);
   const [categoryName, setCategoryName] = useState('');
   const [listData, setListData] = useState([]);
+  const location = useLocation();
   const { id } = useParams();
-  const categoryId = Number(id);
+  const processedId = Number(id);
+
+  // console.log(location.state);
+
+  // fetch(`${API.CATEGORY_BAND}/${categoryId}`, {
+  // fetch(`${API.SELLER_BAND}/${sellerId}`, {
+
+  let API_URL;
+
+  if (location.state.categoryId) {
+    console.log('카테고리 더보기 진입');
+    API_URL = `${API.CATEGORY_BAND}/${processedId}`;
+  } else {
+    console.log('셀러 더보기 진입');
+    API_URL = `${API.SELLER_BAND}/${processedId}`;
+  }
 
   const getListData = () => {
     // fetch(`${API.DETAIL}?categoryId=${categoryId}`, {
-    fetch(`${API.LIST}/${categoryId}`, {
+    // fetch(`${API.LIST}/${categoryId}`, {
+    // fetch(`${API.CATEGORY_BAND}/${processedId}`, {
+    fetch(API_URL, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -52,10 +70,10 @@ const List = () => {
     setLoading(true);
 
     // real data
-    // getListData();
+    getListData();
 
     // mock data
-    getListMockData();
+    // getListMockData();
   }, []);
 
   return (

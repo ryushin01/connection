@@ -24,6 +24,7 @@ const Router = () => {
         <Route path="/" element={<Main />} />
         {/* 셀러 목록 페이지 추가? 또는 셀러 유무 확인 boolean으로 구분? */}
         <Route path="/products/category/:id" element={<List />} />
+        <Route path="/products/seller/:id" element={<List />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/auth" element={<Auth />} />
