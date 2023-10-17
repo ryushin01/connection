@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API } from '../../config';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import Loading from '../../pages/Loading/Loading';
 import ListTitle from './LIstTitle/ListTitle';
 import Filter from '../../components/Filter/Filter';
@@ -11,8 +11,9 @@ import styled from 'styled-components';
 const List = () => {
   // hooks
   const [loading, setLoading] = useState(true);
-  const [categoryName, setCategoryName] = useState('');
+  const [listTitle, setListTitle] = useState('');
   const [listData, setListData] = useState([]);
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams(); // 쿼리 스트링 값을 받아오기 위한 hooks 선언
   const [sort, setSort] = useState(''); // 페이지 정렬을 위한 state
   const [page, setPage] = useState(1); // 페이지 이동을 위한 state
@@ -27,7 +28,9 @@ const List = () => {
   // functions
   const getListData = () => {
     // fetch(`${API.DETAIL}?categoryId=${categoryId}`, {
-    fetch(`${API.LIST}/${categoryId}`, {
+    // fetch(`${API.LIST}/${categoryId}`, {
+    // fetch(`${API.CATEGORY_BAND}/${processedId}`, {
+    fetch(API_URL, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -35,26 +38,11 @@ const List = () => {
     })
       .then(response => response.json())
       .then(result => {
-        if (result.message === 'SUCCESS') {
-          setCategoryName(result.categoryName);
+        if (result.message === 'Success') {
+          setListTitle(result.categoryName || result.sellerName);
           setListData(result.data);
           setLoading(false);
         }
-      });
-  };
-
-  const getListMockData = () => {
-    fetch('/data/ListData.json', {
-      method: 'GET',
-      header: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(result => {
-        setCategoryName(result.categoryName);
-        setListData(result.data);
-        setLoading(false);
       });
   };
 
@@ -78,12 +66,8 @@ const List = () => {
   // useEffect
   useEffect(() => {
     setLoading(true);
-
-    // real data
-    // getListData();
-
-    // mock data
-    getListMockData();
+    getListData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -94,8 +78,7 @@ const List = () => {
     <>
       {loading && <Loading />}
       <main id="main">
-        {/* <ListTitle categoryId={categoryId} categoryName={categoryName} /> */}
-        <ListTitle categoryName={categoryName} />
+        <ListTitle listTitle={listTitle} />
         <div>
           <ListSection>
             <Filter categoryId={categoryId} />
