@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const ListTitle = ({ productName, ...props }) => {
+const ListTitle = ({ listTitle }) => {
   return (
-    <ListTitleSection {...props}>
+    <ListTitleSection>
       <ListTitleSectionInnerWrap>
-        <h2>{productName}</h2>
+        <h2>{listTitle}</h2>
       </ListTitleSectionInnerWrap>
     </ListTitleSection>
   );
@@ -56,7 +56,8 @@ const ListTitleSection = styled.section`
   background-position: center;
 
   background-image: ${({ categoryId }) =>
-    CATEGORY_IMAGE[categoryId]?.backgroundImage};
+    CATEGORY_IMAGE[categoryId]?.backgroundImage ||
+    `url(/images/list/seller.jpg)`};
 
   &::before {
     content: '';

@@ -1,0 +1,61 @@
+{
+  "message": "Success",
+  "categoryName": "뷰티",
+  "data": [
+    {
+      "productId": 11,
+      "productName": "고기",
+      "productImg": "ㄴ",
+      "originalPrice": 20000,
+      "discountRate": 5,
+      "discountAmount": 1000,
+      "totalPrice": 19000,
+      "reviewNumber": 0,
+      "rating": 0
+    },
+    {
+      "productId": 12,
+      "productName": "고기",
+      "productImg": "ㄴ",
+      "originalPrice": 20000,
+      "discountRate": 5,
+      "discountAmount": 1000,
+      "totalPrice": 19000,
+      "reviewNumber": 0,
+      "rating": 0
+    },
+    {
+      "productId": 12,
+      "productName": "고기",
+      "productImg": "ㄴ",
+      "originalPrice": 20000,
+      "discountRate": 5,
+      "discountAmount": 1000,
+      "totalPrice": 19000,
+      "reviewNumber": 0,
+      "rating": 0
+    },
+    {
+      "productId": 12,
+      "productName": "고기",
+      "productImg": "ㄴ",
+      "originalPrice": 20000,
+      "discountRate": 5,
+      "discountAmount": 1000,
+      "totalPrice": 19000,
+      "reviewNumber": 0,
+      "rating": 0
+    },
+    {
+      "productId": 12,
+      "productName": "고기",
+      "productImg": "ㄴ",
+      "originalPrice": 20000,
+      "discountRate": 5,
+      "discountAmount": 1000,
+      "totalPrice": 19000,
+      "reviewNumber": 0,
+      "rating": 0
+    }
+  ]
+}
