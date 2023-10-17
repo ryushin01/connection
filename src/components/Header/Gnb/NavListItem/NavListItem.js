@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import CategoryListItem from './CategoryLIstItem/CategoryLIstItem';
+import Modal from '../../../Modal/Modal';
 import styled from 'styled-components';
+import { createPortal } from 'react-dom';
 
 // const CATEGORY_LIST = [
 //   {
@@ -59,6 +60,7 @@ import styled from 'styled-components';
 //     image: '/images/category/icon_category_pet.svg',
 //   },
 // ];
+
 const NavListItem = ({ id, text, path, image }) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const isCategory = id === 2;
@@ -71,6 +73,8 @@ const NavListItem = ({ id, text, path, image }) => {
           {text}
         </button>
       )}
+
+      {/* {isModalOpened && createPortal(<Modal />)} */}
     </ListItem>
   );
 };
