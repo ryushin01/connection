@@ -10,8 +10,39 @@ const ACCOUNT_MENU_LIST = [
 
 const isLogin = true;
 
+const postKakaoLogout = () => {
+  const access_token = localStorage.getItem('access_token');
+
+  if (!access_token) {
+    alert('로그인이 되어있지 않습니다.');
+    return;
+  } else {
+    localStorage.removeItem('access_token');
+    alert('로그아웃 되었습니다.');
+    window.location.reload();
+  }
+
+  // fetch(`http://10.58.52.246:8000/`, {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+  //     Authorization: `Bearer ${access_token}`,
+  //   },
+  // })
+  //   .then(response => response.json())
+  //   .then(result => {
+  //     if (result.message === 'SUCCESS') {
+  //       localStorage.removeItem('access_token');
+  //       alert('로그아웃 되었습니다.');
+  //       window.location.reload();
+  //     } else {
+  //       alert('로그아웃에 실패하였습니다.');
+  //     }
+  //   });
+};
+
 const logout = () => {
-  console.log('로그아웃');
+  postKakaoLogout();
 };
 
 const Account = () => {
