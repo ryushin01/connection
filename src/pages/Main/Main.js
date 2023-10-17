@@ -4,6 +4,8 @@ import Loading from '../../pages/Loading/Loading';
 import BigBanner from './BigBanner/BigBanner';
 import Band from '../../components/Band/Band';
 
+import Modal from '../../components/Modal/Modal';
+
 const Main = () => {
   const [loading, setLoading] = useState(true);
   const [bandData, setBandData] = useState([]);
@@ -46,6 +48,7 @@ const Main = () => {
             return <Band key={index} item={item} />;
           })}
         </div>
+        <Modal />
       </main>
     </>
   );
