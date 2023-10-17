@@ -37,6 +37,11 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
   }
 
+  input,
+  textarea {
+    font-family: 'Do Hyeon', "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
+  }
+
   main {  
     position: relative;
     z-index: 1;

@@ -8,12 +8,12 @@ import Modal from '../../components/Modal/Modal';
 
 const Main = () => {
   const [loading, setLoading] = useState(true);
-  const [bandData, setBandData] = useState([]);
+  const [categoryBandData, setCategoryBandData] = useState([]);
+  const [sellerBandData, setSellerBandData] = useState([]);
 
-  const getBandData = () => {
-    // fetch('http://10.58.52.91:8000/products', {
-    // fetch(`${API.MAIN}`, {
-    fetch('/data/bandData.json', {
+  const getCategoryBandData = () => {
+    fetch('/data/categoryBandData.json', {
+      // fetch(`${API.CATEGORY_BAND}`, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -23,11 +23,33 @@ const Main = () => {
       .then(result => {
         // real data
         // if (result.message === 'Success') {
-        //   setBandData(result.data);
+        //   setCategoryBandData(result.data);
         // }
 
         // mock data
-        setBandData(result);
+        setCategoryBandData(result);
+
+        setLoading(false);
+      });
+  };
+
+  const getSellerBandData = () => {
+    fetch('/data/sellerBandData.json', {
+      // fetch(`${API.SELLER_BAND}`, {
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        // real data
+        // if (result.message === 'Success') {
+        //   setSellerBandData(result.data);
+        // }
+
+        // mock data
+        setSellerBandData(result);
 
         setLoading(false);
       });
@@ -35,7 +57,8 @@ const Main = () => {
 
   useEffect(() => {
     setLoading(true);
-    getBandData();
+    getCategoryBandData();
+    getSellerBandData();
   }, []);
 
   return (
@@ -44,7 +67,11 @@ const Main = () => {
       <main id="main">
         <BigBanner />
         <div>
-          {bandData?.map((item, index) => {
+          {categoryBandData?.map((item, index) => {
+            return <Band key={index} item={item} />;
+          })}
+
+          {sellerBandData?.map((item, index) => {
             return <Band key={index} item={item} />;
           })}
         </div>

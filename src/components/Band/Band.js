@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { ReactComponent as MoreIcon } from '../../svg/icon_more.svg';
@@ -9,12 +9,25 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 const Band = ({ item }) => {
-  const { categoryName, categoryId, product } = item;
+  const navigate = useNavigate();
+  const { categoryName, sellerName, categoryId, sellerId, product } = item;
+
+  const goToList = e => {
+    if (categoryId) {
+      navigate(`/products/category/${categoryId}`, {
+        state: { categoryId: categoryId },
+      });
+    } else {
+      navigate(`/products/seller/${sellerId}`, {
+        state: { sellerId: sellerId },
+      });
+    }
+  };
 
   return (
     <BandWrap>
       <BandInnerWrap>
-        <BandTitle tabIndex="0">{categoryName}</BandTitle>
+        <BandTitle tabIndex="0">{categoryName || sellerName}</BandTitle>
         <Swiper
           slidesPerView="5"
           slidesPerGroup="5"
@@ -43,14 +56,38 @@ const Band = ({ item }) => {
           </SwiperController>
         </Swiper>
 
-        {/* categoryId와 sellerId 구분 필요 */}
-        <BandListLink
-          to={`/products/category/${categoryId}`}
-          // to={`/products/seller/${sellerId}`}
-          aria-label="밴드 목록 더보기"
-        >
+        <BandListLink onClick={goToList} aria-label="밴드 목록 더보기">
           <MoreIcon />
         </BandListLink>
+
+        {/* {categoryId && (
+          <BandListLink onClick={aaa} aria-label="밴드 목록 더보기">
+            <MoreIcon />
+          </BandListLink>
+        )}
+
+        {sellerId && (
+          <BandListLink onClick={bbb} aria-label="밴드 목록 더보기">
+            <MoreIcon />
+          </BandListLink>
+        )} */}
+
+        {/* {categoryId && (
+          <BandListLink
+            to={`/products/category/${categoryId}`}
+            aria-label="밴드 목록 더보기"
+          >
+            <MoreIcon />
+          </BandListLink>
+        )}
+        {sellerId && (
+          <BandListLink
+            to={`/products/seller/${sellerId}`}
+            aria-label="밴드 목록 더보기"
+          >
+            <MoreIcon />
+          </BandListLink>
+        )} */}
       </BandInnerWrap>
     </BandWrap>
   );
@@ -85,7 +122,7 @@ const BandTitle = styled.h1`
   color: ${props => props.theme.grayscaleF};
 `;
 
-const BandListLink = styled(Link)`
+const BandListLink = styled.button`
   width: 28px;
   height: 28px;
   position: absolute;
