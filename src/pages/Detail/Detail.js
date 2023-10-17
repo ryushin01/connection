@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Loading from '../Loading/Loading';
 import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
+import DetailTab from './DetailTab/DetailTab';
 import styled, { css } from 'styled-components';
 
 const Detail = () => {
@@ -64,7 +65,9 @@ const Detail = () => {
                 </MetadataAreaInnerWrap>
               </MetadataArea>
             </DetailTopSection>
-            {/* <DetailBottomSection>bottom</DetailBottomSection> */}
+            <DetailBottomSection>
+              <DetailTab />
+            </DetailBottomSection>
           </DetailWrap>
         </div>
       </main>
@@ -85,7 +88,7 @@ const DetailWrap = styled.div`
 const DetailTopSection = styled.section`
   position: relative;
   display: flex;
-  border-bottom: 1px #e2e2e2 solid;
+  border-bottom: 1px ${props => props.theme.grayscaleC} solid;
 
   & > div {
     flex: 1;
@@ -102,6 +105,7 @@ const ImageAreaInnerWrap = styled.div`
   ${FlexCenter};
   width: 30vw;
   height: 30vw;
+  border-radius: 4px;
   background-color: ${props => props.theme.grayscaleB};
 
   img {
@@ -152,7 +156,7 @@ const MetadataTable = styled.table`
   }
 
   th {
-    width: 30%;
+    width: 35%;
   }
 
   tr:nth-child(2) {
