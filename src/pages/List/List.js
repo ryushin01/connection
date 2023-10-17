@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API } from '../../config';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Loading from '../../pages/Loading/Loading';
 import ListTitle from './LIstTitle/ListTitle';
 import Filter from '../../components/Filter/Filter';
@@ -9,23 +9,30 @@ import Pagination from '../../components/Pagination/Pagination';
 import styled from 'styled-components';
 
 const List = () => {
-  // hooks
   const [loading, setLoading] = useState(true);
   const [listTitle, setListTitle] = useState('');
   const [listData, setListData] = useState([]);
   const location = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams(); // 쿼리 스트링 값을 받아오기 위한 hooks 선언
-  const [sort, setSort] = useState(''); // 페이지 정렬을 위한 state
-  const [page, setPage] = useState(1); // 페이지 이동을 위한 state
   const { id } = useParams();
-  const categoryId = Number(id);
+  const processedId = Number(id);
 
-  // variables
-  const offset = searchParams.get('offset'); // 페이지의 위치값
-  let limit = searchParams.get('limit'); // 페이지당 보여줄 상품의 개수
-  const totalPage = Math.ceil(listData.length / limit); // 전체 페이지 수
+  // console.log(location.state);
 
-  // functions
+  // fetch(`${API.CATEGORY_BAND}/${categoryId}`, {
+  // fetch(`${API.SELLER_BAND}/${sellerId}`, {
+
+  let API_URL;
+
+  if (location.state.categoryId) {
+    console.log('카테고리 더보기 진입');
+    API_URL = `/data/categoryListData.json`;
+    // API_URL = `${API.CATEGORY_BAND}/${processedId}`;
+  } else {
+    console.log('셀러 더보기 진입');
+    API_URL = `/data/sellerListData.json`;
+    // API_URL = `${API.SELLER_BAND}/${processedId}`;
+  }
+
   const getListData = () => {
     // fetch(`${API.DETAIL}?categoryId=${categoryId}`, {
     // fetch(`${API.LIST}/${categoryId}`, {
@@ -46,33 +53,11 @@ const List = () => {
       });
   };
 
-  const setPaginationParams = () => {
-    limit = 12; // 페이지당 보여줄 상품의 개수(12개 고정)
-    searchParams.set('offset', (page - 1) * limit); // 페이지의 위치값
-    searchParams.set('limit', limit); // 페이지당 보여줄 상품의 개수
-    setSearchParams(searchParams); // 쿼리 스트링 값 변경
-  };
-
-  const getSortData = () => {
-    fetch(
-      `http://10.58.52.73:8000/products/category/:${categoryId}?sort=${sort}&offset=${offset}&limit=${limit}`,
-    )
-      .then(response => response.json())
-      .then(result => {
-        setPaginationParams();
-      });
-  };
-
-  // useEffect
   useEffect(() => {
     setLoading(true);
     getListData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    getSortData();
-  }, [page]);
 
   return (
     <>
@@ -81,9 +66,9 @@ const List = () => {
         <ListTitle listTitle={listTitle} />
         <div>
           <ListSection>
-            <Filter categoryId={categoryId} />
+            <Filter />
             <ProductList listData={listData} />
-            <Pagination totalPage={totalPage} page={page} setPage={setPage} />
+            <Pagination />
           </ListSection>
         </div>
       </main>
