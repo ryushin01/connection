@@ -63,7 +63,7 @@ const DefaultButton = styled.button`
   border-color: ${props =>
     (props.color === 'primary' && props.theme.primaryColor) ||
     (props.color === 'secondary' && props.theme.secondaryColor) ||
-    props.theme.grayscaleC};
+    props.theme.grayscaleD};
 
   &:hover,
   &:active {
@@ -81,7 +81,7 @@ const DefaultButton = styled.button`
         background-color: ${
           (props.color === 'primary' && props.theme.primaryColor) ||
           (props.color === 'secondary' && props.theme.secondaryColor) ||
-          props.theme.grayscaleC
+          props.theme.grayscaleD
         };
         
         color: ${props.theme.grayscaleA};

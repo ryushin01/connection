@@ -7,6 +7,7 @@ import Footer from './components/Footer/Footer';
 import TopButton from './components/TopButton/TopButton';
 import Main from './pages/Main/Main';
 import List from './pages/List/List';
+import Detail from './pages/Detail/Detail';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import Auth from './pages/Login/Auth/Auth';
@@ -22,6 +23,7 @@ const Router = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/detail/:id" element={<Detail />} />
         {/* 셀러 목록 페이지 추가? 또는 셀러 유무 확인 boolean으로 구분? */}
         <Route path="/products/category/:id" element={<List />} />
         <Route path="/products/seller/:id" element={<List />} />
