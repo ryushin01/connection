@@ -39,7 +39,7 @@ const SignUp = props => {
     isEmailValid &&
     isPasswordValid &&
     isPasswordCheckValid &&
-    userInfo.name.length >= 1 &&
+    userInfo.name.length >= 2 &&
     userInfo.phone.length === 11; // 모든 조건이 만족하면 버튼 활성화
 
   const handleAddressSelect = address => {
@@ -178,8 +178,11 @@ const SignUp = props => {
                     placeholder="이름을 입력하세요."
                     borderRadius="4px"
                     name="name"
-                    status={userInfo.name.length < 1 && 'error'}
-                    error="이름을 한 글자 이상 입력하세요."
+                    status={
+                      (userInfo.name.length === 0 && 'default') ||
+                      (userInfo.name.length < 2 && 'error')
+                    }
+                    error="이름을 두 글자 이상 입력하세요."
                   />
                 </SignUpInputWrap>
                 <SignUpInputWrap>
