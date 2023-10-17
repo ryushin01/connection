@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Rating from '../../../Rating/Rating';
 import CartButton from '../../../CartButton/CartButton';
 import styled, { css } from 'styled-components';
 
@@ -9,7 +10,7 @@ const ProductImage = ({ productId, productImage, productName, rating }) => {
       <Link to={`/detail/${productId}`}>
         <ProductImg src={productImage} alt={productName} />
       </Link>
-      <Rating>{rating}</Rating>
+      <Rating rating={rating} />
       <CartButton />
     </ProductImageWrap>
   );
@@ -43,22 +44,6 @@ const ProductImg = styled.img`
   width: 12vw;
   height: 12vw;
   object-fit: contain;
-`;
-
-const Rating = styled.span`
-  ${FlexCenter};
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 20px;
-  color: ${props => props.theme.grayscaleF};
-  &::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 24px;
-    background: url(/images/common/icon_star.png) no-repeat center/cover;
-  }
 `;
 
 export default ProductImage;

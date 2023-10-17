@@ -57,6 +57,7 @@ const BigBanner = () => {
 
 const BigBannerWrap = styled.section`
   position: relative;
+  margin-top: -40px;
   font-size: 0;
 
   & > div > div:first-child {

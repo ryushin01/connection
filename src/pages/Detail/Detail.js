@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import { API } from '../../config';
 // import { useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
+import Rating from '../../components/Rating/Rating';
 import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
 import DetailTab from './DetailTab/DetailTab';
@@ -21,6 +22,7 @@ const Detail = () => {
               <ImageArea>
                 <ImageAreaInnerWrap>
                   <img src="/images/products/milk.png" alt="productName" />
+                  <Rating rating="0" />
                 </ImageAreaInnerWrap>
               </ImageArea>
               <MetadataArea>
@@ -82,7 +84,7 @@ const FlexCenter = css`
 `;
 
 const DetailWrap = styled.div`
-  background-color: transparent;
+  margin-top: -40px;
 `;
 
 const DetailTopSection = styled.section`
@@ -103,6 +105,7 @@ const ImageArea = styled.div`
 
 const ImageAreaInnerWrap = styled.div`
   ${FlexCenter};
+  position: relative;
   width: 30vw;
   height: 30vw;
   border-radius: 4px;

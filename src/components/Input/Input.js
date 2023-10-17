@@ -90,7 +90,7 @@ const DefaultInput = styled.input`
     } else {
       return `
       border-color : ${props.theme.grayscaleC};
-        color : ${props.theme.grayscaleD};
+        color : ${props.theme.grayscaleF};
       `;
     }
   }}

@@ -47,7 +47,7 @@ const GlobalStyle = createGlobalStyle`
     z-index: 1;
     flex: 1;
     width: 100%;
-    padding-bottom: 100px;
+    padding: 40px 0;
     
     & > div {
       width: 90%;
