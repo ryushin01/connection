@@ -1,36 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Filter = ({ categoryId }) => {
   const [sort, setSort] = useState('');
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const selectList = ['별점순', '리뷰순', '최신순'];
-  const offset = searchParams.get('offset');
-  const limit = searchParams.get('limit');
-
-  const [posts, setPosts] = useState([]);
-
-  const getReviewSort = () => {
-    fetch(
-      `http://10.58.52.73:8000/products/category/:${categoryId}?sort=${sort}&offset=${offset}&limit=${limit}`,
-    )
-      .then(response => response.json())
-      .then(result => {
-        setPosts(result);
-      });
-  };
-
-  useEffect(() => {
-    getReviewSort();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [offset, limit, sort]);
-
-  const movePage = pageNumber => {
-    searchParams.set('offset', (pageNumber - 1) * 12);
-    setSearchParams(searchParams.toString());
-  };
 
   const handleSelect = e => {
     const selectedValue = e.target.value;

@@ -2,31 +2,38 @@ import React from 'react';
 import { ReactComponent as PrevIcon } from '../../svg/icon_arrow_left.svg';
 import { ReactComponent as NextIcon } from '../../svg/icon_arrow_right.svg';
 import styled, { css } from 'styled-components';
+import Button from '../Button/Button';
 
-function Pagination() {
+const Pagination = ({ totalPage, page, setPage }) => {
+  const handlePrevButtons = () => {
+    let arr = [];
+
+    for (let i = 0; i < totalPage; i++) {
+      arr.push(
+        <Button
+          key={i + 1}
+          onClick={() => setPage(i + 1)}
+          status={page - 1 === i && 'selected'}
+        >
+          {i + 1}
+        </Button>,
+      );
+    }
+    return arr;
+  };
+
   return (
     <PaginationWrap>
       <PrevButton>
         <PrevIcon />
       </PrevButton>
-      <div className="pagination-number">
-        <button type="button">1</button>
-        <button type="button">2</button>
-        <button type="button">3</button>
-        <button type="button">4</button>
-        <button type="button">5</button>
-        <button type="button">6</button>
-        <button type="button">7</button>
-        <button type="button">8</button>
-        <button type="button">9</button>
-        <button type="button">10</button>
-      </div>
+      <div className="pagination-number">{handlePrevButtons(totalPage)}</div>
       <NextButton>
         <NextIcon />
       </NextButton>
     </PaginationWrap>
   );
-}
+};
 
 const FlexCenter = css`
   display: flex;
