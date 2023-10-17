@@ -31,11 +31,17 @@ const BigBanner = () => {
           },
         }}
       >
-        {BIG_BANNER_SWIPER_DATA.map(item => {
+        {BIG_BANNER_SWIPER_DATA.map(({ id, path, image, title, subtitle }) => {
           return (
-            <SwiperSlide key={item.id}>
-              <Link to={item.path}>
-                <img src={item.imageSrc} alt={item.alt} />
+            <SwiperSlide key={id}>
+              <Link to={path}>
+                <img src={image} alt={title} />
+                <TextWrap>
+                  <TextInnerWrap>
+                    <Title>{title}</Title>
+                    <Subtitle>{subtitle}</Subtitle>
+                  </TextInnerWrap>
+                </TextWrap>
               </Link>
             </SwiperSlide>
           );
@@ -59,7 +65,7 @@ const BigBannerWrap = styled.section`
   position: relative;
   font-size: 0;
 
-  & > div > div:first-child {
+  & > div > div:first-child > div > a {
     &::before {
       content: '';
       position: absolute;
@@ -71,6 +77,60 @@ const BigBannerWrap = styled.section`
       background-color: rgba(0, 0, 0, 0.2);
     }
   }
+
+  & > div > div:first-child > div.swiper-slide-active {
+    span {
+      top: 0;
+      opacity: 1;
+    }
+  }
+`;
+
+const TextWrap = styled.div`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 100;
+  width: 90%;
+  height: 100%;
+  transform: translateX(-50%);
+  text-shadow: 2px 2px 6px #888;
+`;
+
+const TextInnerWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  height: 100%;
+
+  span {
+    position: relative;
+    color: #fff;
+    opacity: 0;
+  }
+
+  span:first-child {
+    top: 40px;
+    transition:
+      opacity 0.4s ease-out,
+      top 0.4s ease-out;
+  }
+
+  span:last-child {
+    top: -20px;
+    transition:
+      opacity 0.2s ease-out 0.2s,
+      top 0.2s ease-out 0.2s;
+  }
+`;
+
+const Title = styled.span`
+  font-size: 40px;
+`;
+
+const Subtitle = styled.span`
+  font-size: 28px;
 `;
 
 const BigBannerController = styled.div`
