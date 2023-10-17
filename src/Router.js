@@ -11,6 +11,7 @@ import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import Auth from './pages/Login/Auth/Auth';
 import ScrollToTop from './components/ScrollTop/ScrollToTop';
+import SnsSignUp from './pages/SignUp/SnsSignUp';
 
 const Router = () => {
   return (
@@ -27,6 +28,7 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/snssignup" element={<SnsSignUp />} />
       </Routes>
       <Footer />
       <TopButton />
