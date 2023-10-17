@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { ReactComponent as MoreIcon } from '../../svg/icon_more.svg';
@@ -12,16 +12,16 @@ const Band = ({ item }) => {
   const navigate = useNavigate();
   const { categoryName, sellerName, categoryId, sellerId, product } = item;
 
-  const aaa = () => {
-    navigate(`/products/category/${categoryId}`, {
-      state: { categoryId: categoryId },
-    });
-  };
-
-  const bbb = () => {
-    navigate(`/products/seller/${sellerId}`, {
-      state: { sellerId: sellerId },
-    });
+  const goToList = e => {
+    if (categoryId) {
+      navigate(`/products/category/${categoryId}`, {
+        state: { categoryId: categoryId },
+      });
+    } else {
+      navigate(`/products/seller/${sellerId}`, {
+        state: { sellerId: sellerId },
+      });
+    }
   };
 
   return (
@@ -56,17 +56,21 @@ const Band = ({ item }) => {
           </SwiperController>
         </Swiper>
 
-        {categoryId && (
-          <button type="button" onClick={aaa} aria-label="밴드 목록 더보기">
+        <BandListLink onClick={goToList} aria-label="밴드 목록 더보기">
+          <MoreIcon />
+        </BandListLink>
+
+        {/* {categoryId && (
+          <BandListLink onClick={aaa} aria-label="밴드 목록 더보기">
             <MoreIcon />
-          </button>
+          </BandListLink>
         )}
 
         {sellerId && (
-          <button type="button" onClick={bbb} aria-label="밴드 목록 더보기">
+          <BandListLink onClick={bbb} aria-label="밴드 목록 더보기">
             <MoreIcon />
-          </button>
-        )}
+          </BandListLink>
+        )} */}
 
         {/* {categoryId && (
           <BandListLink
@@ -118,7 +122,7 @@ const BandTitle = styled.h1`
   color: ${props => props.theme.grayscaleF};
 `;
 
-const BandListLink = styled(Link)`
+const BandListLink = styled.button`
   width: 28px;
   height: 28px;
   position: absolute;
