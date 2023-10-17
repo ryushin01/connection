@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as ArrowLeftIcon } from '../../../svg/icon_arrow_left.svg';
 import { ReactComponent as ArrowRightIcon } from '../../../svg/icon_arrow_right.svg';
 import BIG_BANNER_SWIPER_DATA from '../../../data/BigBannerSwiperData';
@@ -12,6 +12,14 @@ import 'swiper/css/pagination';
 import styled from 'styled-components';
 
 const BigBanner = () => {
+  const navigate = useNavigate();
+
+  const goToListPage = id => {
+    navigate(`/products/category/${id}`, {
+      state: { categoryId: id },
+    });
+  };
+
   return (
     <BigBannerWrap>
       <Swiper
@@ -34,7 +42,12 @@ const BigBanner = () => {
         {BIG_BANNER_SWIPER_DATA.map(({ id, path, image, title, subtitle }) => {
           return (
             <SwiperSlide key={id}>
-              <Link to={path}>
+              <SwiperLinkButton
+                type="button"
+                onClick={e => {
+                  goToListPage(id);
+                }}
+              >
                 <img src={image} alt={title} />
                 <TextWrap>
                   <TextInnerWrap>
@@ -42,7 +55,7 @@ const BigBanner = () => {
                     <Subtitle>{subtitle}</Subtitle>
                   </TextInnerWrap>
                 </TextWrap>
-              </Link>
+              </SwiperLinkButton>
             </SwiperSlide>
           );
         })}
@@ -65,7 +78,7 @@ const BigBannerWrap = styled.section`
   position: relative;
   font-size: 0;
 
-  & > div > div:first-child > div > a {
+  & > div > div:first-child > div > button {
     &::before {
       content: '';
       position: absolute;
@@ -86,6 +99,10 @@ const BigBannerWrap = styled.section`
   }
 `;
 
+const SwiperLinkButton = styled.button`
+  font-size: 0;
+`;
+
 const TextWrap = styled.div`
   position: absolute;
   top: 0;
@@ -103,6 +120,7 @@ const TextInnerWrap = styled.div`
   justify-content: center;
   gap: 12px;
   height: 100%;
+  text-align: left;
 
   span {
     position: relative;
@@ -113,15 +131,15 @@ const TextInnerWrap = styled.div`
   span:first-child {
     top: 40px;
     transition:
-      opacity 0.4s ease-out,
-      top 0.4s ease-out;
+      opacity 0.4s ease-out 0.1s,
+      top 0.4s ease-out 0.1s;
   }
 
   span:last-child {
     top: -20px;
     transition:
-      opacity 0.2s ease-out 0.2s,
-      top 0.2s ease-out 0.2s;
+      opacity 0.3s ease-out 0.2s,
+      top 0.3s ease-out 0.2s;
   }
 `;
 
