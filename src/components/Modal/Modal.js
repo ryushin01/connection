@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 function Modal() {
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
   return (
-    <Container>
-      <Overlay />
-      <Content>모달 창입니다</Content>
-    </Container>
+    <ModalPopup>
+      <ModalPopupInnerWrap>
+        <Overlay />
+        <Content>모달 창입니다</Content>
+      </ModalPopupInnerWrap>
+    </ModalPopup>
   );
 }
 
-const Container = styled.div`
+const ModalPopup = styled.div`
+  display: none;
+`;
+
+const ModalPopupInnerWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,6 +26,7 @@ const Container = styled.div`
   inset: 0;
   z-index: 1;
 `;
+
 const Overlay = styled.div`
   position: fixed;
   inset: 0;

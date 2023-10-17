@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import CategoryListItem from './CategoryLIstItem/CategoryLIstItem';
 import styled from 'styled-components';
@@ -59,11 +59,18 @@ import styled from 'styled-components';
 //     image: '/images/category/icon_category_pet.svg',
 //   },
 // ];
-
 const NavListItem = ({ id, text, path, image }) => {
+  const [isModalOpened, setIsModalOpened] = useState(false);
+  const isCategory = id === 2;
+
   return (
     <ListItem>
-      <Link to={path}>{text}</Link>
+      {!isCategory && <Link to={path}>{text}</Link>}
+      {isCategory && (
+        <button type="button" onClick={() => setIsModalOpened(true)}>
+          {text}
+        </button>
+      )}
     </ListItem>
   );
 };
@@ -73,7 +80,8 @@ const ListItem = styled.li`
   padding: 20px 0;
   cursor: pointer;
 
-  a {
+  a,
+  button {
     position: relative;
     font-size: 24px;
     color: ${props => props.theme.grayscaleF};
