@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import DaumPostCode from './DaumPostCode/DaumPostCode';
+import { useNavigate } from 'react-router';
 
-const SignUp = props => {
+const SnsSignUp = props => {
   // userInfo state 정의 (회원가입 정보)
   const [userInfo, setUserInfo] = useState({
-    email: '',
-    password: '',
-    passwordCheck: '',
-    name: '',
     phone: '',
     zipCode: '',
     address: '',
@@ -27,20 +23,8 @@ const SignUp = props => {
     setUserInfo({ ...userInfo, [name]: value }); // userInfo를 카피하여 각각 name에 맞는 곳에 value 값을 넣어준다.
   };
 
-  const emailRegExp =
-    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; // 이메일 정규표현식
-  const passwordRegExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/; // 비밀번호 정규 표현식
-
-  const isEmailValid = emailRegExp.test(userInfo.email); // 이메일 정규식 체크
-  const isPasswordValid = passwordRegExp.test(userInfo.password); // 비밀번호 정규식 체크
-  const isPasswordCheckValid = userInfo.password === userInfo.passwordCheck; // 비밀번호 확인 체크
-
-  const isValidCheck =
-    isEmailValid &&
-    isPasswordValid &&
-    isPasswordCheckValid &&
-    userInfo.name.length >= 2 &&
-    userInfo.phone.length === 11; // 모든 조건이 만족하면 버튼 활성화
+  // const isValidCheck =
+  // userInfo?.name.length >= 2 && userInfo?.phone.length === 11; // 모든 조건이 만족하면 버튼 활성화
 
   const handleAddressSelect = address => {
     setOnAddressSelect(address); // 주소 API 실행 후 받아온 data를 state에 저장
@@ -54,15 +38,13 @@ const SignUp = props => {
 
   const postSignUp = () => {
     // 회원가입 API 실행
-    fetch('http://10.58.52.173:8000/users/signup', {
-      method: 'POST',
+    fetch('http://10.58.52.246:8000/users/kakao/address', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('access_token'),
       },
       body: JSON.stringify({
-        email: userInfo.email,
-        password: userInfo.password,
-        name: userInfo.name,
         phoneNumber: userInfo.phone,
         zipCode: userInfo.zipCode,
         address: userInfo.address,
@@ -72,34 +54,21 @@ const SignUp = props => {
       .then(res => res.json())
       .then(result => {
         if (result.message === 'SUCCESS') {
-          navigate('/login');
+          navigate('/');
         } else {
           alert('회원가입에 실패하였습니다.');
         }
       });
   };
 
+  console.log(userInfo);
+
   const handleSubmitUserInfo = e => {
     e.preventDefault(); // submit 기본 이벤트 막기
     postSignUp();
   };
 
-  const handleDuplicateCheck = () => {
-    // 이메일 중복체크 API 실행
-    fetch('API 주소', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify({
-        email: userInfo.email,
-      }),
-    })
-      .then(res => res.json())
-      .then(result => {
-        console.log(result);
-      });
-  };
+  const isPhoneNumberValid = userInfo.phone.length === 11;
 
   return (
     <Main id="main">
@@ -114,77 +83,8 @@ const SignUp = props => {
               onSubmit={handleSubmitUserInfo}
             >
               <fieldset>
-                <SignUpLegend>회원가입</SignUpLegend>
+                <SignUpLegend>추가 정보입력</SignUpLegend>
 
-                <SignUpEmailWrap>
-                  <Input
-                    placeholder="이메일을 입력하세요."
-                    borderRadius="4px"
-                    name="email"
-                    labelFlex="1"
-                    status={
-                      (userInfo.email.length === 0 && 'default') ||
-                      (!isEmailValid &&
-                        userInfo.email.length >= 1 &&
-                        'error') ||
-                      (isEmailValid && 'done')
-                    }
-                    error="이메일 형식이 올바르지 않습니다."
-                    done="사용 가능한 이메일입니다."
-                  />
-                  <Button
-                    content="중복확인"
-                    shape="solid"
-                    color="primary"
-                    onClick={handleDuplicateCheck}
-                  />
-                </SignUpEmailWrap>
-                <SignUpInputWrap>
-                  <Input
-                    type="password"
-                    placeholder="패스워드를 입력하세요."
-                    borderRadius="4px"
-                    name="password"
-                    status={
-                      (userInfo.password.length === 0 && 'default') ||
-                      (!isPasswordValid &&
-                        userInfo.password.length >= 1 &&
-                        'error') ||
-                      (isPasswordValid && 'done')
-                    }
-                    error="비밀번호는 8~20자의 영문 대소문자, 숫자, 특수문자를 사용하세요."
-                    done="사용 가능한 비밀번호입니다."
-                  />
-                </SignUpInputWrap>
-                <SignUpInputWrap>
-                  <Input
-                    type="password"
-                    placeholder="패스워드를 다시 한번 입력하세요."
-                    borderRadius="4px"
-                    name="passwordCheck"
-                    status={
-                      (userInfo.passwordCheck.length === 0 && 'default') ||
-                      (!isPasswordCheckValid &&
-                        userInfo.passwordCheck.length >= 1 &&
-                        'error') ||
-                      (isPasswordCheckValid && 'done')
-                    }
-                    error="비밀번호가 일치하지 않습니다."
-                    done="비밀번호가 일치합니다."
-                  />
-                </SignUpInputWrap>
-                <SignUpInputWrap>
-                  <Input
-                    placeholder="이름을 입력하세요."
-                    borderRadius="4px"
-                    name="name"
-                    status={
-                      (userInfo.name.length === 0 && 'default') ||
-                      (userInfo.name.length < 2 && 'error')
-                    }
-                    error="이름을 두 글자 이상 입력하세요."
-                  />
-                </SignUpInputWrap>
                 <SignUpInputWrap>
                   <SignUpAddressWrap>
                     <Input
@@ -216,8 +116,8 @@ const SignUp = props => {
                 <SignUpButtonWrap>
                   <Button
                     type="submit"
-                    disabled={!isValidCheck}
-                    content="회원가입"
+                    // disabled={!isValidCheck}
+                    content="추가정보 저장"
                     shape="solid"
                     color="primary"
                     onClick={handleSubmitUserInfo}
@@ -232,7 +132,7 @@ const SignUp = props => {
   );
 };
 
-export default SignUp;
+export default SnsSignUp;
 
 const Main = styled.main`
   display: flex;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
@@ -9,11 +10,12 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   // 카카오 소셜 로그인을 위한 변수
-  const RestApiKey = '47c1c31b666ba0dbbdda5fdb8ba16011'; // REST API KEY
-  const redirectUri = 'http://localhost:3000/Auth'; // REDIRECT URI
-  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${RestApiKey}&redirect_uri=${redirectUri}&response_type=code`;
+  const RestApiKey = process.env.REACT_APP_RestApiKey;
+  const RedirectUri = process.env.REACT_APP_RedirectUri;
+  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${RestApiKey}&redirect_uri=${RedirectUri}&response_type=code`;
 
   // userInfo Email, Password Valid Check
   const emailRegExp =
@@ -38,11 +40,8 @@ const Login = () => {
     setUserInfo({ ...userInfo, [name]: value }); // name을 정의한 값에 value를 넣어준다.
   };
 
-  const handleLoginSubmit = e => {
-    // 로그인 버튼 클릭 시 실행되는 함수
-    e.preventDefault();
-
-    fetch('API 주소', {
+  const postUserInfo = () => {
+    fetch('http://10.58.52.73:8000/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -55,11 +54,17 @@ const Login = () => {
       .then(res => res.json())
       .then(res => {
         if (res.message === 'SUCCESS') {
-          alert('로그인 성공');
+          navigate('/');
         } else {
-          alert('로그인 실패');
+          alert('로그인 실패하였습니다. 다시 시도해주세요.');
         }
       });
+  };
+
+  const handleLoginSubmit = e => {
+    // 로그인 버튼 클릭 시 실행되는 함수
+    e.preventDefault();
+    postUserInfo();
   };
 
   return (
@@ -77,6 +82,14 @@ const Login = () => {
                     name="email"
                     placeholder="이메일"
                     borderRadius="4px"
+                    status={
+                      (userInfo.email === '' && 'default') ||
+                      (!isEmailValid &&
+                        userInfo.email.length >= 1 &&
+                        'error') ||
+                      (isEmailValid && 'done')
+                    }
+                    error="이메일 형식에 맞지 않습니다."
                   />
                 </LoginInputWrap>
                 <LoginInputWrap>
@@ -85,6 +98,14 @@ const Login = () => {
                     name="password"
                     placeholder="비밀번호"
                     borderRadius="4px"
+                    status={
+                      (userInfo.password === '' && 'default') ||
+                      (!isPasswordValid &&
+                        userInfo.password.length >= 1 &&
+                        'error') ||
+                      (isPasswordValid && 'done')
+                    }
+                    error="비밀번호는 8~20자의 영문 대소문자, 숫자, 특수문자 입니다."
                   />
                 </LoginInputWrap>
                 <LoginButtonWrap>
@@ -169,7 +190,9 @@ const LoginSnsButtonWrap = styled.div`
 
   button {
     width: 100%;
+    border-radius: 4px;
     background: #fee500; // 이미지 빈 공간 같은 색으로 채우기
+    font-size: 0;
 
     img {
       width: auto;

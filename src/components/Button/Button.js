@@ -34,15 +34,15 @@ const Button = ({
 const SIZE_STYLES = {
   small: {
     padding: '11px 10px',
-    fontSize: '12px',
+    fontSize: '16px',
   },
   medium: {
     padding: '12px 10px',
-    fontSize: '16px',
+    fontSize: '20px',
   },
   large: {
     padding: '13px 10px',
-    fontSize: '20px',
+    fontSize: '24px',
   },
 };
 
@@ -58,12 +58,12 @@ const DefaultButton = styled.button`
 
   padding: ${({ size }) => SIZE_STYLES[size]?.padding || '13px 10px'};
 
-  font-size: ${({ size }) => SIZE_STYLES[size]?.fontSize || '18px'};
+  font-size: ${({ size }) => SIZE_STYLES[size]?.fontSize || '20px'};
 
   border-color: ${props =>
     (props.color === 'primary' && props.theme.primaryColor) ||
     (props.color === 'secondary' && props.theme.secondaryColor) ||
-    props.theme.grayscaleC};
+    props.theme.grayscaleD};
 
   &:hover,
   &:active {
@@ -81,7 +81,7 @@ const DefaultButton = styled.button`
         background-color: ${
           (props.color === 'primary' && props.theme.primaryColor) ||
           (props.color === 'secondary' && props.theme.secondaryColor) ||
-          props.theme.grayscaleC
+          props.theme.grayscaleD
         };
         
         color: ${props.theme.grayscaleA};

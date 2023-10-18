@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API } from '../../config';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Loading from '../../pages/Loading/Loading';
 import ListTitle from './LIstTitle/ListTitle';
 import Filter from '../../components/Filter/Filter';
@@ -10,14 +10,34 @@ import styled from 'styled-components';
 
 const List = () => {
   const [loading, setLoading] = useState(true);
-  const [categoryName, setCategoryName] = useState('');
+  const [listTitle, setListTitle] = useState('');
   const [listData, setListData] = useState([]);
+  const location = useLocation();
   const { id } = useParams();
-  const categoryId = Number(id);
+  const processedId = Number(id);
+
+  // console.log(location.state);
+
+  // fetch(`${API.CATEGORY_BAND}/${categoryId}`, {
+  // fetch(`${API.SELLER_BAND}/${sellerId}`, {
+
+  let API_URL;
+
+  if (location.state.categoryId) {
+    console.log('카테고리 더보기 진입');
+    API_URL = `/data/categoryListData.json`;
+    // API_URL = `${API.CATEGORY_BAND}/${processedId}`;
+  } else {
+    console.log('셀러 더보기 진입');
+    API_URL = `/data/sellerListData.json`;
+    // API_URL = `${API.SELLER_BAND}/${processedId}`;
+  }
 
   const getListData = () => {
     // fetch(`${API.DETAIL}?categoryId=${categoryId}`, {
-    fetch(`${API.LIST}/${categoryId}`, {
+    // fetch(`${API.LIST}/${categoryId}`, {
+    // fetch(`${API.CATEGORY_BAND}/${processedId}`, {
+    fetch(API_URL, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -26,44 +46,24 @@ const List = () => {
       .then(response => response.json())
       .then(result => {
         if (result.message === 'Success') {
-          setCategoryName(result.categoryName);
+          setListTitle(result.categoryName || result.sellerName);
           setListData(result.data);
           setLoading(false);
         }
       });
   };
 
-  const getListMockData = () => {
-    fetch('/data/ListData.json', {
-      method: 'GET',
-      header: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(result => {
-        setCategoryName(result.categoryName);
-        setListData(result.data);
-        setLoading(false);
-      });
-  };
-
   useEffect(() => {
     setLoading(true);
-
-    // real data
-    // getListData();
-
-    // mock data
-    getListMockData();
+    getListData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       {loading && <Loading />}
       <main id="main">
-        {/* <ListTitle categoryId={categoryId} categoryName={categoryName} /> */}
-        <ListTitle categoryName={categoryName} />
+        <ListTitle listTitle={listTitle} />
         <div>
           <ListSection>
             <Filter />

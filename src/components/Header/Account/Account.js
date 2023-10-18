@@ -9,9 +9,45 @@ const ACCOUNT_MENU_LIST = [
 ];
 
 const isLogin = true;
+const RestApiKey = process.env.REACT_APP_RestApiKey;
+const RedirectUri = process.env.REACT_APP_LOGOUT_REDIRECT_URI;
+const kakaoURL = `https://kauth.kakao.com/oauth/logout?client_id=${RestApiKey}&logout_redirect_uri=${RedirectUri}`;
+
+const postKakaoLogout = () => {
+  const access_token = localStorage.getItem('access_token');
+
+  // if (!access_token) {
+  //   alert('로그인이 되어있지 않습니다.');
+  //   return;
+  // } else {
+  //   localStorage.removeItem('access_token');
+  //   alert('로그아웃 되었습니다.');
+  //   window.location.reload();
+  //   window.location.href = kakaoURL;
+  // }
+
+  fetch(`http://10.58.52.246:8000/users/kakao/logout`, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+      Authorization: `${access_token}`,
+    },
+  })
+    .then(response => response.json())
+    .then(result => {
+      console.log(result);
+      if (result.message === 'SUCCESS') {
+        localStorage.removeItem('access_token');
+        alert('로그아웃 되었습니다.');
+        window.location.reload();
+      } else {
+        alert('로그아웃에 실패하였습니다.');
+      }
+    });
+};
 
 const logout = () => {
-  console.log('로그아웃');
+  postKakaoLogout();
 };
 
 const Account = () => {
