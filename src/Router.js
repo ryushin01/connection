@@ -13,6 +13,7 @@ import SignUp from './pages/SignUp/SignUp';
 import Auth from './pages/Login/Auth/Auth';
 import ScrollToTop from './components/ScrollTop/ScrollToTop';
 import SnsSignUp from './pages/SignUp/SnsSignUp';
+import SellerSignUp from './pages/SignUp/SellerSignUp';
 
 const Router = () => {
   return (
@@ -32,6 +33,7 @@ const Router = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/snssignup" element={<SnsSignUp />} />
+        <Route path="/sellersignup" element={<SellerSignUp />} />
       </Routes>
       <Footer />
       <TopButton />
