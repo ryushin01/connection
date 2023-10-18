@@ -3,6 +3,7 @@ const BASE_URL = 'http://10.58.52.163:8000';
 export const API = {
   CATEGORY_BAND: `${BASE_URL}/products/category`,
   SELLER_BAND: `${BASE_URL}/products/seller`,
+  CART: `${BASE_URL}/cart`,
 
   // LIST: `${BASE_URL}/products/category`,
   // SIGNUP: `${BASE_URL}/users/signup`,

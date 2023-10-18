@@ -11,17 +11,22 @@ const Root = () => {
   function reducer(currentState, action) {
     if (currentState === undefined) {
       return {
-        number: 1,
+        number: '0',
       };
     }
-    let newState = { ...currentState };
-    if (action.type === 'PLUS') {
-      newState.number++;
-    }
 
-    if (action.type === 'AAA') {
+    let newState = { ...currentState };
+
+    // if (action.type === 'PLUS') {
+    //   newState.number++;
+    // }
+
+    if (action.type === 'ADD') {
+      const changedInt = Number(newState.number);
       const result = action.payload;
-      newState = result;
+      return {
+        number: changedInt + result,
+      };
     }
 
     return newState;

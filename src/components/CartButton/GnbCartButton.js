@@ -12,7 +12,7 @@ const GnbCartButton = () => {
       <Link to="/cart">
         <CartIcon />
       </Link>
-      {number && <span>{number - 1}</span>}
+      {number && <span>{number}</span>}
     </GnbCartButtonWrap>
   );
 };

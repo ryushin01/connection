@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { API } from '../../../config';
 // import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Counter from '../../Counter/Counter';
@@ -22,18 +23,43 @@ const Cart = ({ onClose }) => {
   const totalPrice = price * count;
 
   // 장바구니 버튼 클릭 시 로직
-  // 1. 함수 생성 > onClick 이벤트 핸들러에 연결
-  // 2. dispatch하면서 payload로 quantity(count) 전달 > store로?
+  // [f] 1. 함수 생성 > onClick 이벤트 핸들러에 연결
+  // [f] 2. dispatch하면서 payload로 quantity(count) 전달 > store로?
   // 3. fetch하면서 서버로 productId, quantity(count) 전달
   // 4. 모달 닫기
 
-  console.log(count);
+  const postOrder = () => {
+    // fetch(`${API.CART}`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     authorization: localStorage.getItem('accessToken'),
+    //   },
+    //   body: JSON.stringify({
+    //     productId: 1,
+    //     quantity: 1,
+    //   }),
+    // })
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(result => {
+    //     console.log(result);
+    //   });
+    console.log('fetch');
+  };
+
+  useEffect(() => {
+    // postOrder();
+  }, []);
 
   const putInCart = () => {
     // 1. dispatch
     // dispatch({ type: 'PLUS', payload: count });
 
-    dispatch({ type: 'AAA', payload: count });
+    dispatch({ type: 'ADD', payload: count });
+    postOrder();
+    onClose();
   };
 
   return (
