@@ -91,7 +91,7 @@ const SellerSignUp = props => {
                 />
               </SellerSignUpInputWrap>
               <SellerSignUpInputWrap>
-                <ImageFile name="image" />
+                <ImageFile name="image" borderRadius="4px" />
               </SellerSignUpInputWrap>
 
               <SellerSignUpAddressWrap>
@@ -101,6 +101,7 @@ const SellerSignUp = props => {
                   value={zipCode}
                   name="zipCode"
                   labelFlex="1"
+                  borderRadius="4px"
                 />
                 <DaumPostCode onAddressSelect={handleAddressSelect} />
               </SellerSignUpAddressWrap>
@@ -111,6 +112,7 @@ const SellerSignUp = props => {
                   value={address}
                   name="address"
                   labelFlex="1"
+                  borderRadius="4px"
                 />
               </SellerSignUpInputWrap>
               <SellerSignUpInputWrap>
@@ -119,6 +121,7 @@ const SellerSignUp = props => {
                   placeholder="상세주소"
                   name="addressDetail"
                   labelFlex="1"
+                  borderRadius="4px"
                 />
               </SellerSignUpInputWrap>
               <SellerSignUpInputWrap>
@@ -127,6 +130,7 @@ const SellerSignUp = props => {
                   placeholder="휴대폰 번호"
                   name="phoneNumber"
                   labelFlex="1"
+                  borderRadius="4px"
                 />
               </SellerSignUpInputWrap>
               <SellerSignUpButtonWrap>

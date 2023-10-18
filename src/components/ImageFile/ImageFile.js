@@ -22,6 +22,7 @@ const ImageFile = props => {
         placeholder="이미지 파일"
         labelFlex="1"
         value={`${upLoadedImage}`}
+        {...props}
         readOnly
       />
       <ImageFileLabel>
