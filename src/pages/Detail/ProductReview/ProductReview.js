@@ -59,8 +59,8 @@ const ReviewMetadataArea = styled.div`
     border-color: transparent;
     border-radius: 4px;
     background-color: ${props => props.theme.grayscaleB};
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 20px;
+    line-height: 1.4;
     resize: none;
     outline: 0;
   }
@@ -71,7 +71,7 @@ const ReviewerInfo = styled.span`
   justify-content: space-between;
   align-items: center;
   height: 4vw;
-  font-size: 16px;
+  font-size: 20px;
   color: ${props => props.theme.grayscaleF};
 `;
 

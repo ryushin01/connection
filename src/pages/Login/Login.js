@@ -190,6 +190,7 @@ const LoginSnsButtonWrap = styled.div`
 
   button {
     width: 100%;
+    border-radius: 4px;
     background: #fee500; // 이미지 빈 공간 같은 색으로 채우기
     font-size: 0;
 

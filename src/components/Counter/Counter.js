@@ -71,12 +71,14 @@ const CountDisplay = styled.span`
 `;
 
 const MinusButton = styled.button`
+  border-radius: 4px 0 0 4px;
   &::before {
     content: '-';
   }
 `;
 
 const PlusButton = styled.button`
+  border-radius: 0 4px 4px 0;
   &::before {
     content: '+';
   }
