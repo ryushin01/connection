@@ -1,69 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import CategoryListItem from './CategoryLIstItem/CategoryLIstItem';
+import Portal from '../../../Modal/Portal';
+import Modal from '../../../Modal/Modal';
+import Category from '../../../Modal/Contents/Category';
 import styled from 'styled-components';
 
-// const CATEGORY_LIST = [
-//   {
-//     id: 1,
-//     text: '푸드',
-//     path: 'list?category=food',
-//     image: '/images/category/icon_category_food.svg',
-//   },
-//   {
-//     id: 2,
-//     text: '디지털',
-//     path: 'list?category=digital',
-//     image: '/images/category/icon_category_digital.svg',
-//   },
-//   {
-//     id: 3,
-//     text: '리빙',
-//     path: 'list?category=living',
-//     image: '/images/category/icon_category_living.svg',
-//   },
-//   {
-//     id: 4,
-//     text: '패션',
-//     path: 'list?category=fashion',
-//     image: '/images/category/icon_category_fashion.svg',
-//   },
-//   {
-//     id: 5,
-//     text: '뷰티',
-//     path: 'list?category=beauty',
-//     image: '/images/category/icon_category_beauty.svg',
-//   },
-//   {
-//     id: 6,
-//     text: '스포츠',
-//     path: 'list?category=sports',
-//     image: '/images/category/icon_category_sports.svg',
-//   },
-//   {
-//     id: 7,
-//     text: '유아',
-//     path: 'list?category=baby',
-//     image: '/images/category/icon_category_baby.svg',
-//   },
-//   {
-//     id: 8,
-//     text: '공예',
-//     path: 'list?category=craft',
-//     image: '/images/category/icon_category_craft.svg',
-//   },
-//   {
-//     id: 9,
-//     text: '펫',
-//     path: 'list?category=pet',
-//     image: '/images/category/icon_category_pet.svg',
-//   },
-// ];
+const NavListItem = ({ id, text, path }) => {
+  // 5. Modal 컴포넌트 여닫기를 위한 useState hook을 선언합니다. 기본값은 false입니다.
+  const [modalOpen, setModalOpen] = useState(false);
 
-const NavListItem = ({ id, text, path, image }) => {
+  // 6. Modal 컴포넌트 여닫기 함수를 선언합니다.
+  const modalHandler = () => {
+    setModalOpen(prev => !prev);
+  };
+
+  useEffect(() => {
+    // 9. ESC 키로 Modal 컴포넌트를 닫을 수 있는 함수를 생성합니다.
+    const close = e => {
+      if (e.keyCode === 27) {
+        setModalOpen(false);
+      }
+    };
+
+    // 10. keydown 시에 Modal 컴포넌트 닫힘 함수를 호출합니다.
+    window.addEventListener('keydown', close);
+  }, []);
+
+  const isCategory = id === 2;
+
   return (
     <ListItem>
-      <Link to={path}>{text}</Link>
+      {!isCategory && <Link to={path}>{text}</Link>}
+      {isCategory && (
+        // 7. Modal 컴포넌트를 열 함수를 이벤트 핸들러로 호출합니다.
+        // 8. 94번 줄처럼 Portal 컴포넌트 안에 조건부 렌더링으로 modalOpen이 true라면 Modal 컴포넌트를 렌더링합니다.
+        <button type="button" onClick={modalHandler}>
+          {text}
+        </button>
+      )}
+      <Portal>
+        {modalOpen && (
+          <Modal
+            data={<Category onClose={modalHandler} />}
+            onClose={modalHandler}
+          />
+        )}
+      </Portal>
     </ListItem>
   );
 };
@@ -73,7 +55,8 @@ const ListItem = styled.li`
   padding: 20px 0;
   cursor: pointer;
 
-  a {
+  a,
+  button {
     position: relative;
     font-size: 24px;
     color: ${props => props.theme.grayscaleF};

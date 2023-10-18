@@ -14,7 +14,21 @@ const GlobalStyle = createGlobalStyle`
     background-color : ${props => props.theme.grayscaleA};
     color : ${props => props.theme.grayscaleF};
     font-family: 'Do Hyeon', "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
+
+  ::-webkit-scrollbar {
+    width: 12px; 
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: ${props => props.theme.primaryColor};
+    border-radius: 0 0 24px 24px;
+  }
+
+  ::-webkit-scrollbar-track{
+    background-color:  ${props => props.theme.grayscaleC};
+}
 
   li {
     list-style: none;
@@ -59,7 +73,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-  }
+  }s
 `;
 
 export default GlobalStyle;
