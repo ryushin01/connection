@@ -43,13 +43,16 @@ const Detail = () => {
                           <td>-1,000원(10%)</td>
                         </tr>
                         <tr>
-                          <th>구매 가격</th>
-                          <td>[D] 9,000원</td>
+                          <th>구매 가격(개당)</th>
+                          <td>9,000원</td>
                         </tr>
                       </tbody>
                     </MetadataTable>
                   </MetadataTableWrap>
-                  <Counter count={count} setCount={setCount} />
+                  <PriceDisplay>
+                    <Counter count={count} setCount={setCount} />
+                    <span>[D] 9,000원</span>
+                  </PriceDisplay>
                   <ButtonGroup>
                     <Button
                       shape="solid"
@@ -172,6 +175,24 @@ const MetadataTable = styled.table`
     td {
       color: ${props => props.theme.primaryColor};
     }
+  }
+`;
+
+const PriceDisplay = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  & > div {
+    flex: 1;
+  }
+
+  & > span {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 32px;
   }
 `;
 
