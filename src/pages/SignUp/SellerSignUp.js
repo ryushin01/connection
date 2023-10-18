@@ -1,33 +1,36 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import Input from '../../components/Input/Input';
-import DaumPostCode from './DaumPostCode/DaumPostCode';
-import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import DaumPostCode from './DaumPostCode/DaumPostCode';
+import Input from '../../components/Input/Input';
+import Button from '../../components/Button/Button';
+import ImageFile from '../../components/ImageFile/ImageFile';
 
-const SellerSignUp = () => {
+const SellerSignUp = props => {
   const [sellerInfo, setSellerInfo] = useState({
     // 셀러 회원정보 보관 state
     sellerName: '',
     zipCode: '',
     address: '',
     addressDetail: '',
-    phone: '',
+    image: '',
+    phoneNumber: '',
   });
-  const [onAddressSelect, serOnAddressSelect] = useState(''); // 우편번호 API 실행 후 받아온 data를 state에 저장
+  const [onAddressSelect, setOnAddressSelect] = useState(''); // 우편번호 API 실행 후 받아온 data를 state에 저장
 
   // var
   const navigate = useNavigate();
+  const { sellerName, zipCode, address, addressDetail, phoneNumber } =
+    sellerInfo; // 구조 분해 할당
 
   // function
-
   const handleSellerInfo = e => {
     const { name, value } = e.target;
     setSellerInfo({ ...sellerInfo, [name]: value });
   };
 
   const handleAddressSelect = address => {
-    serOnAddressSelect(address);
+    setOnAddressSelect(address);
     setSellerInfo({
       ...sellerInfo,
       zipCode: address.zonecode,
@@ -45,12 +48,12 @@ const SellerSignUp = () => {
         Authorization: localStorage.getItem('access_token'),
       },
       body: JSON.stringify({
-        name: sellerInfo.sellerName,
+        name: sellerName,
         image: 'no-image.jpg',
-        zipCode: sellerInfo.zipCode,
-        address: sellerInfo.address,
-        addressDetails: sellerInfo.addressDetail,
-        phoneNumber: sellerInfo.phone,
+        zipCode: zipCode,
+        address: address,
+        addressDetails: addressDetail,
+        phoneNumber: phoneNumber,
       }),
     })
       .then(response => response.json())
@@ -87,11 +90,15 @@ const SellerSignUp = () => {
                   name="sellerName"
                 />
               </SellerSignUpInputWrap>
+              <SellerSignUpInputWrap>
+                <ImageFile name="image" />
+              </SellerSignUpInputWrap>
+
               <SellerSignUpAddressWrap>
                 <Input
                   type="text"
                   placeholder="우편번호"
-                  value={sellerInfo.zipCode}
+                  value={zipCode}
                   name="zipCode"
                   labelFlex="1"
                 />
@@ -101,7 +108,7 @@ const SellerSignUp = () => {
                 <Input
                   type="text"
                   placeholder="주소"
-                  value={sellerInfo.address}
+                  value={address}
                   name="address"
                   labelFlex="1"
                 />
@@ -118,7 +125,7 @@ const SellerSignUp = () => {
                 <Input
                   type="text"
                   placeholder="휴대폰 번호"
-                  name="phone"
+                  name="phoneNumber"
                   labelFlex="1"
                 />
               </SellerSignUpInputWrap>
