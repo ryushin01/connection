@@ -128,11 +128,16 @@ const BandListLink = styled.button`
   position: absolute;
   top: 0;
   right: 0;
+  transition: transform 0.3s linear;
 
   svg {
     path {
       stroke: ${props => props.theme.grayscaleF};
     }
+  }
+
+  &:hover {
+    transform: rotate(-180deg);
   }
 `;
 
