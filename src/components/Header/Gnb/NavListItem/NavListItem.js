@@ -42,6 +42,7 @@ const NavListItem = ({ id, text, path }) => {
         {modalOpen && (
           <Modal
             data={<Category onClose={modalHandler} />}
+            scale="large"
             onClose={modalHandler}
           />
         )}
