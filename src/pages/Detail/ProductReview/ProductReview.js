@@ -1,4 +1,5 @@
 import React from 'react';
+import Rating from '../../../components/Rating/Rating';
 import styled, { css } from 'styled-components';
 
 const ProductReview = () => {
@@ -17,6 +18,7 @@ const ProductReview = () => {
         </ReviewMetadataArea>
         <ReviewImageArea>
           <img src="/images/products/milk.png" alt="리뷰 이미지" />
+          <Rating rating="0" />
         </ReviewImageArea>
       </ReviewListItem>
     </ReviewList>
@@ -75,6 +77,7 @@ const ReviewerInfo = styled.span`
 
 const ReviewImageArea = styled.div`
   ${FlexCenter};
+  position: relative;
   width: 20vw;
   height: 20vw;
   border-radius: 4px;
