@@ -14,10 +14,16 @@ const Root = () => {
         number: 1,
       };
     }
-    const newState = { ...currentState };
+    let newState = { ...currentState };
     if (action.type === 'PLUS') {
       newState.number++;
     }
+
+    if (action.type === 'AAA') {
+      const result = action.payload;
+      newState = result;
+    }
+
     return newState;
   }
   const store = createStore(reducer);

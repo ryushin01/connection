@@ -1,19 +1,11 @@
 import React from 'react';
 import { ReactComponent as CartIcon } from '../../svg/icon_cart.svg';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 
-const CartButton = () => {
-  const dispatch = useDispatch();
-
+const CartButton = ({ onClick }) => {
   return (
     <CartButtonWrap>
-      <button
-        type="button"
-        onClick={() => {
-          dispatch({ type: 'PLUS' });
-        }}
-      >
+      <button type="button" onClick={onClick}>
         <CartIcon />
       </button>
     </CartButtonWrap>

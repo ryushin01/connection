@@ -1,7 +1,10 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 
 function Counter({ count, setCount }) {
+  const dispatch = useDispatch();
+
   const counter = (e, count) => {
     let target = e.target.name;
 

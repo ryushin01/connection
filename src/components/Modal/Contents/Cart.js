@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Counter from '../../Counter/Counter';
 import Button from '../../Button/Button';
 import styled, { css } from 'styled-components';
 
 const Cart = ({ onClose }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [count, setCount] = useState(1);
+  const dispatch = useDispatch();
   // const navigate = useNavigate();
 
   // const goToListPage = id => {
@@ -15,6 +18,24 @@ const Cart = ({ onClose }) => {
   //   onClose();
   // };
 
+  const price = 10000;
+  const totalPrice = price * count;
+
+  // 장바구니 버튼 클릭 시 로직
+  // 1. 함수 생성 > onClick 이벤트 핸들러에 연결
+  // 2. dispatch하면서 payload로 quantity(count) 전달 > store로?
+  // 3. fetch하면서 서버로 productId, quantity(count) 전달
+  // 4. 모달 닫기
+
+  console.log(count);
+
+  const putInCart = () => {
+    // 1. dispatch
+    // dispatch({ type: 'PLUS', payload: count });
+
+    dispatch({ type: 'AAA', payload: count });
+  };
+
   return (
     <CartModalWrap>
       <CartModalInnerWrap>
@@ -23,8 +44,8 @@ const Cart = ({ onClose }) => {
           뼈해장국 밀키트 세트 (1팩 2인분)
         </ProductName>
         <PriceDisplay>
-          <Counter />
-          <ProductPrice>10,000원</ProductPrice>
+          <Counter count={count} setCount={setCount} />
+          <ProductPrice>{totalPrice?.toLocaleString()}원</ProductPrice>
         </PriceDisplay>
       </CartModalInnerWrap>
       <ButtonGroup>
@@ -33,6 +54,10 @@ const Cart = ({ onClose }) => {
           color="neutral"
           size="medium"
           content="장바구니"
+          onClick={putInCart}
+          // onClick={() => {
+          //   dispatch({ type: 'PLUS', payload: count });
+          // }}
         />
         <Button
           shape="solid"
@@ -89,6 +114,7 @@ const PriceDisplay = styled.div`
 
   & > div {
     flex: 1;
+    height: 100%;
   }
 `;
 
