@@ -1,0 +1,33 @@
+@charset "utf-8";
+@import '../../styles/partials/mixin', '../../styles/partials/variables';
+
+.label {
+  display: flex;
+  position: relative;
+  .radio {
+    position: absolute;
+    z-index: -1;
+    width: 1px;
+    height: 1px;
+    & + span::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      border: 1px solid $grayscale-4;
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+    &:checked + span::after {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: $red;
+    }
+  }
+}
