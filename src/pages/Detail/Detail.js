@@ -8,6 +8,11 @@ import Button from '../../components/Button/Button';
 import DetailTab from './DetailTab/DetailTab';
 import styled, { css } from 'styled-components';
 
+/**
+ * Detail.js logics
+ * @property {function} getDetailData                       - 제품 상세 데이터를 받아오는 함수입니다.
+ */
+
 const Detail = () => {
   const [loading, setLoading] = useState(false);
   const [detailData, setDetailData] = useState([]);
@@ -34,8 +39,8 @@ const Detail = () => {
     getDetailData();
   }, []);
 
-  const { productName, productImg, discountRate, rating } = detailData;
-
+  const { productId, productName, productImg, discountRate, rating } =
+    detailData;
   const originalPrice = Number(detailData?.originalPrice);
   const discountAmount = Number(detailData?.discountAmount);
   const totalPrice = Number(detailData?.totalPrice);
