@@ -3,12 +3,7 @@ import ProductDescription from '../ProductDescription/ProductDescription';
 import ProductReview from '../ProductReview/ProductReview';
 import styled, { css } from 'styled-components';
 
-const TAB_DATA = [
-  { name: '상품설명', content: <ProductDescription /> },
-  { name: '상품리뷰', content: <ProductReview /> },
-];
-
-const DetailTab = () => {
+const DetailTab = ({ productDetailImages, reviewNumbers }) => {
   const targetRef = useRef(null);
   const [currentTab, setTab] = useState(0);
 
@@ -16,6 +11,15 @@ const DetailTab = () => {
     targetRef.current.scrollIntoView({ behavior: 'smooth' });
     setTab(index);
   };
+
+  const TAB_DATA = [
+    {
+      name: '상품설명',
+      content: <ProductDescription productDetailImages={productDetailImages} />,
+    },
+    { name: '상품리뷰', content: <ProductReview /> },
+  ];
+
   return (
     <>
       <Tabs>
@@ -28,6 +32,7 @@ const DetailTab = () => {
               onClick={() => selectTabHandler(index)}
             >
               {item.name}
+              {index === 1 && <span>&nbsp;({reviewNumbers})</span>}
             </button>
           );
         })}
