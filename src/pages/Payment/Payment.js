@@ -13,10 +13,7 @@ import styled from 'styled-components';
  * @property {function} getDetailData                       - 제품 상세 데이터를 받아오는 함수입니다.
  */
 
-// 배송 방법: string(directly || parcel)으로 서버 전달 필요
-// 결제 장법: 포인트의 id값(1)을 서버 전달 필요
-
-const Order = () => {
+const Payment = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -30,68 +27,41 @@ const Order = () => {
       {loading && <Loading />}
       <main id="main">
         <div>
-          <SectionTitle>주문하기</SectionTitle>
+          <SectionTitle>결제하기</SectionTitle>
           <Section>
-            <SectionSubtitle>배송지 정보</SectionSubtitle>
+            <SectionSubtitle>주문 정보</SectionSubtitle>
             <TableGroup>
               <SectionTable>
-                <caption>보내시는 분</caption>
+                <caption>주문 내역</caption>
                 <tbody>
                   <tr>
-                    <th>이름</th>
-                    <td>류창선</td>
+                    <th>상품명</th>
+                    <td>수량 / 가격</td>
                   </tr>
                   <tr>
-                    <th>연락처</th>
-                    <td>01071607921</td>
-                  </tr>
-                  <tr>
-                    <th>주소</th>
-                    <td>서울시 서대문구 통일로25길 30</td>
+                    <th>상품명</th>
+                    <td>수량 / 가격</td>
                   </tr>
                 </tbody>
               </SectionTable>
               <SectionTable>
-                <caption>받으시는 분</caption>
+                <caption>결제 금액</caption>
                 <tbody>
                   <tr>
-                    <th>이름</th>
-                    <td>류창선</td>
+                    <th>상품 금액</th>
+                    <td>-</td>
                   </tr>
                   <tr>
-                    <th>연락처</th>
-                    <td>01071607921</td>
+                    <th>할인 금액</th>
+                    <td>-</td>
                   </tr>
                   <tr>
-                    <th>주소</th>
-                    <td>서울시 서대문구 통일로25길 30</td>
+                    <th>배송비</th>
+                    <td>-</td>
                   </tr>
-                </tbody>
-              </SectionTable>
-            </TableGroup>
-          </Section>
-          <Section>
-            <SectionSubtitle>배송 및 결제 방법</SectionSubtitle>
-            <TableGroup>
-              <SectionTable>
-                <caption>배송 방법</caption>
-                <tbody>
                   <tr>
-                    <th>배송 방법</th>
-                    <td>
-                      <RadioGroup data={DELIVERY_DATA} name="delivery" />
-                    </td>
-                  </tr>
-                </tbody>
-              </SectionTable>
-              <SectionTable>
-                <caption>결제 방법</caption>
-                <tbody>
-                  <tr>
-                    <th>결제 방법</th>
-                    <td>
-                      <RadioGroup data={PAYMENT_DATA} name="payment" />
-                    </td>
+                    <th>총 결제 금액</th>
+                    <td>-</td>
                   </tr>
                 </tbody>
               </SectionTable>
@@ -109,7 +79,7 @@ const Order = () => {
               shape="solid"
               color="primary"
               size="large"
-              content="주문하기"
+              content="결제하기"
             />
           </ButtonGroup>
         </div>
@@ -183,4 +153,4 @@ const ButtonGroup = styled.div`
   gap: 4vw;
 `;
 
-export default Order;
+export default Payment;
