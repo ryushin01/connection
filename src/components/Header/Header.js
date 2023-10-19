@@ -25,8 +25,8 @@ const Header = () => {
           <Gnb />
         </LeftSection>
         <RightSection>
-          <CartButton count="0" />
           <SearchButton />
+          <CartButton count="0" />
         </RightSection>
       </HeaderInnerWrap>
     </HeaderWrap>

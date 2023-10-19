@@ -33,7 +33,7 @@ const NavListItem = ({ id, text, path }) => {
       {!isCategory && <Link to={path}>{text}</Link>}
       {isCategory && (
         // 7. Modal 컴포넌트를 열 함수를 이벤트 핸들러로 호출합니다.
-        // 8. 94번 줄처럼 Portal 컴포넌트 안에 조건부 렌더링으로 modalOpen이 true라면 Modal 컴포넌트를 렌더링합니다.
+        // 8. 41번 줄처럼 Portal 컴포넌트 안에 조건부 렌더링으로 modalOpen이 true라면 Modal 컴포넌트를 렌더링합니다.
         <button type="button" onClick={modalHandler}>
           {text}
         </button>
