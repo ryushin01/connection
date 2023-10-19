@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Account from './Account/Account';
 import Gnb from './Gnb/Gnb';
 import CartButton from '../CartButton/CartButton';
@@ -7,6 +7,8 @@ import SearchButton from '../SearchButton/SearchButton';
 import styled, { css } from 'styled-components';
 // import { ReactComponent as AppIcon } from '../../svg/icon_app.svg';
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <HeaderWrap>
       <HeaderInnerWrap>
@@ -25,7 +27,12 @@ const Header = () => {
           <Gnb />
         </LeftSection>
         <RightSection>
-          <CartButton count="0" />
+          <CartButton
+            count="0"
+            onClick={() => {
+              navigate('/cart');
+            }}
+          />
           <SearchButton />
         </RightSection>
       </HeaderInnerWrap>

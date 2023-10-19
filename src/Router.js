@@ -14,6 +14,7 @@ import Auth from './pages/Login/Auth/Auth';
 import ScrollToTop from './components/ScrollTop/ScrollToTop';
 import SnsSignUp from './pages/SignUp/SnsSignUp';
 import SellerSignUp from './pages/SignUp/SellerSignUp';
+import Cart from './pages/Cart/Cart';
 
 const Router = () => {
   return (
@@ -34,6 +35,7 @@ const Router = () => {
         <Route path="/auth" element={<Auth />} />
         <Route path="/snssignup" element={<SnsSignUp />} />
         <Route path="/sellersignup" element={<SellerSignUp />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
       <TopButton />
