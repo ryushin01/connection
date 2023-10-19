@@ -1,29 +1,18 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Input from '../../Input/Input';
-import Button from '../../Button/Button';
+import React from 'react';
+import Input from '../Input/Input';
+import Button from '../Button/Button';
 import styled, { css } from 'styled-components';
 
-const Search = ({ onClose }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const goToListPage = id => {
-    navigate(`/products/category/${id}`, {
-      state: { categoryId: id },
-    });
-    onClose();
-  };
-
+const InputSearch = ({ ...props }) => {
   return (
-    <SearchWrap>
+    <SearchWrap {...props}>
       <form>
         <fieldset>
           <legend>검색어 입력 폼</legend>
           <Input
             type="search"
             name="search"
-            placeholder="찾으시는 상품명을 입력해 주세요."
+            placeholder="검색어를 입력해 주세요."
             size="medium"
           />
           <Button content="검색" size="medium" shape="solid" color="primary" />
@@ -40,13 +29,12 @@ const FlexCenter = css`
 `;
 
 const SearchWrap = styled.div`
-  ${FlexCenter};
-  width: 100%;
+  overflow: hidden;
+  width: 0;
   height: 100%;
-
-  form {
-    width: 50%;
-  }
+  margin-right: 24px;
+  transition: width 0.25s linear;
+  font-size: 0;
 
   fieldset {
     ${FlexCenter};
@@ -61,13 +49,27 @@ const SearchWrap = styled.div`
 
   label {
     flex: 1;
-    margin-right: 8px;
+  }
+
+  input {
+    padding: 0 12px;
+    border: 0;
+    border-bottom: 1px ${props => props.theme.grayscaleF} solid;
   }
 
   button {
+    display: none;
     width: 20%;
     margin-left: 8px;
   }
+
+  ${props => {
+    if (props.activate === true) {
+      return `
+        width: 100%;
+      `;
+    }
+  }}
 `;
 
-export default Search;
+export default InputSearch;

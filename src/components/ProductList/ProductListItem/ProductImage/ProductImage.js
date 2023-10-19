@@ -63,8 +63,8 @@ const ProductImageWrap = styled.div`
   }
   div {
     position: absolute;
-    right: 8px;
-    bottom: 8px;
+    right: 4px;
+    bottom: 4px;
   }
 `;
 

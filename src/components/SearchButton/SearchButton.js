@@ -1,49 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ReactComponent as SearchIcon } from '../../svg/icon_search.svg';
-import Portal from '../Modal/Portal';
-import Modal from '../Modal/Modal';
-import Search from '../Modal/Contents/Search';
+import InputSearch from '../InputSearch/InputSearch';
 import styled from 'styled-components';
 
-const SearchButton = ({ onClick }) => {
-  const [modalOpen, setModalOpen] = useState(false);
+const SearchButton = () => {
+  const [activate, setActivate] = useState(false);
 
-  const modalHandler = () => {
-    setModalOpen(prev => !prev);
+  const searchActivate = () => {
+    setActivate(prev => !prev);
   };
-
-  useEffect(() => {
-    const close = e => {
-      if (e.keyCode === 27) {
-        setModalOpen(false);
-      }
-    };
-
-    window.addEventListener('keydown', close);
-  }, []);
 
   return (
     <SearchButtonWrap>
-      <button type="button" onClick={modalHandler}>
+      <InputSearch activate={activate} />
+      <button type="button" onClick={searchActivate}>
         <SearchIcon />
       </button>
-      <Portal>
-        {modalOpen && (
-          <Modal
-            data={<Search onClose={modalHandler} />}
-            scale="extra"
-            onClose={modalHandler}
-          />
-        )}
-      </Portal>
     </SearchButtonWrap>
   );
 };
 
 const SearchButtonWrap = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
   button {
-    width: 36px;
-    height: 36px;
+    min-width: 48px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: 1px transparent solid;
     svg {
