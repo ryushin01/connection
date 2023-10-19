@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { API } from '../../config';
 import Loading from '../Loading/Loading';
+import Radio from '../../components/Radio/Radio';
 import Button from '../../components/Button/Button';
 import styled from 'styled-components';
 
@@ -72,7 +73,9 @@ const Order = () => {
                 <tbody>
                   <tr>
                     <th>배송 방법</th>
-                    <td>류창선</td>
+                    <td>
+                      <Radio text="택배" />
+                    </td>
                   </tr>
                 </tbody>
               </SectionTable>
@@ -140,6 +143,7 @@ const Section = styled.section`
       font-size: 16px;
       line-height: 1.5;
       text-align: left;
+      vertical-align: top;
     }
 
     th {
