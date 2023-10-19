@@ -2,14 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { API } from '../../config';
 import Loading from '../Loading/Loading';
-import Radio from '../../components/Radio/Radio';
+import RadioGroup from '../../components/RadioGroup/RadioGroup';
 import Button from '../../components/Button/Button';
+import DELIVERY_DATA from '../../data/DeliveryData';
+import PAYMENT_DATA from '../../data/PaymentData';
 import styled from 'styled-components';
 
 /**
  * Order.js logics
  * @property {function} getDetailData                       - 제품 상세 데이터를 받아오는 함수입니다.
  */
+
+// 배송 방법: string(directly || parcel)으로 서버 전달 필요
+// 결제 장법: 포인트의 id값(1)을 서버 전달 필요
 
 const Order = () => {
   const [loading, setLoading] = useState(false);
@@ -74,7 +79,7 @@ const Order = () => {
                   <tr>
                     <th>배송 방법</th>
                     <td>
-                      <Radio text="택배" />
+                      <RadioGroup data={DELIVERY_DATA} name="delivery" />
                     </td>
                   </tr>
                 </tbody>
@@ -84,7 +89,9 @@ const Order = () => {
                 <tbody>
                   <tr>
                     <th>결제 방법</th>
-                    <td>류창선</td>
+                    <td>
+                      <RadioGroup data={PAYMENT_DATA} name="payment" />
+                    </td>
                   </tr>
                 </tbody>
               </SectionTable>

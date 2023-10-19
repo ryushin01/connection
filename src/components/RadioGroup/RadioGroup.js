@@ -1,18 +1,11 @@
 import React from 'react';
 import Radio from '../Radio/Radio';
-import './RadioGroup.scss';
+import styled from 'styled-components';
 
-const RadioGroup = props => {
-  // props
-  // name: [String]
-  // value: [String]
-  // text: [String]
-  // defaultChecked: [String]
-  const { name, data } = props;
-
+function RadioGroup({ data, name, value, defaultValue, text }) {
   return (
-    <div className="radio-group">
-      {data.map(item => {
+    <RadioGroupWrap>
+      {data?.map(item => {
         return (
           <Radio
             key={item.id}
@@ -23,8 +16,14 @@ const RadioGroup = props => {
           />
         );
       })}
-    </div>
+    </RadioGroupWrap>
   );
-};
+}
+
+const RadioGroupWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
 
 export default RadioGroup;

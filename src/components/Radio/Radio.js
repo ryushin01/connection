@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 function Radio({
   type = 'radio',
@@ -28,6 +28,12 @@ function Radio({
   );
 }
 
+const FlexCenter = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const RadioLabel = styled.label`
   display: flex;
   position: relative;
@@ -53,6 +59,8 @@ const RadioInput = styled.input`
 `;
 
 const RadioText = styled.span`
+  ${FlexCenter};
+
   &::before {
     content: '';
     display: inline-block;
