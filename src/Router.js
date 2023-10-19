@@ -14,6 +14,7 @@ import Auth from './pages/Login/Auth/Auth';
 import ScrollToTop from './components/ScrollTop/ScrollToTop';
 import SnsSignUp from './pages/SignUp/SnsSignUp';
 import SellerSignUp from './pages/SignUp/SellerSignUp';
+import Order from './pages/Order/Order';
 
 const Router = () => {
   return (
@@ -26,7 +27,6 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/detail/:id" element={<Detail />} />
-        {/* 셀러 목록 페이지 추가? 또는 셀러 유무 확인 boolean으로 구분? */}
         <Route path="/products/category/:id" element={<List />} />
         <Route path="/products/seller/:id" element={<List />} />
         <Route path="/login" element={<Login />} />
@@ -34,6 +34,7 @@ const Router = () => {
         <Route path="/auth" element={<Auth />} />
         <Route path="/snssignup" element={<SnsSignUp />} />
         <Route path="/sellersignup" element={<SellerSignUp />} />
+        <Route path="/order" element={<Order />} />
       </Routes>
       <Footer />
       <TopButton />
