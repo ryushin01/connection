@@ -91,7 +91,11 @@ const SellerSignUp = props => {
                 />
               </SellerSignUpInputWrap>
               <SellerSignUpInputWrap>
-                <ImageFile name="image" borderRadius="4px" />
+                <ImageFile
+                  name="image"
+                  borderRadius="4px"
+                  placeholder="이미지"
+                />
               </SellerSignUpInputWrap>
 
               <SellerSignUpAddressWrap>

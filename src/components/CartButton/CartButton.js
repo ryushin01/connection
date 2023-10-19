@@ -22,8 +22,8 @@ const FlexCenter = css`
 const CartButtonWrap = styled.div`
   position: relative;
   button {
-    width: 36px;
-    height: 36px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: 1px transparent solid;
     svg {
@@ -46,8 +46,8 @@ const CartButtonWrap = styled.div`
   span {
     ${FlexCenter};
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: 0;
+    right: 0;
     z-index: 1;
     width: 20px;
     height: 20px;

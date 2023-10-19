@@ -8,9 +8,45 @@ import Button from '../../components/Button/Button';
 import DetailTab from './DetailTab/DetailTab';
 import styled, { css } from 'styled-components';
 
+/**
+ * Detail.js logics
+ * @property {function} getDetailData                       - 제품 상세 데이터를 받아오는 함수입니다.
+ */
+
 const Detail = () => {
   const [loading, setLoading] = useState(false);
+  const [detailData, setDetailData] = useState([]);
   const [count, setCount] = useState(1);
+
+  const getDetailData = () => {
+    fetch('/data/detailData.json', {
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Success') {
+          setDetailData(result?.product[0]);
+          setLoading(false);
+        }
+      });
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    getDetailData();
+  }, []);
+
+  const { productId, productName, productImg, discountRate, rating } =
+    detailData;
+  const originalPrice = Number(detailData?.originalPrice);
+  const discountAmount = Number(detailData?.discountAmount);
+  const totalPrice = Number(detailData?.totalPrice);
+  const reviewNumbers = Number(detailData?.reviewNumbers);
+  const productDetailImages = detailData?.productDetailImages;
+  const finalPrice = totalPrice * count;
 
   return (
     <>
@@ -21,37 +57,37 @@ const Detail = () => {
             <DetailTopSection>
               <ImageArea>
                 <ImageAreaInnerWrap>
-                  <img src="/images/products/milk.png" alt="productName" />
-                  <Rating rating="0" />
+                  <img src={productImg} alt={productName} />
+                  <Rating rating={rating} />
                 </ImageAreaInnerWrap>
               </ImageArea>
               <MetadataArea>
                 <MetadataAreaInnerWrap>
-                  <ProductTitle>
-                    [커넥션 할인 특가] 50년 전통의 뼈해장국 대가 김인숙 님이
-                    인정한 뼈해장국 밀키트 세트 (1팩 2인분)
-                  </ProductTitle>
+                  <ProductTitle>{productName}</ProductTitle>
                   <MetadataTableWrap>
                     <MetadataTable>
                       <tbody>
                         <tr>
                           <th>원가</th>
-                          <td>10,000원</td>
+                          <td>{originalPrice.toLocaleString()}원</td>
                         </tr>
                         <tr>
-                          <th>할인가(할인율)</th>
-                          <td>-1,000원(10%)</td>
+                          <th>할인가 (할인율)</th>
+                          <td>
+                            -{discountAmount.toLocaleString()}원 ({discountRate}
+                            %)
+                          </td>
                         </tr>
                         <tr>
-                          <th>구매 가격(개당)</th>
-                          <td>9,000원</td>
+                          <th>구매 가격 (1개)</th>
+                          <td>{totalPrice.toLocaleString()}원</td>
                         </tr>
                       </tbody>
                     </MetadataTable>
                   </MetadataTableWrap>
                   <PriceDisplay>
                     <Counter count={count} setCount={setCount} />
-                    <span>[D] 9,000원</span>
+                    <span>{finalPrice.toLocaleString()}원</span>
                   </PriceDisplay>
                   <ButtonGroup>
                     <Button
@@ -71,7 +107,10 @@ const Detail = () => {
               </MetadataArea>
             </DetailTopSection>
             <DetailBottomSection>
-              <DetailTab />
+              <DetailTab
+                productDetailImages={productDetailImages}
+                reviewNumbers={reviewNumbers}
+              />
             </DetailBottomSection>
           </DetailWrap>
         </div>

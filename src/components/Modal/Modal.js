@@ -35,6 +35,10 @@ const MODAL_SIZES = {
     width: '40vw',
     height: '40vw',
   },
+  extra: {
+    width: '90%',
+    height: '90%',
+  },
 };
 
 const ModalPopup = styled.div`
@@ -49,7 +53,7 @@ const ModalPopup = styled.div`
 const Backdrop = styled.div`
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
 `;
 
 const Content = styled.section`
