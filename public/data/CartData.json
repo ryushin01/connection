@@ -1,0 +1,83 @@
+{
+  "message": "Cart_Information",
+  "data": [
+    {
+      "seller_id": 1,
+      "sellerTitle": "마켓컬리",
+      "products": [
+        {
+          "quantity": 1,
+          "productId": 4,
+          "productName": "샐러드",
+          "productImage": "../images/logo.png",
+          "discountRate": 10,
+          "originalPrice": 5000,
+          "totalPrice": 4500,
+          "discountedAmount": 500
+        }
+      ]
+    },
+    {
+      "seller_id": 2,
+      "sellerTitle": "펫마트",
+      "products": [
+        {
+          "quantity": 2,
+          "productId": 5,
+          "productName": "돈까스",
+          "productImage": "../images/logo.png",
+          "discountRate": 0,
+          "originalPrice": 8000,
+          "totalPrice": 16000,
+          "discountedAmount": 0
+        },
+        {
+          "quantity": 1,
+          "productId": 6,
+          "productName": "개사료",
+          "productImage": "../images/logo.png",
+          "discountRate": 20,
+          "originalPrice": 18000,
+          "totalPrice": 14400,
+          "discountedAmount": 3600
+        },
+        {
+          "quantity": 1,
+          "productId": 7,
+          "productName": "고양이사료",
+          "productImage": "../images/logo.png",
+          "discountRate": 30,
+          "originalPrice": 28000,
+          "totalPrice": 19600,
+          "discountedAmount": 8400
+        }
+      ]
+    },
+    {
+      "sellerId": 3,
+      "sellerTitle": "편의점",
+      "products": [
+        {
+          "quantity": 1,
+          "productId": 4,
+          "productName": "샐러드",
+          "productImage": "../images/logo.png",
+          "discountRate": 10,
+          "originalPrice": 5000,
+          "totalPrice": 4500,
+          "discountedAmount": 500
+        },
+        {
+          "quantity": 2,
+          "productId": 5,
+          "productName": "진라면",
+          "productImage": "../images/logo.png",
+          "discountRate": 10,
+          "originalPrice": 5000,
+          "totalPrice": 4500,
+          "discountedAmount": 500
+        }
+      ]
+    }
+  ]
+}
