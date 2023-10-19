@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import { API } from '../../config';
 // import { useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
-// import Rating from '../../components/Rating/Rating';
+import Rating from '../../components/Rating/Rating';
 import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
 import DetailTab from './DetailTab/DetailTab';
@@ -23,7 +23,7 @@ const Detail = () => {
       .then(response => response.json())
       .then(result => {
         if (result.message === 'Success') {
-          setDetailData(result.product[0]);
+          setDetailData(result?.product[0]);
           setLoading(false);
         }
       });
@@ -34,17 +34,14 @@ const Detail = () => {
     getDetailData();
   }, []);
 
-  const {
-    productName,
-    // productDetailImages,
-    productImg,
-    originalPrice,
-    discountRate,
-    discountAmount,
-    totalPrice,
-    // reviewNumbers,
-    Rating,
-  } = detailData;
+  const { productName, productImg, discountRate, rating } = detailData;
+
+  const originalPrice = Number(detailData?.originalPrice);
+  const discountAmount = Number(detailData?.discountAmount);
+  const totalPrice = Number(detailData?.totalPrice);
+  const reviewNumbers = Number(detailData?.reviewNumbers);
+  const productDetailImages = detailData?.productDetailImages;
+  const finalPrice = totalPrice * count;
 
   return (
     <>
@@ -56,7 +53,7 @@ const Detail = () => {
               <ImageArea>
                 <ImageAreaInnerWrap>
                   <img src={productImg} alt={productName} />
-                  <Rating rating={Rating} />
+                  <Rating rating={rating} />
                 </ImageAreaInnerWrap>
               </ImageArea>
               <MetadataArea>
@@ -70,10 +67,10 @@ const Detail = () => {
                           <td>{originalPrice.toLocaleString()}원</td>
                         </tr>
                         <tr>
-                          <th>할인가 &lpar;할인율&rpar;</th>
+                          <th>할인가 (할인율)</th>
                           <td>
-                            -{discountAmount.toLocaleString()}원 &lpar;
-                            {discountRate}&rpar;
+                            -{discountAmount.toLocaleString()}원 ({discountRate}
+                            %)
                           </td>
                         </tr>
                         <tr>
@@ -85,7 +82,7 @@ const Detail = () => {
                   </MetadataTableWrap>
                   <PriceDisplay>
                     <Counter count={count} setCount={setCount} />
-                    <span>[D] 9,000원</span>
+                    <span>{finalPrice.toLocaleString()}원</span>
                   </PriceDisplay>
                   <ButtonGroup>
                     <Button
@@ -105,7 +102,10 @@ const Detail = () => {
               </MetadataArea>
             </DetailTopSection>
             <DetailBottomSection>
-              <DetailTab />
+              <DetailTab
+                productDetailImages={productDetailImages}
+                reviewNumbers={reviewNumbers}
+              />
             </DetailBottomSection>
           </DetailWrap>
         </div>
