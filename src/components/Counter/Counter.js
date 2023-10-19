@@ -64,7 +64,7 @@ const CounterWrap = styled.div`
 const CountDisplay = styled.span`
   ${FlexCenter};
   flex: 1;
-  height: 100%;
+  height: 44px;
   border-top: 1px ${props => props.theme.grayscaleF} solid;
   border-bottom: 1px ${props => props.theme.grayscaleF} solid;
   text-align: center;
