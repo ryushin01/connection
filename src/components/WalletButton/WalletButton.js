@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Portal from '../Modal/Portal';
 import Modal from '../Modal/Modal';
-import Category from '../Modal/Contents/Category';
-// import { ReactComponent as PointIcon } from '../../svg/icon_point.svg';
+import Charge from '../Modal/Contents/Charge';
+import { ReactComponent as WalletIcon } from '../../svg/icon_wallet.svg';
 import styled from 'styled-components';
 
-const PointButton = () => {
+const WalletButton = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const modalHandler = () => {
@@ -23,24 +23,24 @@ const PointButton = () => {
   }, []);
 
   return (
-    <PointButtonWrap>
+    <WalletButtonWrap>
       <button type="button" onClick={modalHandler}>
-        {/* <PointIcon /> */}
+        <WalletIcon />
       </button>
       <Portal>
         {modalOpen && (
           <Modal
-            data={<Category onClose={modalHandler} />}
-            scale="large"
+            data={<Charge onClose={modalHandler} />}
+            scale="small"
             onClose={modalHandler}
           />
         )}
       </Portal>
-    </PointButtonWrap>
+    </WalletButtonWrap>
   );
 };
 
-const PointButtonWrap = styled.div`
+const WalletButtonWrap = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -70,4 +70,4 @@ const PointButtonWrap = styled.div`
   }
 `;
 
-export default PointButton;
+export default WalletButton;
