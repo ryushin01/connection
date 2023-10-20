@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { API } from '../../config';
 import Loading from '../Loading/Loading';
-import RadioGroup from '../../components/RadioGroup/RadioGroup';
 import Button from '../../components/Button/Button';
-import DELIVERY_DATA from '../../data/DeliveryData';
-import PAYMENT_DATA from '../../data/PaymentData';
 import styled from 'styled-components';
 
 /**
@@ -15,12 +12,7 @@ import styled from 'styled-components';
 
 const Payment = () => {
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
-
-  const goToBack = () => {
-    navigate(-1);
-  };
 
   return (
     <>
@@ -34,8 +26,8 @@ const Payment = () => {
               <SectionTable>
                 <colgroup>
                   <col style={{ width: '50%' }} />
-                  <col style={{ width: '15%' }} />
-                  <col style={{ width: '35%' }} />
+                  <col style={{ width: '20%' }} />
+                  <col style={{ width: '30%' }} />
                 </colgroup>
                 <caption>주문 정보</caption>
                 <thead>
@@ -60,8 +52,8 @@ const Payment = () => {
               </SectionTable>
               <SectionTable>
                 <colgroup>
-                  <col style={{ width: '15%' }} />
-                  <col style={{ width: '85%' }} />
+                  <col style={{ width: '20%' }} />
+                  <col style={{ width: '80%' }} />
                 </colgroup>
                 <caption>결제 금액</caption>
                 <tbody>
@@ -81,6 +73,15 @@ const Payment = () => {
                     <th>총 결제 금액</th>
                     <td>-</td>
                   </tr>
+                  <tr>
+                    <th>포인트 차감</th>
+                    <td>
+                      <span>5,000</span>
+                      <RemainingPoints>
+                        (잔여 포인트: <strong>10,000</strong>)
+                      </RemainingPoints>
+                    </td>
+                  </tr>
                 </tbody>
               </SectionTable>
             </TableGroup>
@@ -91,7 +92,7 @@ const Payment = () => {
               color="neutral"
               size="large"
               content="돌아가기"
-              onClick={goToBack}
+              onClick={() => navigate(-1)}
             />
             <Button
               shape="solid"
@@ -135,7 +136,7 @@ const Section = styled.section`
     th,
     td {
       padding: 12px 4px;
-      font-size: 16px;
+      font-size: 20px;
       line-height: 1.5;
       text-align: left;
       vertical-align: top;
@@ -163,6 +164,19 @@ const TableGroup = styled.div`
 
 const SectionTable = styled.table`
   position: relative;
+
+  span {
+    vertical-align: middle;
+  }
+`;
+
+const RemainingPoints = styled.span`
+  margin-left: 8px;
+
+  strong {
+    color: ${props => props.theme.secondaryColor};
+    font-weight: 700;
+  }
 `;
 
 const ButtonGroup = styled.div`

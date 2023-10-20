@@ -24,7 +24,7 @@ const Order = () => {
   const [cartData, setCartData] = useState({
     delivery: '',
   });
-  const [deliveryMethod, setDeliveryMethod] = useState('');
+  const [shippingMethod, setShippingMethod] = useState('');
   const [paymentMethod, setPaymentMethod] = useState(1);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ const Order = () => {
 
   const selectingSentry = e => {
     const { name, value } = e.target;
-    setDeliveryMethod({ ...cartData, [name]: value });
+    setShippingMethod({ ...cartData, [name]: value });
   };
 
   const postOrderData = () => {
@@ -83,8 +83,8 @@ const Order = () => {
       body: JSON.stringify({
         // userId: id
         // productId:
-        deliveryMethod: deliveryMethod.delivery,
-        paymentMethod: paymentMethod,
+        shippingMethod: shippingMethod.delivery,
+        paymentId: paymentMethod,
       }),
     })
       .then(response => response.json())
@@ -107,8 +107,8 @@ const Order = () => {
               <SectionTableWrap>
                 <SectionTable>
                   <colgroup>
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '85%' }} />
+                    <col style={{ width: '20%' }} />
+                    <col style={{ width: '80%' }} />
                   </colgroup>
                   <caption>배송지 정보</caption>
                   <tbody>
@@ -131,8 +131,8 @@ const Order = () => {
                 <SectionTable>
                   <colgroup>
                     <col style={{ width: '50%' }} />
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '35%' }} />
+                    <col style={{ width: '20%' }} />
+                    <col style={{ width: '30%' }} />
                   </colgroup>
                   <caption>주문 정보</caption>
                   <thead>
@@ -196,8 +196,8 @@ const Order = () => {
               <SectionTableWrap>
                 <SectionTable>
                   <colgroup>
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '85%' }} />
+                    <col style={{ width: '20%' }} />
+                    <col style={{ width: '80%' }} />
                   </colgroup>
                   <caption>배송 방법</caption>
                   <tbody>
@@ -218,8 +218,8 @@ const Order = () => {
               <SectionTableWrap>
                 <SectionTable>
                   <colgroup>
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '85%' }} />
+                    <col style={{ width: '20%' }} />
+                    <col style={{ width: '80%' }} />
                   </colgroup>
                   <caption>결제 방법</caption>
                   <tbody>
@@ -227,6 +227,9 @@ const Order = () => {
                       <th>결제 방법</th>
                       <td>
                         <RadioGroup data={PAYMENT_DATA} name="payment" />
+                        <RemainingPoints>
+                          (잔여 포인트: <strong>10,000</strong>)
+                        </RemainingPoints>
                       </td>
                     </tr>
                   </tbody>
@@ -284,7 +287,7 @@ const Section = styled.section`
     th,
     td {
       padding: 12px 4px;
-      font-size: 16px;
+      font-size: 20px;
       line-height: 1.5;
       text-align: left;
       vertical-align: top;
@@ -329,6 +332,19 @@ const SectionTableWrap = styled.div`
 
 const SectionTable = styled.table`
   flex: 1;
+
+  span {
+    vertical-align: middle;
+  }
+`;
+
+const RemainingPoints = styled.span`
+  margin-left: 8px;
+
+  strong {
+    color: ${props => props.theme.secondaryColor};
+    font-weight: 700;
+  }
 `;
 
 const ButtonGroup = styled.div`

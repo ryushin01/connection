@@ -21,8 +21,8 @@ function RadioGroup({ data, name, value, defaultChecked, text, onChange }) {
   );
 }
 
-const RadioGroupWrap = styled.div`
-  display: flex;
+const RadioGroupWrap = styled.span`
+  display: inline-flex;
   flex-direction: column;
   gap: 12px;
 `;
