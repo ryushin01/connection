@@ -2,8 +2,9 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Account from './Account/Account';
 import Gnb from './Gnb/Gnb';
-import CartButton from '../CartButton/CartButton';
 import SearchButton from '../SearchButton/SearchButton';
+import CartButton from '../CartButton/CartButton';
+import PointButton from '../PointButton/PointButton';
 import styled, { css } from 'styled-components';
 // import { ReactComponent as AppIcon } from '../../svg/icon_app.svg';
 const Header = () => {
@@ -27,13 +28,14 @@ const Header = () => {
           <Gnb />
         </LeftSection>
         <RightSection>
+          <SearchButton />
           <CartButton
             count="0"
             onClick={() => {
               navigate('/cart');
             }}
           />
-          <SearchButton />
+          <PointButton />
         </RightSection>
       </HeaderInnerWrap>
     </HeaderWrap>
