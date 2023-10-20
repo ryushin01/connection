@@ -14,11 +14,11 @@ const Band = ({ item }) => {
 
   const goToList = e => {
     if (categoryId) {
-      navigate(`/products/category/${categoryId}`, {
+      navigate(`/products?${categoryId}`, {
         state: { categoryId: categoryId },
       });
     } else {
-      navigate(`/products/seller/${sellerId}`, {
+      navigate(`/products?${sellerId}`, {
         state: { sellerId: sellerId },
       });
     }
