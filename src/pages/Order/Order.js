@@ -83,7 +83,7 @@ const Order = () => {
       body: JSON.stringify({
         // userId: id
         // productId:
-        deliveryMethod: deliveryMethod?.delivery,
+        deliveryMethod: deliveryMethod.delivery,
         paymentMethod: paymentMethod,
       }),
     })
@@ -94,8 +94,6 @@ const Order = () => {
         }
       });
   };
-
-  console.log(deliveryMethod?.delivery, paymentMethod);
 
   return (
     <>
