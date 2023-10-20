@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { API } from '../../config';
 import { useLocation, useParams } from 'react-router-dom';
+import { API } from '../../config';
 import Loading from '../../pages/Loading/Loading';
 import ListTitle from './LIstTitle/ListTitle';
 import Filter from '../../components/Filter/Filter';

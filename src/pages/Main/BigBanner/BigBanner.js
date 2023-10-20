@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API } from '../../config';
 import { ReactComponent as ArrowLeftIcon } from '../../../svg/icon_arrow_left.svg';
 import { ReactComponent as ArrowRightIcon } from '../../../svg/icon_arrow_right.svg';
 import BIG_BANNER_SWIPER_DATA from '../../../data/BigBannerSwiperData';
@@ -15,7 +16,7 @@ const BigBanner = () => {
   const navigate = useNavigate();
 
   const goToListPage = id => {
-    navigate(`/products/category/${id}`, {
+    navigate(`${API.LIST}?categoryId=${id}`, {
       state: { categoryId: id },
     });
   };
