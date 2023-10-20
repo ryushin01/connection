@@ -1,9 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const ListTitle = ({ listTitle }) => {
+const ListTitle = ({ listTitle, categoryId }) => {
   return (
-    <ListTitleSection>
+    <ListTitleSection categoryId={categoryId}>
       <ListTitleSectionInnerWrap>
         <h2>{listTitle}</h2>
       </ListTitleSectionInnerWrap>
@@ -56,8 +56,9 @@ const ListTitleSection = styled.section`
   background-size: cover;
   background-position: center;
 
-  background-image: ${({ id }) =>
-    CATEGORY_IMAGE[id]?.backgroundImage || `url(/images/list/seller.jpg)`};
+  background-image: ${({ categoryId }) =>
+    CATEGORY_IMAGE[categoryId]?.backgroundImage ||
+    `url(/images/list/seller.jpg)`};
 
   &::before {
     content: '';

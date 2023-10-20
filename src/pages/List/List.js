@@ -11,6 +11,7 @@ import styled from 'styled-components';
 const List = () => {
   const [loading, setLoading] = useState(true);
   const [listTitle, setListTitle] = useState('');
+  const [categoryId, setCategoryId] = useState('');
   const [listData, setListData] = useState([]);
   const location = useLocation();
   const { id } = useParams();
@@ -18,10 +19,8 @@ const List = () => {
 
   let API_URL;
   if (location.state.categoryId) {
-    console.log('카테고리 더보기 진입');
     API_URL = `${API.LIST}?categoryId=${processedId}`;
   } else {
-    console.log('셀러 더보기 진입');
     API_URL = `${API.LIST}?sellerId=${processedId}`;
   }
 
@@ -35,8 +34,9 @@ const List = () => {
       .then(response => response.json())
       .then(result => {
         if (result.message === 'Success') {
-          setListTitle(result.name);
-          setListData(result.data);
+          setListTitle(result?.name);
+          setCategoryId(result?.id);
+          setListData(result?.data);
           setLoading(false);
         }
       });
@@ -52,7 +52,7 @@ const List = () => {
     <>
       {loading && <Loading />}
       <main id="main">
-        <ListTitle listTitle={listTitle} />
+        <ListTitle listTitle={listTitle} categoryId={categoryId} />
         <div>
           <ListSection>
             <Filter />
