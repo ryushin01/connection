@@ -15,11 +15,12 @@ import styled, { css } from 'styled-components';
 
 const Detail = () => {
   const [loading, setLoading] = useState(false);
-  const [detailData, setDetailData] = useState([]);
+  const [detailData, setDetailData] = useState({});
   const [count, setCount] = useState(1);
 
   const getDetailData = () => {
     fetch('/data/detailData.json', {
+      // fetch('http://10.58.52.52:8000/products/1', {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -39,12 +40,18 @@ const Detail = () => {
     getDetailData();
   }, []);
 
-  const { productId, productName, productImg, discountRate, rating } =
-    detailData;
-  const originalPrice = Number(detailData?.originalPrice);
-  const discountAmount = Number(detailData?.discountAmount);
-  const totalPrice = Number(detailData?.totalPrice);
-  const reviewNumbers = Number(detailData?.reviewNumbers);
+  const {
+    productId,
+    productName,
+    productImg,
+    discountRate,
+    rating,
+    originalPrice,
+    discountAmount,
+    totalPrice,
+    reviewNumbers,
+  } = detailData;
+
   const productDetailImages = detailData?.productDetailImages;
   const finalPrice = totalPrice * count;
 
@@ -69,25 +76,26 @@ const Detail = () => {
                       <tbody>
                         <tr>
                           <th>원가</th>
-                          <td>{originalPrice.toLocaleString()}원</td>
+                          <td>{originalPrice?.toLocaleString()}원</td>
                         </tr>
                         <tr>
                           <th>할인가 (할인율)</th>
                           <td>
-                            -{discountAmount.toLocaleString()}원 ({discountRate}
+                            -{discountAmount?.toLocaleString()}원 (
+                            {discountRate}
                             %)
                           </td>
                         </tr>
                         <tr>
                           <th>구매 가격 (1개)</th>
-                          <td>{totalPrice.toLocaleString()}원</td>
+                          <td>{totalPrice?.toLocaleString()}원</td>
                         </tr>
                       </tbody>
                     </MetadataTable>
                   </MetadataTableWrap>
                   <PriceDisplay>
                     <Counter count={count} setCount={setCount} />
-                    <span>{finalPrice.toLocaleString()}원</span>
+                    <span>{finalPrice?.toLocaleString()}원</span>
                   </PriceDisplay>
                   <ButtonGroup>
                     <Button
