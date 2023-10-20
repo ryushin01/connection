@@ -1,8 +1,13 @@
-const BASE_URL = 'http://10.58.52.163:8000';
+// 시헌님
+// const BASE_URL = 'http://10.58.52.230:8000';
+
+// AWS
+const BASE_URL = 'http://43.200.175.113:8000';
 
 export const API = {
   CATEGORY_BAND: `${BASE_URL}/products/category`,
   SELLER_BAND: `${BASE_URL}/products/seller`,
+  LIST: `${BASE_URL}/products`,
 
   // LIST: `${BASE_URL}/products/category`,
   // SIGNUP: `${BASE_URL}/users/signup`,
