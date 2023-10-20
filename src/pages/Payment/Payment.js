@@ -32,19 +32,37 @@ const Payment = () => {
             <SectionSubtitle>주문 정보</SectionSubtitle>
             <TableGroup>
               <SectionTable>
-                <caption>주문 내역</caption>
+                <colgroup>
+                  <col style={{ width: '50%' }} />
+                  <col style={{ width: '15%' }} />
+                  <col style={{ width: '35%' }} />
+                </colgroup>
+                <caption>주문 정보</caption>
+                <thead>
+                  <tr>
+                    <th>제품명</th>
+                    <td>수량</td>
+                    <td>가격</td>
+                  </tr>
+                </thead>
                 <tbody>
                   <tr>
-                    <th>상품명</th>
-                    <td>수량 / 가격</td>
+                    <th>밀키트</th>
+                    <td>1</td>
+                    <td>10,000</td>
                   </tr>
                   <tr>
-                    <th>상품명</th>
-                    <td>수량 / 가격</td>
+                    <th>밀키트</th>
+                    <td>1</td>
+                    <td>10,000</td>
                   </tr>
                 </tbody>
               </SectionTable>
               <SectionTable>
+                <colgroup>
+                  <col style={{ width: '15%' }} />
+                  <col style={{ width: '85%' }} />
+                </colgroup>
                 <caption>결제 금액</caption>
                 <tbody>
                   <tr>
@@ -123,8 +141,11 @@ const Section = styled.section`
       vertical-align: top;
     }
 
-    th {
-      width: 15%;
+    thead {
+      th,
+      td {
+        border-bottom: 1px ${props => props.theme.grayscaleD} solid;
+      }
     }
   }
 `;

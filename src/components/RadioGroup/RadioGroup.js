@@ -2,7 +2,7 @@ import React from 'react';
 import Radio from '../Radio/Radio';
 import styled from 'styled-components';
 
-function RadioGroup({ data, name, value, defaultValue, text }) {
+function RadioGroup({ data, name, value, defaultChecked, text, onChange }) {
   return (
     <RadioGroupWrap>
       {data?.map(item => {
@@ -13,6 +13,7 @@ function RadioGroup({ data, name, value, defaultValue, text }) {
             value={item.value}
             text={item.text}
             defaultChecked={item.defaultChecked}
+            onChange={onChange}
           />
         );
       })}
