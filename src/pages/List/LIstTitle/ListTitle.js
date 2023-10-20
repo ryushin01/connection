@@ -56,9 +56,8 @@ const ListTitleSection = styled.section`
   background-size: cover;
   background-position: center;
 
-  background-image: ${({ categoryId }) =>
-    CATEGORY_IMAGE[categoryId]?.backgroundImage ||
-    `url(/images/list/seller.jpg)`};
+  background-image: ${({ id }) =>
+    CATEGORY_IMAGE[id]?.backgroundImage || `url(/images/list/seller.jpg)`};
 
   &::before {
     content: '';

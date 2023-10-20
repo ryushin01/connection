@@ -28,6 +28,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/detail/:id" element={<Detail />} />
+        {/* 셀러 유무 분기해서 라우팅 처리 필요 */}
         <Route path="/products/category/:id" element={<List />} />
         <Route path="/products/seller/:id" element={<List />} />
         <Route path="/login" element={<Login />} />

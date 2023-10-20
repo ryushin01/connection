@@ -16,7 +16,7 @@ const BigBanner = () => {
   const navigate = useNavigate();
 
   const goToListPage = id => {
-    navigate(`${API.LIST}?categoryId=${id}`, {
+    navigate(`/products/category/${id}`, {
       state: { categoryId: id },
     });
   };

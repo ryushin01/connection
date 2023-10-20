@@ -14,11 +14,11 @@ const Band = ({ item }) => {
 
   const goToList = e => {
     if (categoryId) {
-      navigate(`/products?${categoryId}`, {
+      navigate(`/products/category/${categoryId}`, {
         state: { categoryId: categoryId },
       });
     } else {
-      navigate(`/products?${sellerId}`, {
+      navigate(`/products/category/${sellerId}`, {
         state: { sellerId: sellerId },
       });
     }
@@ -55,39 +55,9 @@ const Band = ({ item }) => {
             </SwiperNextBtn>
           </SwiperController>
         </Swiper>
-
         <BandListLink onClick={goToList} aria-label="밴드 목록 더보기">
           <MoreIcon />
         </BandListLink>
-
-        {/* {categoryId && (
-          <BandListLink onClick={aaa} aria-label="밴드 목록 더보기">
-            <MoreIcon />
-          </BandListLink>
-        )}
-
-        {sellerId && (
-          <BandListLink onClick={bbb} aria-label="밴드 목록 더보기">
-            <MoreIcon />
-          </BandListLink>
-        )} */}
-
-        {/* {categoryId && (
-          <BandListLink
-            to={`/products/category/${categoryId}`}
-            aria-label="밴드 목록 더보기"
-          >
-            <MoreIcon />
-          </BandListLink>
-        )}
-        {sellerId && (
-          <BandListLink
-            to={`/products/seller/${sellerId}`}
-            aria-label="밴드 목록 더보기"
-          >
-            <MoreIcon />
-          </BandListLink>
-        )} */}
       </BandInnerWrap>
     </BandWrap>
   );
@@ -96,7 +66,7 @@ const Band = ({ item }) => {
 const BandWrap = styled.section`
   padding: 40px 0;
 
-  &:hover {
+  .swiper:hover {
     .swiper-prev-btn {
       left: 0;
     }

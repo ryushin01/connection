@@ -16,31 +16,16 @@ const List = () => {
   const { id } = useParams();
   const processedId = Number(id);
 
-  // console.log(location.state);
-
-  // fetch(`${API.CATEGORY_BAND}/${categoryId}`, {
-  // fetch(`${API.SELLER_BAND}/${sellerId}`, {
-
   let API_URL;
-
   if (location.state.categoryId) {
     console.log('카테고리 더보기 진입');
-    API_URL = `/data/categoryListData.json`;
-    // API_URL = `${API.CATEGORY_BAND}/${processedId}`;
-
-    // API_URL = `${API.LIST}?categoryId=${processedId}`;
+    API_URL = `${API.LIST}?categoryId=${processedId}`;
   } else {
     console.log('셀러 더보기 진입');
-    API_URL = `/data/sellerListData.json`;
-    // API_URL = `${API.SELLER_BAND}/${processedId}`;
-
-    // API_URL = `${API.LIST}?sellerId=${processedId}`;
+    API_URL = `${API.LIST}?sellerId=${processedId}`;
   }
 
   const getListData = () => {
-    // fetch(`${API.DETAIL}?categoryId=${categoryId}`, {
-    // fetch(`${API.LIST}/${categoryId}`, {
-    // fetch(`${API.CATEGORY_BAND}/${processedId}`, {
     fetch(API_URL, {
       method: 'GET',
       header: {
@@ -50,7 +35,7 @@ const List = () => {
       .then(response => response.json())
       .then(result => {
         if (result.message === 'Success') {
-          setListTitle(result.categoryName || result.sellerName);
+          setListTitle(result.name);
           setListData(result.data);
           setLoading(false);
         }
