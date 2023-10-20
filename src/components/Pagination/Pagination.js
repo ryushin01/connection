@@ -37,7 +37,7 @@ const FlexCenter = css`
 const PaginationWrap = styled.div`
   ${FlexCenter};
   gap: 8px;
-  margin-top: 40px;
+  margin-top: 120px;
 
   button {
     width: 40px;

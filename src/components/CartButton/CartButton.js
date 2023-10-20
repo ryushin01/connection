@@ -15,8 +15,8 @@ const CartButton = ({ onClick }) => {
 const CartButtonWrap = styled.div`
   position: relative;
   button {
-    width: 36px;
-    height: 36px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: 1px transparent solid;
     svg {
@@ -35,6 +35,19 @@ const CartButtonWrap = styled.div`
         }
       }
     }
+  }
+
+  span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    border: 1px ${props => props.theme.secondaryColor} solid;
+    border-radius: 50%;
+    background-color: ${props => props.theme.secondaryColor};
+    color: #fff;
   }
 `;
 

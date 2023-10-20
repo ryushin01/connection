@@ -6,9 +6,9 @@ import Counter from '../../Counter/Counter';
 import Button from '../../Button/Button';
 import styled, { css } from 'styled-components';
 
-const Cart = ({ onClose }) => {
+const Cart = ({ productId, onClose }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [count, setCount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const Cart = ({ onClose }) => {
   // };
 
   const price = 10000;
-  const totalPrice = price * count;
+  const totalPrice = price * quantity;
 
   // 장바구니 버튼 클릭 시 로직
   // [f] 1. 함수 생성 > onClick 이벤트 핸들러에 연결
@@ -54,10 +54,12 @@ const Cart = ({ onClose }) => {
   }, []);
 
   const putInCart = () => {
-    // 1. dispatch
-    // dispatch({ type: 'PLUS', payload: count });
+    // [Redux] 전역 상태를 변경하는 유일한 방법은 액션을 발생시키는 겁니다. store의 내장 함수인 dispatch를 통해 액션은 물론이고, 데이터까지 보낼 수 있습니다. 데이터는 payload 안에 담아야 합니다
+    dispatch({
+      type: 'ADD',
+      payload: { productId: productId, quantity: quantity },
+    });
 
-    dispatch({ type: 'ADD', payload: count });
     postOrder();
     onClose();
   };
@@ -70,7 +72,7 @@ const Cart = ({ onClose }) => {
           뼈해장국 밀키트 세트 (1팩 2인분)
         </ProductName>
         <PriceDisplay>
-          <Counter count={count} setCount={setCount} />
+          <Counter quantity={quantity} setQuantity={setQuantity} />
           <ProductPrice>{totalPrice?.toLocaleString()}원</ProductPrice>
         </PriceDisplay>
       </CartModalInnerWrap>

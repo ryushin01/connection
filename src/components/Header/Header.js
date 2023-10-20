@@ -1,12 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Account from './Account/Account';
 import Gnb from './Gnb/Gnb';
-import GnbCartButton from '../CartButton/GnbCartButton';
 import SearchButton from '../SearchButton/SearchButton';
+import PointButton from '../WalletButton/WalletButton';
+import GnbCartButton from '../CartButton/GnbCartButton';
 import styled, { css } from 'styled-components';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <HeaderWrap>
       <HeaderInnerWrap>
@@ -25,8 +28,9 @@ const Header = () => {
           <Gnb />
         </LeftSection>
         <RightSection>
-          <GnbCartButton />
           <SearchButton />
+          <PointButton />
+          <GnbCartButton />
         </RightSection>
       </HeaderInnerWrap>
     </HeaderWrap>

@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ReactComponent as CartIcon } from '../../svg/icon_cart.svg';
 import styled, { css } from 'styled-components';
 
 const GnbCartButton = () => {
-  const number = useSelector(state => state.number);
+  // [Redux] useSelector hook으로 store에 저장된 데이터(productId, quantity)를 꺼내옵니다.
+  let state = useSelector(state => {
+    return state;
+  });
+
+  console.log(state);
+
+  // store에서 꺼내온 데이터를 배열 순회하면서 총 수량을 구합니다. 그리고 이 수량을 GNB의 장바구니 버튼 옆에 표시합니다.
+  const sumQuantity = state => {
+    if (Array.isArray(state)) {
+      return state.reduce((prev, current) => prev + current.quantity, 0);
+    }
+  };
+
+  const totalQuantity = sumQuantity(state);
 
   return (
     <GnbCartButtonWrap>
       <Link to="/cart">
         <CartIcon />
       </Link>
-      {number && <span>{number}</span>}
+      {totalQuantity && <span>{totalQuantity}</span>}
     </GnbCartButtonWrap>
   );
 };
@@ -25,9 +39,11 @@ const FlexCenter = css`
 
 const GnbCartButtonWrap = styled.div`
   position: relative;
-  button {
-    width: 36px;
-    height: 36px;
+
+  a {
+    ${FlexCenter};
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: 1px transparent solid;
     svg {
@@ -50,8 +66,8 @@ const GnbCartButtonWrap = styled.div`
   span {
     ${FlexCenter};
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: 4px;
+    right: 4px;
     z-index: 1;
     width: 20px;
     height: 20px;

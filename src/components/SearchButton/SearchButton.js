@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ReactComponent as SearchIcon } from '../../svg/icon_search.svg';
+import InputSearch from '../InputSearch/InputSearch';
 import styled from 'styled-components';
 
-const SearchButton = ({ onClick }) => {
+const SearchButton = () => {
+  const [activate, setActivate] = useState(false);
+
+  const searchActivate = () => {
+    setActivate(prev => !prev);
+  };
+
   return (
     <SearchButtonWrap>
-      <button type="button" onClick={onClick}>
+      <InputSearch activate={activate} />
+      <button type="button" onClick={searchActivate}>
         <SearchIcon />
       </button>
     </SearchButtonWrap>
@@ -13,9 +21,14 @@ const SearchButton = ({ onClick }) => {
 };
 
 const SearchButtonWrap = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
   button {
-    width: 36px;
-    height: 36px;
+    min-width: 48px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: 1px transparent solid;
     svg {

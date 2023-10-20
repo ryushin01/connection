@@ -34,7 +34,7 @@ const ProductImage = ({ productId, productImage, productName, rating }) => {
       <Portal>
         {modalOpen && (
           <Modal
-            data={<Cart onClose={modalHandler} />}
+            data={<Cart productId={productId} onClose={modalHandler} />}
             scale="small"
             onClose={modalHandler}
           />
@@ -63,8 +63,8 @@ const ProductImageWrap = styled.div`
   }
   div {
     position: absolute;
-    right: 8px;
-    bottom: 8px;
+    right: 4px;
+    bottom: 4px;
   }
 `;
 

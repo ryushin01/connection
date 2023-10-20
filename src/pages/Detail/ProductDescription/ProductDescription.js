@@ -1,11 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ProductDescription = () => {
+const ProductDescription = ({ productDetailImages }) => {
   return (
     <>
       <Description>
-        <img src="/images/detail/detail.jpg" alt="제품 상세 이미지" />
+        {productDetailImages?.map((item, index) => {
+          return (
+            <div key={index}>
+              <img src={item.url} alt={item.comments} />
+            </div>
+          );
+        })}
       </Description>
       <Map>지도 API 영역</Map>
     </>
