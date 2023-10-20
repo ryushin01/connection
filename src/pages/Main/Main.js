@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { API } from '../../config';
+import { API } from '../../config';
 import Loading from '../../pages/Loading/Loading';
 import BigBanner from './BigBanner/BigBanner';
 import Band from '../../components/Band/Band';
@@ -10,8 +10,8 @@ const Main = () => {
   const [sellerBandData, setSellerBandData] = useState([]);
 
   const getCategoryBandData = () => {
-    fetch('/data/categoryBandData.json', {
-      // fetch(`${API.CATEGORY_BAND}`, {
+    // fetch('/data/categoryBandData.json', {
+    fetch(`${API.CATEGORY_BAND}`, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -20,20 +20,20 @@ const Main = () => {
       .then(response => response.json())
       .then(result => {
         // real data
-        // if (result.message === 'Success') {
-        //   setCategoryBandData(result.data);
-        // }
+        if (result.message === 'Success') {
+          setCategoryBandData(result.data);
+        }
 
         // mock data
-        setCategoryBandData(result);
+        // setCategoryBandData(result);
 
         setLoading(false);
       });
   };
 
   const getSellerBandData = () => {
-    fetch('/data/sellerBandData.json', {
-      // fetch(`${API.SELLER_BAND}`, {
+    // fetch('/data/sellerBandData.json', {
+    fetch(`${API.SELLER_BAND}`, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -42,12 +42,12 @@ const Main = () => {
       .then(response => response.json())
       .then(result => {
         // real data
-        // if (result.message === 'Success') {
-        //   setSellerBandData(result.data);
-        // }
+        if (result.message === 'Success') {
+          setSellerBandData(result.data);
+        }
 
         // mock data
-        setSellerBandData(result);
+        // setSellerBandData(result);
 
         setLoading(false);
       });

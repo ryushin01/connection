@@ -1,9 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const ListTitle = ({ listTitle }) => {
+const ListTitle = ({ listTitle, categoryId }) => {
   return (
-    <ListTitleSection>
+    <ListTitleSection categoryId={categoryId}>
       <ListTitleSectionInnerWrap>
         <h2>{listTitle}</h2>
       </ListTitleSectionInnerWrap>
