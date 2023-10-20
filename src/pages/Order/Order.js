@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // import { API } from '../../config';
 import Loading from '../Loading/Loading';
 import RadioGroup from '../../components/RadioGroup/RadioGroup';
+import CheckBox from '../../components/CheckBox/CheckBox';
 import Button from '../../components/Button/Button';
 import DELIVERY_DATA from '../../data/DeliveryData';
 import PAYMENT_DATA from '../../data/PaymentData';
@@ -34,67 +35,76 @@ const Order = () => {
           <Section>
             <SectionSubtitle>배송지 정보</SectionSubtitle>
             <TableGroup>
-              <SectionTable>
-                <caption>보내시는 분</caption>
-                <tbody>
-                  <tr>
-                    <th>이름</th>
-                    <td>류창선</td>
-                  </tr>
-                  <tr>
-                    <th>연락처</th>
-                    <td>01071607921</td>
-                  </tr>
-                  <tr>
-                    <th>주소</th>
-                    <td>서울시 서대문구 통일로25길 30</td>
-                  </tr>
-                </tbody>
-              </SectionTable>
-              <SectionTable>
-                <caption>받으시는 분</caption>
-                <tbody>
-                  <tr>
-                    <th>이름</th>
-                    <td>류창선</td>
-                  </tr>
-                  <tr>
-                    <th>연락처</th>
-                    <td>01071607921</td>
-                  </tr>
-                  <tr>
-                    <th>주소</th>
-                    <td>서울시 서대문구 통일로25길 30</td>
-                  </tr>
-                </tbody>
-              </SectionTable>
+              <SectionTableWrap>
+                <SectionTable>
+                  <caption>보내시는 분</caption>
+                  <tbody>
+                    <tr>
+                      <th>이름</th>
+                      <td>류창선</td>
+                    </tr>
+                    <tr>
+                      <th>연락처</th>
+                      <td>01071607921</td>
+                    </tr>
+                    <tr>
+                      <th>주소</th>
+                      <td>서울시 서대문구 통일로25길 30</td>
+                    </tr>
+                  </tbody>
+                </SectionTable>
+              </SectionTableWrap>
+              <SectionTableWrap>
+                <CheckBox size="medium" text="주문 고객 정보와 동일합니다" />
+                <SectionTable>
+                  <caption>받으시는 분</caption>
+                  <tbody>
+                    <tr>
+                      <th>이름</th>
+                      <td>류창선</td>
+                    </tr>
+                    <tr>
+                      <th>연락처</th>
+                      <td>01071607921</td>
+                    </tr>
+                    <tr>
+                      <th>주소</th>
+                      <td>서울시 서대문구 통일로25길 30</td>
+                    </tr>
+                  </tbody>
+                </SectionTable>
+              </SectionTableWrap>
             </TableGroup>
           </Section>
           <Section>
             <SectionSubtitle>배송 및 결제 방법</SectionSubtitle>
             <TableGroup>
-              <SectionTable>
-                <caption>배송 방법</caption>
-                <tbody>
-                  <tr>
-                    <th>배송 방법</th>
-                    <td>
-                      <RadioGroup data={DELIVERY_DATA} name="delivery" />
-                    </td>
-                  </tr>
-                </tbody>
-              </SectionTable>
-              <SectionTable>
-                <caption>결제 방법</caption>
-                <tbody>
-                  <tr>
-                    <th>결제 방법</th>
-                    <td>
-                      <RadioGroup data={PAYMENT_DATA} name="payment" />
-                    </td>
-                  </tr>
-                </tbody>
-              </SectionTable>
+              <SectionTableWrap>
+                <SectionTable>
+                  <caption>배송 방법</caption>
+                  <tbody>
+                    <tr>
+                      <th>배송 방법</th>
+                      <td>
+                        <RadioGroup data={DELIVERY_DATA} name="delivery" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </SectionTable>
+              </SectionTableWrap>
+              <SectionTableWrap>
+                <SectionTable>
+                  <caption>결제 방법</caption>
+                  <tbody>
+                    <tr>
+                      <th>결제 방법</th>
+                      <td>
+                        <RadioGroup data={PAYMENT_DATA} name="payment" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </SectionTable>
+              </SectionTableWrap>
             </TableGroup>
           </Section>
           <ButtonGroup>
@@ -135,10 +145,9 @@ const Section = styled.section`
   table {
     table-layout: fixed;
     width: 100%;
-    flex: 1;
 
     caption {
-      padding: 12px 0;
+      padding: 12px 240px 12px 0;
       border-bottom: 1px ${props => props.theme.grayscaleF} solid;
       font-size: 24px;
       text-align: left;
@@ -170,8 +179,18 @@ const TableGroup = styled.div`
   align-items: flex-start;
 `;
 
-const SectionTable = styled.table`
+const SectionTableWrap = styled.div`
   position: relative;
+
+  & > label {
+    position: absolute;
+    top: 8px;
+    right: 0;
+  }
+`;
+
+const SectionTable = styled.table`
+  flex: 1;
 `;
 
 const ButtonGroup = styled.div`
