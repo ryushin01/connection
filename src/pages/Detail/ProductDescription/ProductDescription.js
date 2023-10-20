@@ -8,7 +8,7 @@ const ProductDescription = ({ productDetailImages }) => {
         {productDetailImages?.map((item, index) => {
           return (
             <div key={index}>
-              <img src={item.url} alt="n/a" />
+              <img src={item.url} alt={item.comments} />
             </div>
           );
         })}
