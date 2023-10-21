@@ -38,6 +38,7 @@ const Root = () => {
   };
 
   return (
+    // [Redux] 전역 상태이므로 최상위 Provider에 주입합니다.
     <Provider store={store}>
       <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
         <GlobalStyle />

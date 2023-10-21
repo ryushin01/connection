@@ -6,6 +6,7 @@ import Button from '../../components/Button/Button';
 
 const Cart = () => {
   // hook
+  // hook
   const [quantity, setQuantity] = useState(1);
   const [cartData, setCartData] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false); // 1. 전체 선택 체크박스 상태 확인용  State 생성
@@ -89,6 +90,7 @@ const Cart = () => {
   useEffect(() => {
     getMokData();
   }, []);
+
   return (
     <Main id="main">
       <div>
@@ -104,7 +106,6 @@ const Cart = () => {
               <CartAllCheckText>전체선택</CartAllCheckText>
               <CartSelectDeleteBtn>선택삭제</CartSelectDeleteBtn>
             </CartLeftWrap>
-
             {cartData?.map((item, index) => {
               return (
                 <>
@@ -176,8 +177,8 @@ const Cart = () => {
                           <CartItemLi>
                             <CartItemCounterWrap>
                               <Counter
-                                count={item.quantity}
-                                setCount={setCount}
+                                quantity={item.quantity}
+                                setQuantity={setQuantity}
                               />
                             </CartItemCounterWrap>
                           </CartItemLi>
