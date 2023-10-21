@@ -176,8 +176,8 @@ const Cart = () => {
                           <CartItemLi>
                             <CartItemCounterWrap>
                               <Counter
-                                count={item.quantity}
-                                setCount={setCount}
+                                quantity={item.quantity}
+                                setQuantity={setQuantity}
                               />
                             </CartItemCounterWrap>
                           </CartItemLi>
