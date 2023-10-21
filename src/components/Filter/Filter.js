@@ -1,19 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-function Filter() {
+const Filter = ({ categoryId }) => {
+  const [sort, setSort] = useState('');
+
+  const selectList = ['별점순', '리뷰순', '최신순'];
+
+  const handleSelect = e => {
+    const selectedValue = e.target.value;
+
+    if (selectedValue === '별점순') {
+      return setSort('rating');
+    } else if (selectedValue === '리뷰순') {
+      return setSort('review');
+    } else if (selectedValue === '최신순') {
+      return setSort('created_at');
+    }
+  };
+
   return (
     <FilterWrap>
       <FilterInnerWrap>
-        <Select>
-          <Option>별점순</Option>
-          <Option>리뷰순</Option>
-          <Option>최신순</Option>
+        <Select onChange={handleSelect}>
+          {selectList.map(item => {
+            return (
+              <Option key={item} value={item}>
+                {item}
+              </Option>
+            );
+          })}
         </Select>
       </FilterInnerWrap>
     </FilterWrap>
   );
-}
+};
 
 const FilterWrap = styled.div`
   padding: 20px 0;
