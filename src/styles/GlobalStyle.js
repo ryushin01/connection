@@ -56,6 +56,13 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Do Hyeon', "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
   }
 
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+
   main {  
     position: relative;
     z-index: 1;

@@ -6,7 +6,7 @@ import Button from '../../components/Button/Button';
 
 const Cart = () => {
   // hook
-  const [count, setCount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const [cartData, setCartData] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false); // 1. 전체 선택 체크박스 상태 확인용  State 생성
   const [sellerCheckedItem, setSellerCheckedItem] = useState({});
@@ -89,6 +89,7 @@ const Cart = () => {
   useEffect(() => {
     getMokData();
   }, []);
+
   return (
     <Main id="main">
       <div>
@@ -104,7 +105,6 @@ const Cart = () => {
               <CartAllCheckText>전체선택</CartAllCheckText>
               <CartSelectDeleteBtn>선택삭제</CartSelectDeleteBtn>
             </CartLeftWrap>
-
             {cartData?.map((item, index) => {
               return (
                 <>
@@ -194,6 +194,41 @@ const Cart = () => {
                 </>
               );
             })}
+            <CartMarketTitleWrap>
+              <CartMarketItemWrap>
+                <CheckBox size="small" />
+                <h3>플레이스 마켓</h3>
+              </CartMarketItemWrap>
+            </CartMarketTitleWrap>
+            <CartItemBoxWrap>
+              <CartItemCheckBoxWrap>
+                <CheckBox size="small" />
+              </CartItemCheckBoxWrap>
+              <CartItemUl>
+                <CartItemLi>
+                  <CartItemImgWrap>
+                    <img src="/images/logo.png" alt="itemImage" />
+                  </CartItemImgWrap>
+                </CartItemLi>
+                <CartItemLi>
+                  <h3>
+                    [커넥션 할인 특가] 50년 전통의 뼈해장국 대가 김인숙 님이
+                    인정한 뼈해장국 밀키트 세트 (1팩 2인분)
+                  </h3>
+                </CartItemLi>
+                <CartItemLi>
+                  <CartItemCounterWrap>
+                    <Counter quantity={quantity} setQuantity={setQuantity} />
+                  </CartItemCounterWrap>
+                </CartItemLi>
+                <CartItemLi>
+                  <h3>100,000,000원</h3>
+                </CartItemLi>
+                <CartItemLi>
+                  <span>무료 배송</span>
+                </CartItemLi>
+              </CartItemUl>
+            </CartItemBoxWrap>
           </CartLeftSection>
           <CartRightSection>
             <CartReceiptContainer>
