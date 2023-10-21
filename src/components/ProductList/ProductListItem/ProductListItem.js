@@ -20,6 +20,7 @@ const ProductListItem = ({ item }) => {
         productImage={productImage}
         productName={productName}
         rating={rating}
+        totalPrice={totalPrice}
       />
       <ProductText
         productId={productId}
