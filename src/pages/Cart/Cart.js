@@ -13,12 +13,11 @@ const Cart = () => {
   const [checkItem, setCheckItem] = useState([]);
 
   // function
-  const getMokData = () => {
-    fetch('/data/CartData.json')
-      .then(Response => Response.json())
-      .then(result => setCartData(result.data));
-  };
-
+  // const getMokData = () => {
+  //   fetch('/data/CartData.json')
+  //     .then(Response => Response.json())
+  //     .then(result => setCartData(result.data));
+  // };
   const cartListData = cartData
     .map(item => {
       return item.products.map(product => {
@@ -53,6 +52,16 @@ const Cart = () => {
     return itemInfo; // itemInfo를 return
   };
 
+  // 전체 선택 시 cartData 중 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
+  const handleItemIdInfoChange = () => {
+    const itemIdInfo = checkItem
+      .map(item => ({
+        productId: item.productId,
+      }))
+      .flat(); // flat() : 중첩 배열을 평탄화 (2차원 배열을 1차원 배열로 만듦)
+    return itemIdInfo; // itemInfo를 return
+  };
+
   const handleMarketCheck = (checked, sellerId) => {
     if (checked) {
       const marketData = cartData.filter(cart => cart.sellerId === sellerId); // sellerId가 같은 cartData를 marketData에 넣어줌
@@ -67,17 +76,30 @@ const Cart = () => {
   };
   console.log(sellerCheckedItem);
 
-  // console.log(checkItem);
-  const postCheckItemBtn = () => {
-    fetch('API 주소', {
-      method: 'POST',
+  const getCartInfoData = () => {
+    fetch('http://10.58.52.207:8000/carts', {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('access_token'),
+        authorization: localStorage.getItem('accessToken'),
       },
-      body: JSON.stringify({
-        items: handleItemInfoChange(),
-      }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        setCartData(result.data);
+      });
+  };
+
+  console.log(checkItem);
+  const patchCheckItemBtn = () => {
+    fetch('http://10.58.52.207:8000/carts', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({ data: handleItemInfoChange() }),
     })
       .then(response => response.json())
       .then(result => {
@@ -85,9 +107,28 @@ const Cart = () => {
       });
   };
 
+  const deleteCheckItemBtn = () => {
+    fetch('http://10.58.52.207:8000/carts', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({ data: handleItemIdInfoChange() }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        if (result.message === 'Delete item!') {
+          window.location.reload();
+        }
+      });
+  };
+
   // useEffect
   useEffect(() => {
-    getMokData();
+    // getMokData();
+    getCartInfoData();
   }, []);
 
   return (
@@ -103,7 +144,9 @@ const Cart = () => {
                 checked={checkItem.length === cartListData.length}
               />
               <CartAllCheckText>전체선택</CartAllCheckText>
-              <CartSelectDeleteBtn>선택삭제</CartSelectDeleteBtn>
+              <CartSelectDeleteBtn onClick={deleteCheckItemBtn}>
+                선택삭제
+              </CartSelectDeleteBtn>
             </CartLeftWrap>
             {cartData?.map((item, index) => {
               return (
@@ -119,7 +162,7 @@ const Cart = () => {
                         //   })
                         // }
                       />
-                      <h3>{item.sellerTitle}</h3>
+                      <h3>{item.sellerName}</h3>
                     </CartMarketItemWrap>
                   </CartMarketTitleWrap>
                   {item.products?.map((item, index) => {
@@ -194,41 +237,6 @@ const Cart = () => {
                 </>
               );
             })}
-            <CartMarketTitleWrap>
-              <CartMarketItemWrap>
-                <CheckBox size="small" />
-                <h3>플레이스 마켓</h3>
-              </CartMarketItemWrap>
-            </CartMarketTitleWrap>
-            <CartItemBoxWrap>
-              <CartItemCheckBoxWrap>
-                <CheckBox size="small" />
-              </CartItemCheckBoxWrap>
-              <CartItemUl>
-                <CartItemLi>
-                  <CartItemImgWrap>
-                    <img src="/images/logo.png" alt="itemImage" />
-                  </CartItemImgWrap>
-                </CartItemLi>
-                <CartItemLi>
-                  <h3>
-                    [커넥션 할인 특가] 50년 전통의 뼈해장국 대가 김인숙 님이
-                    인정한 뼈해장국 밀키트 세트 (1팩 2인분)
-                  </h3>
-                </CartItemLi>
-                <CartItemLi>
-                  <CartItemCounterWrap>
-                    <Counter quantity={quantity} setQuantity={setQuantity} />
-                  </CartItemCounterWrap>
-                </CartItemLi>
-                <CartItemLi>
-                  <h3>100,000,000원</h3>
-                </CartItemLi>
-                <CartItemLi>
-                  <span>무료 배송</span>
-                </CartItemLi>
-              </CartItemUl>
-            </CartItemBoxWrap>
           </CartLeftSection>
           <CartRightSection>
             <CartReceiptContainer>
@@ -287,7 +295,7 @@ const Cart = () => {
                         size="large"
                         color="primary"
                         content="최종 구매 금액 : 100,000,000원"
-                        onClick={postCheckItemBtn}
+                        onClick={patchCheckItemBtn}
                       />
                     </td>
                   </CartLastTr>
