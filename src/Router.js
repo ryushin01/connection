@@ -20,7 +20,8 @@ import Payment from './pages/Payment/Payment';
 import Gateway from './pages/Gateway/Gateway';
 
 const Router = () => {
-  const isLogin = false;
+  // 유저 정보에서 추출하여 적용하기
+  const isLogin = true;
   return (
     <BrowserRouter>
       <ScrollToTop />
@@ -32,7 +33,8 @@ const Router = () => {
         </>
       )}
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Gateway />} />
+        <Route path="/main" element={<Main />} />
         <Route path="/detail/:id" element={<Detail />} />
         {/* 셀러 유무 분기해서 라우팅 처리 필요 */}
         <Route path="/products/category/:id" element={<List />} />
@@ -45,7 +47,6 @@ const Router = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<Order />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/gateway" element={<Gateway />} />
       </Routes>
       {isLogin && (
         <>
