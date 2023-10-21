@@ -4,7 +4,7 @@ import Account from './Account/Account';
 import Gnb from './Gnb/Gnb';
 import SearchButton from '../SearchButton/SearchButton';
 import PointButton from '../WalletButton/WalletButton';
-import CartButton from '../CartButton/CartButton';
+import GnbCartButton from '../CartButton/GnbCartButton';
 import styled, { css } from 'styled-components';
 
 const Header = () => {
@@ -30,12 +30,7 @@ const Header = () => {
         <RightSection>
           <SearchButton />
           <PointButton />
-          <CartButton
-            count="0"
-            onClick={() => {
-              navigate('/cart');
-            }}
-          />
+          <GnbCartButton />
         </RightSection>
       </HeaderInnerWrap>
     </HeaderWrap>

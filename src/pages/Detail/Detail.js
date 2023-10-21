@@ -16,7 +16,7 @@ import styled, { css } from 'styled-components';
 const Detail = () => {
   const [loading, setLoading] = useState(false);
   const [detailData, setDetailData] = useState({});
-  const [count, setCount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
   const getDetailData = () => {
     fetch('/data/detailData.json', {
@@ -53,7 +53,7 @@ const Detail = () => {
   } = detailData;
 
   const productDetailImages = detailData?.productDetailImages;
-  const finalPrice = totalPrice * count;
+  const finalPrice = totalPrice * quantity;
 
   return (
     <>
@@ -94,7 +94,7 @@ const Detail = () => {
                     </MetadataTable>
                   </MetadataTableWrap>
                   <PriceDisplay>
-                    <Counter count={count} setCount={setCount} />
+                    <Counter quantity={quantity} setQuantity={setQuantity} />
                     <span>{finalPrice?.toLocaleString()}원</span>
                   </PriceDisplay>
                   <ButtonGroup>

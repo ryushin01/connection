@@ -4,7 +4,7 @@ import CheckBox from '../../components/CheckBox/CheckBox';
 import Counter from '../../components/Counter/Counter';
 
 const Cart = () => {
-  const [count, setCount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <Main id="main">
@@ -41,7 +41,7 @@ const Cart = () => {
                 </CartItemLi>
                 <CartItemLi>
                   <CartItemCounterWrap>
-                    <Counter count={count} setCount={setCount} />
+                    <Counter quantity={quantity} setQuantity={setQuantity} />
                   </CartItemCounterWrap>
                 </CartItemLi>
                 <CartItemLi>

@@ -1,23 +1,16 @@
 import React from 'react';
 import { ReactComponent as CartIcon } from '../../svg/icon_cart.svg';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-const CartButton = ({ count, onClick }) => {
+const CartButton = ({ onClick }) => {
   return (
     <CartButtonWrap>
       <button type="button" onClick={onClick}>
         <CartIcon />
       </button>
-      {count && <span>{count}</span>}
     </CartButtonWrap>
   );
 };
-
-const FlexCenter = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 const CartButtonWrap = styled.div`
   position: relative;
@@ -43,8 +36,8 @@ const CartButtonWrap = styled.div`
       }
     }
   }
+
   span {
-    ${FlexCenter};
     position: absolute;
     top: 0;
     right: 0;
