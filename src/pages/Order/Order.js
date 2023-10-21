@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 // import { API } from '../../config';
 import Loading from '../Loading/Loading';
 import RadioGroup from '../../components/RadioGroup/RadioGroup';
@@ -12,22 +12,24 @@ import styled from 'styled-components';
  * Order.js logics
  * @property {function} getUserData     - 유저 데이터(이름, 연락처, 주소)를 받아오는 함수입니다.
  * @property {function} getCartData     - 장바구니 데이터(제품명, 수량, 가격, 총 금액)를 받아오는 함수입니다.
+ * @property {function} selectingSentry - 배송 방법 선택 시 값을 모니터링하고 배송 방법 값을 정하는 함수입니다.
  * @property {function} postOrderData   - 유저 데이터, 장바구니 데이터, 배송 방법, 결제 방법을 서버로 보내는 함수입니다.
  */
-
-// 배송 방법: string(directly || parcel)으로 서버 전달 필요
-// 결제 방법: 포인트의 id값(1)을 서버 전달 필요
 
 const Order = () => {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({});
-  const [cartData, setCartData] = useState({
-    delivery: '',
-  });
-  const [shippingMethod, setShippingMethod] = useState('');
+  const [cartData, setCartData] = useState({});
+  const [shippingMethod, setShippingMethod] = useState('visiting');
   const [paymentMethod, setPaymentMethod] = useState(1);
-  const { id } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
+
+  // console.log(location?.state);
+
+  const { productId, quantity } = location?.state;
+
+  // console.log('productId:', productId, 'quantity:', quantity);
 
   const getUserData = () => {
     // fetch(`${API.ORDER_DETAIL}?id=${id}`, {
@@ -68,8 +70,8 @@ const Order = () => {
   }, []);
 
   const selectingSentry = e => {
-    const { name, value } = e.target;
-    setShippingMethod({ ...cartData, [name]: value });
+    const { value } = e.target;
+    setShippingMethod(value);
   };
 
   const postOrderData = () => {
@@ -82,9 +84,9 @@ const Order = () => {
       },
       body: JSON.stringify({
         // userId: id
-        // productId:
-        shippingMethod: shippingMethod.delivery,
-        paymentId: paymentMethod,
+        productId: productId,
+        shippingMethod: shippingMethod,
+        paymentMethod: paymentMethod,
       }),
     })
       .then(response => response.json())
