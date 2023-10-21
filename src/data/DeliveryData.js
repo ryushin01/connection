@@ -1,15 +1,13 @@
 const DELIVERY_DATA = [
   {
     id: 1,
-    value: 'directly',
+    value: 'visiting',
     text: '직접 수령',
-    defaultChecked: true,
   },
   {
     id: 2,
-    value: 'parcel',
+    value: 'shipping',
     text: '택배 배송',
-    defaultChecked: false,
   },
 ];
 

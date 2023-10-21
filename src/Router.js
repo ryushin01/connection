@@ -16,6 +16,7 @@ import SnsSignUp from './pages/SignUp/SnsSignUp';
 import SellerSignUp from './pages/SignUp/SellerSignUp';
 import Cart from './pages/Cart/Cart';
 import Order from './pages/Order/Order';
+import Payment from './pages/Payment/Payment';
 
 const Router = () => {
   return (
@@ -38,6 +39,7 @@ const Router = () => {
         <Route path="/sellersignup" element={<SellerSignUp />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<Order />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
       <Footer />
       <TopButton />

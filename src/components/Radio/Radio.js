@@ -5,7 +5,7 @@ function Radio({
   type = 'radio',
   name,
   value,
-  defaultValue,
+  defaultChecked,
   text,
   onChange,
   disabled,
@@ -18,7 +18,7 @@ function Radio({
         type={type}
         name={name}
         value={value}
-        defaultValue={defaultValue}
+        defaultChecked={defaultChecked}
         onChange={onChange}
         disabled={disabled}
         {...props}
