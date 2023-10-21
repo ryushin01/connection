@@ -3,7 +3,7 @@ import NavListItem from './NavListItem/NavListItem';
 import styled, { css } from 'styled-components';
 
 const GNB_LIST = [
-  { id: 1, text: '홈', path: '/' },
+  { id: 1, text: '홈', path: '/main' },
   { id: 2, text: '카테고리', path: '/' },
   { id: 3, text: '마이페이지', path: '/mypage' },
 ];

@@ -20,7 +20,7 @@ const Header = () => {
       <HeaderInnerWrap>
         <LeftSection>
           <Logo>
-            <Link to="/">
+            <Link to="/main">
               <img src="/images/logo.png" alt="커넥션 로고" />
               <span>커넥션</span>
             </Link>
