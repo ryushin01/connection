@@ -34,7 +34,7 @@ const ProductImage = ({ productId, productImage, productName, rating }) => {
       <Portal>
         {modalOpen && (
           <Modal
-            data={<Cart onClose={modalHandler} />}
+            data={<Cart productId={productId} onClose={modalHandler} />}
             scale="small"
             onClose={modalHandler}
           />

@@ -6,7 +6,7 @@ import Button from '../../components/Button/Button';
 
 const Cart = () => {
   // hook
-  const [count, setCount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const [cartData, setCartData] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false); // 1. 전체 선택 체크박스 상태 확인용  State 생성
   const [sellerCheckedItem, setSellerCheckedItem] = useState({});
