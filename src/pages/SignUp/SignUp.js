@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import DaumPostCode from './DaumPostCode/DaumPostCode';
-import { useNavigate } from 'react-router';
 
 const SignUp = props => {
   // userInfo state 정의 (회원가입 정보)

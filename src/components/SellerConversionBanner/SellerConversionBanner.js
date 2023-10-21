@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 const SellerConversionBanner = () => {
   return (
     <SellerConversionBannerWrap>
-      <Link to="/">판매자가 되어 커넥션만의 혜택을 받으세요!</Link>
+      <Link to="/sellersignup">판매자가 되어 커넥션만의 혜택을 받으세요!</Link>
     </SellerConversionBannerWrap>
   );
 };

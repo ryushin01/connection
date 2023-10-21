@@ -1,4 +1,5 @@
 import React from 'react';
+import Rating from '../../../components/Rating/Rating';
 import styled, { css } from 'styled-components';
 
 const ProductReview = () => {
@@ -17,6 +18,7 @@ const ProductReview = () => {
         </ReviewMetadataArea>
         <ReviewImageArea>
           <img src="/images/products/milk.png" alt="리뷰 이미지" />
+          <Rating rating="0" />
         </ReviewImageArea>
       </ReviewListItem>
     </ReviewList>
@@ -57,8 +59,8 @@ const ReviewMetadataArea = styled.div`
     border-color: transparent;
     border-radius: 4px;
     background-color: ${props => props.theme.grayscaleB};
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 20px;
+    line-height: 1.4;
     resize: none;
     outline: 0;
   }
@@ -69,12 +71,13 @@ const ReviewerInfo = styled.span`
   justify-content: space-between;
   align-items: center;
   height: 4vw;
-  font-size: 16px;
+  font-size: 20px;
   color: ${props => props.theme.grayscaleF};
 `;
 
 const ReviewImageArea = styled.div`
   ${FlexCenter};
+  position: relative;
   width: 20vw;
   height: 20vw;
   border-radius: 4px;

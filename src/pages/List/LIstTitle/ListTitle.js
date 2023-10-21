@@ -1,9 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const ListTitle = ({ listTitle }) => {
+const ListTitle = ({ listTitle, categoryId }) => {
   return (
-    <ListTitleSection>
+    <ListTitleSection categoryId={categoryId}>
       <ListTitleSectionInnerWrap>
         <h2>{listTitle}</h2>
       </ListTitleSectionInnerWrap>
@@ -51,6 +51,7 @@ const ListTitleSection = styled.section`
   ${FlexCenter};
   position: relative;
   height: 20vw;
+  margin-top: -40px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

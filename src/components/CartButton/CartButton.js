@@ -1,29 +1,22 @@
 import React from 'react';
 import { ReactComponent as CartIcon } from '../../svg/icon_cart.svg';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-const CartButton = ({ count, onClick }) => {
+const CartButton = ({ onClick }) => {
   return (
     <CartButtonWrap>
       <button type="button" onClick={onClick}>
         <CartIcon />
       </button>
-      {count && <span>{count}</span>}
     </CartButtonWrap>
   );
 };
 
-const FlexCenter = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const CartButtonWrap = styled.div`
   position: relative;
   button {
-    width: 36px;
-    height: 36px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: 1px transparent solid;
     svg {
@@ -43,11 +36,11 @@ const CartButtonWrap = styled.div`
       }
     }
   }
+
   span {
-    ${FlexCenter};
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: 0;
+    right: 0;
     z-index: 1;
     width: 20px;
     height: 20px;

@@ -2,14 +2,58 @@ import React, { useEffect, useState } from 'react';
 // import { API } from '../../config';
 // import { useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
+import Rating from '../../components/Rating/Rating';
 import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
 import DetailTab from './DetailTab/DetailTab';
 import styled, { css } from 'styled-components';
 
+/**
+ * Detail.js logics
+ * @property {function} getDetailData                       - 제품 상세 데이터를 받아오는 함수입니다.
+ */
+
 const Detail = () => {
   const [loading, setLoading] = useState(false);
-  const [count, setCount] = useState(1);
+  const [detailData, setDetailData] = useState({});
+  const [quantity, setQuantity] = useState(1);
+
+  const getDetailData = () => {
+    fetch('/data/detailData.json', {
+      // fetch('http://10.58.52.52:8000/products/1', {
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Success') {
+          setDetailData(result?.product[0]);
+          setLoading(false);
+        }
+      });
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    getDetailData();
+  }, []);
+
+  const {
+    productId,
+    productName,
+    productImg,
+    discountRate,
+    rating,
+    originalPrice,
+    discountAmount,
+    totalPrice,
+    reviewNumbers,
+  } = detailData;
+
+  const productDetailImages = detailData?.productDetailImages;
+  const finalPrice = totalPrice * quantity;
 
   return (
     <>
@@ -20,34 +64,39 @@ const Detail = () => {
             <DetailTopSection>
               <ImageArea>
                 <ImageAreaInnerWrap>
-                  <img src="/images/products/milk.png" alt="productName" />
+                  <img src={productImg} alt={productName} />
+                  <Rating rating={rating} />
                 </ImageAreaInnerWrap>
               </ImageArea>
               <MetadataArea>
                 <MetadataAreaInnerWrap>
-                  <ProductTitle>
-                    [커넥션 할인 특가] 50년 전통의 뼈해장국 대가 김인숙 님이
-                    인정한 뼈해장국 밀키트 세트 (1팩 2인분)
-                  </ProductTitle>
+                  <ProductTitle>{productName}</ProductTitle>
                   <MetadataTableWrap>
                     <MetadataTable>
                       <tbody>
                         <tr>
                           <th>원가</th>
-                          <td>10,000원</td>
+                          <td>{originalPrice?.toLocaleString()}원</td>
                         </tr>
                         <tr>
-                          <th>할인가(할인율)</th>
-                          <td>-1,000원(10%)</td>
+                          <th>할인가 (할인율)</th>
+                          <td>
+                            -{discountAmount?.toLocaleString()}원 (
+                            {discountRate}
+                            %)
+                          </td>
                         </tr>
                         <tr>
-                          <th>구매 가격</th>
-                          <td>[D] 9,000원</td>
+                          <th>구매 가격 (1개)</th>
+                          <td>{totalPrice?.toLocaleString()}원</td>
                         </tr>
                       </tbody>
                     </MetadataTable>
                   </MetadataTableWrap>
-                  <Counter count={count} setCount={setCount} />
+                  <PriceDisplay>
+                    <Counter quantity={quantity} setQuantity={setQuantity} />
+                    <span>{finalPrice?.toLocaleString()}원</span>
+                  </PriceDisplay>
                   <ButtonGroup>
                     <Button
                       shape="solid"
@@ -66,7 +115,10 @@ const Detail = () => {
               </MetadataArea>
             </DetailTopSection>
             <DetailBottomSection>
-              <DetailTab />
+              <DetailTab
+                productDetailImages={productDetailImages}
+                reviewNumbers={reviewNumbers}
+              />
             </DetailBottomSection>
           </DetailWrap>
         </div>
@@ -82,7 +134,7 @@ const FlexCenter = css`
 `;
 
 const DetailWrap = styled.div`
-  background-color: transparent;
+  margin-top: -40px;
 `;
 
 const DetailTopSection = styled.section`
@@ -103,6 +155,7 @@ const ImageArea = styled.div`
 
 const ImageAreaInnerWrap = styled.div`
   ${FlexCenter};
+  position: relative;
   width: 30vw;
   height: 30vw;
   border-radius: 4px;
@@ -169,6 +222,24 @@ const MetadataTable = styled.table`
     td {
       color: ${props => props.theme.primaryColor};
     }
+  }
+`;
+
+const PriceDisplay = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  & > div {
+    flex: 1;
+  }
+
+  & > span {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 32px;
   }
 `;
 
