@@ -32,20 +32,19 @@ const Purchase = ({ productId, productName, totalPrice, onClose }) => {
   };
 
   const postOrder = () => {
-    // fetch(`${API.CART}`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     authorization: localStorage.getItem('accessToken'),
-    //   },
-    //   body: JSON.stringify(productData),
-    // })
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(result => {
-    //     console.log(result);
-    //   });
+    fetch('http://10.58.52.207:8000/carts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify(productData),
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        // setCartData(result.data);
+      });
     console.log('fetch');
   };
 
