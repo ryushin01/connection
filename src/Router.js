@@ -17,17 +17,24 @@ import SellerSignUp from './pages/SignUp/SellerSignUp';
 import Cart from './pages/Cart/Cart';
 import Order from './pages/Order/Order';
 import Payment from './pages/Payment/Payment';
+import Gateway from './pages/Gateway/Gateway';
 
 const Router = () => {
+  // 유저 정보에서 추출하여 적용하기
+  const isLogin = true;
   return (
     <BrowserRouter>
-      <SkipNavigation />
-      {/* 셀러 유무 체크 후 노출 여부 결정 */}
-      <SellerConversionBanner />
       <ScrollToTop />
-      <Header />
+      {isLogin && (
+        <>
+          <SkipNavigation />
+          <SellerConversionBanner />
+          <Header />
+        </>
+      )}
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Gateway />} />
+        <Route path="/main" element={<Main />} />
         <Route path="/detail/:id" element={<Detail />} />
         {/* 셀러 유무 분기해서 라우팅 처리 필요 */}
         <Route path="/products/category/:id" element={<List />} />
@@ -41,8 +48,12 @@ const Router = () => {
         <Route path="/order" element={<Order />} />
         <Route path="/payment" element={<Payment />} />
       </Routes>
-      <Footer />
-      <TopButton />
+      {isLogin && (
+        <>
+          <Footer />
+          <TopButton />
+        </>
+      )}
     </BrowserRouter>
   );
 };
