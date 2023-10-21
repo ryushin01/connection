@@ -17,15 +17,20 @@ import SellerSignUp from './pages/SignUp/SellerSignUp';
 import Cart from './pages/Cart/Cart';
 import Order from './pages/Order/Order';
 import Payment from './pages/Payment/Payment';
+import Gateway from './pages/Gateway/Gateway';
 
 const Router = () => {
+  const isLogin = false;
   return (
     <BrowserRouter>
-      <SkipNavigation />
-      {/* 셀러 유무 체크 후 노출 여부 결정 */}
-      <SellerConversionBanner />
       <ScrollToTop />
-      <Header />
+      {isLogin && (
+        <>
+          <SkipNavigation />
+          <SellerConversionBanner />
+          <Header />
+        </>
+      )}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/detail/:id" element={<Detail />} />
@@ -40,9 +45,14 @@ const Router = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<Order />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/gateway" element={<Gateway />} />
       </Routes>
-      <Footer />
-      <TopButton />
+      {isLogin && (
+        <>
+          <Footer />
+          <TopButton />
+        </>
+      )}
     </BrowserRouter>
   );
 };
