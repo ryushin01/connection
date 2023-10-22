@@ -16,7 +16,7 @@ import styled from 'styled-components';
 const List = () => {
   const [loading, setLoading] = useState(true);
   const [listTitle, setListTitle] = useState('');
-  const [categoryId, setCategoryId] = useState('');
+  // const [categoryId, setCategoryId] = useState('');
   const [listData, setListData] = useState([]);
   const location = useLocation();
   const { id } = useParams();
@@ -24,13 +24,13 @@ const List = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [sort, setSort] = useState('rating');
 
-  let productId = null;
+  let categoryId = null;
   if (location?.state !== null) {
-    const { productId } = location?.state;
+    const { categoryId } = location?.state;
   }
 
   let API_URL;
-  if (productId) {
+  if (location?.state.categoryId) {
     API_URL = `${API.LIST}?categoryId=${processedId}`;
   } else {
     API_URL = `${API.LIST}?sellerId=${processedId}`;
@@ -38,7 +38,8 @@ const List = () => {
 
   const getListData = () => {
     // 정렬 시 end point가 변경됩니다.
-    fetch(API_URL + `&sort=${sortValue}`, {
+    // fetch(API_URL + `&sort=${sort}`, {
+    fetch(API_URL, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ const List = () => {
         if (result.message === 'Success') {
           setListSortParams();
           setListTitle(result?.name);
-          setCategoryId(result?.id);
+          // setCategoryId(result?.id);
           setListData(result?.data);
           setLoading(false);
         }
