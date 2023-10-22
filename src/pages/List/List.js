@@ -17,10 +17,11 @@ const List = () => {
   const [loading, setLoading] = useState(true);
   const [listTitle, setListTitle] = useState('');
   const [listData, setListData] = useState([]);
-  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [sort, setSort] = useState('rating');
   const [page, setPage] = useState(1);
+  const [totalQuantity, setTotalQuantity] = useState(1);
+  const location = useLocation();
 
   let categoryId,
     sellerId = null;
@@ -40,7 +41,7 @@ const List = () => {
   // sort: review, created_at, rating
   const offset = searchParams.get('offset');
   let limit = searchParams.get('limit');
-  const totalPages = Math.ceil(listData.length / 10);
+  const totalPages = Math.ceil(totalQuantity / 10);
   limit = 10;
   const calc_offset = (page - 1) * limit;
 
@@ -60,6 +61,7 @@ const List = () => {
         if (result.message === 'Success') {
           setListTitle(result?.name);
           setListData(result?.data);
+          setTotalQuantity(result?.totalQuantity);
           // setListSortParams();
           setLoading(false);
         }

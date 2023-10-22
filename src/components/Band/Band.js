@@ -17,25 +17,13 @@ const Band = ({ item }) => {
   const navigate = useNavigate();
   const { categoryName, sellerName, categoryId, sellerId, product } = item;
 
-  // const goToList = e => {
-  //   if (categoryId) {
-  //     navigate(`/products/category/${categoryId}`, {
-  //       state: { categoryId: categoryId },
-  //     });
-  //   } else {
-  //     navigate(`/products/category/${sellerId}`, {
-  //       state: { sellerId: sellerId },
-  //     });
-  //   }
-  // };
-
-  const aaa = () => {
+  const goToCategoryList = () => {
     navigate(`/products/category/${categoryId}`, {
       state: { categoryId: categoryId, sellerId: null },
     });
   };
 
-  const bbb = () => {
+  const goToSellerList = () => {
     navigate(`/products/category/${sellerId}`, {
       state: { sellerId: sellerId, categoryId: null },
     });
@@ -72,24 +60,16 @@ const Band = ({ item }) => {
             </SwiperNextBtn>
           </SwiperController>
         </Swiper>
-        {/* <BandListLink onClick={goToList} aria-label="밴드 목록 더보기">
-          <MoreIcon />
-        </BandListLink> */}
         {categoryId && (
           <BandListLink
-            // onClick={() => navigate(`/products/category/${categoryId}`)}
             aria-label="밴드 목록 더보기"
-            onClick={aaa}
+            onClick={goToCategoryList}
           >
             <MoreIcon />
           </BandListLink>
         )}
         {sellerId && (
-          <BandListLink
-            // onClick={() => `/products/category/${sellerId}`}
-            aria-label="밴드 목록 더보기"
-            onClick={bbb}
-          >
+          <BandListLink aria-label="밴드 목록 더보기" onClick={goToSellerList}>
             <MoreIcon />
           </BandListLink>
         )}

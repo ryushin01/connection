@@ -67,6 +67,11 @@ const PaginationWrap = styled.div`
       }
     }
 
+    &[status='selected'] {
+      background-color: ${props => props.theme.primaryColor};
+      color: ${props => props.theme.grayscaleA};
+    }
+
     &:disabled {
       opacity: 0.2;
       cursor: not-allowed;
