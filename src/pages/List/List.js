@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { API } from '../../config';
 import Loading from '../../pages/Loading/Loading';
 import ListTitle from './LIstTitle/ListTitle';
@@ -21,16 +21,24 @@ const List = () => {
   const location = useLocation();
   const { id } = useParams();
   const processedId = Number(id);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [sort, setSort] = useState('created_at');
+
+  let productId = null;
+  if (location?.state !== null) {
+    const { productId } = location?.state;
+  }
 
   let API_URL;
-  if (location.state.categoryId) {
+  if (productId) {
     API_URL = `${API.LIST}?categoryId=${processedId}`;
   } else {
     API_URL = `${API.LIST}?sellerId=${processedId}`;
   }
 
   const getListData = () => {
-    fetch(API_URL, {
+    // 정렬 시 end point가 변경됩니다.
+    fetch(API_URL + `&sort=${sortValue}`, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -39,6 +47,7 @@ const List = () => {
       .then(response => response.json())
       .then(result => {
         if (result.message === 'Success') {
+          setListSortParams();
           setListTitle(result?.name);
           setCategoryId(result?.id);
           setListData(result?.data);
@@ -53,6 +62,16 @@ const List = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // sort: review, created_at, rating
+  const sortValue = searchParams.get('sort');
+
+  const setListSortParams = () => {
+    searchParams.set('sort', sort);
+    setSearchParams(searchParams);
+  };
+
+  console.log(sort);
+
   return (
     <>
       {loading && <Loading />}
@@ -60,7 +79,7 @@ const List = () => {
         <ListTitle listTitle={listTitle} categoryId={categoryId} />
         <div>
           <ListSection>
-            <Filter />
+            <Filter sort={sort} setSort={setSort} />
             <ProductList listData={listData} />
             <Pagination />
           </ListSection>
