@@ -8,6 +8,11 @@ import ProductList from '../../components/ProductList/ProductList';
 import Pagination from '../../components/Pagination/Pagination';
 import styled from 'styled-components';
 
+/**
+ * List.js logics
+ * @property {function} getListData     - 제품 목록 데이터를 받아오는 함수입니다.
+ */
+
 const List = () => {
   const [loading, setLoading] = useState(true);
   const [listTitle, setListTitle] = useState('');

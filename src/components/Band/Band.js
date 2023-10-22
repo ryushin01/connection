@@ -8,6 +8,11 @@ import styled from 'styled-components';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
+/**
+ * Band.js logics
+ * @property {function} goToList      - 밴드 목록 더보기 버튼 클릭 시 카테고리/셀러에 따라 다른 목록 페이지로 이동하는 함수입니다.
+ */
+
 const Band = ({ item }) => {
   const navigate = useNavigate();
   const { categoryName, sellerName, categoryId, sellerId, product } = item;

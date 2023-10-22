@@ -5,8 +5,8 @@ import Button from '../../components/Button/Button';
 import styled, { css } from 'styled-components';
 
 /**
- * Order.js logics
- * @property {function} getUserData     - 유저 데이터(이름, 연락처, 주소)를 받아오는 함수입니다.
+ * Gateway.js logics
+ * @property {function} scrollToDown      - 버튼 클릭 시 지정된 영역으로 스크롤 이동하는 함수입니다.
  */
 
 const Gateway = () => {

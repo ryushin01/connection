@@ -7,6 +7,11 @@ import Modal from '../../../Modal/Modal';
 import Purchase from '../../../Modal/Contents/Purchase';
 import styled, { css } from 'styled-components';
 
+/**
+ * ProductImage.js logics
+ * @property {function} modalHandler      - 모달 팝업 여닫기 함수입니다.
+ */
+
 const ProductImage = ({
   productId,
   productImage,

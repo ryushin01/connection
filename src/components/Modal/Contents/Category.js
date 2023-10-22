@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import CATEGORY_CONSTANT_DATA from '../../../data/CategoryConstantData';
 import styled, { css } from 'styled-components';
 
+/**
+ * Modal/Contents/Category.js logics
+ * @property {function} goToListPage      - 해당 카테고리로 이동하면서 모달 팝업을 닫는 함수입니다.
+ */
+
 const Category = ({ onClose }) => {
-  const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const goToListPage = id => {

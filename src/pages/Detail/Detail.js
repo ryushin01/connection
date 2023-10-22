@@ -10,7 +10,7 @@ import styled, { css } from 'styled-components';
 
 /**
  * Detail.js logics
- * @property {function} getDetailData                       - 제품 상세 데이터를 받아오는 함수입니다.
+ * @property {function} getDetailData     - 제품 상세 데이터를 받아오는 함수입니다.
  */
 
 const Detail = () => {

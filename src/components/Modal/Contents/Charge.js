@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Input from '../../Input/Input';
 import Button from '../../Button/Button';
 import styled, { css } from 'styled-components';
 
-const Charge = ({ onClose }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-
+const Charge = () => {
   return (
     <ChargeModalWrap>
       <ChargeModalInnerWrap>

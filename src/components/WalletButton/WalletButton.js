@@ -5,6 +5,11 @@ import Charge from '../Modal/Contents/Charge';
 import { ReactComponent as WalletIcon } from '../../svg/icon_wallet.svg';
 import styled from 'styled-components';
 
+/**
+ * WalletButton.js logics
+ * @property {function} modalHandler      - 모달 팝업 여닫기 함수입니다.
+ */
+
 const WalletButton = () => {
   const [modalOpen, setModalOpen] = useState(false);
 

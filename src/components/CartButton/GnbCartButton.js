@@ -4,6 +4,11 @@ import { useSelector } from 'react-redux';
 import { ReactComponent as CartIcon } from '../../svg/icon_cart.svg';
 import styled, { css } from 'styled-components';
 
+/**
+ * GnbCartButton.js logics
+ * @property {function} sumQuantity     - 장바구니 버튼 UI에 수량 정보를 노출하는 함수입니다.
+ */
+
 const GnbCartButton = () => {
   // [Redux] useSelector hook으로 store에 저장된 데이터(productId, quantity)를 꺼내옵니다.
   let state = useSelector(state => {

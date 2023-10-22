@@ -12,6 +12,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import styled from 'styled-components';
 
+/**
+ * BigBanner.js logics
+ * @property {function} goToListPage      - 빅배너 클릭 시 해당 카테고리 목록 페이지로 이동하는 함수입니다.
+ */
+
 const BigBanner = () => {
   const navigate = useNavigate();
 
