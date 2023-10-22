@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components';
 const Pagination = ({ totalPages, page, setPage }) => {
   const handlePrevButtons = totalPages => {
     let arr = [];
-    for (let i = 0; i < totalPages + 1; i++) {
+    for (let i = 0; i < totalPages; i++) {
       arr.push(
         <button
           key={i + 1}

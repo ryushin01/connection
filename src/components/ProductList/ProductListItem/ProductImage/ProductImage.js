@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Rating from '../../../Rating/Rating';
 import CartButton from '../../../CartButton/CartButton';
 import Portal from '../../../Modal/Portal';
@@ -19,6 +19,7 @@ const ProductImage = ({
   rating,
   totalPrice,
 }) => {
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
 
   const modalHandler = () => {
@@ -35,11 +36,17 @@ const ProductImage = ({
     window.addEventListener('keydown', close);
   }, []);
 
+  const goToDetail = () => {
+    navigate(`/detail/${productId}`, {
+      state: { productId: productId },
+    });
+  };
+
   return (
     <ProductImageWrap>
-      <Link to={`/detail/${productId}`}>
+      <button type="button" onClick={goToDetail}>
         <ProductImg src={productImage} alt={productName} />
-      </Link>
+      </button>
       <Rating rating={rating} />
       <CartButton onClick={modalHandler} />
       <Portal>

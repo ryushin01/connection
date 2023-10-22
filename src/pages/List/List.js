@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { API } from '../../config';
 import Loading from '../../pages/Loading/Loading';
 import ListTitle from './LIstTitle/ListTitle';
@@ -16,11 +16,8 @@ import styled from 'styled-components';
 const List = () => {
   const [loading, setLoading] = useState(true);
   const [listTitle, setListTitle] = useState('');
-  // const [categoryId, setCategoryId] = useState('');
   const [listData, setListData] = useState([]);
   const location = useLocation();
-  const { id } = useParams();
-  const processedId = Number(id);
   const [searchParams, setSearchParams] = useSearchParams();
   const [sort, setSort] = useState('rating');
   const [page, setPage] = useState(1);
@@ -44,11 +41,13 @@ const List = () => {
   const offset = searchParams.get('offset');
   let limit = searchParams.get('limit');
   const totalPages = Math.ceil(listData.length / 10);
+  limit = 10;
+  const calc_offset = (page - 1) * limit;
 
   const getListData = () => {
+    // fetch(
     fetch(
-      API_URL +
-        `API_URL&sort=${sort}&offset=${offset || 0}&limit=${limit || 10}`,
+      API_URL + `&sort=${sort}&offset=${calc_offset || 0}&limit=${limit || 10}`,
       {
         method: 'GET',
         header: {
@@ -59,41 +58,34 @@ const List = () => {
       .then(response => response.json())
       .then(result => {
         if (result.message === 'Success') {
-          setListSortParams();
           setListTitle(result?.name);
-          // setCategoryId(result?.id);
           setListData(result?.data);
+          // setListSortParams();
           setLoading(false);
         }
       });
   };
 
-  const setListSortParams = () => {
-    limit = 10;
-    // 필터
-    searchParams.set('sort', sort);
-    // 페이지네이션
-    searchParams.set('offset', (page - 1) * limit);
-    searchParams.set('limit', limit);
-    setSearchParams(searchParams);
-  };
+  // [Issue] Router 이슈로 인한 주석 처리
+  // const setListSortParams = () => {
+  //   limit = 10;
+  //   searchParams.set('sort', sort);
+  //   searchParams.set('offset', (page - 1) * limit);
+  //   searchParams.set('limit', limit);
+  //   setSearchParams(searchParams);
+  // };
 
   useEffect(() => {
     setLoading(true);
     getListData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
-
-  console.log(sort, page, totalPages);
+  }, [sort, page]);
 
   return (
     <>
       {loading && <Loading />}
       <main id="main">
-        <ListTitle
-          listTitle={listTitle}
-          // categoryId={categoryId}
-        />
+        <ListTitle listTitle={listTitle} categoryId={categoryId} />
         <div>
           <ListSection>
             <Filter sort={sort} setSort={setSort} />
