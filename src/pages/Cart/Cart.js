@@ -26,7 +26,7 @@ const Cart = () => {
   // 전체선택 시 현재 체크 된 체크박스와 전체 체크박스의 수를 비교하기 위한 함수
   const cartListData = cartData
     .map(item => {
-      return item.products.map(product => {
+      return item.products?.map(product => {
         return product.productId;
       });
     })
@@ -42,21 +42,83 @@ const Cart = () => {
     setSelectAllChecked(!selectAllChecked);
 
     // setCheckItem(selectAllChecked ? [] : cartData);
-    setCheckItem(selectAllChecked ? [] : handleItemInfoChange());
+    setCheckItem(selectAllChecked ? [] : handleItemPrice());
   };
 
+  // 체크박스가 체크되어 있을 때의 상품 가격 구하는 함수
+  const checkedItemOriginalPrice = (checked, productId) => {
+    const itemPrice = checkItem
+      ?.map(item => {
+        return item.originalPrice * item.quantity;
+      })
+      .flat();
+    return itemPrice;
+  };
+
+  const checkedItemDiscountedAmount = (checked, productId) => {
+    const itemPrice = checkItem
+      ?.map(item => {
+        return item.discountedAmount * item.quantity;
+      })
+      .flat();
+    return itemPrice;
+  };
+
+  // 체크박스가 체크되어 있을 때의 상품 가격 구하는 함수
+  const checkedItemTotalPrice = (checked, productId) => {
+    const itemPrice = checkItem
+      ?.map(item => {
+        return (
+          item.originalPrice * item.quantity -
+          item.discountedAmount * item.quantity
+        );
+      })
+      .flat();
+    return itemPrice;
+  };
+
+  const ItemOriginalPrice = checkedItemOriginalPrice();
+  const ItemTotalPrice = checkedItemTotalPrice();
+  const ItemDiscountAmount = checkedItemDiscountedAmount();
+
+  const totalOriginalPrice = ItemOriginalPrice.reduce(
+    (acc, cur) => acc + cur,
+    0,
+  );
+  const totalDiscountAmount = ItemDiscountAmount.reduce(
+    (acc, cur) => acc + cur,
+    0,
+  );
+  const totalPrice = ItemTotalPrice.reduce((acc, cur) => acc + cur, 0);
+
+  console.log(
+    'totalOriginalPrice',
+    totalOriginalPrice,
+    typeof totalOriginalPrice,
+    'totalPrice',
+    totalPrice,
+    typeof totalPrice,
+    'totalDiscountAmount',
+    totalDiscountAmount,
+    typeof totalDiscountAmount,
+  );
   // 전체 선택 시 cartData 중 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
-  const handleItemInfoChange = () => {
-    const itemInfo = cartData
-      .map(item => {
+  const handleItemPrice = () => {
+    const itemPrice = cartData
+      ?.map(item => {
         return item.products.map(product => ({
           productId: product.productId,
           quantity: product.quantity,
+          originalPrice: product.originalPrice,
+          discountedAmount: product.discountedAmount,
+          totalPrice: product.originalPrice * product.quantity,
         }));
       })
       .flat(); // flat() : 중첩 배열을 평탄화 (2차원 배열을 1차원 배열로 만듦)
-    return itemInfo; // itemInfo를 return
+    return itemPrice; // itemInfo를 return
   };
+
+  console.log(checkItem);
 
   // 전체 선택 시 cartData 중 productId만 뽑아서 checkItem에 넣어주는 함수
   const handleItemIdInfoChange = () => {
@@ -126,13 +188,25 @@ const Cart = () => {
         'Content-Type': 'application/json',
         authorization: localStorage.getItem('accessToken'),
       },
-      body: JSON.stringify({ data: checkItem }),
+      body: JSON.stringify({ data: patchItemInfo() }),
     })
       .then(response => response.json())
       .then(result => {
-        console.log(result);
         navigate('/order');
       });
+  };
+
+  // 전체 선택 시 cartData 중 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
+  const patchItemInfo = () => {
+    const itemInfo = cartData
+      .map(item => {
+        return item.products.map(product => ({
+          productId: product.productId,
+          quantity: product.quantity,
+        }));
+      })
+      .flat(); // flat() : 중첩 배열을 평탄화 (2차원 배열을 1차원 배열로 만듦)
+    return itemInfo; // itemInfo를 return
   };
 
   // 장바구니에서 선택한 상품을 삭제하기 위한 DELETE 요청
@@ -153,6 +227,20 @@ const Cart = () => {
         }
       });
   };
+
+  // const itemTotalPrice = () => {
+  //   const itemTotalPrice = checkItem
+  //     .map(item => {
+  //       return item.products.map(product => {
+  //         return product.originalPrice * product.quantity;
+  //       });
+  //     })
+  //     .flat();
+  //   return itemTotalPrice;
+  // };
+
+  // console.log(itemTotalPrice);
+  console.log(checkItem);
 
   // useEffect
   // 백엔드에 요청한 상품을 불러오기 위한 useEffect
@@ -178,96 +266,112 @@ const Cart = () => {
                 선택삭제
               </CartSelectDeleteBtn>
             </CartLeftWrap>
-            {cartData?.map((item, index) => {
-              return (
-                <>
-                  <CartMarketTitleWrap>
-                    <CartMarketItemWrap>
-                      <CheckBox
-                        size="small"
-                        onChange={e =>
-                          handleMarketCheck(e.target.checked, item.sellerId)
+            {cartData.length === 0 && (
+              <CartIsEmpty>장바구니에 담긴 상품이 없습니다.</CartIsEmpty>
+            )}
+            {cartData.length !== 0 &&
+              cartData?.map((item, index) => {
+                return (
+                  <>
+                    <CartMarketTitleWrap>
+                      <CartMarketItemWrap>
+                        <CheckBox
+                          size="small"
+                          onChange={e =>
+                            handleMarketCheck(e.target.checked, item.sellerId)
+                          }
+                          // checked={
+                          //   !!sellerCheckedItem.find(checked => {
+                          //     checked.sellerId === item.sellerId;
+                          //   })
+                          // }
+                        />
+                        <h3>{item.sellerName}</h3>
+                      </CartMarketItemWrap>
+                    </CartMarketTitleWrap>
+                    {item.products?.map((item, index) => {
+                      const handleSingleCheck = (checked, productId) => {
+                        // 개별 선택 체크 박스 함수
+                        if (checked) {
+                          // 체크박스가 체크되어 있으면 checkItem에 productId와 quantity를 넣어줌
+                          return setCheckItem([
+                            ...checkItem,
+                            {
+                              productId: item.productId,
+                              quantity: item.quantity,
+                              originalPrice: item.originalPrice,
+                              discountedAmount: item.discountedAmount,
+                              totalPrice: item.originalPrice * item.quantity,
+                            },
+                          ]);
+                        } else {
+                          // 체크박스가 체크되어 있지 않으면 checkItem에서 productId와 quantity를 제거
+                          return setCheckItem(
+                            checkItem.filter(
+                              item => item.productId !== productId,
+                            ),
+                          );
                         }
-                        // checked={
-                        //   !!sellerCheckedItem.find(checked => {
-                        //     checked.sellerId === item.sellerId;
-                        //   })
-                        // }
-                      />
-                      <h3>{item.sellerName}</h3>
-                    </CartMarketItemWrap>
-                  </CartMarketTitleWrap>
-                  {item.products?.map((item, index) => {
-                    const handleSingleCheck = (checked, productId) => {
-                      // 개별 선택 체크 박스 함수
-                      if (checked) {
-                        // 체크박스가 체크되어 있으면 checkItem에 productId와 quantity를 넣어줌
-                        return setCheckItem([
-                          ...checkItem,
-                          {
-                            productId: item.productId,
-                            quantity: item.quantity,
-                          },
-                        ]);
-                      } else {
-                        // 체크박스가 체크되어 있지 않으면 checkItem에서 productId와 quantity를 제거
-                        return setCheckItem(
-                          checkItem.filter(
-                            item => item.productId !== productId,
-                          ),
-                        );
-                      }
-                    };
-                    return (
-                      <CartItemBoxWrap key={index}>
-                        <CartItemCheckBoxWrap>
-                          <CheckBox
-                            size="small"
-                            onChange={e =>
-                              handleSingleCheck(
-                                e.target.checked,
-                                item.productId,
-                              )
-                            }
-                            checked={
-                              // !! : 불린값으로 변환
-                              !!checkItem.find(
-                                // find()를 이용해 checkItem의 productId와 item의 productId가 같은지 확인하여 체크박스 상태를 결정
-                                checked => checked.productId === item.productId,
-                              )
-                            }
-                          />
-                        </CartItemCheckBoxWrap>
-                        <CartItemUl>
-                          <CartItemLi>
-                            <CartItemImgWrap>
-                              <img src={item.productImage} alt="itemImage" />
-                            </CartItemImgWrap>
-                          </CartItemLi>
-                          <CartItemLi>
-                            <h3>{item.productName}</h3>
-                          </CartItemLi>
-                          <CartItemLi>
-                            <CartItemCounterWrap>
-                              <Counter
-                                quantity={item.quantity}
-                                setQuantity={setQuantity}
-                              />
-                            </CartItemCounterWrap>
-                          </CartItemLi>
-                          <CartItemLi>
-                            <h3>{item.originalPrice * item.quantity}원</h3>
-                          </CartItemLi>
-                          <CartItemLi>
-                            <span>무료 배송</span>
-                          </CartItemLi>
-                        </CartItemUl>
-                      </CartItemBoxWrap>
-                    );
-                  })}
-                </>
-              );
-            })}
+                      };
+                      return (
+                        <CartItemBoxWrap key={index}>
+                          <CartItemCheckBoxWrap>
+                            <CheckBox
+                              size="small"
+                              onChange={e =>
+                                handleSingleCheck(
+                                  e.target.checked,
+                                  item.productId,
+                                )
+                              }
+                              checked={
+                                // !! : 불린값으로 변환
+                                !!checkItem.find(
+                                  // find()를 이용해 checkItem의 productId와 item의 productId가 같은지 확인하여 체크박스 상태를 결정
+                                  checked =>
+                                    checked.productId === item.productId,
+                                )
+                              }
+                            />
+                          </CartItemCheckBoxWrap>
+                          <CartItemUl>
+                            <CartItemLi>
+                              <CartItemImgWrap>
+                                <img src={item.productImage} alt="itemImage" />
+                              </CartItemImgWrap>
+                            </CartItemLi>
+                            <CartItemLi>
+                              <h3>{item.productName}</h3>
+                            </CartItemLi>
+                            <CartItemLi>
+                              <CartItemCounterWrap>
+                                <Counter
+                                  quantity={item.quantity}
+                                  setQuantity={setQuantity}
+                                />
+                              </CartItemCounterWrap>
+                            </CartItemLi>
+                            <CartItemLi>
+                              <h3>
+                                {(
+                                  item.originalPrice * item.quantity -
+                                  item.discountedAmount * item.quantity
+                                )
+                                  .toString()
+                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                원
+                              </h3>
+                            </CartItemLi>
+                            <CartItemLi>
+                              <span>무료 배송</span>
+                            </CartItemLi>
+                          </CartItemUl>
+                        </CartItemBoxWrap>
+                      );
+                    })}
+                  </>
+                );
+              })}
           </CartLeftSection>
           <CartRightSection>
             <CartReceiptContainer>
@@ -283,7 +387,12 @@ const Cart = () => {
                       <CartReceiptText>총 상품금액</CartReceiptText>
                     </th>
                     <td>
-                      <CartReceiptText>0원</CartReceiptText>
+                      <CartReceiptText>
+                        {totalOriginalPrice
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        원
+                      </CartReceiptText>
                     </td>
                   </CartTr>
 
@@ -292,7 +401,12 @@ const Cart = () => {
                       <CartReceiptText>총 할인금액</CartReceiptText>
                     </th>
                     <td>
-                      <CartReceiptPrice>0원</CartReceiptPrice>
+                      <CartReceiptPrice>
+                        {totalDiscountAmount
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        원
+                      </CartReceiptPrice>
                     </td>
                   </CartDisCountTr>
                   <CartTr>
@@ -300,7 +414,12 @@ const Cart = () => {
                       <CartReceiptSmallText>└ 즉시 할인</CartReceiptSmallText>
                     </th>
                     <td>
-                      <CartReceiptSmallPrice>0원</CartReceiptSmallPrice>
+                      <CartReceiptSmallPrice>
+                        {totalDiscountAmount
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        원
+                      </CartReceiptSmallPrice>
                     </td>
                   </CartTr>
                   <CartTr>
@@ -316,7 +435,12 @@ const Cart = () => {
                       <CartReceiptText>최종 구매 가격</CartReceiptText>
                     </th>
                     <td>
-                      <CartReceiptText>100,000,000원</CartReceiptText>
+                      <CartReceiptText>
+                        {totalPrice
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        원
+                      </CartReceiptText>
                     </td>
                   </CartTr>
                   <CartLastTr>
@@ -325,7 +449,9 @@ const Cart = () => {
                         shape="solid"
                         size="large"
                         color="primary"
-                        content="최종 구매 금액 : 100,000,000원"
+                        content={`최종 구매 금액 : ${totalPrice
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}
                         onClick={patchCheckItemBtn}
                       />
                       {/* <Button onClick={MarketDataInfo} /> */}
@@ -497,6 +623,15 @@ const CartHeader = styled.thead`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const CartIsEmpty = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  font-size: 32px;
 `;
 
 const CartReceiptPrice = styled.div`

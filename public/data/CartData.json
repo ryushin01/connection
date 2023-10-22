@@ -12,8 +12,8 @@
           "productImage": "/images/logo.png",
           "discountRate": 10,
           "originalPrice": 5000,
-          "totalPrice": 4500,
-          "discountedAmount": 500
+          "totalPrice": 20000,
+          "discountedAmount": 2000
         }
       ]
     },
