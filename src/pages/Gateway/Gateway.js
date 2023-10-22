@@ -146,6 +146,7 @@ const GridItem = styled.li`
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  filter: blur(4px);
 `;
 
 const SectionTitle = styled.h1`

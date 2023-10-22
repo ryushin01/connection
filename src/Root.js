@@ -37,13 +37,21 @@ const Root = () => {
     setIsLightTheme(prev => !prev);
   };
 
+  // 유저 정보에서 추출하여 적용하기
+  const isLogin = true;
+
   return (
     // [Redux] 전역 상태이므로 최상위 Provider에 주입합니다.
     <Provider store={store}>
       <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
         <GlobalStyle />
         <Router />
-        <ThemeSwitcher switchTheme={switchTheme} isLightTheme={isLightTheme} />
+        {isLogin && (
+          <ThemeSwitcher
+            switchTheme={switchTheme}
+            isLightTheme={isLightTheme}
+          />
+        )}
       </ThemeProvider>
     </Provider>
   );

@@ -22,6 +22,7 @@ import Gateway from './pages/Gateway/Gateway';
 const Router = () => {
   // 유저 정보에서 추출하여 적용하기
   const isLogin = true;
+
   return (
     <BrowserRouter>
       <ScrollToTop />

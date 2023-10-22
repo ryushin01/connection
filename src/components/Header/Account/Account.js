@@ -1,14 +1,12 @@
 import React from 'react';
-import AccountListItem from './AccountListItem/AccountListItem';
+import { Link } from 'react-router-dom';
+import { ReactComponent as AdminIcon } from '../../../svg/icon_admin.svg';
+import { ReactComponent as LogoutIcon } from '../../../svg/icon_logout.svg';
 import styled, { css } from 'styled-components';
 
-const ACCOUNT_MENU_LIST = [
-  { id: 1, text: '로그인', path: '/login' },
-  { id: 2, text: '회원가입', path: '/signup' },
-  { id: 3, text: '어드민', path: '/admin' },
-];
-
 const isLogin = true;
+const isSeller = true;
+
 const RestApiKey = process.env.REACT_APP_RestApiKey;
 const RedirectUri = process.env.REACT_APP_LOGOUT_REDIRECT_URI;
 const kakaoURL = `https://kauth.kakao.com/oauth/logout?client_id=${RestApiKey}&logout_redirect_uri=${RedirectUri}`;
@@ -54,17 +52,23 @@ const Account = () => {
   return (
     <AccountList>
       {isLogin && (
-        <li>
-          <button type="button" onClick={logout}>
-            로그아웃
-          </button>
-        </li>
+        <>
+          {isSeller && (
+            <li>
+              <Link to="/">
+                <AdminIcon />
+                관리자
+              </Link>
+            </li>
+          )}
+          <li>
+            <button type="button" onClick={logout}>
+              <LogoutIcon />
+              로그아웃
+            </button>
+          </li>
+        </>
       )}
-      {ACCOUNT_MENU_LIST.map(item => {
-        return (
-          <AccountListItem key={item.id} text={item.text} path={item.path} />
-        );
-      })}
     </AccountList>
   );
 };
@@ -81,6 +85,8 @@ const AccountList = styled.ul`
 
   a,
   button {
+    ${FlexCenter};
+    gap: 4px;
     font-size: 16px;
     color: ${props => props.theme.grayscaleF};
   }
