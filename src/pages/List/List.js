@@ -22,7 +22,7 @@ const List = () => {
   const { id } = useParams();
   const processedId = Number(id);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [sort, setSort] = useState('ratingg');
+  const [sort, setSort] = useState('rating');
 
   let productId = null;
   if (location?.state !== null) {
