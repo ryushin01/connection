@@ -4,23 +4,26 @@ import styled from 'styled-components';
 import CheckBox from '../../components/CheckBox/CheckBox';
 import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
+import { useDispatch } from 'react-redux';
 
 const Cart = () => {
   // [Redux] 카운터에 dispatch 적용 필요
   // hook
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState({});
   const [cartData, setCartData] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false); // 1. 전체 선택 체크박스 상태 확인용  State 생성
-  const [sellerCheckedItem, setSellerCheckedItem] = useState({});
   const [checkItem, setCheckItem] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // function
-  // const getMokData = () => {
-  //   fetch('/data/CartData.json')
-  //     .then(Response => Response.json())
-  //     .then(result => setCartData(result.data));
-  // };
+  const getMokData = () => {
+    fetch('/data/CartData.json')
+      .then(Response => Response.json())
+      .then(result => setCartData(result.data));
+  };
+
+  // 전체선택 시 현재 체크 된 체크박스와 전체 체크박스의 수를 비교하기 위한 함수
   const cartListData = cartData
     .map(item => {
       return item.products.map(product => {
@@ -38,6 +41,7 @@ const Cart = () => {
   const handleAllCheck = checked => {
     setSelectAllChecked(!selectAllChecked);
 
+    // setCheckItem(selectAllChecked ? [] : cartData);
     setCheckItem(selectAllChecked ? [] : handleItemInfoChange());
   };
 
@@ -51,11 +55,10 @@ const Cart = () => {
         }));
       })
       .flat(); // flat() : 중첩 배열을 평탄화 (2차원 배열을 1차원 배열로 만듦)
-
     return itemInfo; // itemInfo를 return
   };
 
-  // 전체 선택 시 cartData 중 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
+  // 전체 선택 시 cartData 중 productId만 뽑아서 checkItem에 넣어주는 함수
   const handleItemIdInfoChange = () => {
     const itemIdInfo = checkItem
       .map(item => ({
@@ -67,18 +70,39 @@ const Cart = () => {
 
   const handleMarketCheck = (checked, sellerId) => {
     if (checked) {
+      // 1. CheckItem 에서 선택한 마켓의 아이템을 filter 로 다 제거 해서 새로운 변수(a)에 넣어준다
+      // 2. cartData 에서 filter 로 선택한 마켓의 아이템들을 뽑아 온다
+      // 3. a 변수에 push(2번 값) 해준다.
+      // 4. CheckItem에 3번 값을 넣어준다.
+
+      const unMarketData = checkItem.filter(item => item.sellerId !== sellerId);
+
       const marketData = cartData.filter(cart => cart.sellerId === sellerId); // sellerId가 같은 cartData를 marketData에 넣어줌
-      setSellerCheckedItem(marketData);
-      // checkItem.push(marketData);
+
+      unMarketData.push(...marketData);
+
+      setCheckItem(unMarketData);
     } else {
       // 체크박스가 체크되어 있지 않으면 sellerCheckedItem에서 sellerId를 제거
-      setSellerCheckedItem(
-        sellerCheckedItem.filter(item => item.sellerId !== sellerId),
-      );
+
+      const unMarketData = checkItem.filter(cart => cart.sellerId !== sellerId);
+
+      setCheckItem(unMarketData);
     }
   };
-  console.log(sellerCheckedItem);
 
+  // const MarketDataInfo = () => {
+  //   checkItem?.map(item => {
+  //     return item.products?.map(product => {
+  //       return checkItem.push({
+  //         productId: product.productId,
+  //         quantity: product.quantity,
+  //       });
+  //     });
+  //   });
+  // };
+
+  // 장바구니를 데이터 가져오기 위한 GET 요청
   const getCartInfoData = () => {
     fetch('http://10.58.52.207:8000/carts', {
       method: 'GET',
@@ -94,7 +118,7 @@ const Cart = () => {
       });
   };
 
-  console.log(checkItem);
+  // 장바구니에서 선택한 상품을 주문하기 위한 PATCH 요청
   const patchCheckItemBtn = () => {
     fetch('http://10.58.52.207:8000/carts', {
       method: 'PATCH',
@@ -102,7 +126,7 @@ const Cart = () => {
         'Content-Type': 'application/json',
         authorization: localStorage.getItem('accessToken'),
       },
-      body: JSON.stringify({ data: handleItemInfoChange() }),
+      body: JSON.stringify({ data: checkItem }),
     })
       .then(response => response.json())
       .then(result => {
@@ -111,6 +135,7 @@ const Cart = () => {
       });
   };
 
+  // 장바구니에서 선택한 상품을 삭제하기 위한 DELETE 요청
   const deleteCheckItemBtn = () => {
     fetch('http://10.58.52.207:8000/carts', {
       method: 'DELETE',
@@ -130,9 +155,10 @@ const Cart = () => {
   };
 
   // useEffect
+  // 백엔드에 요청한 상품을 불러오기 위한 useEffect
   useEffect(() => {
-    // getMokData();
-    getCartInfoData();
+    getMokData();
+    // getCartInfoData();
   }, []);
 
   return (
@@ -159,7 +185,9 @@ const Cart = () => {
                     <CartMarketItemWrap>
                       <CheckBox
                         size="small"
-                        onChange={e => handleMarketCheck(e.target.checked)}
+                        onChange={e =>
+                          handleMarketCheck(e.target.checked, item.sellerId)
+                        }
                         // checked={
                         //   !!sellerCheckedItem.find(checked => {
                         //     checked.sellerId === item.sellerId;
@@ -202,12 +230,11 @@ const Cart = () => {
                               )
                             }
                             checked={
+                              // !! : 불린값으로 변환
                               !!checkItem.find(
-                                // !! : 불린값으로 변환
+                                // find()를 이용해 checkItem의 productId와 item의 productId가 같은지 확인하여 체크박스 상태를 결정
                                 checked => checked.productId === item.productId,
-                              ) // find()를 이용해 checkItem의 productId와 item의 productId가 같은지 확인하여 체크박스 상태를 결정
-                              // 전체 선택 체크박스가 체크되어 있으면 체크박스 상태를 true로 설정
-                              // checkItem.includes(item.productId)
+                              )
                             }
                           />
                         </CartItemCheckBoxWrap>
@@ -301,6 +328,7 @@ const Cart = () => {
                         content="최종 구매 금액 : 100,000,000원"
                         onClick={patchCheckItemBtn}
                       />
+                      {/* <Button onClick={MarketDataInfo} /> */}
                     </td>
                   </CartLastTr>
                 </tbody>
