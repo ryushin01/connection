@@ -4,11 +4,11 @@ import { ReactComponent as NextIcon } from '../../svg/icon_arrow_right.svg';
 import styled, { css } from 'styled-components';
 import Button from '../Button/Button';
 
-const Pagination = ({ totalPage, page, setPage }) => {
+const Pagination = ({ totalPages, page, setPage }) => {
   const handlePrevButtons = () => {
     let arr = [];
 
-    for (let i = 0; i < totalPage; i++) {
+    for (let i = 0; i < totalPages; i++) {
       arr.push(
         <Button
           key={i + 1}
@@ -24,11 +24,14 @@ const Pagination = ({ totalPage, page, setPage }) => {
 
   return (
     <PaginationWrap>
-      <PrevButton>
+      <PrevButton onClick={() => setPage(page - 1)} disabled={page === 1}>
         <PrevIcon />
       </PrevButton>
-      <div className="pagination-number">{handlePrevButtons(totalPage)}</div>
-      <NextButton>
+      <div className="pagination-number">{handlePrevButtons(totalPages)}</div>
+      <NextButton
+        onClick={() => setPage(page + 1)}
+        disabled={page === totalPages}
+      >
         <NextIcon />
       </NextButton>
     </PaginationWrap>

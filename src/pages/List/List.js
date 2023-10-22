@@ -16,21 +16,22 @@ import styled from 'styled-components';
 const List = () => {
   const [loading, setLoading] = useState(true);
   const [listTitle, setListTitle] = useState('');
-  // const [categoryId, setCategoryId] = useState('');
+  const [categoryId, setCategoryId] = useState('');
   const [listData, setListData] = useState([]);
   const location = useLocation();
   const { id } = useParams();
   const processedId = Number(id);
   const [searchParams, setSearchParams] = useSearchParams();
   const [sort, setSort] = useState('rating');
+  const [page, setPage] = useState(1);
 
-  let categoryId = null;
-  if (location?.state !== null) {
-    const { categoryId } = location?.state;
-  }
+  // let categoryId = null;
+  // if (location?.state !== null) {
+  //   const { categoryId } = location?.state;
+  // }
 
   let API_URL;
-  if (location?.state.categoryId) {
+  if (location.state.categoryId) {
     API_URL = `${API.LIST}?categoryId=${processedId}`;
   } else {
     API_URL = `${API.LIST}?sellerId=${processedId}`;
@@ -38,8 +39,8 @@ const List = () => {
 
   const getListData = () => {
     // 정렬 시 end point가 변경됩니다.
-    // fetch(API_URL + `&sort=${sort}`, {
-    fetch(API_URL, {
+    fetch(API_URL + `&sort=${sort}&offset=${offset}&limit=${limitCount}`, {
+      // fetch(API_URL, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ const List = () => {
         if (result.message === 'Success') {
           setListSortParams();
           setListTitle(result?.name);
-          // setCategoryId(result?.id);
+          setCategoryId(result?.id);
           setListData(result?.data);
           setLoading(false);
         }
@@ -67,11 +68,20 @@ const List = () => {
   const sortValue = searchParams.get('sort');
 
   const setListSortParams = () => {
+    // 필터
     searchParams.set('sort', sort);
+
+    // 페이지네이션
+    searchParams.set('offset', (page - 1) * limitCount);
+    searchParams.set('limit', limitCount);
+
     setSearchParams(searchParams);
   };
 
-  console.log(sort);
+  const offset = searchParams.get('offset');
+  const limit = searchParams.get('limit');
+  const limitCount = 10;
+  const totalPages = Math.ceil(listData.length / limitCount);
 
   return (
     <>
@@ -82,7 +92,7 @@ const List = () => {
           <ListSection>
             <Filter sort={sort} setSort={setSort} />
             <ProductList listData={listData} />
-            <Pagination />
+            <Pagination totalPages={totalPages} page={page} setPage={setPage} />
           </ListSection>
         </div>
       </main>
