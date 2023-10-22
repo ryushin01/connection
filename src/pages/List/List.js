@@ -25,59 +25,30 @@ const List = () => {
   const [sort, setSort] = useState('rating');
   const [page, setPage] = useState(1);
 
-  // let categoryId,
-  //   sellerId = null;
-
-  // if (location?.state !== null) {
-  //   const { categoryId, sellerId } = location?.state;
-  // }
+  let categoryId,
+    sellerId = null;
+  if (location.state != null) {
+    categoryId = location.state.categoryId;
+    sellerId = location.state.sellerId;
+  }
 
   let API_URL;
-
-  if (location?.state.categoryId !== null) {
-    const targetId = location?.state.categoryId;
-    API_URL = `${API.LIST}?categoryId=${targetId}`;
-    // API_URL = `${API.LIST}?categoryId=${location?.state.categoryId}`;
+  if (categoryId != null) {
+    API_URL = `${API.LIST}?categoryId=${categoryId}`;
   }
-
-  if (location?.state.sellerId !== null) {
-    const targetId = location?.state.sellerId;
-    API_URL = `${API.LIST}?sellerId=${targetId}`;
-    // API_URL = `${API.LIST}?sellerId=${location?.state.sellerId}`;
+  if (sellerId != null) {
+    API_URL = `${API.LIST}?sellerId=${sellerId}`;
   }
-
-  // console.log(
-  //   'categoryId=',
-  //   location?.state.categoryId,
-  //   'sellerId=',
-  //   location?.state.sellerId,
-  // );
-
-  // let API_URL;
-  // if (categoryId !== null) {
-  //   API_URL = `${API.LIST}?categoryId=${processedId}`;
-  // } else {
-  //   API_URL = `${API.LIST}?sellerId=${processedId}`;
-  // }
 
   // sort: review, created_at, rating
   const offset = searchParams.get('offset');
   let limit = searchParams.get('limit');
   const totalPages = Math.ceil(listData.length / 10);
 
-  const setListSortParams = () => {
-    limit = 10;
-    // 필터
-    searchParams.set('sort', sort);
-    // 페이지네이션
-    searchParams.set('offset', (page - 1) * limit);
-    searchParams.set('limit', limit);
-    setSearchParams(searchParams);
-  };
-
   const getListData = () => {
     fetch(
-      API_URL + `&sort=${sort}&offset=${offset || 0}&limit=${limit || 10}`,
+      API_URL +
+        `API_URL&sort=${sort}&offset=${offset || 0}&limit=${limit || 10}`,
       {
         method: 'GET',
         header: {
@@ -97,11 +68,23 @@ const List = () => {
       });
   };
 
+  const setListSortParams = () => {
+    limit = 10;
+    // 필터
+    searchParams.set('sort', sort);
+    // 페이지네이션
+    searchParams.set('offset', (page - 1) * limit);
+    searchParams.set('limit', limit);
+    setSearchParams(searchParams);
+  };
+
   useEffect(() => {
     setLoading(true);
     getListData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
+
+  console.log(sort, page, totalPages);
 
   return (
     <>

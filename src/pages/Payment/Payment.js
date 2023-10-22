@@ -75,7 +75,7 @@ const Payment = () => {
                       </tr>
                       <tr>
                         <th>배송비</th>
-                        <td>-</td>
+                        <td>무료</td>
                       </tr>
                       <tr>
                         <th>총 결제 금액</th>

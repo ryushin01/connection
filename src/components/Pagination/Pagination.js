@@ -2,21 +2,20 @@ import React from 'react';
 import { ReactComponent as PrevIcon } from '../../svg/icon_arrow_left.svg';
 import { ReactComponent as NextIcon } from '../../svg/icon_arrow_right.svg';
 import styled, { css } from 'styled-components';
-import Button from '../Button/Button';
+// import Button from '../Button/Button';
 
 const Pagination = ({ totalPages, page, setPage }) => {
-  const handlePrevButtons = () => {
+  const handlePrevButtons = totalPages => {
     let arr = [];
-
-    for (let i = 0; i < totalPages; i++) {
+    for (let i = 0; i < totalPages + 1; i++) {
       arr.push(
-        <Button
+        <button
           key={i + 1}
           onClick={() => setPage(i + 1)}
           status={page - 1 === i && 'selected'}
         >
           {i + 1}
-        </Button>,
+        </button>,
       );
     }
     return arr;
