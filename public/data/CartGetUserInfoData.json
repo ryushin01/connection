@@ -1,0 +1,14 @@
+{
+  "message": "userInformation",
+  "data": [
+    {
+      "userId": 1,
+      "userName": "kwon",
+      "phoneNumber": "01012345678",
+      "zipCode": "4561",
+      "address": "서울시",
+      "addressDetail": "성동구",
+      "isSubscribe": 1
+    }
+  ]
+}
