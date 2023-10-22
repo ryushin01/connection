@@ -4,22 +4,26 @@ import styled from 'styled-components';
 import CheckBox from '../../components/CheckBox/CheckBox';
 import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
+import { useDispatch } from 'react-redux';
 
 const Cart = () => {
   // [Redux] 카운터에 dispatch 적용 필요
   // hook
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState({});
   const [cartData, setCartData] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false); // 1. 전체 선택 체크박스 상태 확인용  State 생성
   const [checkItem, setCheckItem] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // function
-  // const getMokData = () => {
-  //   fetch('/data/CartData.json')
-  //     .then(Response => Response.json())
-  //     .then(result => setCartData(result.data));
-  // };
+  const getMokData = () => {
+    fetch('/data/CartData.json')
+      .then(Response => Response.json())
+      .then(result => setCartData(result.data));
+  };
+
+  // 전체선택 시 현재 체크 된 체크박스와 전체 체크박스의 수를 비교하기 위한 함수
   const cartListData = cartData
     .map(item => {
       return item.products.map(product => {
@@ -54,7 +58,7 @@ const Cart = () => {
     return itemInfo; // itemInfo를 return
   };
 
-  // 전체 선택 시 cartData 중 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
+  // 전체 선택 시 cartData 중 productId만 뽑아서 checkItem에 넣어주는 함수
   const handleItemIdInfoChange = () => {
     const itemIdInfo = checkItem
       .map(item => ({
@@ -86,7 +90,6 @@ const Cart = () => {
       setCheckItem(unMarketData);
     }
   };
-  console.log(checkItem);
 
   // const MarketDataInfo = () => {
   //   checkItem?.map(item => {
@@ -99,8 +102,7 @@ const Cart = () => {
   //   });
   // };
 
-  console.log(checkItem);
-
+  // 장바구니를 데이터 가져오기 위한 GET 요청
   const getCartInfoData = () => {
     fetch('http://10.58.52.207:8000/carts', {
       method: 'GET',
@@ -116,7 +118,7 @@ const Cart = () => {
       });
   };
 
-  console.log(checkItem);
+  // 장바구니에서 선택한 상품을 주문하기 위한 PATCH 요청
   const patchCheckItemBtn = () => {
     fetch('http://10.58.52.207:8000/carts', {
       method: 'PATCH',
@@ -124,7 +126,7 @@ const Cart = () => {
         'Content-Type': 'application/json',
         authorization: localStorage.getItem('accessToken'),
       },
-      body: JSON.stringify({ data: handleItemInfoChange() }),
+      body: JSON.stringify({ data: checkItem }),
     })
       .then(response => response.json())
       .then(result => {
@@ -133,6 +135,7 @@ const Cart = () => {
       });
   };
 
+  // 장바구니에서 선택한 상품을 삭제하기 위한 DELETE 요청
   const deleteCheckItemBtn = () => {
     fetch('http://10.58.52.207:8000/carts', {
       method: 'DELETE',
@@ -152,9 +155,10 @@ const Cart = () => {
   };
 
   // useEffect
+  // 백엔드에 요청한 상품을 불러오기 위한 useEffect
   useEffect(() => {
-    // getMokData();
-    getCartInfoData();
+    getMokData();
+    // getCartInfoData();
   }, []);
 
   return (
