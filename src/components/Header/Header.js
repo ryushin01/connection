@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Account from './Account/Account';
 import Gnb from './Gnb/Gnb';
 // import SearchButton from '../SearchButton/SearchButton';
@@ -8,8 +8,6 @@ import GnbCartButton from '../CartButton/GnbCartButton';
 import styled, { css } from 'styled-components';
 
 const Header = () => {
-  const navigate = useNavigate();
-
   return (
     <HeaderWrap>
       <HeaderInnerWrap>

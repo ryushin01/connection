@@ -7,8 +7,8 @@ import Button from '../../components/Button/Button';
 import styled, { css } from 'styled-components';
 
 /**
- * Order.js logics
- * @property {function} getDetailData                       - 제품 상세 데이터를 받아오는 함수입니다.
+ * Payment.js logics
+ * @property {function} advancedPaymentComplete     - 결제 완료 유무에 따라 UI 조건부 렌더링을 처리한 함수입니다.
  */
 
 const Payment = () => {

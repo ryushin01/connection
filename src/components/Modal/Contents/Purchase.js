@@ -7,7 +7,7 @@ import Button from '../../Button/Button';
 import styled, { css } from 'styled-components';
 
 /**
- * Purchase.js logics
+ * Modal/Contents/Purchase.js logics
  * @property {function} cartProcess     - 장바구니 프로세스 함수입니다. postOrder()와 putInCart() 함수를 담고 있습니다.
  * @property {function} postOrder       - 장바구니 데이터(제품명, 수량, 가격, 총 금액)를 서버로 전송하는 함수입니다.
  * @property {function} putInCart       - 장바구니로 데이터(productId, quantity)를 Redux store로 보내고 모달 팝업을 닫는 함수입니다.

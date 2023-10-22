@@ -4,6 +4,12 @@ import Loading from '../../pages/Loading/Loading';
 import BigBanner from './BigBanner/BigBanner';
 import Band from '../../components/Band/Band';
 
+/**
+ * Main.js logics
+ * @property {function} getCategoryBandData     - 카테고리 밴드 데이터를 받아오는 함수입니다.
+ * @property {function} getSellerBandData       - 셀러 밴드 데이터를 받아오는 함수입니다.
+ */
+
 const Main = () => {
   const [loading, setLoading] = useState(true);
   const [categoryBandData, setCategoryBandData] = useState([]);

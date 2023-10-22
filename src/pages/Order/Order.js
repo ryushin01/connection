@@ -12,6 +12,7 @@ import styled from 'styled-components';
  * Order.js logics
  * @property {function} getUserData     - 유저 데이터(이름, 연락처, 주소)를 받아오는 함수입니다.
  * @property {function} getCartData     - 장바구니 데이터(제품명, 수량, 가격, 총 금액)를 받아오는 함수입니다.
+ * @property {function} sumCartData     - 장바구니 데이터 중 수량과 가격을 각각 더해 반환하는 함수입니다.
  * @property {function} selectingSentry - 배송 방법 선택 시 값을 모니터링하고 배송 방법 값을 정하는 함수입니다.
  * @property {function} postOrderData   - 유저 데이터, 장바구니 데이터, 배송 방법, 결제 방법을 서버로 보내는 함수입니다.
  */

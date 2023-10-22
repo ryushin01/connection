@@ -3,6 +3,11 @@ import ProductDescription from '../ProductDescription/ProductDescription';
 import ProductReview from '../ProductReview/ProductReview';
 import styled, { css } from 'styled-components';
 
+/**
+ * DetailTab.js logics
+ * @property {function} selectTabHandler      - 탭 클릭 시 해당 영역으로 스크롤되면서 클릭한 탭을 활성화하는 함수입니다.
+ */
+
 const DetailTab = ({ productDetailImages, reviewNumbers }) => {
   const targetRef = useRef(null);
   const [currentTab, setTab] = useState(0);

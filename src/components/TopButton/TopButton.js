@@ -1,6 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+/**
+ * TopButton.js logics
+ * @property {function} goToTop     - 뷰포트 최상단으로 스크롤 이동하는 함수입니다.
+ */
+
 const TopButton = () => {
   const goToTop = () => {
     window.scroll({
