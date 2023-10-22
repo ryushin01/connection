@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import { API } from '../../config';
+import { API } from '../../config';
 import Loading from '../Loading/Loading';
 import RadioGroup from '../../components/RadioGroup/RadioGroup';
 import Button from '../../components/Button/Button';
@@ -18,22 +18,23 @@ import styled from 'styled-components';
 
 const Order = () => {
   const [loading, setLoading] = useState(false);
-  const [userData, setUserData] = useState({});
-  const [cartData, setCartData] = useState({});
+  const [userData, setUserData] = useState([]);
+  const [cartData, setCartData] = useState([]);
   const [shippingMethod, setShippingMethod] = useState('visiting');
   const [paymentMethod, setPaymentMethod] = useState(1);
   const location = useLocation();
   const navigate = useNavigate();
 
-  // console.log(location?.state);
+  let productId,
+    quantity = null;
 
-  const { productId, quantity } = location?.state;
-
-  // console.log('productId:', productId, 'quantity:', quantity);
+  if (location?.state !== null) {
+    const { productId, quantity } = location?.state;
+  }
 
   const getUserData = () => {
-    // fetch(`${API.ORDER_DETAIL}?id=${id}`, {
-    fetch('/data/categoryBandData.json', {
+    // fetch(`${API.CART}/getuserinfo`, {
+    fetch(`/data/CartGetUserInfoData.json`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -42,14 +43,27 @@ const Order = () => {
     })
       .then(response => response.json())
       .then(result => {
-        // setUserData(result?.data[0]);
+        if (result.message === 'userInformation') {
+          setUserData(result?.data[0]);
+        }
+
         setLoading(false);
       });
   };
 
+  const {
+    userId,
+    userName,
+    phoneNumber,
+    address,
+    addressDetail,
+    zipCode,
+    isSubscribe,
+  } = userData;
+
   const getCartData = () => {
-    // fetch(`${API.ORDER_DETAIL}?id=${id}`, {
-    fetch('/data/categoryBandData.json', {
+    // fetch(`${API.CART}/complete`, {
+    fetch(`/data/CartCompleteData.json`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -58,10 +72,29 @@ const Order = () => {
     })
       .then(response => response.json())
       .then(result => {
-        // setCartData(result?.data[0]);
+        if (result.message === 'Order_Item') {
+          setCartData(result?.data[0].products);
+        }
         setLoading(false);
       });
   };
+
+  const sumCartData = data => {
+    if (Array.isArray(data)) {
+      let values = {
+        quantity: 0,
+        totalPrice: 0,
+      };
+
+      data.forEach(cartData => {
+        values.quantity += cartData.quantity;
+        values.totalPrice += cartData.totalPrice;
+      });
+      return values;
+    }
+  };
+
+  const sumCartDataValues = sumCartData(cartData);
 
   useEffect(() => {
     setLoading(true);
@@ -76,7 +109,7 @@ const Order = () => {
 
   const postOrderData = () => {
     // fetch('http://10.58.52.173:8000/users/signup', {
-    fetch('/data/categoryBandData.json', {
+    fetch(`${API.ORDERS}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -84,7 +117,7 @@ const Order = () => {
       },
       body: JSON.stringify({
         // userId: id
-        productId: productId,
+        // productId: productId,
         shippingMethod: shippingMethod,
         paymentMethod: paymentMethod,
       }),
@@ -116,15 +149,17 @@ const Order = () => {
                   <tbody>
                     <tr>
                       <th>이름</th>
-                      <td>류창선</td>
+                      <td>{userName}</td>
                     </tr>
                     <tr>
                       <th>연락처</th>
-                      <td>01071607921</td>
+                      <td>{phoneNumber}</td>
                     </tr>
                     <tr>
                       <th>주소</th>
-                      <td>서울시 서대문구 통일로25길 30</td>
+                      <td>
+                        {address} {addressDetail} {zipCode}
+                      </td>
                     </tr>
                   </tbody>
                 </SectionTable>
@@ -145,47 +180,23 @@ const Order = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th>밀키트</th>
-                      <td>1</td>
-                      <td>10,000</td>
-                    </tr>
-                    <tr>
-                      <th>밀키트</th>
-                      <td>1</td>
-                      <td>10,000</td>
-                    </tr>
-                    <tr>
-                      <th>밀키트</th>
-                      <td>1</td>
-                      <td>10,000</td>
-                    </tr>
-                    <tr>
-                      <th>밀키트</th>
-                      <td>1</td>
-                      <td>10,000</td>
-                    </tr>
-                    <tr>
-                      <th>밀키트</th>
-                      <td>1</td>
-                      <td>10,000</td>
-                    </tr>
-                    <tr>
-                      <th>밀키트</th>
-                      <td>1</td>
-                      <td>10,000</td>
-                    </tr>
-                    <tr>
-                      <th>밀키트</th>
-                      <td>1</td>
-                      <td>10,000</td>
-                    </tr>
+                    {cartData?.map(
+                      ({ productName, quantity, totalPrice }, index) => {
+                        return (
+                          <tr key={index}>
+                            <th>{productName}</th>
+                            <td>{quantity}</td>
+                            <td>{totalPrice.toLocaleString()}원</td>
+                          </tr>
+                        );
+                      },
+                    )}
                   </tbody>
                   <tfoot>
                     <tr>
                       <th>총 금액</th>
-                      <td>15</td>
-                      <td>100,000</td>
+                      <td>{sumCartDataValues.quantity}</td>
+                      <td>{sumCartDataValues.totalPrice.toLocaleString()}원</td>
                     </tr>
                   </tfoot>
                 </SectionTable>
