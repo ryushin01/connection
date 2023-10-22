@@ -4,10 +4,16 @@ import Rating from '../../../Rating/Rating';
 import CartButton from '../../../CartButton/CartButton';
 import Portal from '../../../Modal/Portal';
 import Modal from '../../../Modal/Modal';
-import Cart from '../../../Modal/Contents/Cart';
+import Purchase from '../../../Modal/Contents/Purchase';
 import styled, { css } from 'styled-components';
 
-const ProductImage = ({ productId, productImage, productName, rating }) => {
+const ProductImage = ({
+  productId,
+  productImage,
+  productName,
+  rating,
+  totalPrice,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const modalHandler = () => {
@@ -34,7 +40,14 @@ const ProductImage = ({ productId, productImage, productName, rating }) => {
       <Portal>
         {modalOpen && (
           <Modal
-            data={<Cart productId={productId} onClose={modalHandler} />}
+            data={
+              <Purchase
+                productId={productId}
+                productName={productName}
+                totalPrice={totalPrice}
+                onClose={modalHandler}
+              />
+            }
             scale="small"
             onClose={modalHandler}
           />

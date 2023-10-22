@@ -1,57 +1,52 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { API } from '../../../config';
-// import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Counter from '../../Counter/Counter';
 import Button from '../../Button/Button';
 import styled, { css } from 'styled-components';
 
-const Cart = ({ productId, onClose }) => {
-  const [modalOpen, setModalOpen] = useState(false);
+/**
+ * Purchase.js logics
+ * @property {function} cartProcess     - 장바구니 프로세스 함수입니다. postOrder()와 putInCart() 함수를 담고 있습니다.
+ * @property {function} postOrder       - 장바구니 데이터(제품명, 수량, 가격, 총 금액)를 서버로 전송하는 함수입니다.
+ * @property {function} putInCart       - 장바구니로 데이터(productId, quantity)를 Redux store로 보내고 모달 팝업을 닫는 함수입니다.
+ * @property {function} buyNowProcess   - 바로구매 프로세스 함수입니다. 데이터를 가지고 주문 페이지로 이동하면서 모달 팝업을 닫습니다.
+ */
+
+const Purchase = ({ productId, productName, totalPrice, onClose }) => {
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
-  // const goToListPage = id => {
-  //   navigate(`/products/category/${id}`, {
-  //     state: { categoryId: id },
-  //   });
-  //   onClose();
-  // };
-
-  const price = 10000;
-  const totalPrice = price * quantity;
-
-  // 장바구니 버튼 클릭 시 로직
-  // [f] 1. 함수 생성 > onClick 이벤트 핸들러에 연결
-  // [f] 2. dispatch하면서 payload로 quantity(count) 전달 > store로?
-  // 3. fetch하면서 서버로 productId, quantity(count) 전달
-  // 4. 모달 닫기
-
-  const postOrder = () => {
-    // fetch(`${API.CART}`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     authorization: localStorage.getItem('accessToken'),
-    //   },
-    //   body: JSON.stringify({
-    //     productId: 1,
-    //     quantity: 1,
-    //   }),
-    // })
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(result => {
-    //     console.log(result);
-    //   });
-    console.log('fetch');
+  const productData = {
+    productId: productId,
+    quantity: quantity,
   };
 
-  useEffect(() => {
-    // postOrder();
-  }, []);
+  const finalPrice = totalPrice * quantity;
+
+  const cartProcess = () => {
+    postOrder();
+    putInCart();
+  };
+
+  const postOrder = () => {
+    fetch('http://10.58.52.207:8000/carts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify(productData),
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        // setCartData(result.data);
+      });
+    console.log('fetch');
+  };
 
   const putInCart = () => {
     // [Redux] 전역 상태를 변경하는 유일한 방법은 액션을 발생시키는 겁니다. store의 내장 함수인 dispatch를 통해 액션은 물론이고, 데이터까지 보낼 수 있습니다. 데이터는 payload 안에 담아야 합니다
@@ -59,21 +54,22 @@ const Cart = ({ productId, onClose }) => {
       type: 'ADD',
       payload: { productId: productId, quantity: quantity },
     });
-
-    postOrder();
     onClose();
+  };
+
+  const buyNowProcess = () => {
+    navigate('/order', {
+      state: productData,
+    });
   };
 
   return (
     <CartModalWrap>
       <CartModalInnerWrap>
-        <ProductName>
-          [커넥션 할인 특가] 50년 전통의 뼈해장국 대가 김인숙 님이 인정한
-          뼈해장국 밀키트 세트 (1팩 2인분)
-        </ProductName>
+        <ProductName>{productName}</ProductName>
         <PriceDisplay>
           <Counter quantity={quantity} setQuantity={setQuantity} />
-          <ProductPrice>{totalPrice?.toLocaleString()}원</ProductPrice>
+          <ProductPrice>{finalPrice?.toLocaleString()}원</ProductPrice>
         </PriceDisplay>
       </CartModalInnerWrap>
       <ButtonGroup>
@@ -82,16 +78,14 @@ const Cart = ({ productId, onClose }) => {
           color="neutral"
           size="medium"
           content="장바구니"
-          onClick={putInCart}
-          // onClick={() => {
-          //   dispatch({ type: 'PLUS', payload: count });
-          // }}
+          onClick={cartProcess}
         />
         <Button
           shape="solid"
           color="primary"
           size="medium"
           content="바로구매"
+          onClick={buyNowProcess}
         />
       </ButtonGroup>
     </CartModalWrap>
@@ -132,6 +126,7 @@ const ProductName = styled.strong`
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   white-space: normal;
+  align-self: center;
   font-size: 32px;
   line-height: 1.2;
 `;
@@ -163,4 +158,4 @@ const ButtonGroup = styled.div`
   }
 `;
 
-export default Cart;
+export default Purchase;

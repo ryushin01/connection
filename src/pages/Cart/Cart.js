@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CheckBox from '../../components/CheckBox/CheckBox';
 import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
 
 const Cart = () => {
+  // [Redux] 카운터에 dispatch 적용 필요
   // hook
   const [quantity, setQuantity] = useState(1);
   const [cartData, setCartData] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false); // 1. 전체 선택 체크박스 상태 확인용  State 생성
   const [checkItem, setCheckItem] = useState([]);
+  const navigate = useNavigate();
 
   // function
-  const getMokData = () => {
-    fetch('/data/CartData.json')
-      .then(Response => Response.json())
-      .then(result => setCartData(result.data));
-  };
-
+  // const getMokData = () => {
+  //   fetch('/data/CartData.json')
+  //     .then(Response => Response.json())
+  //     .then(result => setCartData(result.data));
+  // };
   const cartListData = cartData
     .map(item => {
       return item.products.map(product => {
@@ -50,6 +52,16 @@ const Cart = () => {
       })
       .flat(); // flat() : 중첩 배열을 평탄화 (2차원 배열을 1차원 배열로 만듦)
     return itemInfo; // itemInfo를 return
+  };
+
+  // 전체 선택 시 cartData 중 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
+  const handleItemIdInfoChange = () => {
+    const itemIdInfo = checkItem
+      .map(item => ({
+        productId: item.productId,
+      }))
+      .flat(); // flat() : 중첩 배열을 평탄화 (2차원 배열을 1차원 배열로 만듦)
+    return itemIdInfo; // itemInfo를 return
   };
 
   const handleMarketCheck = (checked, sellerId) => {
@@ -89,27 +101,60 @@ const Cart = () => {
 
   console.log(checkItem);
 
-  // console.log(checkItem);
-  const postCheckItemBtn = () => {
-    fetch('API 주소', {
-      method: 'POST',
+  const getCartInfoData = () => {
+    fetch('http://10.58.52.207:8000/carts', {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('access_token'),
+        authorization: localStorage.getItem('accessToken'),
       },
-      body: JSON.stringify({
-        items: handleItemInfoChange(),
-      }),
     })
       .then(response => response.json())
       .then(result => {
         console.log(result);
+        setCartData(result.data);
+      });
+  };
+
+  console.log(checkItem);
+  const patchCheckItemBtn = () => {
+    fetch('http://10.58.52.207:8000/carts', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({ data: handleItemInfoChange() }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        navigate('/order');
+      });
+  };
+
+  const deleteCheckItemBtn = () => {
+    fetch('http://10.58.52.207:8000/carts', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({ data: handleItemIdInfoChange() }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        if (result.message === 'Delete item!') {
+          window.location.reload();
+        }
       });
   };
 
   // useEffect
   useEffect(() => {
-    getMokData();
+    // getMokData();
+    getCartInfoData();
   }, []);
 
   return (
@@ -125,7 +170,9 @@ const Cart = () => {
                 checked={checkItem.length === cartListData.length}
               />
               <CartAllCheckText>전체선택</CartAllCheckText>
-              <CartSelectDeleteBtn>선택삭제</CartSelectDeleteBtn>
+              <CartSelectDeleteBtn onClick={deleteCheckItemBtn}>
+                선택삭제
+              </CartSelectDeleteBtn>
             </CartLeftWrap>
             {cartData?.map((item, index) => {
               return (
@@ -143,7 +190,7 @@ const Cart = () => {
                         //   })
                         // }
                       />
-                      <h3>{item.sellerTitle}</h3>
+                      <h3>{item.sellerName}</h3>
                     </CartMarketItemWrap>
                   </CartMarketTitleWrap>
                   {item.products?.map((item, index) => {
@@ -275,7 +322,7 @@ const Cart = () => {
                         size="large"
                         color="primary"
                         content="최종 구매 금액 : 100,000,000원"
-                        onClick={postCheckItemBtn}
+                        onClick={patchCheckItemBtn}
                       />
                       {/* <Button onClick={MarketDataInfo} /> */}
                     </td>
