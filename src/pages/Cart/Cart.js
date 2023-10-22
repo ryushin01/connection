@@ -91,22 +91,12 @@ const Cart = () => {
   );
   const totalPrice = ItemTotalPrice.reduce((acc, cur) => acc + cur, 0);
 
-  console.log(
-    'totalOriginalPrice',
-    totalOriginalPrice,
-    typeof totalOriginalPrice,
-    'totalPrice',
-    totalPrice,
-    typeof totalPrice,
-    'totalDiscountAmount',
-    totalDiscountAmount,
-    typeof totalDiscountAmount,
-  );
   // 전체 선택 시 cartData 중 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
   const handleItemPrice = () => {
     const itemPrice = cartData
       ?.map(item => {
         return item.products.map(product => ({
+          sellerId: item.sellerId,
           productId: product.productId,
           quantity: product.quantity,
           originalPrice: product.originalPrice,
@@ -118,9 +108,7 @@ const Cart = () => {
     return itemPrice; // itemInfo를 return
   };
 
-  console.log(checkItem);
-
-  // 전체 선택 시 cartData 중 productId만 뽑아서 checkItem에 넣어주는 함수
+  // 전체 선택 시 checkItem 중 productId만 뽑아서 checkItem에 넣어주는 함수 (체크한 상품 삭제 시 사용)
   const handleItemIdInfoChange = () => {
     const itemIdInfo = checkItem
       .map(item => ({
@@ -141,28 +129,30 @@ const Cart = () => {
 
       const marketData = cartData.filter(cart => cart.sellerId === sellerId); // sellerId가 같은 cartData를 marketData에 넣어줌
 
-      unMarketData.push(...marketData);
+      marketData.map(item => {
+        return item.products.map(product => {
+          return unMarketData.push({
+            sellerId: item.sellerId,
+            productId: product.productId,
+            quantity: product.quantity,
+            originalPrice: product.originalPrice,
+            discountedAmount: product.discountedAmount,
+            totalPrice: product.originalPrice * product.quantity,
+          });
+        });
+      });
 
       setCheckItem(unMarketData);
     } else {
       // 체크박스가 체크되어 있지 않으면 sellerCheckedItem에서 sellerId를 제거
 
-      const unMarketData = checkItem.filter(cart => cart.sellerId !== sellerId);
+      const unCheckMarketData = checkItem.filter(
+        cart => cart.sellerId !== sellerId,
+      );
 
-      setCheckItem(unMarketData);
+      setCheckItem(unCheckMarketData);
     }
   };
-
-  // const MarketDataInfo = () => {
-  //   checkItem?.map(item => {
-  //     return item.products?.map(product => {
-  //       return checkItem.push({
-  //         productId: product.productId,
-  //         quantity: product.quantity,
-  //       });
-  //     });
-  //   });
-  // };
 
   // 장바구니를 데이터 가져오기 위한 GET 요청
   const getCartInfoData = () => {
@@ -198,13 +188,14 @@ const Cart = () => {
 
   // 전체 선택 시 cartData 중 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
   const patchItemInfo = () => {
-    const itemInfo = cartData
-      .map(item => {
-        return item.products.map(product => ({
-          productId: product.productId,
-          quantity: product.quantity,
-        }));
+    const itemInfo = checkItem
+      ?.map(item => {
+        return {
+          productId: item.productId,
+          quantity: item.quantity,
+        };
       })
+
       .flat(); // flat() : 중첩 배열을 평탄화 (2차원 배열을 1차원 배열로 만듦)
     return itemInfo; // itemInfo를 return
   };
@@ -227,20 +218,6 @@ const Cart = () => {
         }
       });
   };
-
-  // const itemTotalPrice = () => {
-  //   const itemTotalPrice = checkItem
-  //     .map(item => {
-  //       return item.products.map(product => {
-  //         return product.originalPrice * product.quantity;
-  //       });
-  //     })
-  //     .flat();
-  //   return itemTotalPrice;
-  // };
-
-  // console.log(itemTotalPrice);
-  console.log(checkItem);
 
   // useEffect
   // 백엔드에 요청한 상품을 불러오기 위한 useEffect
@@ -280,11 +257,12 @@ const Cart = () => {
                           onChange={e =>
                             handleMarketCheck(e.target.checked, item.sellerId)
                           }
-                          // checked={
-                          //   !!sellerCheckedItem.find(checked => {
-                          //     checked.sellerId === item.sellerId;
-                          //   })
-                          // }
+                          checked={
+                            !!checkItem.find(checked => {
+                              //checked.sellerId === item.sellerId;
+                              return checked.sellerId === item.sellerId;
+                            })
+                          }
                         />
                         <h3>{item.sellerName}</h3>
                       </CartMarketItemWrap>
@@ -297,6 +275,7 @@ const Cart = () => {
                           return setCheckItem([
                             ...checkItem,
                             {
+                              sellerId: item.sellerId,
                               productId: item.productId,
                               quantity: item.quantity,
                               originalPrice: item.originalPrice,
