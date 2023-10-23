@@ -29,12 +29,15 @@ const Order = () => {
   // 장바구니에서 들어왔을 때와 바로구매에서 들어왔을 때를 분기해야 합니다.
 
   let productId,
-    quantity = null;
-
+    quantity,
+    course = null;
   if (location?.state !== null) {
-    const { productId, quantity } = location?.state;
+    productId = location.state.productData.productId;
+    quantity = location.state.productData.quantity;
+    course = location.state.course;
   }
 
+  console.log(location.state);
   const getUserData = () => {
     // fetch(`${API.CART}/getuserinfo`, {
     fetch(`/data/CartGetUserInfoData.json`, {
@@ -64,6 +67,7 @@ const Order = () => {
     isSubscribe,
   } = userData;
 
+  // 장바구니 로직 시 제품 정보 수급 함수입니다.
   const getCartData = () => {
     // fetch(`${API.CART}/complete`, {
     fetch(`/data/CartCompleteData.json`, {
@@ -76,10 +80,10 @@ const Order = () => {
       .then(response => response.json())
       .then(result => {
         if (result.message === 'Order_Item') {
-          console.log(result);
           setCartData(result?.data[0].products);
+          setLoading(false);
+          console.log('장바구니(주문)');
         }
-        setLoading(false);
       });
   };
 
@@ -100,10 +104,35 @@ const Order = () => {
 
   const sumCartDataValues = sumCartData(cartData);
 
+  // 바로구매 로직 시 제품 정보 수급 함수입니다.
+  const getBuyNowCartData = () => {
+    fetch(`${API.LIST}/${productId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Success') {
+          setCartData(result?.product);
+          setLoading(false);
+          console.log('바로구매(주문)');
+        }
+      });
+  };
+
   useEffect(() => {
     setLoading(true);
     getUserData();
-    getCartData();
+
+    if (course === 'directly') {
+      getBuyNowCartData();
+    } else {
+      getCartData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const selectingSentry = e => {
@@ -119,6 +148,7 @@ const Order = () => {
         shippingMethod: shippingMethod,
         paymentId: paymentId,
         products: cartData,
+        course: course,
       },
     });
   };

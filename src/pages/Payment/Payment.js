@@ -21,18 +21,42 @@ const Payment = () => {
     totalPrice,
     shippingMethod,
     paymentId,
-    products = null;
+    products,
+    course = null;
   if (location.state != null) {
     userId = location.state.userId;
     totalPrice = location.state.totalPrice;
     shippingMethod = location.state.shippingMethod;
     paymentId = location.state.paymentId;
     products = location.state.products;
+    course = location.state.course;
   }
 
   // 장바구니 로직의 최종 함수
   const postCartPayment = () => {
     fetch(`${API.ORDERS}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({
+        userId: userId,
+        totalPrice: totalPrice,
+        shippingMethod: shippingMethod,
+        paymentId: paymentId,
+        products: products,
+      }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        setPaymentComplete(true);
+      });
+  };
+
+  // 바로구매 로직의 최종 함수
+  const postBuyNowPayment = () => {
+    fetch(`${API.ORDERS}/now`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -131,13 +155,24 @@ const Payment = () => {
                   content="돌아가기"
                   onClick={() => navigate(-1)}
                 />
-                <Button
-                  shape="solid"
-                  color="primary"
-                  size="large"
-                  content="결제하기"
-                  onClick={postCartPayment}
-                />
+                {course !== 'directly' && (
+                  <Button
+                    shape="solid"
+                    color="primary"
+                    size="large"
+                    content="결제하기"
+                    onClick={postCartPayment}
+                  />
+                )}
+                {course === 'directly' && (
+                  <Button
+                    shape="solid"
+                    color="primary"
+                    size="large"
+                    content="결제하기"
+                    onClick={postBuyNowPayment}
+                  />
+                )}
               </ButtonGroup>
             </Before>
           )}
