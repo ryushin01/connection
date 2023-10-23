@@ -20,22 +20,16 @@ const Auth = () => {
       .then(result => {
         if (
           result.message === 'SUCCESS' &&
-          result.access_token.isAddress === false
+          result.accessToken.isAddress === false
         ) {
           // 로그인 성공 시 토큰 저장
-          localStorage.setItem(
-            'access_token',
-            result.access_token.access_token,
-          );
+          localStorage.setItem('accessToken', result.accessToken.accessToken);
           navigate('/snssignup');
         } else if (
           result.message === 'SUCCESS' &&
-          result.access_token.isAddress === true
+          result.accessToken.isAddress === true
         ) {
-          localStorage.setItem(
-            'access_token',
-            result.access_token.access_token,
-          );
+          localStorage.setItem('accessToken', result.accessToken.accessToken);
           navigate('/');
         } else {
           // 로그인 실패 시 로그인 페이지로 이동

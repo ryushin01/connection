@@ -45,7 +45,7 @@ const Order = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('access_token'),
+        authorization: localStorage.getItem('accessToken'),
       },
     })
       .then(response => response.json())
@@ -76,7 +76,7 @@ const Order = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('access_token'),
+        authorization: localStorage.getItem('accessToken'),
       },
     })
       .then(response => response.json())
@@ -112,7 +112,7 @@ const Order = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('access_token'),
+        authorization: localStorage.getItem('accessToken'),
       },
     })
       .then(response => response.json())
