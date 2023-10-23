@@ -34,11 +34,12 @@ const Payment = () => {
 
   // 장바구니 로직의 최종 함수
   const postCartPayment = () => {
-    fetch(`${API.ORDERS}`, {
+    // fetch(`${API.ORDERS}`, {
+    fetch('http://10.58.52.59:8000/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('accessToken'),
+        authorization: localStorage.getItem('access_token'),
       },
       body: JSON.stringify({
         userId: userId,
@@ -50,6 +51,7 @@ const Payment = () => {
     })
       .then(response => response.json())
       .then(result => {
+        console.log(result);
         setPaymentComplete(true);
       });
   };
@@ -60,7 +62,7 @@ const Payment = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('accessToken'),
+        authorization: localStorage.getItem('access_token'),
       },
       body: JSON.stringify({
         userId: userId,

@@ -33,8 +33,8 @@ const Root = () => {
 
   const [isLogin, setIsLogin] = useState(false);
   const getAccessToken = () => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
+    const access_token = localStorage.getItem('access_token');
+    if (access_token) {
       setIsLogin(true);
     } else {
       setIsLogin(false);

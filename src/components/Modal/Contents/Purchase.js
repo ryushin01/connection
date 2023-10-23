@@ -36,7 +36,7 @@ const Purchase = ({ productId, productName, totalPrice, onClose }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('accessToken'),
+        authorization: localStorage.getItem('access_token'),
       },
       body: JSON.stringify(productData),
     })

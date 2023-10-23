@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import DaumPostCode from './DaumPostCode/DaumPostCode';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import ImageFile from '../../components/ImageFile/ImageFile';
+import styled from 'styled-components';
 
 const SellerSignUp = props => {
   const [sellerInfo, setSellerInfo] = useState({
@@ -41,7 +41,7 @@ const SellerSignUp = props => {
   const postSellerInfoSubmitBtn = e => {
     e.preventDefault();
 
-    fetch('http://10.58.52.198:8000/users/seller', {
+    fetch('http://10.58.52.64:8000/users/seller', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
