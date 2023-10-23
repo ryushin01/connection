@@ -61,8 +61,6 @@ const SnsSignUp = props => {
       });
   };
 
-  console.log(userInfo);
-
   const handleSubmitUserInfo = e => {
     e.preventDefault(); // submit 기본 이벤트 막기
     postSignUp();
@@ -116,7 +114,7 @@ const SnsSignUp = props => {
                 <SignUpButtonWrap>
                   <Button
                     type="submit"
-                    // disabled={!isValidCheck}
+                    disabled={!isPhoneNumberValid}
                     content="추가정보 저장"
                     shape="solid"
                     color="primary"
