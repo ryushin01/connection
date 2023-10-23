@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 function CartCount({ onQuantityChange, productId, quantity }) {
-  const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, '10+'];
+  // 부모 컴포넌트에서 받아온 props
+  const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, '10+']; // 옵션 value 값을 map으로 돌리기 위한 배열 변수
   return (
     <SelectCounterWrap>
       <select
-        onChange={e => onQuantityChange(productId, e.target.value)}
-        value={quantity}
+        onChange={e => onQuantityChange(productId, e.target.value)} // 부모 컴포넌트에서 받아온 함수에 productId와 선택한 옵션 value 값을 넘겨줌
+        value={quantity} // 서버에서 받아온 quantity 값으로 초기화
       >
         {options.map((option, index) => {
+          // 옵션 value 값으로 map 돌리기
           return (
             <option value={option} key={index}>
               {option}
