@@ -51,10 +51,12 @@ const Login = ({ getAccessToken }) => {
         password: userInfo.password,
       }),
     })
-      .then(res => res.json())
-      .then(res => {
-        if (res.message === 'SUCCESS') {
-          localStorage.setItem('accessToken', res.accessToken.accessToken); // 로그인 성공 시 accessToken을 localStorage에 저장
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'SUCCESS') {
+          localStorage.setItem('accessToken', result.accessToken.accessToken); // 로그인 성공 시 accessToken을 localStorage에 저장
+          localStorage.setItem('seller', result.accessToken.isSeller);
+          localStorage.setItem('point', result.accessToken.points);
           getAccessToken();
           navigate('/');
         } else {
