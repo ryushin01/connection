@@ -52,12 +52,7 @@ const Root = () => {
       <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
         <GlobalStyle />
         <Router getAccessToken={getAccessToken} />
-        {isLogin && (
-          <ThemeSwitcher
-            switchTheme={switchTheme}
-            isLightTheme={isLightTheme}
-          />
-        )}
+        <ThemeSwitcher switchTheme={switchTheme} isLightTheme={isLightTheme} />
       </ThemeProvider>
     </Provider>
   );
