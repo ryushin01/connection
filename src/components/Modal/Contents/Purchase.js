@@ -45,7 +45,6 @@ const Purchase = ({ productId, productName, totalPrice, onClose }) => {
         console.log(result);
         // setCartData(result.data);
       });
-    console.log('fetch');
   };
 
   const putInCart = () => {
@@ -59,7 +58,11 @@ const Purchase = ({ productId, productName, totalPrice, onClose }) => {
 
   const buyNowProcess = () => {
     navigate('/order', {
-      state: productData,
+      state: {
+        productData,
+        course: 'directly',
+      },
+      // state: productData,
     });
   };
 
