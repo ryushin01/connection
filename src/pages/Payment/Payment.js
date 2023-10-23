@@ -131,7 +131,10 @@ const Payment = () => {
                       </tr>
                       <tr>
                         <th>배송비</th>
-                        <td>무료</td>
+                        <td>
+                          무료(배송 방법:{' '}
+                          {shippingMethod === 1 ? '직접수령' : '택배배송'})
+                        </td>
                       </tr>
                       <tr>
                         <th>총 결제 금액</th>
