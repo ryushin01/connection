@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 function CartCount({ onQuantityChange, productId, quantity }) {
+  const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, '10+'];
   return (
     <SelectCounterWrap>
       <select
         onChange={e => onQuantityChange(productId, e.target.value)}
         value={quantity}
       >
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
+        {options.map((option, index) => {
+          return (
+            <option value={option} key={index}>
+              {option}
+            </option>
+          );
+        })}
       </select>
     </SelectCounterWrap>
   );
