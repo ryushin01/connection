@@ -20,7 +20,7 @@ const DetailTab = ({ productId, productDetailImages, reviewNumbers }) => {
   };
 
   function getReviewData() {
-    fetch(`http://10.58.52.237:8000/reviews/${productId}`, {
+    fetch(`http://10.58.52.203:8000/reviews/${productId}`, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',

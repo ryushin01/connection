@@ -24,7 +24,7 @@ const Detail = () => {
 
   function getDetailData() {
     // fetch('/data/detailData.json', {
-    fetch(`http://10.58.52.237:8000/products/${intId}`, {
+    fetch(`http://10.58.52.203:8000/products/${intId}`, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
