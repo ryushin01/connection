@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 
-const Login = () => {
+const Login = ({ getAccessToken }) => {
   const [userInfo, setUserInfo] = useState({
     // 로그인 Valid를 위한 state
     email: '',
@@ -41,7 +41,7 @@ const Login = () => {
   };
 
   const postUserInfo = () => {
-    fetch('http://10.58.52.207:8000/users', {
+    fetch('http://10.58.52.64:8000/users/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -55,6 +55,7 @@ const Login = () => {
       .then(res => {
         if (res.message === 'SUCCESS') {
           localStorage.setItem('accessToken', res.accessToken.accessToken); // 로그인 성공 시 access_token을 localStorage에 저장
+          getAccessToken();
           navigate('/');
         } else {
           alert('로그인 실패하였습니다. 다시 시도해주세요.');

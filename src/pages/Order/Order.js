@@ -26,6 +26,8 @@ const Order = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // 장바구니에서 들어왔을 때와 바로구매에서 들어왔을 때를 분기해야 합니다.
+
   let productId,
     quantity = null;
 

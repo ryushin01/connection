@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import { API } from '../../config';
-// import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import Rating from '../../components/Rating/Rating';
 import Counter from '../../components/Counter/Counter';
@@ -17,10 +17,14 @@ const Detail = () => {
   const [loading, setLoading] = useState(false);
   const [detailData, setDetailData] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const params = useParams();
+  const location = useLocation();
+  const { id } = params;
+  const intId = Number(params?.id);
 
-  const getDetailData = () => {
-    fetch('/data/detailData.json', {
-      // fetch('http://10.58.52.52:8000/products/1', {
+  function getDetailData() {
+    // fetch('/data/detailData.json', {
+    fetch(`http://10.58.52.237:8000/products/${intId}`, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -33,11 +37,12 @@ const Detail = () => {
           setLoading(false);
         }
       });
-  };
+  }
 
   useEffect(() => {
     setLoading(true);
     getDetailData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const {
@@ -116,6 +121,7 @@ const Detail = () => {
             </DetailTopSection>
             <DetailBottomSection>
               <DetailTab
+                productId={productId}
                 productDetailImages={productDetailImages}
                 reviewNumbers={reviewNumbers}
               />
