@@ -4,7 +4,7 @@ import { ReactComponent as AdminIcon } from '../../../svg/icon_admin.svg';
 import { ReactComponent as LogoutIcon } from '../../../svg/icon_logout.svg';
 import styled, { css } from 'styled-components';
 
-const isLogin = true;
+const isLogin = localStorage.getItem('accessToken');
 const isSeller = true;
 
 const RestApiKey = process.env.REACT_APP_RestApiKey;
