@@ -82,7 +82,6 @@ const Order = () => {
         if (result.message === 'Order_Item') {
           setCartData(result?.data[0].products);
           setLoading(false);
-          console.log('장바구니(주문)');
         }
       });
   };
@@ -118,7 +117,6 @@ const Order = () => {
         if (result.message === 'Success') {
           setCartData(result?.product);
           setLoading(false);
-          console.log('바로구매(주문)');
         }
       });
   };
@@ -129,8 +127,10 @@ const Order = () => {
 
     if (course === 'directly') {
       getBuyNowCartData();
+      console.log('바로구매(주문)');
     } else {
       getCartData();
+      console.log('장바구니(주문)');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
