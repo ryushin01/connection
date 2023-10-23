@@ -45,7 +45,6 @@ const Purchase = ({ productId, productName, totalPrice, onClose }) => {
         console.log(result);
         // setCartData(result.data);
       });
-    console.log('fetch');
   };
 
   const putInCart = () => {
