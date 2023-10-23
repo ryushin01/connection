@@ -42,7 +42,7 @@ const SnsSignUp = props => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('access_token'),
+        Authorization: localStorage.getItem('accessToken'),
       },
       body: JSON.stringify({
         phoneNumber: userInfo.phone,
@@ -60,8 +60,6 @@ const SnsSignUp = props => {
         }
       });
   };
-
-  console.log(userInfo);
 
   const handleSubmitUserInfo = e => {
     e.preventDefault(); // submit 기본 이벤트 막기
@@ -116,7 +114,7 @@ const SnsSignUp = props => {
                 <SignUpButtonWrap>
                   <Button
                     type="submit"
-                    // disabled={!isValidCheck}
+                    disabled={!isPhoneNumberValid}
                     content="추가정보 저장"
                     shape="solid"
                     color="primary"

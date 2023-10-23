@@ -39,7 +39,7 @@ const Payment = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('access_token'),
+        authorization: localStorage.getItem('accessToken'),
       },
       body: JSON.stringify({
         userId: userId,
@@ -63,7 +63,7 @@ const Payment = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('access_token'),
+        authorization: localStorage.getItem('accessToken'),
       },
       body: JSON.stringify({
         userId: userId,

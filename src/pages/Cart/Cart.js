@@ -66,6 +66,8 @@ const Cart = () => {
     return itemPrice;
   };
 
+  console.log(checkItem);
+
   // 체크박스가 체크되어 있을 때의 상품 가격 구하는 함수
   const checkedItemTotalPrice = (checked, productId) => {
     const itemPrice = checkItem
@@ -162,7 +164,7 @@ const Cart = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('access_token'),
+        authorization: localStorage.getItem('accessToken'),
       },
     })
       .then(response => response.json())
@@ -178,7 +180,7 @@ const Cart = () => {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('access_token'),
+        authorization: localStorage.getItem('accessToken'),
       },
       body: JSON.stringify({ data: patchItemInfo() }),
     })
@@ -208,7 +210,7 @@ const Cart = () => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('access_token'),
+        authorization: localStorage.getItem('accessToken'),
       },
       body: JSON.stringify({ data: handleItemIdInfoChange() }),
     })
