@@ -58,7 +58,8 @@ const Payment = () => {
 
   // 바로구매 로직의 최종 함수
   const postBuyNowPayment = () => {
-    fetch(`${API.ORDERS}/now`, {
+    // fetch(`${API.ORDERS}/now`, {
+    fetch('http://10.58.52.149:8000/orders/now', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

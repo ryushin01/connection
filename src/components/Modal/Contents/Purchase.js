@@ -32,7 +32,8 @@ const Purchase = ({ productId, productName, totalPrice, onClose }) => {
   };
 
   const postOrder = () => {
-    fetch('http://10.58.52.207:8000/carts', {
+    // fetch('http://10.58.52.149:8000/order', {
+    fetch('http://10.58.52.140:8000/carts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

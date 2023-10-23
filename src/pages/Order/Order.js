@@ -40,7 +40,8 @@ const Order = () => {
   console.log(location.state);
   const getUserData = () => {
     // fetch(`${API.CART}/getuserinfo`, {
-    fetch(`/data/CartGetUserInfoData.json`, {
+    // fetch(`/data/CartGetUserInfoData.json`, {
+    fetch('http://10.58.52.140:8000/carts/getuserinfo', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -106,7 +107,8 @@ const Order = () => {
 
   // 바로구매 로직 시 제품 정보 수급 함수입니다.
   const getBuyNowCartData = () => {
-    fetch(`${API.LIST}/${productId}`, {
+    // fetch(`${API.LIST}/${productId}`, {
+    fetch('http://10.58.52.203:8000/products/1', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -118,6 +120,9 @@ const Order = () => {
         if (result.message === 'Success') {
           setCartData(result?.product);
           setLoading(false);
+          console.log('바로구매(주문)');
+
+          console.log(result);
         }
       });
   };
@@ -128,10 +133,8 @@ const Order = () => {
 
     if (course === 'directly') {
       getBuyNowCartData();
-      console.log('바로구매(주문)');
     } else {
       getCartData();
-      console.log('장바구니(주문)');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
