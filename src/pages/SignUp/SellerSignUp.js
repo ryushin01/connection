@@ -67,6 +67,9 @@ const SellerSignUp = props => {
       });
   };
 
+  const isDisabledBtnValid =
+    sellerName.length >= 2 && phoneNumber.length === 11;
+
   return (
     <Main id="main">
       <div>
@@ -88,6 +91,11 @@ const SellerSignUp = props => {
                   placeholder="판매자 이름을 입력해주세요."
                   borderRadius="4px"
                   name="sellerName"
+                  status={
+                    (sellerInfo?.sellerName?.length === 0 && 'default') ||
+                    (sellerInfo?.sellerName?.length < 2 && 'error')
+                  }
+                  error="이름을 두 글자 이상 입력하세요."
                 />
               </SellerSignUpInputWrap>
               <SellerSignUpInputWrap>
@@ -144,6 +152,7 @@ const SellerSignUp = props => {
                   shape="solid"
                   color="primary"
                   onClick={postSellerInfoSubmitBtn}
+                  disabled={!isDisabledBtnValid}
                 />
               </SellerSignUpButtonWrap>
             </SellerSignUpForm>
