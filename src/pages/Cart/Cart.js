@@ -5,16 +5,18 @@ import CheckBox from '../../components/CheckBox/CheckBox';
 import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
 import { useDispatch } from 'react-redux';
+import CartCount from '../../components/CartCount/CartCount';
 
 const Cart = () => {
   // [Redux] 카운터에 dispatch 적용 필요
   // hook
-  const [quantity, setQuantity] = useState({});
+  const [quantity, setQuantity] = useState({
+    count: 1,
+  });
   const [cartData, setCartData] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false); // 1. 전체 선택 체크박스 상태 확인용  State 생성
   const [checkItem, setCheckItem] = useState([]);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // function
   const getMokData = () => {
@@ -22,7 +24,6 @@ const Cart = () => {
       .then(Response => Response.json())
       .then(result => setCartData(result.data));
   };
-
   // 전체선택 시 현재 체크 된 체크박스와 전체 체크박스의 수를 비교하기 위한 함수
   const cartListData = cartData
     .map(item => {
@@ -219,6 +220,32 @@ const Cart = () => {
       });
   };
 
+  const handleQuantityChange = (productId, newQuantity) => {
+    const newProducts = cartData.map(product => {
+      if (product.productId === productId) {
+        return {
+          ...quantity,
+          quantity: newQuantity,
+        };
+      }
+      return product;
+    });
+    return setQuantity(newProducts);
+  };
+
+  // useEffect(() => {
+  //   fetch('http://10.58.52.207:8000/carts', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       authorization: localStorage.getItem('accessToken'),
+  //     },
+  //     body: JSON.stringify({ data: handleQuantityChange() }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => console.log(result));
+  // }, []);
+
   // useEffect
   // 백엔드에 요청한 상품을 불러오기 위한 useEffect
   useEffect(() => {
@@ -324,9 +351,10 @@ const Cart = () => {
                             </CartItemLi>
                             <CartItemLi>
                               <CartItemCounterWrap>
-                                <Counter
+                                <CartCount
+                                  productId={item.productId}
                                   quantity={item.quantity}
-                                  setQuantity={setQuantity}
+                                  onQuantityChange={handleQuantityChange}
                                 />
                               </CartItemCounterWrap>
                             </CartItemLi>
