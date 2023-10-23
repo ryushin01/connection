@@ -9,7 +9,7 @@ const Auth = () => {
   const searchParam = searchParams.get('code');
 
   const getSnsCode = () => {
-    fetch(`http://10.58.52.246:8000/users/kakao/callback?code=${searchParam}`, {
+    fetch(`http://10.58.52.64:8000/users/kakao/callback?code=${searchParam}`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -20,16 +20,22 @@ const Auth = () => {
       .then(result => {
         if (
           result.message === 'SUCCESS' &&
-          result.accessToken.isAddress === false
+          result.access_token.isAddress === false
         ) {
           // 로그인 성공 시 토큰 저장
-          localStorage.setItem('access_token', result.accessToken.accessToken);
+          localStorage.setItem(
+            'access_token',
+            result.access_token.access_token,
+          );
           navigate('/snssignup');
         } else if (
           result.message === 'SUCCESS' &&
-          result.accessToken.isAddress === true
+          result.access_token.isAddress === true
         ) {
-          localStorage.setItem('access_token', result.accessToken.accessToken);
+          localStorage.setItem(
+            'access_token',
+            result.access_token.access_token,
+          );
           navigate('/');
         } else {
           // 로그인 실패 시 로그인 페이지로 이동

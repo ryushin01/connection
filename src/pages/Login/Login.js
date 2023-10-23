@@ -54,7 +54,7 @@ const Login = ({ getAccessToken }) => {
       .then(res => res.json())
       .then(res => {
         if (res.message === 'SUCCESS') {
-          localStorage.setItem('accessToken', res.accessToken.accessToken); // 로그인 성공 시 access_token을 localStorage에 저장
+          localStorage.setItem('access_token', res.access_token.access_token); // 로그인 성공 시 access_token을 localStorage에 저장
           getAccessToken();
           navigate('/');
         } else {

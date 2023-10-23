@@ -44,7 +44,7 @@ const Order = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('accessToken'),
+        authorization: localStorage.getItem('access_token'),
       },
     })
       .then(response => response.json())
@@ -70,11 +70,12 @@ const Order = () => {
   // 장바구니 로직 시 제품 정보 수급 함수입니다.
   const getCartData = () => {
     // fetch(`${API.CART}/complete`, {
-    fetch(`/data/CartCompleteData.json`, {
+    // fetch(`/data/CartCompleteData.json`, {
+    fetch('http://10.58.52.140:8000/carts/complete', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('accessToken'),
+        authorization: localStorage.getItem('access_token'),
       },
     })
       .then(response => response.json())
@@ -109,7 +110,7 @@ const Order = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('accessToken'),
+        authorization: localStorage.getItem('access_token'),
       },
     })
       .then(response => response.json())
