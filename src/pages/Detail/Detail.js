@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 // import { API } from '../../config';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { API } from '../../../config';
+import { useDispatch } from 'react-redux';
 import Loading from '../Loading/Loading';
 import Rating from '../../components/Rating/Rating';
 import Counter from '../../components/Counter/Counter';
@@ -19,8 +21,15 @@ const Detail = () => {
   const [quantity, setQuantity] = useState(1);
   const params = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { id } = params;
   const intId = Number(params?.id);
+
+  const productData = {
+    productId: productId,
+    quantity: quantity,
+  };
 
   function getDetailData() {
     // fetch('/data/detailData.json', {
@@ -59,6 +68,43 @@ const Detail = () => {
 
   const productDetailImages = detailData?.productDetailImages;
   const finalPrice = totalPrice * quantity;
+
+  const cartProcess = () => {
+    postOrder();
+    putInCart();
+  };
+
+  const postOrder = () => {
+    fetch('http://10.58.52.140:8000/carts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify(productData),
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        // setCartData(result.data);
+      });
+  };
+
+  const putInCart = () => {
+    // [Redux] 전역 상태를 변경하는 유일한 방법은 액션을 발생시키는 겁니다. store의 내장 함수인 dispatch를 통해 액션은 물론이고, 데이터까지 보낼 수 있습니다. 데이터는 payload 안에 담아야 합니다
+    dispatch({
+      type: 'ADD',
+      payload: { productId: productId, quantity: quantity },
+    });
+  };
+
+  const buyNowProcess = () => {
+    navigate('/order', {
+      state: {
+        productData,
+      },
+    });
+  };
 
   return (
     <>
@@ -108,12 +154,14 @@ const Detail = () => {
                       color="neutral"
                       size="medium"
                       content="장바구니"
+                      onClick={cartProcess}
                     />
                     <Button
                       shape="solid"
                       color="primary"
                       size="medium"
                       content="바로구매"
+                      onClick={buyNowProcess}
                     />
                   </ButtonGroup>
                 </MetadataAreaInnerWrap>
