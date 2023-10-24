@@ -2,17 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CheckBox from '../../components/CheckBox/CheckBox';
-import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
-import { useDispatch } from 'react-redux';
 import CartCount from '../../components/CartCount/CartCount';
 
 const Cart = () => {
-  // [Redux] 카운터에 dispatch 적용 필요
   // hook
-  const [quantity, setQuantity] = useState({
-    count: 1,
-  });
   const [cartData, setCartData] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false); // 1. 전체 선택 체크박스 상태 확인용  State 생성
   const [checkItem, setCheckItem] = useState([]);
@@ -25,13 +19,15 @@ const Cart = () => {
       .then(result => setCartData(result.data));
   };
   // 전체선택 시 현재 체크 된 체크박스와 전체 체크박스의 수를 비교하기 위한 함수
-  const cartListData = cartData
-    .map(item => {
-      return item.products?.map(product => {
-        return product.productId;
-      });
-    })
-    .flat();
+  const cartListData =
+    !!cartData &&
+    cartData
+      .map(item => {
+        return item.products?.map(product => {
+          return product.productId;
+        });
+      })
+      .flat();
 
   // 전체 선택
   // 1. 전체 선택 체크박스 상태 확인용  State 생성
@@ -48,18 +44,17 @@ const Cart = () => {
 
   // 체크박스가 체크되어 있을 때의 상품 가격 구하는 함수
   const checkedItemOriginalPrice = (checked, productId) => {
-    const itemPrice = checkItem
-      ?.map(item => {
-        return item.originalPrice * item.quantity;
-      })
-      .flat();
+    const itemPrice = checkItem?.map(item => {
+      return item.totalPrice;
+    });
+
     return itemPrice;
   };
 
   const checkedItemDiscountedAmount = (checked, productId) => {
     const itemPrice = checkItem
       ?.map(item => {
-        return item.discountedAmount * item.quantity;
+        return item.discountedAmount;
       })
       .flat();
     return itemPrice;
@@ -69,10 +64,7 @@ const Cart = () => {
   const checkedItemTotalPrice = (checked, productId) => {
     const itemPrice = checkItem
       ?.map(item => {
-        return (
-          item.originalPrice * item.quantity -
-          item.discountedAmount * item.quantity
-        );
+        return item.totalPrice - (item.discountedAmount || 0);
       })
       .flat();
     return itemPrice;
@@ -156,8 +148,10 @@ const Cart = () => {
   };
 
   // 장바구니를 데이터 가져오기 위한 GET 요청
+  const FETCH_URL = 'http://10.58.52.176:8000/carts';
+
   const getCartInfoData = () => {
-    fetch('http://10.58.52.207:8000/carts', {
+    fetch(FETCH_URL, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -173,7 +167,7 @@ const Cart = () => {
 
   // 장바구니에서 선택한 상품을 주문하기 위한 PATCH 요청
   const patchCheckItemBtn = () => {
-    fetch('http://10.58.52.207:8000/carts', {
+    fetch(FETCH_URL, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -203,7 +197,7 @@ const Cart = () => {
 
   // 장바구니에서 선택한 상품을 삭제하기 위한 DELETE 요청
   const deleteCheckItemBtn = () => {
-    fetch('http://10.58.52.207:8000/carts', {
+    fetch(FETCH_URL, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -222,16 +216,25 @@ const Cart = () => {
 
   const handleQuantityChange = (productId, newQuantity) => {
     // cartCount Component에서 받아온 productId와 newQuantity를 매개변수로 받음
-    fetch('http://10.58.52.207:8000/carts', {
+    fetch(FETCH_URL + '/updatequantity', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         authorization: localStorage.getItem('accessToken'),
       },
-      body: JSON.stringify({ data: { productId, quantity: newQuantity } }), // productId가 같은 제품의 수량이 변경되는 것을 감지하고 변경된 값으로 POST 요청
+      body: JSON.stringify({
+        data: { productId, quantity: Number(newQuantity) },
+      }), // productId가 같은 제품의 수량이 변경되는 것을 감지하고 변경된 값으로 POST 요청
     })
       .then(response => response.json())
-      .then(result => getCartInfoData()) // 정상적으로 통신이 되었으면 장바구니 데이터를 다시 불러옴.
+      .then(result => {
+        if (result.message === 'Update Success!') {
+          alert('수량이 변경되었습니다.');
+          getCartInfoData();
+        } else {
+          alert('수량 변경에 실패하였습니다.');
+        }
+      }) // 정상적으로 통신이 되었으면 장바구니 데이터를 다시 불러옴.
       .catch(err => console.log(err));
   };
 
@@ -371,10 +374,7 @@ const Cart = () => {
                             </CartItemLi>
                             <CartItemLi>
                               <h3>
-                                {(
-                                  item.originalPrice * item.quantity -
-                                  item.discountedAmount * item.quantity
-                                )
+                                {item.totalPrice
                                   .toString()
                                   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                 원
