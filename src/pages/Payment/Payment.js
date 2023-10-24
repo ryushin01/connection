@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// import { API } from '../../config';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { API } from '../../config';
 import { ReactComponent as CheckIcon } from '../../svg/icon_check.svg';
 import Loading from '../Loading/Loading';
 import Button from '../../components/Button/Button';
@@ -14,10 +14,69 @@ import styled, { css } from 'styled-components';
 const Payment = () => {
   const [loading, setLoading] = useState(false);
   const [paymentComplete, setPaymentComplete] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const advancedPaymentComplete = () => {
-    setPaymentComplete(true);
+  let userId,
+    totalPrice,
+    shippingMethod,
+    paymentId,
+    products,
+    course = null;
+  if (location.state != null) {
+    userId = location.state.userId;
+    totalPrice = location.state.totalPrice;
+    shippingMethod = location.state.shippingMethod;
+    paymentId = location.state.paymentId;
+    products = location.state.products;
+    course = location.state.course;
+  }
+
+  // 장바구니 로직의 최종 함수
+  const postCartPayment = () => {
+    // fetch(`${API.ORDERS}`, {
+    fetch('http://10.58.52.59:8000/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({
+        userId: userId,
+        totalPrice: totalPrice,
+        shippingMethod: shippingMethod,
+        paymentId: paymentId,
+        products: products,
+      }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        setPaymentComplete(true);
+      });
+  };
+
+  // 바로구매 로직의 최종 함수
+  const postBuyNowPayment = () => {
+    // fetch(`${API.ORDERS}/now`, {
+    fetch('http://10.58.52.149:8000/orders/now', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({
+        userId: userId,
+        totalPrice: totalPrice,
+        shippingMethod: shippingMethod,
+        paymentId: paymentId,
+        products: products,
+      }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        setPaymentComplete(true);
+      });
   };
 
   return (
@@ -46,16 +105,17 @@ const Payment = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th>밀키트</th>
-                        <td>1</td>
-                        <td>10,000</td>
-                      </tr>
-                      <tr>
-                        <th>밀키트</th>
-                        <td>1</td>
-                        <td>10,000</td>
-                      </tr>
+                      {products?.map(
+                        ({ productName, quantity, totalPrice }, index) => {
+                          return (
+                            <tr key={index}>
+                              <th>{productName}</th>
+                              <td>{quantity}</td>
+                              <td>{totalPrice.toLocaleString()}원</td>
+                            </tr>
+                          );
+                        },
+                      )}
                     </tbody>
                   </SectionTable>
                   <SectionTable>
@@ -67,24 +127,23 @@ const Payment = () => {
                     <tbody>
                       <tr>
                         <th>상품 금액</th>
-                        <td>-</td>
-                      </tr>
-                      <tr>
-                        <th>할인 금액</th>
-                        <td>-</td>
+                        <td>{totalPrice.toLocaleString()}원</td>
                       </tr>
                       <tr>
                         <th>배송비</th>
-                        <td>-</td>
+                        <td>
+                          무료(배송 방법:{' '}
+                          {shippingMethod === 1 ? '직접수령' : '택배배송'})
+                        </td>
                       </tr>
                       <tr>
                         <th>총 결제 금액</th>
-                        <td>-</td>
+                        <td>{totalPrice.toLocaleString()}원</td>
                       </tr>
                       <tr>
                         <th>포인트 차감</th>
                         <td>
-                          <span>5,000</span>
+                          <span>{totalPrice.toLocaleString()}원</span>
                           <RemainingPoints>
                             (잔여 포인트: <strong>10,000</strong>)
                           </RemainingPoints>
@@ -102,13 +161,24 @@ const Payment = () => {
                   content="돌아가기"
                   onClick={() => navigate(-1)}
                 />
-                <Button
-                  shape="solid"
-                  color="primary"
-                  size="large"
-                  content="결제하기"
-                  onClick={advancedPaymentComplete}
-                />
+                {course !== 'directly' && (
+                  <Button
+                    shape="solid"
+                    color="primary"
+                    size="large"
+                    content="결제하기"
+                    onClick={postCartPayment}
+                  />
+                )}
+                {course === 'directly' && (
+                  <Button
+                    shape="solid"
+                    color="primary"
+                    size="large"
+                    content="결제하기"
+                    onClick={postBuyNowPayment}
+                  />
+                )}
               </ButtonGroup>
             </Before>
           )}

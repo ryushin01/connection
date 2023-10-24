@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import CheckBox from '../../components/CheckBox/CheckBox';
 import Button from '../../components/Button/Button';
 import CartCount from '../../components/CartCount/CartCount';
+import styled from 'styled-components';
 
 const Cart = () => {
   // hook
@@ -20,7 +20,7 @@ const Cart = () => {
   };
   // 전체선택 시 현재 체크 된 체크박스와 전체 체크박스의 수를 비교하기 위한 함수
   const cartListData =
-    !!cartData &&
+    cartData !== undefined &&
     cartData
       .map(item => {
         return item.products?.map(product => {
@@ -59,6 +59,8 @@ const Cart = () => {
       .flat();
     return itemPrice;
   };
+
+  console.log(checkItem);
 
   // 체크박스가 체크되어 있을 때의 상품 가격 구하는 함수
   const checkedItemTotalPrice = (checked, productId) => {
@@ -277,17 +279,17 @@ const Cart = () => {
               <CheckBox
                 size="small"
                 onChange={e => handleAllCheck(e.target.checked)}
-                checked={checkItem.length === cartListData.length}
+                checked={checkItem.length === (cartListData.length || 0)}
               />
               <CartAllCheckText>전체선택</CartAllCheckText>
               <CartSelectDeleteBtn onClick={deleteCheckItemBtn}>
                 선택삭제
               </CartSelectDeleteBtn>
             </CartLeftWrap>
-            {cartData.length === 0 && (
+            {!!cartData === false && (
               <CartIsEmpty>장바구니에 담긴 상품이 없습니다.</CartIsEmpty>
             )}
-            {cartData.length !== 0 &&
+            {!!cartData &&
               cartData?.map((item, index) => {
                 return (
                   <>

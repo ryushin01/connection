@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Filter = ({ categoryId }) => {
-  const [sort, setSort] = useState('');
-
+const Filter = ({ categoryId, sort, setSort }) => {
   const selectList = ['별점순', '리뷰순', '최신순'];
 
   const handleSelect = e => {

@@ -31,27 +31,28 @@ const Root = () => {
   // [Redux] 전역 상태 관리 도구인 Redux에서 실제 상태가 저장되는 공간인 store를 생성합니다. 이제는 store에서 데이터를 꺼내 사용할 수 있게 되었습니다.
   const store = createStore(reducer);
 
-  const [isLightTheme, setIsLightTheme] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
+  const getAccessToken = () => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  };
 
+  const [isLightTheme, setIsLightTheme] = useState(true);
   const switchTheme = () => {
     setIsLightTheme(prev => !prev);
   };
-
-  // 유저 정보에서 추출하여 적용하기
-  const isLogin = true;
 
   return (
     // [Redux] 전역 상태이므로 최상위 Provider에 주입합니다.
     <Provider store={store}>
       <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
         <GlobalStyle />
-        <Router />
-        {isLogin && (
-          <ThemeSwitcher
-            switchTheme={switchTheme}
-            isLightTheme={isLightTheme}
-          />
-        )}
+        <Router getAccessToken={getAccessToken} />
+        <ThemeSwitcher switchTheme={switchTheme} isLightTheme={isLightTheme} />
       </ThemeProvider>
     </Provider>
   );

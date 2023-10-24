@@ -2,25 +2,28 @@ import React from 'react';
 import Rating from '../../../components/Rating/Rating';
 import styled, { css } from 'styled-components';
 
-const ProductReview = () => {
+const ProductReview = ({ reviewData }) => {
   return (
     <ReviewList>
-      <ReviewListItem>
-        <ReviewMetadataArea>
-          <ReviewerInfo>
-            <span>ryushin0@test.com</span>
-            <span>2023-10-17</span>
-          </ReviewerInfo>
-          <textarea
-            value="리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다. 리뷰 내용이 들어갑니다."
-            readOnly
-          />
-        </ReviewMetadataArea>
-        <ReviewImageArea>
-          <img src="/images/products/milk.png" alt="리뷰 이미지" />
-          <Rating rating="0" />
-        </ReviewImageArea>
-      </ReviewListItem>
+      {reviewData?.map(
+        ({ email, date, contents, reviewImages, rating }, index) => {
+          return (
+            <ReviewListItem key={index}>
+              <ReviewMetadataArea>
+                <ReviewerInfo>
+                  <span>{email}</span>
+                  <span>{date.substring(2, 10)}</span>
+                </ReviewerInfo>
+                <textarea value={contents} readOnly />
+              </ReviewMetadataArea>
+              <ReviewImageArea>
+                <img src={reviewImages} alt="리뷰 이미지" />
+                <Rating rating={rating} />
+              </ReviewImageArea>
+            </ReviewListItem>
+          );
+        },
+      )}
     </ReviewList>
   );
 };

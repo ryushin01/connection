@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import styled from 'styled-components';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import DaumPostCode from './DaumPostCode/DaumPostCode';
+import styled from 'styled-components';
 
 const SignUp = props => {
   // userInfo state 정의 (회원가입 정보)
@@ -54,7 +54,7 @@ const SignUp = props => {
 
   const postSignUp = () => {
     // 회원가입 API 실행
-    fetch('http://10.58.52.207:8000/users/signup', {
+    fetch('http://10.58.52.64:8000/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -86,7 +86,7 @@ const SignUp = props => {
 
   const handleDuplicateCheck = () => {
     // 이메일 중복체크 API 실행
-    fetch('API 주소', {
+    fetch('http://10.58.52.64:8000/users/duplicate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -97,7 +97,9 @@ const SignUp = props => {
     })
       .then(res => res.json())
       .then(result => {
-        console.log(result);
+        if (result.message === 'SUCCESS') {
+          alert('사용 가능한 이메일입니다.');
+        }
       });
   };
 
