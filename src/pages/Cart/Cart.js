@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import CheckBox from '../../components/CheckBox/CheckBox';
-import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
-import { useDispatch } from 'react-redux';
 import CartCount from '../../components/CartCount/CartCount';
 import styled from 'styled-components';
 
 const Cart = () => {
   // [Redux] 카운터에 dispatch 적용 필요
   // hook
-  const [quantity, setQuantity] = useState({
-    count: 1,
-  });
   const [cartData, setCartData] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false); // 1. 전체 선택 체크박스 상태 확인용  State 생성
   const [checkItem, setCheckItem] = useState([]);
