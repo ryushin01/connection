@@ -10,26 +10,29 @@ const Charge = () => {
         <ChargeForm>
           <fieldset>
             <legend>포인트 충전</legend>
-            <Input
-              type="number"
-              name="point"
-              labelFlex="1"
-              borderRadius="4px"
-            />
-            <Button
-              type="submit"
-              shape="solid"
-              color="primary"
-              size="medium"
-              content="충전"
-            />
+            <PointDisplay>
+              보유 포인트:&nbsp;<span>50000</span>
+            </PointDisplay>
+            <InputInnerWrap>
+              <Input
+                type="number"
+                name="point"
+                labelFlex="1"
+                borderRadius="4px"
+              />
+              <Button
+                type="submit"
+                shape="solid"
+                color="primary"
+                size="medium"
+                content="충전"
+              />
+            </InputInnerWrap>
           </fieldset>
         </ChargeForm>
         <ChargeNotice>
           <ul>
-            <li>포인트로 모든 제품을 구매하실 수 있습니다.</li>
             <li>포인트 충전 시 1%의 추가 금액이 함께 충전됩니다.</li>
-            <li>보유 포인트 최대 한도는 1억원입니다.</li>
             <li>포인트 환불은 고객센터를 통해 가능합니다.</li>
             <li>
               포인트 환불 시 추가로 충전된 금액은 환불 받으실 수 없습니다.
@@ -78,14 +81,24 @@ const ChargeForm = styled.form`
   }
 
   fieldset {
-    ${FlexCenter};
+    display: flex;
+    flex-direction: column;
     width: 100%;
     gap: 8px;
+  }
+
+  input {
+    color: #000;
   }
 
   button {
     width: 100px;
   }
+`;
+
+const InputInnerWrap = styled.div`
+  ${FlexCenter};
+  gap: 8px;
 `;
 
 const ChargeNotice = styled.div`
@@ -109,6 +122,16 @@ const ChargeNotice = styled.div`
       top: 4px;
       left: 0;
     }
+  }
+`;
+
+const PointDisplay = styled.span`
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: left;
+
+  span {
+    color: ${props => props.theme.secondaryColor};
   }
 `;
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Point from './Point/Point';
 import Account from './Account/Account';
 import Gnb from './Gnb/Gnb';
 // import SearchButton from '../SearchButton/SearchButton';
@@ -9,13 +8,10 @@ import GnbCartButton from '../CartButton/GnbCartButton';
 import styled, { css } from 'styled-components';
 
 const Header = () => {
-  const isLogin = true;
-
   return (
     <HeaderWrap>
       <HeaderInnerWrap>
         <TopSection>
-          {isLogin && <Point />}
           <Account />
         </TopSection>
       </HeaderInnerWrap>
@@ -97,7 +93,7 @@ const HeaderInnerWrap = styled.div`
 
 const TopSection = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 4vw;
   width: 100%;

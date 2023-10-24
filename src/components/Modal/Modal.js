@@ -48,6 +48,7 @@ const ModalPopup = styled.div`
   position: fixed;
   inset: 0;
   z-index: 100;
+  color: #000;
 `;
 
 const Backdrop = styled.div`
