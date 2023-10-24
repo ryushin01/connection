@@ -29,12 +29,18 @@ const Order = () => {
   let productId,
     quantity,
     course = null;
-  if (location?.state !== null) {
-    productId = location.state.productData.productId;
-    quantity = location.state.productData.quantity;
-    course = location.state.course;
+  if (location?.state?.productData !== null) {
+    productId = location?.state?.productData?.productId;
+    quantity = location?.state?.productData?.quantity;
+    course = location?.state?.course;
   }
 
+  let cartPriceData = null;
+  if (location?.state?.cartPriceData !== null) {
+    cartPriceData = location?.state?.cartPriceData;
+  }
+
+  console.log(cartPriceData);
   const isBuyNow = course === 'directly';
 
   let API_URL;
@@ -49,7 +55,7 @@ const Order = () => {
   const getUserData = () => {
     // fetch(`${API.CART}/getuserinfo`, {
     // fetch(`/data/CartGetUserInfoData.json`, {
-    fetch('http://10.58.52.140:8000/carts/getuserinfo', {
+    fetch('http://10.58.52.176:8000/carts/getuserinfo', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -138,7 +144,8 @@ const Order = () => {
 
   // 통합 함수
   const getOrderData = () => {
-    fetch(API_URL, {
+    // fetch(API_URL, {
+    fetch('http://10.58.52.176:8000/carts/complete', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
