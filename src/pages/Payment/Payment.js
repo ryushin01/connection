@@ -24,18 +24,17 @@ const Payment = () => {
     products,
     productName,
     course = null;
-  if (location.state != null) {
-    userId = location.state.userId;
-    totalPrice = location.state.totalPrice;
-    shippingMethod = location.state.shippingMethod;
-    paymentId = location.state.paymentId;
-    products = location.state.products;
-    productName = location.state.productName;
-    course = location.state.course;
+  if (location?.state != null) {
+    userId = location?.state?.userId;
+    totalPrice = location?.state?.totalPrice;
+    shippingMethod = location?.state?.shippingMethod;
+    paymentId = location?.state?.paymentId;
+    products = location?.state?.products;
+    productName = location?.state?.productName;
+    course = location?.state?.course;
   }
 
-  console.log(totalPrice);
-
+  const isVisiting = shippingMethod === 'visiting';
   const isBuyNow = course === 'directly';
 
   let API_URL;
@@ -65,10 +64,14 @@ const Payment = () => {
     })
       .then(response => response.json())
       .then(result => {
-        console.log(result);
         setPaymentComplete(true);
         setLoading(false);
       });
+  };
+
+  const goToMain = () => {
+    navigate('/main');
+    window.location.reload();
   };
 
   return (
@@ -133,8 +136,8 @@ const Payment = () => {
                       <tr>
                         <th>배송비</th>
                         <td>
-                          무료&nbsp;(배송 방법:{' '}
-                          {shippingMethod === 1 ? '직접수령' : '택배배송'})
+                          무료&nbsp;&nbsp;&nbsp;*배송 방법:&nbsp;
+                          {isVisiting ? '직접 수령' : '택배 배송'}
                         </td>
                       </tr>
                       <tr>
@@ -169,24 +172,6 @@ const Payment = () => {
                   content="결제하기"
                   onClick={postPaymentData}
                 />
-                {/* {course !== 'directly' && (
-                  <Button
-                    shape="solid"
-                    color="primary"
-                    size="large"
-                    content="결제하기"
-                    onClick={postCartPayment}
-                  />
-                )}
-                {course === 'directly' && (
-                  <Button
-                    shape="solid"
-                    color="primary"
-                    size="large"
-                    content="결제하기"
-                    onClick={postBuyNowPayment}
-                  />
-                )} */}
               </ButtonGroup>
             </Before>
           )}
@@ -213,7 +198,7 @@ const Payment = () => {
                   color="primary"
                   size="large"
                   content="메인 화면으로 돌아가기"
-                  onClick={() => navigate('/')}
+                  onClick={goToMain}
                 />
               </ButtonGroup>
             </After>

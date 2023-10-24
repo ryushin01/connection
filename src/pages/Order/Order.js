@@ -210,11 +210,11 @@ const Order = () => {
     navigate('/payment', {
       state: {
         userId: userId,
-        totalPrice: sumCartDataValues.totalPrice || totalPrice,
+        totalPrice: sumCartDataValues?.totalPrice || totalPrice,
         shippingMethod: shippingMethod,
         paymentId: paymentId,
-        // products: cartData,
-        products: productData,
+        products: cartData,
+        // [바로구매] products: productData,
         productName: cartData[0].productName,
         course: course,
       },
