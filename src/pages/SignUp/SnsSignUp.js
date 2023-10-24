@@ -38,7 +38,7 @@ const SnsSignUp = props => {
 
   const postSignUp = () => {
     // 회원가입 API 실행
-    fetch('http://10.58.52.64:8000/users/kakao/address', {
+    fetch('http://10.58.52.126:8000/users/kakao/address', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
