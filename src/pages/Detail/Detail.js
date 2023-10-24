@@ -24,7 +24,7 @@ const Detail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = params;
-  const intId = Number(params?.id);
+  const productId = Number(params?.id);
 
   const productData = {
     productId: productId,
@@ -33,7 +33,8 @@ const Detail = () => {
 
   function getDetailData() {
     // fetch('/data/detailData.json', {
-    fetch(`http://10.58.52.203:8000/products/${intId}`, {
+    // fetch(`http://10.58.52.203:8000/products/${intId}`, {
+    fetch(`http://10.58.52.203:8000/products/${productId}`, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -55,7 +56,7 @@ const Detail = () => {
   }, []);
 
   const {
-    productId,
+    // productId,
     productName,
     productImg,
     discountRate,
