@@ -4,17 +4,20 @@ import { useDispatch } from 'react-redux';
 import CheckBox from '../../components/CheckBox/CheckBox';
 import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
+import { useDispatch } from 'react-redux';
+import CartCount from '../../components/CartCount/CartCount';
 import styled from 'styled-components';
 
 const Cart = () => {
   // [Redux] 카운터에 dispatch 적용 필요
   // hook
-  const [quantity, setQuantity] = useState({});
+  const [quantity, setQuantity] = useState({
+    count: 1,
+  });
   const [cartData, setCartData] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false); // 1. 전체 선택 체크박스 상태 확인용  State 생성
   const [checkItem, setCheckItem] = useState([]);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // function
   const getMokData = () => {
@@ -22,7 +25,6 @@ const Cart = () => {
       .then(Response => Response.json())
       .then(result => setCartData(result.data));
   };
-
   // 전체선택 시 현재 체크 된 체크박스와 전체 체크박스의 수를 비교하기 위한 함수
   const cartListData =
     cartData !== undefined &&
@@ -223,6 +225,43 @@ const Cart = () => {
       });
   };
 
+  const handleQuantityChange = (productId, newQuantity) => {
+    // cartCount Component에서 받아온 productId와 newQuantity를 매개변수로 받음
+    fetch('http://10.58.52.207:8000/carts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify({ data: { productId, quantity: newQuantity } }), // productId가 같은 제품의 수량이 변경되는 것을 감지하고 변경된 값으로 POST 요청
+    })
+      .then(response => response.json())
+      .then(result => getCartInfoData()) // 정상적으로 통신이 되었으면 장바구니 데이터를 다시 불러옴.
+      .catch(err => console.log(err));
+  };
+
+  // 함수를 이용하여 수량을 변경해야할 때 사용
+  // const changeQuantity = (productId, newQuantity) => { // cartCount Component에서 받아온 productId와 newQuantity를 매개변수로 받음
+  //   const nextCarts = cartData.map(cart => { // cartData를 map으로 돌려서 cart에 넣어줌
+  //     const nextProducts = cart.products.map(product => { // cart의 products를 map으로 돌려서 product에 넣어줌
+  //       if (product.productId === productId) { // product의 productId가 cartCount Component에서 받아온 productId와 같으면
+  //         return { // product를 return
+  //           ...product, // 기존의 product를 그대로 유지하고
+  //           quantity: newQuantity, // quantity를 cartCount Component에서 받아온 newQuantity로 변경
+  //         };
+  //       }
+  //       return product; // product의 productId가 cartCount Component에서 받아온 productId와 같지 않으면 product를 그대로 return
+  //     });
+
+  //     return { // cart를 return
+  //       ...cart, // 기존의 cart를 그대로 유지하고
+  //       products: nextProducts, // products를 nextProducts로 변경
+  //     };
+  //   });
+
+  //   setCartData(nextCarts); // 변경된 cartData를 setCartData로 변경
+  // };
+
   // useEffect
   // 백엔드에 요청한 상품을 불러오기 위한 useEffect
   useEffect(() => {
@@ -328,9 +367,10 @@ const Cart = () => {
                             </CartItemLi>
                             <CartItemLi>
                               <CartItemCounterWrap>
-                                <Counter
+                                <CartCount
+                                  productId={item.productId}
                                   quantity={item.quantity}
-                                  setQuantity={setQuantity}
+                                  onQuantityChange={handleQuantityChange}
                                 />
                               </CartItemCounterWrap>
                             </CartItemLi>

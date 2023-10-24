@@ -1,90 +1,39 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import styled, { css } from 'styled-components';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-function CartCount({ quantity, setQuantity }) {
-  const dispatch = useDispatch();
-
-  const counter = (e, quantity) => {
-    let target = e.target.name;
-
-    if (target === 'minus') {
-      if (quantity <= 1) {
-        alert('1개부터 구매가 가능합니다.');
-      } else {
-        setQuantity(quantity - 1);
-      }
-    } else if (target === 'plus') {
-      setQuantity(quantity + 1);
-    } else {
-      setQuantity(1);
-    }
-  };
-
+function CartCount({ onQuantityChange, productId, quantity }) {
+  // 부모 컴포넌트에서 받아온 props
+  const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, '10+']; // 옵션 value 값을 map으로 돌리기 위한 배열 변수
   return (
-    <CounterWrap>
-      <MinusButton
-        name="minus"
-        onClick={e => {
-          counter(e, quantity);
-        }}
-      />
-      <CountDisplay>{quantity}</CountDisplay>
-      <PlusButton
-        name="plus"
-        onClick={e => {
-          counter(e, quantity);
-        }}
-      />
-    </CounterWrap>
+    <SelectCounterWrap>
+      <select
+        onChange={e => onQuantityChange(productId, e.target.value)} // 부모 컴포넌트에서 받아온 함수에 productId와 선택한 옵션 value 값을 넘겨줌
+        value={quantity} // 서버에서 받아온 quantity 값으로 초기화
+      >
+        {options.map((option, index) => {
+          // 옵션 value 값으로 map 돌리기
+          return (
+            <option value={option} key={index}>
+              {option}
+            </option>
+          );
+        })}
+      </select>
+    </SelectCounterWrap>
   );
 }
 
-const FlexCenter = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const CounterWrap = styled.div`
-  ${FlexCenter};
-
-  button {
-    width: 44px;
-    height: 44px;
-    border: 1px ${props => props.theme.grayscaleF} solid;
-    font-size: 32px;
-    line-height: 50px;
-    color: ${props => props.theme.grayscaleF};
-
-    &:hover {
-      background-color: ${props => props.theme.grayscaleF};
-      color: ${props => props.theme.grayscaleA};
-    }
-  }
-`;
-
-const CountDisplay = styled.span`
-  ${FlexCenter};
-  flex: 1;
-  height: 44px;
-  border-top: 1px ${props => props.theme.grayscaleF} solid;
-  border-bottom: 1px ${props => props.theme.grayscaleF} solid;
-  text-align: center;
-`;
-
-const MinusButton = styled.button`
-  border-radius: 4px 0 0 4px;
-  &::before {
-    content: '-';
-  }
-`;
-
-const PlusButton = styled.button`
-  border-radius: 0 4px 4px 0;
-  &::before {
-    content: '+';
-  }
-`;
-
 export default CartCount;
+
+const SelectCounterWrap = styled.div`
+  display: flex;
+  width: 100%;
+
+  select {
+    width: 150px;
+    height: 24px;
+    padding-left: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+`;
