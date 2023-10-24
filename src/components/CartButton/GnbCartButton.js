@@ -15,8 +15,6 @@ const GnbCartButton = () => {
     return state;
   });
 
-  console.log(state);
-
   // store에서 꺼내온 데이터를 배열 순회하면서 총 수량을 구합니다. 그리고 이 수량을 GNB의 장바구니 버튼 옆에 표시합니다.
   const sumQuantity = state => {
     if (Array.isArray(state)) {

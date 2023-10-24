@@ -43,15 +43,8 @@ const Payment = () => {
     API_URL = `${API.ORDERS}`;
   }
 
-  // let randomValue;
-  // const random = () => {
-  //   randomValue = Math.random().toString(36).substring(2, 10);
-  //   return randomValue;
-  // };
-
   let randomValue = Math.random().toString(36).substring(2, 12);
-
-  console.log(randomValue);
+  const merchant_uid = `2023-10-${randomValue}`;
 
   const IMP = window.IMP;
   IMP.init('imp62852632');
@@ -59,18 +52,9 @@ const Payment = () => {
   const requestPay = () => {
     IMP.request_pay(
       {
-        // param
         pg: 'TC0ONETIME',
         pay_method: 'card',
-        // merchant_uid: 'ORD20180131-0000011',
-        merchant_uid: randomValue,
-        name: '노르웨이 회전 의자',
-        amount: 64900,
-        buyer_email: 'gildong@gmail.com',
-        buyer_name: '홍길동',
-        buyer_tel: '010-4242-4242',
-        buyer_addr: '서울특별시 강남구 신사동',
-        buyer_postcode: '01181',
+        merchant_uid: merchant_uid,
       },
       rsp => {
         // callback
