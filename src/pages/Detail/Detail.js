@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { API } from '../../config';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { API } from '../../../config';
+import { API } from '../../config';
 import { useDispatch } from 'react-redux';
 import Loading from '../Loading/Loading';
 import Rating from '../../components/Rating/Rating';
