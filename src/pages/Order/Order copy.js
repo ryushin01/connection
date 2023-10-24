@@ -26,6 +26,8 @@ const Order = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // 장바구니에서 들어왔을 때와 바로구매에서 들어왔을 때를 분기해야 합니다.
+
   let productId,
     quantity,
     course = null;
@@ -35,16 +37,7 @@ const Order = () => {
     course = location.state.course;
   }
 
-  const isBuyNow = course === 'directly';
-
-  let API_URL;
-  if (isBuyNow) {
-    // 바로구매
-    API_URL = `${API.LIST}/${productId}`;
-  } else {
-    // 장바구니
-    API_URL = `${API.CART}/complete`;
-  }
+  // let A
 
   const getUserData = () => {
     // fetch(`${API.CART}/getuserinfo`, {
@@ -77,24 +70,24 @@ const Order = () => {
   } = userData;
 
   // 장바구니 로직 시 제품 정보 수급 함수입니다.
-  // const getCartData = () => {
-  //   // fetch(`/data/CartCompleteData.json`, {
-  //   // fetch('http://10.58.52.140:8000/carts/complete', {
-  //   fetch(API_URL, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       authorization: localStorage.getItem('accessToken'),
-  //     },
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       if (result.message === 'Order_Item') {
-  //         setCartData(result?.data[0].products);
-  //         setLoading(false);
-  //       }
-  //     });
-  // };
+  const getCartData = () => {
+    // fetch(`${API.CART}/complete`, {
+    // fetch(`/data/CartCompleteData.json`, {
+    fetch('http://10.58.52.140:8000/carts/complete', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Order_Item') {
+          setCartData(result?.data[0].products);
+          setLoading(false);
+        }
+      });
+  };
 
   const sumCartData = data => {
     if (Array.isArray(data)) {
@@ -114,31 +107,9 @@ const Order = () => {
   const sumCartDataValues = sumCartData(cartData);
 
   // 바로구매 로직 시 제품 정보 수급 함수입니다.
-  // const getBuyNowData = () => {
-  //   // fetch(`${API.LIST}/${productId}`, {
-  //   // fetch('http://10.58.52.203:8000/products/1', {
-  //   fetch(API_URL, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       authorization: localStorage.getItem('accessToken'),
-  //     },
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       if (result.message === 'Success') {
-  //         setCartData(result?.product);
-  //         setLoading(false);
-  //         console.log('바로구매(주문)');
-
-  //         console.log(result);
-  //       }
-  //     });
-  // };
-
-  // 통합 함수
-  const getOrderData = () => {
-    fetch(API_URL, {
+  const getBuyNowData = () => {
+    // fetch(`${API.LIST}/${productId}`, {
+    fetch('http://10.58.52.203:8000/products/1', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -147,34 +118,32 @@ const Order = () => {
     })
       .then(response => response.json())
       .then(result => {
-        if (result.message === 'Order_Item') {
-          if (isBuyNow) {
-            setCartData(result?.product);
-          } else {
-            setCartData(result?.data[0].products);
-          }
+        if (result.message === 'Success') {
+          setCartData(result?.product);
           setLoading(false);
+          console.log('바로구매(주문)');
+
+          console.log(result);
         }
       });
-  };
-
-  const selectingSentry = e => {
-    const { value } = e.target;
-    setShippingMethod(value);
   };
 
   useEffect(() => {
     setLoading(true);
     getUserData();
-    getOrderData();
 
-    // if (course === 'directly') {
-    //   getBuyNowData();
-    // } else {
-    //   getCartData();
-    // }
+    if (course === 'directly') {
+      getBuyNowData();
+    } else {
+      getCartData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const selectingSentry = e => {
+    const { value } = e.target;
+    setShippingMethod(value);
+  };
 
   const dataTransfer = () => {
     navigate('/payment', {

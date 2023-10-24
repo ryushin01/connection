@@ -32,10 +32,20 @@ const Payment = () => {
     course = location.state.course;
   }
 
-  // 장바구니 로직의 최종 함수
-  const postCartPayment = () => {
-    // fetch(`${API.ORDERS}`, {
-    fetch('http://10.58.52.59:8000/orders', {
+  const isBuyNow = course === 'directly';
+
+  let API_URL;
+  if (isBuyNow) {
+    // 바로구매
+    API_URL = `${API.ORDERS}/now`;
+  } else {
+    // 장바구니
+    API_URL = `${API.ORDERS}`;
+  }
+
+  // 통합 함수
+  const postPaymentData = () => {
+    fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -56,29 +66,53 @@ const Payment = () => {
       });
   };
 
+  // 장바구니 로직의 최종 함수
+  // const postCartPayment = () => {
+  //   // fetch(`${API.ORDERS}`, {
+  //   fetch('http://10.58.52.59:8000/orders', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       authorization: localStorage.getItem('accessToken'),
+  //     },
+  //     body: JSON.stringify({
+  //       userId: userId,
+  //       totalPrice: totalPrice,
+  //       shippingMethod: shippingMethod,
+  //       paymentId: paymentId,
+  //       products: products,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       setPaymentComplete(true);
+  //       setLoading(false);
+  //     });
+  // };
+
   // 바로구매 로직의 최종 함수
-  const postBuyNowPayment = () => {
-    // fetch(`${API.ORDERS}/now`, {
-    fetch('http://10.58.52.149:8000/orders/now', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: localStorage.getItem('accessToken'),
-      },
-      body: JSON.stringify({
-        userId: userId,
-        totalPrice: totalPrice,
-        shippingMethod: shippingMethod,
-        paymentId: paymentId,
-        products: products,
-      }),
-    })
-      .then(response => response.json())
-      .then(result => {
-        setPaymentComplete(true);
-        setLoading(false);
-      });
-  };
+  // const postBuyNowPayment = () => {
+  //   // fetch(`${API.ORDERS}/now`, {
+  //   fetch('http://10.58.52.149:8000/orders/now', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       authorization: localStorage.getItem('accessToken'),
+  //     },
+  //     body: JSON.stringify({
+  //       userId: userId,
+  //       totalPrice: totalPrice,
+  //       shippingMethod: shippingMethod,
+  //       paymentId: paymentId,
+  //       products: products,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       setPaymentComplete(true);
+  //       setLoading(false);
+  //     });
+  // };
 
   useEffect(() => {
     setLoading(true);
@@ -166,7 +200,14 @@ const Payment = () => {
                   content="돌아가기"
                   onClick={() => navigate(-1)}
                 />
-                {course !== 'directly' && (
+                <Button
+                  shape="solid"
+                  color="primary"
+                  size="large"
+                  content="결제하기"
+                  onClick={postPaymentData}
+                />
+                {/* {course !== 'directly' && (
                   <Button
                     shape="solid"
                     color="primary"
@@ -183,7 +224,7 @@ const Payment = () => {
                     content="결제하기"
                     onClick={postBuyNowPayment}
                   />
-                )}
+                )} */}
               </ButtonGroup>
             </Before>
           )}
