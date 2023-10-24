@@ -54,7 +54,7 @@ const SignUp = props => {
 
   const postSignUp = () => {
     // 회원가입 API 실행
-    fetch('http://10.58.52.64:8000/users/signup', {
+    fetch('http://10.58.52.126:8000/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -86,7 +86,7 @@ const SignUp = props => {
 
   const handleDuplicateCheck = () => {
     // 이메일 중복체크 API 실행
-    fetch('http://10.58.52.64:8000/users/duplicate', {
+    fetch('http://10.58.52.126:8000/users/duplicate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

@@ -13,10 +13,10 @@ const SellerSignUp = props => {
     zipCode: '',
     address: '',
     addressDetail: '',
-    image: '',
     phoneNumber: '',
   });
   const [onAddressSelect, setOnAddressSelect] = useState(''); // 우편번호 API 실행 후 받아온 data를 state에 저장
+  const [upLoadedImage, setUpLoadedImage] = useState(null); // 이미지 url state
 
   // var
   const navigate = useNavigate();
@@ -40,21 +40,25 @@ const SellerSignUp = props => {
 
   const postSellerInfoSubmitBtn = e => {
     e.preventDefault();
+    const formData = new FormData(); // formData 생성
+    formData.append('image', upLoadedImage); // formData에 image 추가
 
-    fetch('http://10.58.52.64:8000/users/seller', {
+    const seller = {
+      name: sellerName,
+      zipCode,
+      address,
+      addressDetails: addressDetail,
+      phoneNumber,
+    };
+    formData.append('seller', JSON.stringify(seller)); // formData에 seller 추가(JSON 형식으로 저장)
+
+    fetch('http://10.58.52.126:8000/users/seller', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json;charset=utf-8',
+        // 'Content-Type': 'multipart/form-data', // formData를 사용할 때는 Content-Type을 지정하지 않는다. form 태그의 enctype 속성을 사용하면 자동으로 multipart/form-data로 설정된다.
         Authorization: localStorage.getItem('accessToken'),
       },
-      body: JSON.stringify({
-        name: sellerName,
-        image: 'no-image.jpg',
-        zipCode: zipCode,
-        address: address,
-        addressDetails: addressDetail,
-        phoneNumber: phoneNumber,
-      }),
+      body: formData,
     })
       .then(response => response.json())
       .then(result => {
@@ -81,6 +85,7 @@ const SellerSignUp = props => {
             <SellerSignUpForm
               onSubmit={postSellerInfoSubmitBtn}
               onChange={handleSellerInfo}
+              encType="multipart/form-data"
             >
               <fieldset>
                 <SellerSignUpLegend>셀러 회원가입</SellerSignUpLegend>
@@ -103,6 +108,8 @@ const SellerSignUp = props => {
                   name="image"
                   borderRadius="4px"
                   placeholder="이미지"
+                  upLoadedImage={upLoadedImage}
+                  setUpLoadedImage={setUpLoadedImage}
                 />
               </SellerSignUpInputWrap>
 
