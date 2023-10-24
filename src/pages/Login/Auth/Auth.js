@@ -9,7 +9,7 @@ const Auth = () => {
   const searchParam = searchParams.get('code');
 
   const getSnsCode = () => {
-    fetch(`http://10.58.52.64:8000/users/kakao/callback?code=${searchParam}`, {
+    fetch(`http://10.58.52.126:8000/users/kakao/callback?code=${searchParam}`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -18,6 +18,7 @@ const Auth = () => {
       .then(response => response.json())
 
       .then(result => {
+        console.log(result);
         if (
           result.message === 'SUCCESS' &&
           result.accessToken.isAddress === false

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CheckBox from '../../components/CheckBox/CheckBox';
 import Button from '../../components/Button/Button';
 import CartCount from '../../components/CartCount/CartCount';
@@ -179,7 +179,15 @@ const Cart = () => {
     })
       .then(response => response.json())
       .then(result => {
-        navigate('/order');
+        navigate(`/order`, {
+          state: {
+            cartPriceData: {
+              totalOriginalPrice,
+              totalDiscountAmount,
+              totalPrice,
+            },
+          },
+        });
       });
   };
 
@@ -265,8 +273,8 @@ const Cart = () => {
   // useEffect
   // 백엔드에 요청한 상품을 불러오기 위한 useEffect
   useEffect(() => {
-    getMokData();
-    // getCartInfoData();
+    // getMokData();
+    getCartInfoData();
   }, []);
 
   return (
