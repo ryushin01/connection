@@ -106,7 +106,7 @@ const Order = () => {
   const sumCartDataValues = sumCartData(cartData);
 
   // 바로구매 로직 시 제품 정보 수급 함수입니다.
-  const getBuyNowCartData = () => {
+  const getBuyNowData = () => {
     // fetch(`${API.LIST}/${productId}`, {
     fetch('http://10.58.52.203:8000/products/1', {
       method: 'GET',
@@ -132,7 +132,7 @@ const Order = () => {
     getUserData();
 
     if (course === 'directly') {
-      getBuyNowCartData();
+      getBuyNowData();
     } else {
       getCartData();
     }

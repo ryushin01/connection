@@ -51,8 +51,8 @@ const Payment = () => {
     })
       .then(response => response.json())
       .then(result => {
-        console.log(result);
         setPaymentComplete(true);
+        setLoading(false);
       });
   };
 
@@ -76,8 +76,13 @@ const Payment = () => {
       .then(response => response.json())
       .then(result => {
         setPaymentComplete(true);
+        setLoading(false);
       });
   };
+
+  useEffect(() => {
+    setLoading(true);
+  }, []);
 
   return (
     <>
