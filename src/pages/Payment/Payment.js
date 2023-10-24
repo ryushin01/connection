@@ -22,16 +22,19 @@ const Payment = () => {
     shippingMethod,
     paymentId,
     products,
+    productName,
     course = null;
-  if (location.state != null) {
-    userId = location.state.userId;
-    totalPrice = location.state.totalPrice;
-    shippingMethod = location.state.shippingMethod;
-    paymentId = location.state.paymentId;
-    products = location.state.products;
-    course = location.state.course;
+  if (location?.state != null) {
+    userId = location?.state?.userId;
+    totalPrice = location?.state?.totalPrice;
+    shippingMethod = location?.state?.shippingMethod;
+    paymentId = location?.state?.paymentId;
+    products = location?.state?.products;
+    productName = location?.state?.productName;
+    course = location?.state?.course;
   }
 
+  const isVisiting = shippingMethod === 'visiting';
   const isBuyNow = course === 'directly';
 
   let API_URL;
@@ -66,57 +69,10 @@ const Payment = () => {
       });
   };
 
-  // 장바구니 로직의 최종 함수
-  // const postCartPayment = () => {
-  //   // fetch(`${API.ORDERS}`, {
-  //   fetch('http://10.58.52.59:8000/orders', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       authorization: localStorage.getItem('accessToken'),
-  //     },
-  //     body: JSON.stringify({
-  //       userId: userId,
-  //       totalPrice: totalPrice,
-  //       shippingMethod: shippingMethod,
-  //       paymentId: paymentId,
-  //       products: products,
-  //     }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       setPaymentComplete(true);
-  //       setLoading(false);
-  //     });
-  // };
-
-  // 바로구매 로직의 최종 함수
-  // const postBuyNowPayment = () => {
-  //   // fetch(`${API.ORDERS}/now`, {
-  //   fetch('http://10.58.52.149:8000/orders/now', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       authorization: localStorage.getItem('accessToken'),
-  //     },
-  //     body: JSON.stringify({
-  //       userId: userId,
-  //       totalPrice: totalPrice,
-  //       shippingMethod: shippingMethod,
-  //       paymentId: paymentId,
-  //       products: products,
-  //     }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       setPaymentComplete(true);
-  //       setLoading(false);
-  //     });
-  // };
-
-  useEffect(() => {
-    setLoading(true);
-  }, []);
+  const goToMain = () => {
+    navigate('/main');
+    window.location.reload();
+  };
 
   return (
     <>
@@ -144,16 +100,25 @@ const Payment = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {products?.map(
-                        ({ productName, quantity, totalPrice }, index) => {
-                          return (
-                            <tr key={index}>
-                              <th>{productName}</th>
-                              <td>{quantity}</td>
-                              <td>{totalPrice.toLocaleString()}원</td>
-                            </tr>
-                          );
-                        },
+                      {!isBuyNow &&
+                        products?.map(
+                          ({ productName, quantity, totalPrice }, index) => {
+                            return (
+                              <tr key={index}>
+                                <th>{productName}</th>
+                                <td>{quantity}</td>
+                                <td>{totalPrice.toLocaleString()}원</td>
+                              </tr>
+                            );
+                          },
+                        )}
+
+                      {isBuyNow && (
+                        <tr>
+                          <th>{productName}</th>
+                          <td>{products[0]?.quantity}</td>
+                          <td>{totalPrice.toLocaleString()}원</td>
+                        </tr>
                       )}
                     </tbody>
                   </SectionTable>
@@ -171,8 +136,8 @@ const Payment = () => {
                       <tr>
                         <th>배송비</th>
                         <td>
-                          무료(배송 방법:{' '}
-                          {shippingMethod === 1 ? '직접수령' : '택배배송'})
+                          무료&nbsp;&nbsp;&nbsp;*배송 방법:&nbsp;
+                          {isVisiting ? '직접 수령' : '택배 배송'}
                         </td>
                       </tr>
                       <tr>
@@ -207,24 +172,6 @@ const Payment = () => {
                   content="결제하기"
                   onClick={postPaymentData}
                 />
-                {/* {course !== 'directly' && (
-                  <Button
-                    shape="solid"
-                    color="primary"
-                    size="large"
-                    content="결제하기"
-                    onClick={postCartPayment}
-                  />
-                )}
-                {course === 'directly' && (
-                  <Button
-                    shape="solid"
-                    color="primary"
-                    size="large"
-                    content="결제하기"
-                    onClick={postBuyNowPayment}
-                  />
-                )} */}
               </ButtonGroup>
             </Before>
           )}
@@ -239,19 +186,19 @@ const Payment = () => {
                 </SectionInnerWrap>
               </Section>
               <ButtonGroup>
-                <Button
+                {/* <Button
                   shape="solid"
                   color="neutral"
                   size="large"
                   content="주문 내역 확인하러 가기"
                   onClick={() => navigate('/mypage')}
-                />
+                /> */}
                 <Button
                   shape="solid"
                   color="primary"
                   size="large"
                   content="메인 화면으로 돌아가기"
-                  onClick={() => navigate('/')}
+                  onClick={goToMain}
                 />
               </ButtonGroup>
             </After>

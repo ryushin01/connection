@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API } from '../../config';
 import DaumPostCode from './DaumPostCode/DaumPostCode';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
@@ -40,6 +41,7 @@ const SellerSignUp = props => {
 
   const postSellerInfoSubmitBtn = e => {
     e.preventDefault();
+
     const formData = new FormData(); // formData 생성
     formData.append('image', upLoadedImage); // formData에 image 추가
 
@@ -51,8 +53,8 @@ const SellerSignUp = props => {
       phoneNumber,
     };
     formData.append('seller', JSON.stringify(seller)); // formData에 seller 추가(JSON 형식으로 저장)
-
-    fetch('http://10.58.52.126:8000/users/seller', {
+    // fetch('http://10.58.52.64:8000/users/seller', {
+    fetch(`${API.USERS}/seller`, {
       method: 'POST',
       headers: {
         // 'Content-Type': 'multipart/form-data', // formData를 사용할 때는 Content-Type을 지정하지 않는다. form 태그의 enctype 속성을 사용하면 자동으로 multipart/form-data로 설정된다.

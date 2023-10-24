@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API } from '../../config';
 import styled from 'styled-components';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 
-const Login = ({ getAccessToken }) => {
+const Login = () => {
   const [userInfo, setUserInfo] = useState({
     // 로그인 Valid를 위한 state
     email: '',
@@ -42,6 +43,7 @@ const Login = ({ getAccessToken }) => {
 
   const postUserInfo = () => {
     fetch('http://10.58.52.126:8000/users/', {
+      // fetch(`${API.USERS}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -55,9 +57,9 @@ const Login = ({ getAccessToken }) => {
       .then(result => {
         if (result.message === 'SUCCESS') {
           localStorage.setItem('accessToken', result.accessToken.accessToken); // 로그인 성공 시 accessToken을 localStorage에 저장
-          localStorage.setItem('seller', result.accessToken.isSeller);
-          localStorage.setItem('point', result.accessToken.points);
-          getAccessToken();
+          localStorage.setItem('isSeller', result.accessToken.isSeller);
+          localStorage.setItem('points', result.accessToken.points);
+          localStorage.setItem('cartCount', result.accessToken.cartCount);
           navigate('/');
         } else {
           alert('로그인 실패하였습니다. 다시 시도해주세요.');

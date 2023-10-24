@@ -4,8 +4,7 @@ import { ReactComponent as AdminIcon } from '../../../svg/icon_admin.svg';
 import { ReactComponent as LogoutIcon } from '../../../svg/icon_logout.svg';
 import styled, { css } from 'styled-components';
 
-const isLogin = localStorage.getItem('accessToken');
-const isSeller = true;
+// const isLogin = localStorage.getItem('accessToken');
 
 const RestApiKey = process.env.REACT_APP_RestApiKey;
 const RedirectUri = process.env.REACT_APP_LOGOUT_REDIRECT_URI;
@@ -18,7 +17,7 @@ const postKakaoLogout = () => {
     alert('로그인이 되어있지 않습니다.');
     return;
   } else {
-    localStorage.removeItem('accessToken');
+    localStorage.clear();
     alert('로그아웃 되었습니다.');
     window.location.reload();
     window.location.href = kakaoURL;
@@ -32,24 +31,24 @@ const logout = () => {
 const Account = () => {
   return (
     <AccountList>
-      {isLogin && (
-        <>
-          {isSeller && (
-            <li>
-              <Link to="/">
-                <AdminIcon />
-                관리자
-              </Link>
-            </li>
-          )}
-          <li>
-            <button type="button" onClick={logout}>
-              <LogoutIcon />
-              로그아웃
-            </button>
-          </li>
-        </>
-      )}
+      {/* {isLogin && ( */}
+      <>
+        {/* {isSeller && ( */}
+        <li>
+          <Link to="/">
+            <AdminIcon />
+            관리자
+          </Link>
+        </li>
+        {/* )} */}
+        <li>
+          <button type="button" onClick={logout}>
+            <LogoutIcon />
+            로그아웃
+          </button>
+        </li>
+      </>
+      {/* )} */}
     </AccountList>
   );
 };

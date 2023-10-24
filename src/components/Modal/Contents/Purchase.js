@@ -24,6 +24,8 @@ const Purchase = ({ productId, productName, totalPrice, onClose }) => {
     quantity: quantity,
   };
 
+  console.log(productData);
+
   const finalPrice = totalPrice * quantity;
 
   const cartProcess = () => {
@@ -33,7 +35,8 @@ const Purchase = ({ productId, productName, totalPrice, onClose }) => {
 
   const postOrder = () => {
     // fetch('http://10.58.52.149:8000/order', {
-    fetch('http://10.58.52.140:8000/carts', {
+    // fetch('http://10.58.52.140:8000/carts', {
+    fetch(`${API.CART}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

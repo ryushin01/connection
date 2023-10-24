@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { API } from '../../../config';
 import ProductDescription from '../ProductDescription/ProductDescription';
 import ProductReview from '../ProductReview/ProductReview';
 import styled, { css } from 'styled-components';
@@ -20,7 +21,8 @@ const DetailTab = ({ productId, productDetailImages, reviewNumbers }) => {
   };
 
   function getReviewData() {
-    fetch(`http://10.58.52.203:8000/reviews/${productId}`, {
+    // fetch(`http://10.58.52.203:8000/reviews/${productId}`, {
+    fetch(`${API.REVIEWS}/${productId}`, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',

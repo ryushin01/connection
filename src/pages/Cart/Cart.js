@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { API } from '../../config';
 import CheckBox from '../../components/CheckBox/CheckBox';
 import Button from '../../components/Button/Button';
 import CartCount from '../../components/CartCount/CartCount';
@@ -150,10 +151,11 @@ const Cart = () => {
   };
 
   // 장바구니를 데이터 가져오기 위한 GET 요청
-  const FETCH_URL = 'http://10.58.52.176:8000/carts';
+  // const FETCH_URL = 'http://10.58.52.176:8000/carts';
 
   const getCartInfoData = () => {
-    fetch(FETCH_URL, {
+    // fetch(FETCH_URL, {
+    fetch(`${API.CART}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -169,7 +171,8 @@ const Cart = () => {
 
   // 장바구니에서 선택한 상품을 주문하기 위한 PATCH 요청
   const patchCheckItemBtn = () => {
-    fetch(FETCH_URL, {
+    // fetch(FETCH_URL, {
+    fetch(`${API.CART}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -207,7 +210,8 @@ const Cart = () => {
 
   // 장바구니에서 선택한 상품을 삭제하기 위한 DELETE 요청
   const deleteCheckItemBtn = () => {
-    fetch(FETCH_URL, {
+    // fetch(FETCH_URL, {
+    fetch(`${API.CART}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -226,7 +230,8 @@ const Cart = () => {
 
   const handleQuantityChange = (productId, newQuantity) => {
     // cartCount Component에서 받아온 productId와 newQuantity를 매개변수로 받음
-    fetch(FETCH_URL + '/updatequantity', {
+    // fetch(FETCH_URL + '/updatequantity', {
+    fetch(`${API.CART}/updatequantity`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

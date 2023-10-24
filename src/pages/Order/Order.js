@@ -35,27 +35,38 @@ const Order = () => {
     course = location?.state?.course;
   }
 
-  let cartPriceData = null;
+  console.log(quantity);
+
+  // Payment.js로 전달할 데이터 모음
+  let cartPriceData,
+    totalPrice = null;
   if (location?.state?.cartPriceData !== null) {
     cartPriceData = location?.state?.cartPriceData;
+    totalPrice = location?.state?.cartPriceData?.totalPrice;
   }
 
-  console.log(cartPriceData);
   const isBuyNow = course === 'directly';
 
   let API_URL;
+  let productData;
   if (isBuyNow) {
     // 바로구매
     API_URL = `${API.LIST}/${productId}`;
+
+    productData = [
+      {
+        productId: productId,
+        quantity: quantity,
+      },
+    ];
   } else {
     // 장바구니
     API_URL = `${API.CART}/complete`;
   }
 
   const getUserData = () => {
-    // fetch(`${API.CART}/getuserinfo`, {
-    // fetch(`/data/CartGetUserInfoData.json`, {
-    fetch('http://10.58.52.176:8000/carts/getuserinfo', {
+    fetch(`${API.CART}/getuserinfo`, {
+      // fetch(`/data/CartGetUserInfoData.json`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +76,7 @@ const Order = () => {
       .then(response => response.json())
       .then(result => {
         if (result.message === 'userInformation') {
-          setUserData(result?.data[0]);
+          setUserData(result?.data);
         }
 
         setLoading(false);
@@ -81,26 +92,6 @@ const Order = () => {
     zipCode,
     isSubscribe,
   } = userData;
-
-  // 장바구니 로직 시 제품 정보 수급 함수입니다.
-  // const getCartData = () => {
-  //   // fetch(`/data/CartCompleteData.json`, {
-  //   // fetch('http://10.58.52.140:8000/carts/complete', {
-  //   fetch(API_URL, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       authorization: localStorage.getItem('accessToken'),
-  //     },
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       if (result.message === 'Order_Item') {
-  //         setCartData(result?.data[0].products);
-  //         setLoading(false);
-  //       }
-  //     });
-  // };
 
   const sumCartData = data => {
     if (Array.isArray(data)) {
@@ -119,7 +110,6 @@ const Order = () => {
 
   const sumCartDataValues = sumCartData(cartData);
 
-  // 바로구매 로직 시 제품 정보 수급 함수입니다.
   // const getBuyNowData = () => {
   //   // fetch(`${API.LIST}/${productId}`, {
   //   // fetch('http://10.58.52.203:8000/products/1', {
@@ -144,8 +134,8 @@ const Order = () => {
 
   // 통합 함수
   const getOrderData = () => {
-    // fetch(API_URL, {
-    fetch('http://10.58.52.176:8000/carts/complete', {
+    // fetch('http://10.58.52.176:8000/carts/complete', {
+    fetch(`${API_URL}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -154,14 +144,47 @@ const Order = () => {
     })
       .then(response => response.json())
       .then(result => {
+        console.log(result);
+
+        // 장바구니
         if (result.message === 'Order_Item') {
+          if (!isBuyNow) {
+            setCartData(result?.data.products);
+            setLoading(false);
+          }
+        }
+
+        // 바로구매
+        if (result.message === 'Success') {
           if (isBuyNow) {
             setCartData(result?.product);
-          } else {
-            setCartData(result?.data[0].products);
+            setLoading(false);
           }
-          setLoading(false);
         }
+
+        // if (result.message === 'Cart_Information') {
+        //   if (isBuyNow) {
+        //     setCartData(result?.product);
+        //     console.log('바로구매');
+        //   } else {
+        //     setCartData(result?.data[0].products);
+        //     console.log('장바구니');
+        //   }
+        //   setLoading(false);
+        // }
+
+        // Order_Item: 장바구니 성공 메시지
+        // if (result.message === 'Order_Item') {
+        // if (isBuyNow) {
+        //   setCartData(result?.product);
+        //   console.log('바로구매');
+        // } else {
+        //   setCartData(result?.data[0].products[0]);
+        //   console.log('장바구니');
+        // }
+
+        //   setLoading(false);
+        // }
       });
   };
 
@@ -187,14 +210,18 @@ const Order = () => {
     navigate('/payment', {
       state: {
         userId: userId,
-        totalPrice: sumCartDataValues?.totalPrice,
+        totalPrice: sumCartDataValues?.totalPrice || totalPrice,
         shippingMethod: shippingMethod,
         paymentId: paymentId,
         products: cartData,
+        // [바로구매] products: productData,
+        productName: cartData[0].productName,
         course: course,
       },
     });
   };
+
+  console.log(cartData);
 
   return (
     <>
@@ -251,6 +278,8 @@ const Order = () => {
                         return (
                           <tr key={index}>
                             <th>{productName}</th>
+
+                            {/* 장바구니 로직 */}
                             <td>{quantity}</td>
                             <td>{totalPrice.toLocaleString()}원</td>
                           </tr>
@@ -261,8 +290,10 @@ const Order = () => {
                   <tfoot>
                     <tr>
                       <th>총 금액</th>
-                      <td>{sumCartDataValues.quantity}</td>
-                      <td>{sumCartDataValues.totalPrice.toLocaleString()}원</td>
+                      <td>&nbsp;</td>
+
+                      {/* 장바구니 로직 */}
+                      <td>{totalPrice.toLocaleString()}원</td>
                     </tr>
                   </tfoot>
                 </SectionTable>
