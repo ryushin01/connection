@@ -1,17 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ProductText = ({ productId, productName, originalPrice, totalPrice }) => {
+  const navigate = useNavigate();
+
+  const goToDetail = () => {
+    navigate(`/detail/${productId}`, {
+      state: { productId: productId },
+    });
+  };
+
   return (
     <ProductProductTextWrap>
-      <Link to={`/detail/${productId}`} aria-hidden="true">
+      <button type="button" onClick={goToDetail}>
         <h2>{productName}</h2>
         <strong>
           <span>{originalPrice.toLocaleString()}원</span>
           <span>{totalPrice.toLocaleString()}원</span>
         </strong>
-      </Link>
+      </button>
     </ProductProductTextWrap>
   );
 };
@@ -20,7 +28,7 @@ const ProductProductTextWrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  a {
+  button {
     display: flex;
     flex-direction: column;
     gap: 8px;

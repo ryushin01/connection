@@ -4,7 +4,7 @@ import { ReactComponent as AdminIcon } from '../../../svg/icon_admin.svg';
 import { ReactComponent as LogoutIcon } from '../../../svg/icon_logout.svg';
 import styled, { css } from 'styled-components';
 
-const isLogin = true;
+const isLogin = localStorage.getItem('accessToken');
 const isSeller = true;
 
 const RestApiKey = process.env.REACT_APP_RestApiKey;
@@ -12,36 +12,17 @@ const RedirectUri = process.env.REACT_APP_LOGOUT_REDIRECT_URI;
 const kakaoURL = `https://kauth.kakao.com/oauth/logout?client_id=${RestApiKey}&logout_redirect_uri=${RedirectUri}`;
 
 const postKakaoLogout = () => {
-  const access_token = localStorage.getItem('access_token');
+  const accessToken = localStorage.getItem('accessToken');
 
-  // if (!access_token) {
-  //   alert('로그인이 되어있지 않습니다.');
-  //   return;
-  // } else {
-  //   localStorage.removeItem('access_token');
-  //   alert('로그아웃 되었습니다.');
-  //   window.location.reload();
-  //   window.location.href = kakaoURL;
-  // }
-
-  fetch(`http://10.58.52.246:8000/users/kakao/logout`, {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-      Authorization: `${access_token}`,
-    },
-  })
-    .then(response => response.json())
-    .then(result => {
-      console.log(result);
-      if (result.message === 'SUCCESS') {
-        localStorage.removeItem('access_token');
-        alert('로그아웃 되었습니다.');
-        window.location.reload();
-      } else {
-        alert('로그아웃에 실패하였습니다.');
-      }
-    });
+  if (!accessToken) {
+    alert('로그인이 되어있지 않습니다.');
+    return;
+  } else {
+    localStorage.removeItem('accessToken');
+    alert('로그아웃 되었습니다.');
+    window.location.reload();
+    window.location.href = kakaoURL;
+  }
 };
 
 const logout = () => {

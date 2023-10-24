@@ -17,16 +17,16 @@ const Band = ({ item }) => {
   const navigate = useNavigate();
   const { categoryName, sellerName, categoryId, sellerId, product } = item;
 
-  const goToList = e => {
-    if (categoryId) {
-      navigate(`/products/category/${categoryId}`, {
-        state: { categoryId: categoryId },
-      });
-    } else {
-      navigate(`/products/category/${sellerId}`, {
-        state: { sellerId: sellerId },
-      });
-    }
+  const goToCategoryList = () => {
+    navigate(`/products/category/${categoryId}`, {
+      state: { categoryId: categoryId, sellerId: null },
+    });
+  };
+
+  const goToSellerList = () => {
+    navigate(`/products/category/${sellerId}`, {
+      state: { sellerId: sellerId, categoryId: null },
+    });
   };
 
   return (
@@ -60,9 +60,19 @@ const Band = ({ item }) => {
             </SwiperNextBtn>
           </SwiperController>
         </Swiper>
-        <BandListLink onClick={goToList} aria-label="밴드 목록 더보기">
-          <MoreIcon />
-        </BandListLink>
+        {categoryId && (
+          <BandListLink
+            aria-label="밴드 목록 더보기"
+            onClick={goToCategoryList}
+          >
+            <MoreIcon />
+          </BandListLink>
+        )}
+        {sellerId && (
+          <BandListLink aria-label="밴드 목록 더보기" onClick={goToSellerList}>
+            <MoreIcon />
+          </BandListLink>
+        )}
       </BandInnerWrap>
     </BandWrap>
   );

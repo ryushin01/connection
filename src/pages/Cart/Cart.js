@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import CheckBox from '../../components/CheckBox/CheckBox';
 import Counter from '../../components/Counter/Counter';
 import Button from '../../components/Button/Button';
 import { useDispatch } from 'react-redux';
 import CartCount from '../../components/CartCount/CartCount';
+import styled from 'styled-components';
 
 const Cart = () => {
   // [Redux] 카운터에 dispatch 적용 필요
@@ -25,13 +26,15 @@ const Cart = () => {
       .then(result => setCartData(result.data));
   };
   // 전체선택 시 현재 체크 된 체크박스와 전체 체크박스의 수를 비교하기 위한 함수
-  const cartListData = cartData
-    .map(item => {
-      return item.products?.map(product => {
-        return product.productId;
-      });
-    })
-    .flat();
+  const cartListData =
+    cartData !== undefined &&
+    cartData
+      .map(item => {
+        return item.products?.map(product => {
+          return product.productId;
+        });
+      })
+      .flat();
 
   // 전체 선택
   // 1. 전체 선택 체크박스 상태 확인용  State 생성
@@ -64,6 +67,8 @@ const Cart = () => {
       .flat();
     return itemPrice;
   };
+
+  console.log(checkItem);
 
   // 체크박스가 체크되어 있을 때의 상품 가격 구하는 함수
   const checkedItemTotalPrice = (checked, productId) => {
@@ -157,7 +162,7 @@ const Cart = () => {
 
   // 장바구니를 데이터 가져오기 위한 GET 요청
   const getCartInfoData = () => {
-    fetch('http://10.58.52.207:8000/carts', {
+    fetch('http://10.58.52.140:8000/carts', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -173,7 +178,7 @@ const Cart = () => {
 
   // 장바구니에서 선택한 상품을 주문하기 위한 PATCH 요청
   const patchCheckItemBtn = () => {
-    fetch('http://10.58.52.207:8000/carts', {
+    fetch('http://10.58.52.140:8000/carts', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -203,7 +208,7 @@ const Cart = () => {
 
   // 장바구니에서 선택한 상품을 삭제하기 위한 DELETE 요청
   const deleteCheckItemBtn = () => {
-    fetch('http://10.58.52.207:8000/carts', {
+    fetch('http://10.58.52.140:8000/carts', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -274,17 +279,17 @@ const Cart = () => {
               <CheckBox
                 size="small"
                 onChange={e => handleAllCheck(e.target.checked)}
-                checked={checkItem.length === cartListData.length}
+                checked={checkItem.length === (cartListData.length || 0)}
               />
               <CartAllCheckText>전체선택</CartAllCheckText>
               <CartSelectDeleteBtn onClick={deleteCheckItemBtn}>
                 선택삭제
               </CartSelectDeleteBtn>
             </CartLeftWrap>
-            {cartData.length === 0 && (
+            {!!cartData === false && (
               <CartIsEmpty>장바구니에 담긴 상품이 없습니다.</CartIsEmpty>
             )}
-            {cartData.length !== 0 &&
+            {!!cartData &&
               cartData?.map((item, index) => {
                 return (
                   <>

@@ -14,7 +14,7 @@ import styled from 'styled-components';
  * @property {function} getCartData     - 장바구니 데이터(제품명, 수량, 가격, 총 금액)를 받아오는 함수입니다.
  * @property {function} sumCartData     - 장바구니 데이터 중 수량과 가격을 각각 더해 반환하는 함수입니다.
  * @property {function} selectingSentry - 배송 방법 선택 시 값을 모니터링하고 배송 방법 값을 정하는 함수입니다.
- * @property {function} postOrderData   - 유저 데이터, 장바구니 데이터, 배송 방법, 결제 방법을 서버로 보내는 함수입니다.
+ * @property {function} dataTransfer   - 유저 데이터, 장바구니 데이터, 배송 방법, 결제 방법을 결제 페이지(Payment.js)로 전달하는 함수입니다.
  */
 
 const Order = () => {
@@ -22,20 +22,26 @@ const Order = () => {
   const [userData, setUserData] = useState([]);
   const [cartData, setCartData] = useState([]);
   const [shippingMethod, setShippingMethod] = useState('visiting');
-  const [paymentMethod, setPaymentMethod] = useState(1);
+  const [paymentId, setPaymentId] = useState(1);
   const location = useLocation();
   const navigate = useNavigate();
 
-  let productId,
-    quantity = null;
+  // 장바구니에서 들어왔을 때와 바로구매에서 들어왔을 때를 분기해야 합니다.
 
+  let productId,
+    quantity,
+    course = null;
   if (location?.state !== null) {
-    const { productId, quantity } = location?.state;
+    productId = location.state.productData.productId;
+    quantity = location.state.productData.quantity;
+    course = location.state.course;
   }
 
+  console.log(location.state);
   const getUserData = () => {
     // fetch(`${API.CART}/getuserinfo`, {
-    fetch(`/data/CartGetUserInfoData.json`, {
+    // fetch(`/data/CartGetUserInfoData.json`, {
+    fetch('http://10.58.52.140:8000/carts/getuserinfo', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -62,9 +68,11 @@ const Order = () => {
     isSubscribe,
   } = userData;
 
+  // 장바구니 로직 시 제품 정보 수급 함수입니다.
   const getCartData = () => {
     // fetch(`${API.CART}/complete`, {
-    fetch(`/data/CartCompleteData.json`, {
+    // fetch(`/data/CartCompleteData.json`, {
+    fetch('http://10.58.52.140:8000/carts/complete', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -75,8 +83,8 @@ const Order = () => {
       .then(result => {
         if (result.message === 'Order_Item') {
           setCartData(result?.data[0].products);
+          setLoading(false);
         }
-        setLoading(false);
       });
   };
 
@@ -97,10 +105,38 @@ const Order = () => {
 
   const sumCartDataValues = sumCartData(cartData);
 
+  // 바로구매 로직 시 제품 정보 수급 함수입니다.
+  const getBuyNowCartData = () => {
+    // fetch(`${API.LIST}/${productId}`, {
+    fetch('http://10.58.52.203:8000/products/1', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Success') {
+          setCartData(result?.product);
+          setLoading(false);
+          console.log('바로구매(주문)');
+
+          console.log(result);
+        }
+      });
+  };
+
   useEffect(() => {
     setLoading(true);
     getUserData();
-    getCartData();
+
+    if (course === 'directly') {
+      getBuyNowCartData();
+    } else {
+      getCartData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const selectingSentry = e => {
@@ -108,27 +144,17 @@ const Order = () => {
     setShippingMethod(value);
   };
 
-  const postOrderData = () => {
-    // fetch('http://10.58.52.173:8000/users/signup', {
-    fetch(`${API.ORDERS}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: localStorage.getItem('accessToken'),
-      },
-      body: JSON.stringify({
-        // userId: id
-        // productId: productId,
+  const dataTransfer = () => {
+    navigate('/payment', {
+      state: {
+        userId: userId,
+        totalPrice: sumCartDataValues?.totalPrice,
         shippingMethod: shippingMethod,
-        paymentMethod: paymentMethod,
-      }),
-    })
-      .then(response => response.json())
-      .then(result => {
-        if (result.message === 'Success') {
-          navigate('/payment');
-        }
-      });
+        paymentId: paymentId,
+        products: cartData,
+        course: course,
+      },
+    });
   };
 
   return (
@@ -264,7 +290,7 @@ const Order = () => {
               color="primary"
               size="large"
               content="주문하기"
-              onClick={postOrderData}
+              onClick={dataTransfer}
             />
           </ButtonGroup>
         </div>

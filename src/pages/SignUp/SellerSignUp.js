@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import DaumPostCode from './DaumPostCode/DaumPostCode';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import ImageFile from '../../components/ImageFile/ImageFile';
+import styled from 'styled-components';
 
 const SellerSignUp = props => {
   const [sellerInfo, setSellerInfo] = useState({
@@ -41,11 +41,11 @@ const SellerSignUp = props => {
   const postSellerInfoSubmitBtn = e => {
     e.preventDefault();
 
-    fetch('http://10.58.52.198:8000/users/seller', {
+    fetch('http://10.58.52.64:8000/users/seller', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('access_token'),
+        Authorization: localStorage.getItem('accessToken'),
       },
       body: JSON.stringify({
         name: sellerName,
@@ -66,6 +66,9 @@ const SellerSignUp = props => {
         }
       });
   };
+
+  const isDisabledBtnValid =
+    sellerName.length >= 2 && phoneNumber.length === 11;
 
   return (
     <Main id="main">
@@ -88,6 +91,11 @@ const SellerSignUp = props => {
                   placeholder="판매자 이름을 입력해주세요."
                   borderRadius="4px"
                   name="sellerName"
+                  status={
+                    (sellerInfo?.sellerName?.length === 0 && 'default') ||
+                    (sellerInfo?.sellerName?.length < 2 && 'error')
+                  }
+                  error="이름을 두 글자 이상 입력하세요."
                 />
               </SellerSignUpInputWrap>
               <SellerSignUpInputWrap>
@@ -144,6 +152,7 @@ const SellerSignUp = props => {
                   shape="solid"
                   color="primary"
                   onClick={postSellerInfoSubmitBtn}
+                  disabled={!isDisabledBtnValid}
                 />
               </SellerSignUpButtonWrap>
             </SellerSignUpForm>
