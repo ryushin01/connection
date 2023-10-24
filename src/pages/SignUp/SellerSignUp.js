@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API } from '../../config';
 import DaumPostCode from './DaumPostCode/DaumPostCode';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
@@ -41,7 +42,8 @@ const SellerSignUp = props => {
   const postSellerInfoSubmitBtn = e => {
     e.preventDefault();
 
-    fetch('http://10.58.52.64:8000/users/seller', {
+    // fetch('http://10.58.52.64:8000/users/seller', {
+    fetch(`${API.USERS}/seller`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

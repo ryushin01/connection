@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API } from '../../config';
 import styled from 'styled-components';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
@@ -41,7 +42,8 @@ const Login = ({ getAccessToken }) => {
   };
 
   const postUserInfo = () => {
-    fetch('http://10.58.52.64:8000/users/', {
+    // fetch('http://10.58.52.64:8000/users/', {
+    fetch(`${API.USERS}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
