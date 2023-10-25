@@ -55,8 +55,8 @@ const SignUp = props => {
 
   const postSignUp = () => {
     // 회원가입 API 실행
-    fetch('http://10.58.52.126:8000/users/signup', {
-      // fetch(`${API.USERS}/signup`, {
+    // fetch('http://10.58.52.126:8000/users/signup', {
+    fetch(`${API.USERS}/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
