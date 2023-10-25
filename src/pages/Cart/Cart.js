@@ -162,10 +162,16 @@ const Cart = () => {
         authorization: localStorage.getItem('accessToken'),
       },
     })
-      .then(response => response.json())
+      .then(response => {
+        response.json();
+        throw new Error('통신 실패');
+      })
       .then(result => {
         console.log(result);
         setCartData(result.data);
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 
@@ -180,7 +186,10 @@ const Cart = () => {
       },
       body: JSON.stringify({ data: patchItemInfo() }),
     })
-      .then(response => response.json())
+      .then(response => {
+        response.json();
+        throw new Error('통신 실패');
+      })
       .then(result => {
         navigate(`/order`, {
           state: {
@@ -191,6 +200,9 @@ const Cart = () => {
             },
           },
         });
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 
@@ -219,12 +231,18 @@ const Cart = () => {
       },
       body: JSON.stringify({ data: handleItemIdInfoChange() }),
     })
-      .then(response => response.json())
+      .then(response => {
+        response.json();
+        throw new Error('통신 실패');
+      })
       .then(result => {
         console.log(result);
         if (result.message === 'Delete item!') {
           window.location.reload();
         }
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 
@@ -241,7 +259,10 @@ const Cart = () => {
         data: { productId, quantity: Number(newQuantity) },
       }), // productId가 같은 제품의 수량이 변경되는 것을 감지하고 변경된 값으로 POST 요청
     })
-      .then(response => response.json())
+      .then(response => {
+        response.json();
+        throw new Error('통신 실패');
+      })
       .then(result => {
         if (result.message === 'Update Success!') {
           alert('수량이 변경되었습니다.');
@@ -250,7 +271,9 @@ const Cart = () => {
           alert('수량 변경에 실패하였습니다.');
         }
       }) // 정상적으로 통신이 되었으면 장바구니 데이터를 다시 불러옴.
-      .catch(err => console.log(err));
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   // 함수를 이용하여 수량을 변경해야할 때 사용

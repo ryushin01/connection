@@ -73,13 +73,19 @@ const Order = ({ points }) => {
         authorization: localStorage.getItem('accessToken'),
       },
     })
-      .then(response => response.json())
+      .then(response => {
+        response.json();
+        throw new Error('통신 실패');
+      })
       .then(result => {
         if (result.message === 'userInformation') {
           setUserData(result?.data);
         }
 
         setLoading(false);
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 
@@ -142,7 +148,10 @@ const Order = ({ points }) => {
         authorization: localStorage.getItem('accessToken'),
       },
     })
-      .then(response => response.json())
+      .then(response => {
+        response.json();
+        throw new Error('통신 실패');
+      })
       .then(result => {
         console.log(result);
 
@@ -185,6 +194,9 @@ const Order = ({ points }) => {
 
         //   setLoading(false);
         // }
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 
