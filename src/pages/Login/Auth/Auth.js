@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-/// var
+/**
+ * Auth.js logics
+ * @property {function} getSnsCode = 카카오 소셜 로그인을 위한 코드를 받아오는 함수
+ *
+ */
 const Auth = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -17,7 +21,7 @@ const Auth = () => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[GET] 소셜 로그인 정보 요청 통신 실패');
       })
       .then(result => {
         console.log(result);
