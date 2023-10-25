@@ -10,7 +10,7 @@ import styled from 'styled-components';
  * @property {function} modalHandler      - 모달 팝업 여닫기 함수입니다.
  */
 
-const WalletButton = () => {
+const WalletButton = ({ points }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const modalHandler = () => {
@@ -35,7 +35,7 @@ const WalletButton = () => {
       <Portal>
         {modalOpen && (
           <Modal
-            data={<Charge onClose={modalHandler} />}
+            data={<Charge points={points} onClose={modalHandler} />}
             scale="small"
             onClose={modalHandler}
           />

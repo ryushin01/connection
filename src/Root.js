@@ -31,10 +31,11 @@ const Root = () => {
   // [Redux] 전역 상태 관리 도구인 Redux에서 실제 상태가 저장되는 공간인 store를 생성합니다. 이제는 store에서 데이터를 꺼내 사용할 수 있게 되었습니다.
   const store = createStore(reducer);
 
-  // const isLogin = localStorage.getItem('accessToken');
-  // const isSeller = localStorage.getItem('isSeller');
-
-  // console.log(isLogin);
+  const isLogin = localStorage.getItem('accessToken');
+  // const isSns = localStorage.getItem('isSns');
+  const isSeller = localStorage.getItem('isSeller');
+  const points = localStorage.getItem('points');
+  const cartCount = localStorage.getItem('cartCount');
 
   const [isLightTheme, setIsLightTheme] = useState(true);
   const switchTheme = () => {
@@ -47,11 +48,17 @@ const Root = () => {
       <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
         <GlobalStyle />
         <Router
-        // isLogin={isLogin} isSeller={isSeller}
+          isLogin={isLogin}
+          isSeller={isSeller}
+          points={points}
+          cartCount={cartCount}
         />
-        {/* {!isLogin && ( */}
-        <ThemeSwitcher switchTheme={switchTheme} isLightTheme={isLightTheme} />
-        {/* )} */}
+        {isLogin && (
+          <ThemeSwitcher
+            switchTheme={switchTheme}
+            isLightTheme={isLightTheme}
+          />
+        )}
       </ThemeProvider>
     </Provider>
   );

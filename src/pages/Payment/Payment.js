@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { API } from '../../config';
 import { ReactComponent as CheckIcon } from '../../svg/icon_check.svg';
@@ -11,7 +11,7 @@ import styled, { css } from 'styled-components';
  * @property {function} advancedPaymentComplete     - 결제 완료 유무에 따라 UI 조건부 렌더링을 처리한 함수입니다.
  */
 
-const Payment = () => {
+const Payment = ({ points }) => {
   const [loading, setLoading] = useState(false);
   const [paymentComplete, setPaymentComplete] = useState(false);
   const location = useLocation();
@@ -134,10 +134,9 @@ const Payment = () => {
                         <td>{totalPrice.toLocaleString()}원</td>
                       </tr>
                       <tr>
-                        <th>배송비</th>
+                        <th>배송비&nbsp;(배송 방법)</th>
                         <td>
-                          무료&nbsp;&nbsp;&nbsp;*배송 방법:&nbsp;
-                          {isVisiting ? '직접 수령' : '택배 배송'}
+                          무료&nbsp;({isVisiting ? '직접 수령' : '택배 배송'})
                         </td>
                       </tr>
                       <tr>
@@ -149,7 +148,7 @@ const Payment = () => {
                         <td>
                           <span>{totalPrice.toLocaleString()}원</span>
                           <RemainingPoints>
-                            (잔여 포인트: <strong>10,000</strong>)
+                            (잔여 포인트: <strong>{points}</strong>)
                           </RemainingPoints>
                         </td>
                       </tr>

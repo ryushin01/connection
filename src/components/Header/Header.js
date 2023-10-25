@@ -7,7 +7,7 @@ import PointButton from '../WalletButton/WalletButton';
 import GnbCartButton from '../CartButton/GnbCartButton';
 import styled, { css } from 'styled-components';
 
-const Header = () => {
+const Header = ({ points, cartCount }) => {
   return (
     <HeaderWrap>
       <HeaderInnerWrap>
@@ -27,8 +27,8 @@ const Header = () => {
         </LeftSection>
         <RightSection>
           {/* <SearchButton /> */}
-          <PointButton />
-          <GnbCartButton />
+          <PointButton points={points} />
+          <GnbCartButton cartCount={cartCount} />
         </RightSection>
       </HeaderInnerWrap>
     </HeaderWrap>

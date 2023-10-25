@@ -56,7 +56,7 @@ const SnsSignUp = props => {
       .then(res => res.json())
       .then(result => {
         if (result.message === 'SUCCESS') {
-          navigate('/');
+          navigate('/main');
         } else {
           alert('회원가입에 실패하였습니다.');
         }
