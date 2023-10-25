@@ -9,7 +9,13 @@ import styled, { css } from 'styled-components';
  * @property {function} selectTabHandler      - 탭 클릭 시 해당 영역으로 스크롤되면서 클릭한 탭을 활성화하는 함수입니다.
  */
 
-const DetailTab = ({ productId, productDetailImages, reviewNumbers }) => {
+const DetailTab = ({
+  productId,
+  productDetailImages,
+  reviewNumbers,
+  latitude,
+  longitude,
+}) => {
   const [reviewData, setReviewData] = useState([]);
   const targetRef = useRef(null);
   const [currentTab, setTab] = useState(0);
@@ -39,7 +45,13 @@ const DetailTab = ({ productId, productDetailImages, reviewNumbers }) => {
   const TAB_DATA = [
     {
       name: '상품설명',
-      content: <ProductDescription productDetailImages={productDetailImages} />,
+      content: (
+        <ProductDescription
+          productDetailImages={productDetailImages}
+          latitude={latitude}
+          longitude={longitude}
+        />
+      ),
     },
     { name: '상품리뷰', content: <ProductReview reviewData={reviewData} /> },
   ];

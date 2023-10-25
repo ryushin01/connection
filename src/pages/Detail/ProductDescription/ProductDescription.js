@@ -1,8 +1,8 @@
 import React from 'react';
-import Map from '../../../components/Map/Map';
+import { Map } from 'react-kakao-maps-sdk';
 import styled from 'styled-components';
 
-const ProductDescription = ({ productDetailImages }) => {
+const ProductDescription = ({ productDetailImages, latitude, longitude }) => {
   return (
     <>
       <Description>
@@ -14,7 +14,11 @@ const ProductDescription = ({ productDetailImages }) => {
           );
         })}
       </Description>
-      <Map />
+      <Map
+        center={{ lat: latitude, lng: longitude }} // 지도의 중심 좌표
+        style={{ width: '100%', height: '300px' }} // 지도 크기
+        level={3} // 지도 확대 레벨
+      />
     </>
   );
 };

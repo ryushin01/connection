@@ -44,6 +44,7 @@ const Detail = () => {
     })
       .then(response => response.json())
       .then(result => {
+        console.log(result);
         if (result.message === 'Success') {
           setDetailData(result?.product[0]);
           setLoading(false);
@@ -57,6 +58,8 @@ const Detail = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // console.log(detailData);
+
   const {
     // productId,
     productName,
@@ -67,6 +70,8 @@ const Detail = () => {
     discountAmount,
     totalPrice,
     reviewNumbers,
+    latitude,
+    longitude,
   } = detailData;
 
   const productDetailImages = detailData?.productDetailImages;
@@ -177,6 +182,8 @@ const Detail = () => {
                 productId={productId}
                 productDetailImages={productDetailImages}
                 reviewNumbers={reviewNumbers}
+                latitude={latitude}
+                longitude={longitude}
               />
             </DetailBottomSection>
           </DetailWrap>

@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 const { kakao } = window;
 
-const Map = () => {
+const Map = ({ latitude, longitude }) => {
+  console.log(latitude, longitude);
   useEffect(() => {
     const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
     const options = {
