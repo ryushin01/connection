@@ -1,5 +1,4 @@
 import React from 'react';
-import { ReactComponent as Checked } from '../../svg/check-solid.svg';
 import styled from 'styled-components';
 
 function CartCount({ onQuantityChange, productId, quantity }) {
@@ -12,12 +11,7 @@ function CartCount({ onQuantityChange, productId, quantity }) {
         onChange={e => onQuantityChange(productId, e.target.value)} // 부모 컴포넌트에서 받아온 함수에 productId와 선택한 옵션 value 값을 넘겨줌
         value={quantity} // 서버에서 받아온 quantity 값으로 초기화
       >
-        <option value={quantity}>
-          {quantity}
-          <SelectCheckImgWrap>
-            <Checked />
-          </SelectCheckImgWrap>
-        </option>
+        <option value={quantity}>{quantity}</option>
         {selectQuantity.map((item, index) => {
           return (
             <option key={index} value={item}>
@@ -42,18 +36,9 @@ const SelectCounterWrap = styled.div`
     height: 32px;
     font-size: 16px;
     border-radius: 4px;
+    background: #fff url(/images/cart/check-solid.svg) no-repeat left 8px
+      center/16px;
     appearance: none;
     text-align: center;
-  }
-`;
-
-const SelectCheckImgWrap = styled.div`
-  width: 32px;
-  height: 32px;
-  svg {
-    fill: ${props => props.theme.grayscaleA};
-    path {
-      stroke: ${props => props.theme.grayscaleA};
-    }
   }
 `;
