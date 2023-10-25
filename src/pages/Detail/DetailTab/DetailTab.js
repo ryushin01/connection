@@ -15,32 +15,15 @@ const DetailTab = ({
   reviewNumbers,
   latitude,
   longitude,
+  reviewData,
 }) => {
-  const [reviewData, setReviewData] = useState([]);
   const targetRef = useRef(null);
-  const [currentTab, setTab] = useState(0);
+  const [currentTab, setTab] = useState(1);
 
   const selectTabHandler = index => {
     targetRef.current.scrollIntoView({ behavior: 'smooth' });
     setTab(index);
-    getReviewData();
   };
-
-  function getReviewData() {
-    // fetch(`http://10.58.52.203:8000/reviews/${productId}`, {
-    fetch(`${API.REVIEWS}/${productId}`, {
-      method: 'GET',
-      header: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(result => {
-        if (result.message === 'Success') {
-          setReviewData(result?.review);
-        }
-      });
-  }
 
   const TAB_DATA = [
     {
@@ -91,7 +74,7 @@ const Tabs = styled.div`
   ${FlexCenter};
   gap: 80px;
   position: sticky;
-  z-index: 1;
+  z-index: 1000;
   top: 160px;
   padding: 20px 0;
   border-bottom: 1px ${props => props.theme.grayscaleC} solid;

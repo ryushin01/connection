@@ -18,6 +18,7 @@ const Detail = () => {
   const [loading, setLoading] = useState(false);
   const [detailData, setDetailData] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [reviewData, setReviewData] = useState([]);
   const params = useParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -52,13 +53,28 @@ const Detail = () => {
       });
   }
 
+  function getReviewData() {
+    // fetch(`http://10.58.52.203:8000/reviews/${productId}`, {
+    fetch(`${API.REVIEWS}/${productId}`, {
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Success') {
+          setReviewData(result?.review);
+        }
+      });
+  }
+
   useEffect(() => {
     setLoading(true);
     getDetailData();
+    getReviewData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // console.log(detailData);
 
   const {
     // productId,
@@ -184,6 +200,7 @@ const Detail = () => {
                 reviewNumbers={reviewNumbers}
                 latitude={latitude}
                 longitude={longitude}
+                reviewData={reviewData}
               />
             </DetailBottomSection>
           </DetailWrap>
