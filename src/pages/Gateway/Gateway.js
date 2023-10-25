@@ -10,7 +10,7 @@ import styled, { css } from 'styled-components';
  */
 
 const Gateway = ({ isLogin }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const targetRef = useRef(null);
   const navigate = useNavigate();
 
@@ -19,6 +19,7 @@ const Gateway = ({ isLogin }) => {
   };
 
   useEffect(() => {
+    setTimeout(() => setLoading(false), 4000);
     if (isLogin) {
       navigate('/main');
     }
