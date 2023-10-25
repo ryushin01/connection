@@ -72,11 +72,11 @@ const GnbCartButtonWrap = styled.div`
   span {
     ${FlexCenter};
     position: absolute;
-    top: 4px;
-    right: 4px;
+    top: 0;
+    right: 0;
     z-index: 1;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border: 1px ${props => props.theme.secondaryColor} solid;
     border-radius: 50%;
     background-color: ${props => props.theme.secondaryColor};

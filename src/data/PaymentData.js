@@ -5,6 +5,12 @@ const PAYMENT_DATA = [
     text: '포인트',
     defaultChecked: true,
   },
+  {
+    id: 2,
+    value: 'kakaopay',
+    text: '카카오페이',
+    defaultChecked: false,
+  },
 ];
 
 export default PAYMENT_DATA;

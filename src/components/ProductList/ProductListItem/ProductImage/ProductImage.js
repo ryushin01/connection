@@ -77,19 +77,28 @@ const FlexCenter = css`
 
 const ProductImageWrap = styled.div`
   ${FlexCenter};
+  overflow: hidden;
   position: relative;
   width: 100%;
   height: 19vw;
   border-radius: 4px;
   background-color: ${props => props.theme.grayscaleB};
+
   a {
     display: block;
     font-size: 0;
   }
+
   div {
     position: absolute;
     right: 4px;
     bottom: 4px;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.2);
+    }
   }
 `;
 
@@ -97,6 +106,7 @@ const ProductImg = styled.img`
   width: 12vw;
   height: 12vw;
   object-fit: contain;
+  transition: transform 0.4s ease-in-out;
 `;
 
 export default ProductImage;

@@ -44,6 +44,7 @@ const Main = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
       },
     })
       .then(response => response.json())

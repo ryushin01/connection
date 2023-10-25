@@ -4,6 +4,8 @@ import Button from '../../Button/Button';
 import styled, { css } from 'styled-components';
 
 const Charge = ({ points }) => {
+  const intPoints = Number(points);
+
   return (
     <ChargeModalWrap>
       <ChargeModalInnerWrap>
@@ -11,7 +13,7 @@ const Charge = ({ points }) => {
           <fieldset>
             <legend>포인트 충전</legend>
             <PointDisplay>
-              보유 포인트:&nbsp;<span>{points}</span>
+              보유 포인트:&nbsp;<span>{intPoints?.toLocaleString()}</span>
             </PointDisplay>
             <InputInnerWrap>
               <Input

@@ -13,6 +13,7 @@ export const API = {
   ORDERS: `${BASE_URL}/orders`,
   USERS: `${BASE_URL}/users`,
   REVIEWS: `${BASE_URL}/reviews`,
+  PAYMENTS: `${BASE_URL}/payments`,
 };
 
 // 사용하는 컴포넌트

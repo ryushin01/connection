@@ -25,6 +25,7 @@ const Order = ({ points }) => {
   const [paymentId, setPaymentId] = useState(1);
   const location = useLocation();
   const navigate = useNavigate();
+  const intPoints = Number(points);
 
   let productData,
     productId,
@@ -36,8 +37,6 @@ const Order = ({ points }) => {
     quantity = location?.state?.productData?.quantity;
     course = location?.state?.course;
   }
-
-  console.log(productData);
 
   // Payment.js로 전달할 데이터 모음
   let cartPriceData,
@@ -114,10 +113,7 @@ const Order = ({ points }) => {
         authorization: localStorage.getItem('accessToken'),
       },
     })
-      .then(response => {
-        response.json();
-        // throw new Error('[GET] 주문 내역 데이터 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         console.log(result);
 
@@ -136,51 +132,20 @@ const Order = ({ points }) => {
             setLoading(false);
           }
         }
-
-        // if (result.message === 'Cart_Information') {
-        //   if (isBuyNow) {
-        //     setCartData(result?.product);
-        //     console.log('바로구매');
-        //   } else {
-        //     setCartData(result?.data[0].products);
-        //     console.log('장바구니');
-        //   }
-        //   setLoading(false);
-        // }
-
-        // Order_Item: 장바구니 성공 메시지
-        // if (result.message === 'Order_Item') {
-        // if (isBuyNow) {
-        //   setCartData(result?.product);
-        //   console.log('바로구매');
-        // } else {
-        //   setCartData(result?.data[0].products[0]);
-        //   console.log('장바구니');
-        // }
-
-        //   setLoading(false);
-        // }
       });
-    // .catch(error => {
-    //   console.log(error);
-    // });
   };
 
   const selectingSentry = e => {
-    const { value } = e.target;
+    const { id, value } = e.target;
     setShippingMethod(value);
+    setPaymentId(id);
+    console.log(e.target.id, e.target.value);
   };
 
   useEffect(() => {
     setLoading(true);
     getUserData();
     getOrderData();
-
-    // if (course === 'directly') {
-    //   getBuyNowData();
-    // } else {
-    //   getCartData();
-    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -198,8 +163,6 @@ const Order = ({ points }) => {
       },
     });
   };
-
-  console.log(cartData);
 
   return (
     <>
@@ -269,9 +232,12 @@ const Order = ({ points }) => {
                     <tr>
                       <th>총 금액</th>
                       <td>&nbsp;</td>
-
                       {/* 장바구니 로직 */}
-                      <td>{totalPrice.toLocaleString()}원</td>
+                      <td>
+                        {sumCartDataValues?.totalPrice.toLocaleString() ||
+                          totalPrice.toLocaleString()}
+                        원
+                      </td>
                     </tr>
                   </tfoot>
                 </SectionTable>
@@ -314,9 +280,14 @@ const Order = ({ points }) => {
                     <tr>
                       <th>결제 방법</th>
                       <td>
-                        <RadioGroup data={PAYMENT_DATA} name="payment" />
+                        <RadioGroup
+                          data={PAYMENT_DATA}
+                          name="payment"
+                          onChange={selectingSentry}
+                        />
                         <RemainingPoints>
-                          (잔여 포인트: <strong>{points}</strong>)
+                          (잔여 포인트:&nbsp;
+                          <strong>{intPoints?.toLocaleString()}</strong>)
                         </RemainingPoints>
                       </td>
                     </tr>
@@ -422,7 +393,7 @@ const SectionTable = styled.table`
   flex: 1;
 
   span {
-    vertical-align: middle;
+    vertical-align: top;
   }
 `;
 

@@ -69,6 +69,7 @@ const Login = () => {
           localStorage.setItem('points', result.accessToken.points);
           localStorage.setItem('cartCount', result.accessToken.cartCount);
           navigate('/main');
+          window.location.reload();
         } else {
           alert('로그인 실패하였습니다. 다시 시도해주세요.');
         }
