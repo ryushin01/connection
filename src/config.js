@@ -1,7 +1,7 @@
 // AWS
 // const BASE_URL = 'http://43.200.31.13:8000';
 
-const BASE_URL = 'http://13.124.161.55:8000';
+const BASE_URL = 'http://10.58.52.124:8000';
 
 export const API = {
   CATEGORY_BAND: `${BASE_URL}/products/category`,
