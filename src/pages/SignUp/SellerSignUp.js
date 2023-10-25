@@ -7,9 +7,15 @@ import Button from '../../components/Button/Button';
 import ImageFile from '../../components/ImageFile/ImageFile';
 import styled from 'styled-components';
 
+/**
+ *
+ * @property {function} handleSellerInfo - 셀러 회원정보를 state에 저장하는 함수입니다.
+ * @property {function} handleAddressSelect - 우편번호 API 실행 후 받아온 data를 state에 저장하는 함수입니다.
+ * @property {function} postSellerInfoSubmitBtn - 셀러 회원정보를 서버에 전송하는 함수입니다.
+ */
+
 const SellerSignUp = props => {
   const [sellerInfo, setSellerInfo] = useState({
-    // 셀러 회원정보 보관 state
     sellerName: '',
     zipCode: '',
     address: '',
@@ -64,7 +70,7 @@ const SellerSignUp = props => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[POST] 셀러 회원가입 요청 통신 실패');
       })
       .then(result => {
         if (result.message === 'SUCCESS') {
