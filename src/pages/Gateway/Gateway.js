@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import Button from '../../components/Button/Button';
@@ -9,7 +9,7 @@ import styled, { css } from 'styled-components';
  * @property {function} scrollToDown      - 버튼 클릭 시 지정된 영역으로 스크롤 이동하는 함수입니다.
  */
 
-const Gateway = () => {
+const Gateway = ({ isLogin }) => {
   const [loading, setLoading] = useState(false);
   const targetRef = useRef(null);
   const navigate = useNavigate();
@@ -17,6 +17,13 @@ const Gateway = () => {
   const scrollToDown = () => {
     targetRef.current.scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    if (!isLogin) {
+      navigate('/main');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -146,7 +153,7 @@ const GridItem = styled.li`
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  filter: blur(4px);
+  filter: blur(2px);
 `;
 
 const SectionTitle = styled.h1`

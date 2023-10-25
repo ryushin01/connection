@@ -31,7 +31,7 @@ const Auth = () => {
           result.accessToken.isAddress === true
         ) {
           localStorage.setItem('accessToken', result.accessToken.accessToken);
-          navigate('/');
+          navigate('/main');
         } else {
           // 로그인 실패 시 로그인 페이지로 이동
           alert('로그인이 실패하였습니다. 로그인 페이지로 이동합니다.');

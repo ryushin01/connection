@@ -17,7 +17,7 @@ import styled from 'styled-components';
  * @property {function} dataTransfer   - 유저 데이터, 장바구니 데이터, 배송 방법, 결제 방법을 결제 페이지(Payment.js)로 전달하는 함수입니다.
  */
 
-const Order = () => {
+const Order = ({ points }) => {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState([]);
   const [cartData, setCartData] = useState([]);
@@ -338,7 +338,7 @@ const Order = () => {
                       <td>
                         <RadioGroup data={PAYMENT_DATA} name="payment" />
                         <RemainingPoints>
-                          (잔여 포인트: <strong>10,000</strong>)
+                          (잔여 포인트: <strong>{points}</strong>)
                         </RemainingPoints>
                       </td>
                     </tr>
