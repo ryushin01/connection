@@ -25,7 +25,7 @@ const Main = () => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[GET] 카테고리 밴드 데이터 통신 실패');
       })
       .then(result => {
         // real data
@@ -53,7 +53,7 @@ const Main = () => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[GET] 셀러 밴드 데이터 통신 실패');
       })
       .then(result => {
         // real data

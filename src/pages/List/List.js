@@ -58,7 +58,7 @@ const List = () => {
     )
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[GET] 제품 목록 데이터 통신 실패');
       })
       .then(result => {
         if (result.message === 'Success') {

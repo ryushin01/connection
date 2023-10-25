@@ -64,7 +64,7 @@ const Payment = ({ points }) => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[POST] 결제 데이터 통신 실패');
       })
       .then(result => {
         setPaymentComplete(true);
