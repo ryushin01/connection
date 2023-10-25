@@ -301,8 +301,8 @@ const Cart = () => {
   // useEffect
   // 백엔드에 요청한 상품을 불러오기 위한 useEffect
   useEffect(() => {
-    // getMokData();
-    getCartInfoData();
+    getMokData();
+    // getCartInfoData();
   }, []);
 
   return (
