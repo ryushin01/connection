@@ -19,7 +19,7 @@ const Gateway = ({ isLogin }) => {
   };
 
   useEffect(() => {
-    if (!isLogin) {
+    if (isLogin) {
       navigate('/main');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
