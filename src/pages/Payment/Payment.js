@@ -34,6 +34,8 @@ const Payment = ({ points }) => {
     course = location?.state?.course;
   }
 
+  console.log(products);
+
   const isVisiting = shippingMethod === 'visiting';
   const isBuyNow = course === 'directly';
 
