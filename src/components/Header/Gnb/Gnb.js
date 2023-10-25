@@ -8,7 +8,7 @@ const GNB_LIST = [
   { id: 3, text: '마이페이지', path: '/mypage' },
 ];
 
-const Gnb = ({ isLogin }) => {
+const Gnb = () => {
   return (
     <Nav>
       <NavList id="menu-list">

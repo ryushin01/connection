@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { API } from '../../config';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import DaumPostCode from './DaumPostCode/DaumPostCode';
@@ -54,7 +55,8 @@ const SignUp = props => {
 
   const postSignUp = () => {
     // 회원가입 API 실행
-    fetch('http://10.58.52.64:8000/users/signup', {
+    // fetch('http://10.58.52.126:8000/users/signup', {
+    fetch(`${API.USERS}/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -86,7 +88,8 @@ const SignUp = props => {
 
   const handleDuplicateCheck = () => {
     // 이메일 중복체크 API 실행
-    fetch('http://10.58.52.64:8000/users/duplicate', {
+    // fetch('http://10.58.52.64:8000/users/duplicate', {
+    fetch(`${API.USERS}/duplicate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { API } from '../../config';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { API } from '../../config';
 import { useDispatch } from 'react-redux';
@@ -24,16 +23,20 @@ const Detail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = params;
-  const intId = Number(params?.id);
+  const productId = Number(params?.id);
 
   const productData = {
     productId: productId,
     quantity: quantity,
   };
 
+  console.log(productData);
+
   function getDetailData() {
     // fetch('/data/detailData.json', {
-    fetch(`http://10.58.52.203:8000/products/${intId}`, {
+    // fetch(`http://10.58.52.203:8000/products/${intId}`, {
+    // fetch(`http://10.58.52.203:8000/products/${productId}`, {
+    fetch(`${API.LIST}/${productId}`, {
       method: 'GET',
       header: {
         'Content-Type': 'application/json',
@@ -41,6 +44,7 @@ const Detail = () => {
     })
       .then(response => response.json())
       .then(result => {
+        console.log(result);
         if (result.message === 'Success') {
           setDetailData(result?.product[0]);
           setLoading(false);
@@ -55,7 +59,7 @@ const Detail = () => {
   }, []);
 
   const {
-    productId,
+    // productId,
     productName,
     productImg,
     discountRate,
@@ -75,7 +79,8 @@ const Detail = () => {
   };
 
   const postOrder = () => {
-    fetch('http://10.58.52.140:8000/carts', {
+    // fetch('http://10.58.52.140:8000/carts', {
+    fetch(`${API.CART}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
