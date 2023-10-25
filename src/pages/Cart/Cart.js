@@ -632,7 +632,6 @@ const CartItemCounterWrap = styled.div`
 const CartRightSection = styled.section`
   display: flex;
   flex-direction: column;
-  width: 20%;
 `;
 
 const CartReceiptContainer = styled.div`
