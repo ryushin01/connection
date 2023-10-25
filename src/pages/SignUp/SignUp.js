@@ -6,6 +6,15 @@ import Button from '../../components/Button/Button';
 import DaumPostCode from './DaumPostCode/DaumPostCode';
 import styled from 'styled-components';
 
+/**
+ * SingUp.js logics
+ * @property {function} handleUserInfo = 회원가입 정보를 state에 저장하는 함수
+ * @property {function} handleAddressSelect = 주소 API 실행 후 받아온 data를 state에 저장하는 함수
+ * @property {function} postSignUp = 회원가입 POST API 실행하는 함수
+ * @property {function} handleSubmitUserInfo = 회원가입 정보를 서버에 전달하는 함수
+ * @property {function} postDuplicateCheck = 이메일 중복체크 API 실행하는 함수
+ */
+
 const SignUp = props => {
   // userInfo state 정의 (회원가입 정보)
   const [userInfo, setUserInfo] = useState({
@@ -22,7 +31,6 @@ const SignUp = props => {
   const [onAddressSelect, setOnAddressSelect] = useState('');
   const navigate = useNavigate();
 
-  // userInfo state onChange 핸들러 함수 정의
   const handleUserInfo = e => {
     const { name, value } = e.target; // e.target으로 각 name에 맞는 value를 가져온다.
     setUserInfo({ ...userInfo, [name]: value }); // userInfo를 카피하여 각각 name에 맞는 곳에 value 값을 넣어준다.
@@ -54,7 +62,6 @@ const SignUp = props => {
   };
 
   const postSignUp = () => {
-    // 회원가입 API 실행
     // fetch('http://10.58.52.126:8000/users/signup', {
     fetch(`${API.USERS}/signup`, {
       method: 'POST',
@@ -73,7 +80,7 @@ const SignUp = props => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[POST] 회원가입 요청 통신 실패');
       })
       .then(result => {
         if (result.message === 'SUCCESS') {
@@ -92,7 +99,7 @@ const SignUp = props => {
     postSignUp();
   };
 
-  const handleDuplicateCheck = () => {
+  const postDuplicateCheck = () => {
     // 이메일 중복체크 API 실행
     // fetch('http://10.58.52.64:8000/users/duplicate', {
     fetch(`${API.USERS}/duplicate`, {
@@ -104,11 +111,17 @@ const SignUp = props => {
         email: userInfo.email,
       }),
     })
-      .then(res => res.json())
+      .then(res => {
+        res.json();
+        throw new Error('[POST] 이메일 중복체크 요청 통신 실패');
+      })
       .then(result => {
         if (result.message === 'SUCCESS') {
           alert('사용 가능한 이메일입니다.');
         }
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 
@@ -147,7 +160,7 @@ const SignUp = props => {
                     content="중복확인"
                     shape="solid"
                     color="primary"
-                    onClick={handleDuplicateCheck}
+                    onClick={postDuplicateCheck}
                   />
                 </SignUpEmailWrap>
                 <SignUpInputWrap>

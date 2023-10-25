@@ -2,6 +2,12 @@ import React from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import Button from '../../../components/Button/Button';
 
+/**
+ * @property {function} open = 우편번호 검색 팝업을 띄우는 함수
+ * @property {function} handelComplete = 주소 검색 완료 후 실행할 함수
+ * @property {function} handelClick = 버튼 클릭 시 실행할 함수
+ */
+
 const DaumPostCode = props => {
   const open = useDaumPostcodePopup(
     '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js',

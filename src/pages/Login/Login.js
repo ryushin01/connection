@@ -5,6 +5,14 @@ import styled from 'styled-components';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 
+/**
+ * Login.js logics
+ * @property {function} handleLogin = 카카오 로그인 버튼 클릭 시 실행되는 함수 (카카오 소셜 로그인 RedirectUri로 이동)
+ * @property {function} handleUserInfo = userInfo state onChange 핸들러 함수 정의
+ * @property {function} postUserInfo = 로그인 버튼 클릭 시 POST 실행되는 함수
+ * @property {function} handleLoginSubmit = 로그인 버튼 클릭 시 실행되는 함수
+ */
+
 const Login = () => {
   const [userInfo, setUserInfo] = useState({
     // 로그인 Valid를 위한 state
@@ -30,15 +38,13 @@ const Login = () => {
   // 모든 조건이 만족하면 버튼 활성화
   const isValidCheck = isEmailValid && isPasswordValid;
 
-  // 카카오 로그인 버튼 클릭 시 실행할 함수 (하이퍼 링크)
   const handleLogin = () => {
     window.location.href = kakaoURL;
   };
 
-  // userInfo state onChange 핸들러 함수 정의
   const handleUserInfo = e => {
-    const { name, value } = e.target; // e. target을 이용한 입력되는 값 Check
-    setUserInfo({ ...userInfo, [name]: value }); // name을 정의한 값에 value를 넣어준다.
+    const { name, value } = e.target;
+    setUserInfo({ ...userInfo, [name]: value });
   };
 
   const postUserInfo = () => {
@@ -55,11 +61,11 @@ const Login = () => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[POST] 로그인 요청 통신 실패');
       })
       .then(result => {
         if (result.message === 'SUCCESS') {
-          localStorage.setItem('accessToken', result.accessToken.accessToken); // 로그인 성공 시 accessToken을 localStorage에 저장
+          localStorage.setItem('accessToken', result.accessToken.accessToken);
           // localStorage.setItem('isSns', result.accessToken.isSns);
           localStorage.setItem('isSeller', result.accessToken.isSeller);
           localStorage.setItem('points', result.accessToken.points);
@@ -75,7 +81,6 @@ const Login = () => {
   };
 
   const handleLoginSubmit = e => {
-    // 로그인 버튼 클릭 시 실행되는 함수
     e.preventDefault();
     postUserInfo();
   };
