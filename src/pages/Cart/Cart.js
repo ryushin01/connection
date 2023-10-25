@@ -7,6 +7,21 @@ import CartCount from '../../components/CartCount/CartCount';
 import styled from 'styled-components';
 
 const Cart = () => {
+  /**
+   * @property {function} handleAllCheck = 전체 체크박스 선택/취소 시 실행되는 함수
+   * @property {function} checkedItemOriginalPrice = 체크박스가 체크된 상품의 가격 구하는 함수
+   * @property {function} checkedItemDiscountedAmount = 체크박스가 체크된 상품의 할인 가격 구하는 함수
+   * @property {function} checkedItemTotalPrice = 체크된 상품의 최종 가격을 구하는 함수
+   * @property {function} handleItemPrice = 전체 선택 시 cartData에서 data를 뽑아서 checkItem에 넣어주는 함수
+   * @property {function} handleItemIdInfoChange = 체크 된 상품 중 productId data를 뽑아서 checkItem에 넣어주는 함수 (체크한 상품 삭제 시 사용)
+   * @property {function} handleMarketCheck = 마켓 선택 체크박스 선택/취소 시 실행되는 함수
+   * @property {function} getCartInfoData = 장바구니를 데이터 가져오기 위한 GET 요청
+   * @property {function} patchCheckItemBtn = 장바구니에서 선택한 상품을 주문하기 위한 PATCH 요청
+   * @property {function} patchItemInfo = 체크된 상품의 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
+   * @property {function} deleteCheckItemBtn = 장바구니에서 선택한 상품을 삭제하기 위한 DELETE 요청
+   * @property {function} handleQuantityChange = 가져온 데이터에서 상품의 수량을 변경하기 위한 함수
+   */
+
   // hook
   const [cartData, setCartData] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false); // 1. 전체 선택 체크박스 상태 확인용  State 생성
@@ -19,7 +34,7 @@ const Cart = () => {
       .then(Response => Response.json())
       .then(result => setCartData(result.data));
   };
-  // 전체선택 시 현재 체크 된 체크박스와 전체 체크박스의 수를 비교하기 위한 함수
+
   const cartListData =
     cartData !== undefined &&
     cartData
@@ -31,20 +46,16 @@ const Cart = () => {
       .flat();
 
   // 전체 선택
-  // 1. 전체 선택 체크박스 상태 확인용  State 생성
-  // 2. 전체 선택 함수 생성
-  // 3. 전체 선택 체크박스 상태 반전
-  // 4. 전체 선택 체크박스가 체크되어 있으면 cartData를 checkItem에 넣고, 체크되어 있지 않으면 checkItem을 빈 배열로 설정
 
   const handleAllCheck = checked => {
-    setSelectAllChecked(!selectAllChecked);
+    // 1. 전체 선택 체크박스 상태 확인용 State 생성
+    setSelectAllChecked(!selectAllChecked); // 2. 전체 선택 체크박스 상태 반전
 
-    // setCheckItem(selectAllChecked ? [] : cartData);
-    setCheckItem(selectAllChecked ? [] : handleItemPrice());
+    setCheckItem(selectAllChecked ? [] : handleItemPrice()); // 3. 전체 선택 체크박스가 체크되어 있으면 cartData를 checkItem에 넣고, 체크되어 있지 않으면 checkItem을 빈 배열로 설정
   };
 
-  // 체크박스가 체크되어 있을 때의 상품 가격 구하는 함수
   const checkedItemOriginalPrice = (checked, productId) => {
+    // 체크된 상품의 원가를 구하는 함수
     const itemPrice = checkItem?.map(item => {
       return item.totalPrice;
     });
@@ -53,6 +64,7 @@ const Cart = () => {
   };
 
   const checkedItemDiscountedAmount = (checked, productId) => {
+    // 체크된 상품의 할인 가격을 구하는 함수
     const itemPrice = checkItem
       ?.map(item => {
         return item.discountedAmount;
@@ -61,10 +73,8 @@ const Cart = () => {
     return itemPrice;
   };
 
-  console.log(checkItem);
-
-  // 체크박스가 체크되어 있을 때의 상품 가격 구하는 함수
   const checkedItemTotalPrice = (checked, productId) => {
+    // 체크박스가 체크되어 있을 때의 상품의 최종 가격을 구하는 함수
     const itemPrice = checkItem
       ?.map(item => {
         return item.totalPrice - (item.discountedAmount || 0);
@@ -73,22 +83,24 @@ const Cart = () => {
     return itemPrice;
   };
 
-  const ItemOriginalPrice = checkedItemOriginalPrice();
-  const ItemTotalPrice = checkedItemTotalPrice();
-  const ItemDiscountAmount = checkedItemDiscountedAmount();
+  const ItemOriginalPrice = checkedItemOriginalPrice(); // 체크된 상품의 원가를 배열에 담기 위한 변수
+  const ItemTotalPrice = checkedItemTotalPrice(); // 체크된 상품의 최종 가격을 배열에 담기 위한 변수
+  const ItemDiscountAmount = checkedItemDiscountedAmount(); // 체크된 상품의 할인 가격을 배열에 담기 위한 변수
 
   const totalOriginalPrice = ItemOriginalPrice.reduce(
+    // 체크된 상품의 원가를 reduce함수를 사용하여 합산
     (acc, cur) => acc + cur,
     0,
   );
   const totalDiscountAmount = ItemDiscountAmount.reduce(
+    // 체크된 상품의 할인 가격을 reduce함수를 사용하여 합산
     (acc, cur) => acc + cur,
     0,
   );
-  const totalPrice = ItemTotalPrice.reduce((acc, cur) => acc + cur, 0);
+  const totalPrice = ItemTotalPrice.reduce((acc, cur) => acc + cur, 0); // 체크된 상품의 최종 가격을 reduce함수를 사용하여 합산
 
-  // 전체 선택 시 cartData 중 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
   const handleItemPrice = () => {
+    // 전체 선택 시 cartData에서 data를 뽑아서 checkItem에 넣어주는 함수
     const itemPrice = cartData
       ?.map(item => {
         return item.products.map(product => ({
@@ -101,27 +113,23 @@ const Cart = () => {
         }));
       })
       .flat(); // flat() : 중첩 배열을 평탄화 (2차원 배열을 1차원 배열로 만듦)
-    return itemPrice; // itemInfo를 return
+    return itemPrice;
   };
 
-  // 전체 선택 시 checkItem 중 productId만 뽑아서 checkItem에 넣어주는 함수 (체크한 상품 삭제 시 사용)
   const handleItemIdInfoChange = () => {
+    // 체크 된 상품 중 productId data를 뽑아서 checkItem에 넣어주는 함수 (체크한 상품 삭제 시 사용)
     const itemIdInfo = checkItem
       .map(item => ({
         productId: item.productId,
       }))
       .flat(); // flat() : 중첩 배열을 평탄화 (2차원 배열을 1차원 배열로 만듦)
-    return itemIdInfo; // itemInfo를 return
+    return itemIdInfo;
   };
 
   const handleMarketCheck = (checked, sellerId) => {
+    // 마켓 선택 체크박스 선택/취소 시 실행되는 함수
     if (checked) {
-      // 1. CheckItem 에서 선택한 마켓의 아이템을 filter 로 다 제거 해서 새로운 변수(a)에 넣어준다
-      // 2. cartData 에서 filter 로 선택한 마켓의 아이템들을 뽑아 온다
-      // 3. a 변수에 push(2번 값) 해준다.
-      // 4. CheckItem에 3번 값을 넣어준다.
-
-      const unMarketData = checkItem.filter(item => item.sellerId !== sellerId);
+      const unMarketData = checkItem.filter(item => item.sellerId !== sellerId); // sellerId가 같지 않은 checkItem을 unMarketData에 넣어줌
 
       const marketData = cartData.filter(cart => cart.sellerId === sellerId); // sellerId가 같은 cartData를 marketData에 넣어줌
 
@@ -143,6 +151,7 @@ const Cart = () => {
       // 체크박스가 체크되어 있지 않으면 sellerCheckedItem에서 sellerId를 제거
 
       const unCheckMarketData = checkItem.filter(
+        //
         cart => cart.sellerId !== sellerId,
       );
 
@@ -164,10 +173,9 @@ const Cart = () => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[GET] 장바구니 데이터 가져오기 통신 실패');
       })
       .then(result => {
-        console.log(result);
         setCartData(result.data);
       })
       .catch(error => {
@@ -188,7 +196,7 @@ const Cart = () => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[PATCH] 선택한 상품 주문하기 통신 실패');
       })
       .then(result => {
         navigate(`/order`, {
@@ -206,8 +214,8 @@ const Cart = () => {
       });
   };
 
-  // 전체 선택 시 cartData 중 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
   const patchItemInfo = () => {
+    // 체크된 상품의 productId와 quantity만 뽑아서 checkItem에 넣어주는 함수
     const itemInfo = checkItem
       ?.map(item => {
         return {
@@ -216,12 +224,12 @@ const Cart = () => {
         };
       })
 
-      .flat(); // flat() : 중첩 배열을 평탄화 (2차원 배열을 1차원 배열로 만듦)
-    return itemInfo; // itemInfo를 return
+      .flat();
+    return itemInfo;
   };
 
-  // 장바구니에서 선택한 상품을 삭제하기 위한 DELETE 요청
   const deleteCheckItemBtn = () => {
+    // 장바구니에서 선택한 상품을 삭제하기 위한 DELETE 요청
     // fetch(FETCH_URL, {
     fetch(`${API.CART}`, {
       method: 'DELETE',
@@ -233,10 +241,9 @@ const Cart = () => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[DELETE] 체크한 상품 삭제하기 통신 실패');
       })
       .then(result => {
-        console.log(result);
         if (result.message === 'Delete item!') {
           window.location.reload();
         }
@@ -247,6 +254,7 @@ const Cart = () => {
   };
 
   const handleQuantityChange = (productId, newQuantity) => {
+    // 가져온 데이터에서 상품의 수량을 변경하기 위한 함수
     // cartCount Component에서 받아온 productId와 newQuantity를 매개변수로 받음
     // fetch(FETCH_URL + '/updatequantity', {
     fetch(`${API.CART}/updatequantity`, {
@@ -261,7 +269,7 @@ const Cart = () => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[POST] 상품 수량 변경하기 통신 실패');
       })
       .then(result => {
         if (result.message === 'Update Success!') {
@@ -275,28 +283,6 @@ const Cart = () => {
         console.log(error);
       });
   };
-
-  // 함수를 이용하여 수량을 변경해야할 때 사용
-  // const changeQuantity = (productId, newQuantity) => { // cartCount Component에서 받아온 productId와 newQuantity를 매개변수로 받음
-  //   const nextCarts = cartData.map(cart => { // cartData를 map으로 돌려서 cart에 넣어줌
-  //     const nextProducts = cart.products.map(product => { // cart의 products를 map으로 돌려서 product에 넣어줌
-  //       if (product.productId === productId) { // product의 productId가 cartCount Component에서 받아온 productId와 같으면
-  //         return { // product를 return
-  //           ...product, // 기존의 product를 그대로 유지하고
-  //           quantity: newQuantity, // quantity를 cartCount Component에서 받아온 newQuantity로 변경
-  //         };
-  //       }
-  //       return product; // product의 productId가 cartCount Component에서 받아온 productId와 같지 않으면 product를 그대로 return
-  //     });
-
-  //     return { // cart를 return
-  //       ...cart, // 기존의 cart를 그대로 유지하고
-  //       products: nextProducts, // products를 nextProducts로 변경
-  //     };
-  //   });
-
-  //   setCartData(nextCarts); // 변경된 cartData를 setCartData로 변경
-  // };
 
   // useEffect
   // 백엔드에 요청한 상품을 불러오기 위한 useEffect
