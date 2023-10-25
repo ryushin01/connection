@@ -42,8 +42,8 @@ const Login = () => {
   };
 
   const postUserInfo = () => {
-    fetch('http://10.58.52.126:8000/users/', {
-      // fetch(`${API.USERS}`, {
+    // fetch('http://10.58.52.126:8000/users/', {
+    fetch(`${API.USERS}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
