@@ -53,17 +53,24 @@ const Login = () => {
         password: userInfo.password,
       }),
     })
-      .then(response => response.json())
+      .then(response => {
+        response.json();
+        throw new Error('통신 실패');
+      })
       .then(result => {
         if (result.message === 'SUCCESS') {
           localStorage.setItem('accessToken', result.accessToken.accessToken); // 로그인 성공 시 accessToken을 localStorage에 저장
+          // localStorage.setItem('isSns', result.accessToken.isSns);
           localStorage.setItem('isSeller', result.accessToken.isSeller);
           localStorage.setItem('points', result.accessToken.points);
           localStorage.setItem('cartCount', result.accessToken.cartCount);
-          navigate('/');
+          navigate('/main');
         } else {
           alert('로그인 실패하였습니다. 다시 시도해주세요.');
         }
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 

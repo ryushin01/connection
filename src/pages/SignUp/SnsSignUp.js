@@ -53,13 +53,19 @@ const SnsSignUp = props => {
         addressDetails: userInfo.addressDetail,
       }),
     })
-      .then(res => res.json())
+      .then(response => {
+        response.json();
+        throw new Error('통신 실패');
+      })
       .then(result => {
         if (result.message === 'SUCCESS') {
-          navigate('/');
+          navigate('/main');
         } else {
           alert('회원가입에 실패하였습니다.');
         }
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 

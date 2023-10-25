@@ -15,8 +15,10 @@ const Auth = () => {
         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
       },
     })
-      .then(response => response.json())
-
+      .then(response => {
+        response.json();
+        throw new Error('통신 실패');
+      })
       .then(result => {
         console.log(result);
         if (
@@ -35,12 +37,15 @@ const Auth = () => {
           localStorage.setItem('accessToken', result.accessToken.accessToken);
           localStorage.setItem('seller', result.accessToken.isSeller);
           localStorage.setItem('point', result.accessToken.points);
-          navigate('/');
+          navigate('/main');
         } else {
           // 로그인 실패 시 로그인 페이지로 이동
           alert('로그인이 실패하였습니다. 로그인 페이지로 이동합니다.');
           navigate('/login');
         }
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 
