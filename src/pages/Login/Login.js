@@ -64,7 +64,7 @@ const Login = () => {
         console.log(result);
         if (result.message === 'SUCCESS') {
           localStorage.setItem('accessToken', result.accessToken.accessToken);
-          localStorage.setItem('isSns', result.accessToken.isSns);
+          localStorage.setItem('isKakao', result.accessToken.isKakao);
           localStorage.setItem('isSeller', result.accessToken.isSeller);
           localStorage.setItem('points', result.accessToken.points);
           localStorage.setItem('cartCount', result.accessToken.cartCount);

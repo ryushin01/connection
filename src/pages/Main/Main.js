@@ -19,8 +19,9 @@ const Main = () => {
     // fetch('/data/categoryBandData.json', {
     fetch(`${API.CATEGORY_BAND}`, {
       method: 'GET',
-      header: {
+      headers: {
         'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
       },
     })
       .then(response => response.json())
@@ -41,7 +42,7 @@ const Main = () => {
     // fetch('/data/sellerBandData.json', {
     fetch(`${API.SELLER_BAND}`, {
       method: 'GET',
-      header: {
+      headers: {
         'Content-Type': 'application/json',
       },
     })
