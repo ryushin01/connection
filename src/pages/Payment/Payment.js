@@ -48,6 +48,30 @@ const Payment = ({ points }) => {
     API_URL = `${API.ORDERS}`;
   }
 
+  let randomValue = Math.random().toString(36).substring(2, 12);
+  const merchant_uid = `2023-10-${randomValue}`;
+
+  const IMP = window.IMP;
+  IMP.init('imp62852632');
+
+  const requestPay = () => {
+    IMP.request_pay(
+      {
+        pg: 'TC0ONETIME',
+        pay_method: 'card',
+        merchant_uid: merchant_uid,
+      },
+      rsp => {
+        // callback
+        if (rsp.success) {
+          console.log('결제 성공 로직');
+        } else {
+          console.log('결제 실패 로직');
+        }
+      },
+    );
+  };
+
   // 통합 함수
   const postPaymentData = () => {
     fetch(API_URL, {
@@ -67,6 +91,7 @@ const Payment = ({ points }) => {
       .then(response => response.json())
       .then(result => {
         setPaymentComplete(true);
+        requestPay();
         setLoading(false);
       });
   };
@@ -75,7 +100,58 @@ const Payment = ({ points }) => {
     navigate('/main');
     window.location.reload();
   };
+  // 장바구니 로직의 최종 함수
+  // const postCartPayment = () => {
+  //   // fetch(`${API.ORDERS}`, {
+  //   fetch('http://10.58.52.59:8000/orders', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       authorization: localStorage.getItem('accessToken'),
+  //     },
+  //     body: JSON.stringify({
+  //       userId: userId,
+  //       totalPrice: totalPrice,
+  //       shippingMethod: shippingMethod,
+  //       paymentId: paymentId,
+  //       products: products,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       setPaymentComplete(true);
+  //       setLoading(false);
+  //     });
+  // };
 
+  // 바로구매 로직의 최종 함수
+  // const postBuyNowPayment = () => {
+  //   // fetch(`${API.ORDERS}/now`, {
+  //   fetch('http://10.58.52.149:8000/orders/now', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       authorization: localStorage.getItem('accessToken'),
+  //     },
+  //     body: JSON.stringify({
+  //       userId: userId,
+  //       totalPrice: totalPrice,
+  //       shippingMethod: shippingMethod,
+  //       paymentId: paymentId,
+  //       products: products,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       setPaymentComplete(true);
+  //       setLoading(false);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   // random();
+  // }, []);
   return (
     <>
       {loading && <Loading />}
