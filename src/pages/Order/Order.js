@@ -26,16 +26,18 @@ const Order = ({ points }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  let productId,
+  let productData,
+    productId,
     quantity,
     course = null;
   if (location?.state?.productData !== null) {
+    productData = location?.state?.productData;
     productId = location?.state?.productData?.productId;
     quantity = location?.state?.productData?.quantity;
     course = location?.state?.course;
   }
 
-  console.log(quantity);
+  console.log(productData);
 
   // Payment.js로 전달할 데이터 모음
   let cartPriceData,
@@ -48,17 +50,9 @@ const Order = ({ points }) => {
   const isBuyNow = course === 'directly';
 
   let API_URL;
-  let productData;
   if (isBuyNow) {
     // 바로구매
     API_URL = `${API.LIST}/${productId}`;
-
-    productData = [
-      {
-        productId: productId,
-        quantity: quantity,
-      },
-    ];
   } else {
     // 장바구니
     API_URL = `${API.CART}/complete`;
@@ -115,28 +109,6 @@ const Order = ({ points }) => {
   };
 
   const sumCartDataValues = sumCartData(cartData);
-
-  // const getBuyNowData = () => {
-  //   // fetch(`${API.LIST}/${productId}`, {
-  //   // fetch('http://10.58.52.203:8000/products/1', {
-  //   fetch(API_URL, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       authorization: localStorage.getItem('accessToken'),
-  //     },
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       if (result.message === 'Success') {
-  //         setCartData(result?.product);
-  //         setLoading(false);
-  //         console.log('바로구매(주문)');
-
-  //         console.log(result);
-  //       }
-  //     });
-  // };
 
   // 통합 함수
   const getOrderData = () => {
@@ -225,7 +197,7 @@ const Order = ({ points }) => {
         totalPrice: sumCartDataValues?.totalPrice || totalPrice,
         shippingMethod: shippingMethod,
         paymentId: paymentId,
-        products: cartData,
+        products: cartData || productData,
         // [바로구매] products: productData,
         productName: cartData[0].productName,
         course: course,

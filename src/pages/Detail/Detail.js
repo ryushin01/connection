@@ -119,6 +119,7 @@ const Detail = () => {
     navigate('/order', {
       state: {
         productData,
+        course: 'directly',
       },
     });
   };
