@@ -30,7 +30,7 @@ const DetailTab = ({ productId, productDetailImages, reviewNumbers }) => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[GET] 리뷰 데이터 통신 실패');
       })
       .then(result => {
         if (result.message === 'Success') {

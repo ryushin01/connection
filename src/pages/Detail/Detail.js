@@ -44,7 +44,7 @@ const Detail = () => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[GET] 제품 상세 데이터 통신 실패');
       })
       .then(result => {
         console.log(result);
@@ -80,11 +80,11 @@ const Detail = () => {
   const finalPrice = totalPrice * quantity;
 
   const cartProcess = () => {
-    postOrder();
+    postCart();
     putInCart();
   };
 
-  const postOrder = () => {
+  const postCart = () => {
     // fetch('http://10.58.52.140:8000/carts', {
     fetch(`${API.CART}`, {
       method: 'POST',
@@ -96,7 +96,7 @@ const Detail = () => {
     })
       .then(response => {
         response.json();
-        throw new Error('통신 실패');
+        throw new Error('[POST] 장바구니 데이터 통신 실패');
       })
       .then(result => {
         console.log(result);
