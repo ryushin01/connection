@@ -7,12 +7,12 @@ import PointButton from '../WalletButton/WalletButton';
 import GnbCartButton from '../CartButton/GnbCartButton';
 import styled, { css } from 'styled-components';
 
-const Header = ({ points, cartCount }) => {
+const Header = ({ isSns, points, cartCount }) => {
   return (
     <HeaderWrap>
       <HeaderInnerWrap>
         <TopSection>
-          <Account />
+          <Account isSns={isSns} />
         </TopSection>
       </HeaderInnerWrap>
       <HeaderInnerWrap>

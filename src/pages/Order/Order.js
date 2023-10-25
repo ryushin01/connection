@@ -67,19 +67,13 @@ const Order = ({ points }) => {
         authorization: localStorage.getItem('accessToken'),
       },
     })
-      .then(response => {
-        response.json();
-        throw new Error('[GET] 유저 데이터 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         if (result.message === 'userInformation') {
           setUserData(result?.data);
         }
 
         setLoading(false);
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 
@@ -122,7 +116,7 @@ const Order = ({ points }) => {
     })
       .then(response => {
         response.json();
-        throw new Error('[GET] 주문 내역 데이터 통신 실패');
+        // throw new Error('[GET] 주문 내역 데이터 통신 실패');
       })
       .then(result => {
         console.log(result);
@@ -166,10 +160,10 @@ const Order = ({ points }) => {
 
         //   setLoading(false);
         // }
-      })
-      .catch(error => {
-        console.log(error);
       });
+    // .catch(error => {
+    //   console.log(error);
+    // });
   };
 
   const selectingSentry = e => {

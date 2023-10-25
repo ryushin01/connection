@@ -42,19 +42,12 @@ const Detail = () => {
         'Content-Type': 'application/json',
       },
     })
-      .then(response => {
-        response.json();
-        throw new Error('[GET] 제품 상세 데이터 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
-        console.log(result);
         if (result.message === 'Success') {
           setDetailData(result?.product[0]);
           setLoading(false);
         }
-      })
-      .catch(error => {
-        console.log(error);
       });
   }
 
@@ -94,16 +87,10 @@ const Detail = () => {
       },
       body: JSON.stringify(productData),
     })
-      .then(response => {
-        response.json();
-        throw new Error('[POST] 장바구니 데이터 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         console.log(result);
         // setCartData(result.data);
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 

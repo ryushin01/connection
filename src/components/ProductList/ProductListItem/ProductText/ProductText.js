@@ -16,8 +16,8 @@ const ProductText = ({ productId, productName, originalPrice, totalPrice }) => {
       <button type="button" onClick={goToDetail}>
         <h2>{productName}</h2>
         <strong>
-          <span>{originalPrice.toLocaleString()}원</span>
-          <span>{totalPrice.toLocaleString()}원</span>
+          <span>{originalPrice?.toLocaleString()}원</span>
+          <span>{totalPrice?.toLocaleString()}원</span>
         </strong>
       </button>
     </ProductProductTextWrap>

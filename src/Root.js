@@ -32,7 +32,7 @@ const Root = () => {
   const store = createStore(reducer);
 
   const isLogin = localStorage.getItem('accessToken');
-  // const isSns = localStorage.getItem('isSns');
+  const isSns = localStorage.getItem('isSns');
   const isSeller = localStorage.getItem('isSeller');
   const points = localStorage.getItem('points');
   const cartCount = localStorage.getItem('cartCount');
@@ -49,6 +49,7 @@ const Root = () => {
         <GlobalStyle />
         <Router
           isLogin={isLogin}
+          isSns={isSns}
           isSeller={isSeller}
           points={points}
           cartCount={cartCount}

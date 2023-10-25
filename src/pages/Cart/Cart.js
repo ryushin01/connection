@@ -171,15 +171,9 @@ const Cart = () => {
         authorization: localStorage.getItem('accessToken'),
       },
     })
-      .then(response => {
-        response.json();
-        throw new Error('[GET] 장바구니 데이터 가져오기 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         setCartData(result.data);
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 
@@ -194,10 +188,7 @@ const Cart = () => {
       },
       body: JSON.stringify({ data: patchItemInfo() }),
     })
-      .then(response => {
-        response.json();
-        throw new Error('[PATCH] 선택한 상품 주문하기 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         navigate(`/order`, {
           state: {
@@ -208,9 +199,6 @@ const Cart = () => {
             },
           },
         });
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 
@@ -239,17 +227,11 @@ const Cart = () => {
       },
       body: JSON.stringify({ data: handleItemIdInfoChange() }),
     })
-      .then(response => {
-        response.json();
-        throw new Error('[DELETE] 체크한 상품 삭제하기 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         if (result.message === 'Delete item!') {
           window.location.reload();
         }
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 
@@ -267,10 +249,7 @@ const Cart = () => {
         data: { productId, quantity: Number(newQuantity) },
       }), // productId가 같은 제품의 수량이 변경되는 것을 감지하고 변경된 값으로 POST 요청
     })
-      .then(response => {
-        response.json();
-        throw new Error('[POST] 상품 수량 변경하기 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         if (result.message === 'Update Success!') {
           alert('수량이 변경되었습니다.');
@@ -278,17 +257,14 @@ const Cart = () => {
         } else {
           alert('수량 변경에 실패하였습니다.');
         }
-      }) // 정상적으로 통신이 되었으면 장바구니 데이터를 다시 불러옴.
-      .catch(error => {
-        console.log(error);
-      });
+      }); // 정상적으로 통신이 되었으면 장바구니 데이터를 다시 불러옴.
   };
 
   // useEffect
   // 백엔드에 요청한 상품을 불러오기 위한 useEffect
   useEffect(() => {
-    getMokData();
-    // getCartInfoData();
+    // getMokData();
+    getCartInfoData();
   }, []);
 
   return (

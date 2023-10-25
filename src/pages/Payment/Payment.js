@@ -64,16 +64,10 @@ const Payment = ({ points }) => {
         products: products,
       }),
     })
-      .then(response => {
-        response.json();
-        throw new Error('[POST] 결제 데이터 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         setPaymentComplete(true);
         setLoading(false);
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 

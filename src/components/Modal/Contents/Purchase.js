@@ -44,16 +44,10 @@ const Purchase = ({ productId, productName, totalPrice, onClose }) => {
       },
       body: JSON.stringify(productData),
     })
-      .then(response => {
-        response.json();
-        throw new Error('[POST] 장바구니 데이터 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         console.log(result);
         // setCartData(result.data);
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 

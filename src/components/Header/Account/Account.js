@@ -28,7 +28,7 @@ const logout = () => {
   postKakaoLogout();
 };
 
-const Account = () => {
+const Account = ({ isSns }) => {
   return (
     <AccountList>
       {/* {isLogin && ( */}
