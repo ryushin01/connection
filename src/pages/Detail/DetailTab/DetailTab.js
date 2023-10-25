@@ -28,11 +28,17 @@ const DetailTab = ({ productId, productDetailImages, reviewNumbers }) => {
         'Content-Type': 'application/json',
       },
     })
-      .then(response => response.json())
+      .then(response => {
+        response.json();
+        throw new Error('통신 실패');
+      })
       .then(result => {
         if (result.message === 'Success') {
           setReviewData(result?.review);
         }
+      })
+      .catch(error => {
+        console.log(error);
       });
   }
 

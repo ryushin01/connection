@@ -62,10 +62,16 @@ const Payment = () => {
         products: products,
       }),
     })
-      .then(response => response.json())
+      .then(response => {
+        response.json();
+        throw new Error('통신 실패');
+      })
       .then(result => {
         setPaymentComplete(true);
         setLoading(false);
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 
