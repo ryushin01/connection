@@ -30,13 +30,17 @@ const Order = ({ points }) => {
   let productData,
     productId,
     quantity,
-    course = null;
+    course,
+    finalPrice = null;
   if (location?.state?.productData !== null) {
     productData = location?.state?.productData;
     productId = location?.state?.productData?.productId;
     quantity = location?.state?.productData?.quantity;
     course = location?.state?.course;
+    finalPrice = location?.state?.cartPriceData?.totalPrice;
   }
+
+  console.log(location?.state);
 
   // Payment.js로 전달할 데이터 모음
   let cartPriceData,
@@ -153,16 +157,17 @@ const Order = ({ points }) => {
     navigate('/payment', {
       state: {
         userId: userId,
-        totalPrice: sumCartDataValues?.totalPrice || totalPrice,
+        totalPrice: finalPrice || totalPrice,
         shippingMethod: shippingMethod,
         paymentId: paymentId,
-        products: cartData || productData,
-        // [바로구매] products: productData,
+        products: productData || cartData,
         productName: cartData[0].productName,
         course: course,
       },
     });
   };
+
+  console.log(finalPrice, quantity);
 
   return (
     <>
@@ -201,8 +206,7 @@ const Order = ({ points }) => {
               <SectionTableWrap>
                 <SectionTable>
                   <colgroup>
-                    <col style={{ width: '50%' }} />
-                    <col style={{ width: '20%' }} />
+                    <col style={{ width: '70%' }} />
                     <col style={{ width: '30%' }} />
                   </colgroup>
                   <caption>주문 정보</caption>
@@ -210,7 +214,6 @@ const Order = ({ points }) => {
                     <tr>
                       <th>제품명</th>
                       <td>수량</td>
-                      <td>가격</td>
                     </tr>
                   </thead>
                   <tbody>
@@ -219,10 +222,10 @@ const Order = ({ points }) => {
                         return (
                           <tr key={index}>
                             <th>{productName}</th>
-
-                            {/* 장바구니 로직 */}
-                            <td>{quantity}</td>
-                            <td>{totalPrice.toLocaleString()}원</td>
+                            <td>
+                              {location?.state?.productData?.quantity ||
+                                quantity}
+                            </td>
                           </tr>
                         );
                       },
@@ -231,11 +234,14 @@ const Order = ({ points }) => {
                   <tfoot>
                     <tr>
                       <th>총 금액</th>
-                      <td>&nbsp;</td>
-                      {/* 장바구니 로직 */}
+                      {/* <td>
+                        {finalPrice?.toLocaleString() ||
+                          sumCartDataValues?.totalPrice?.toLocaleString()}
+                        원
+                      </td> */}
                       <td>
-                        {sumCartDataValues?.totalPrice.toLocaleString() ||
-                          totalPrice.toLocaleString()}
+                        {finalPrice?.toLocaleString() ||
+                          cartData[0]?.totalPrice?.toLocaleString()}
                         원
                       </td>
                     </tr>

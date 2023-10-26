@@ -17,7 +17,7 @@ const Payment = ({ points }) => {
   const intPoints = Number(points);
 
   let userId,
-    totalPrice,
+    finalPrice,
     shippingMethod,
     paymentId,
     products,
@@ -25,7 +25,7 @@ const Payment = ({ points }) => {
     course = null;
   if (location?.state != null) {
     userId = location?.state?.userId;
-    totalPrice = location?.state?.totalPrice;
+    finalPrice = location?.state?.totalPrice;
     shippingMethod = location?.state?.shippingMethod;
     paymentId = location?.state?.paymentId;
     products = location?.state?.products;
@@ -33,10 +33,10 @@ const Payment = ({ points }) => {
     course = location?.state?.course;
   }
 
+  console.log(finalPrice);
+
   const isVisiting = shippingMethod === 'visiting';
   const isBuyNow = course === 'directly';
-
-  console.log(products);
 
   let API_URL;
   if (isBuyNow) {
@@ -58,9 +58,9 @@ const Payment = ({ points }) => {
       {
         pg: 'kakaopay',
         name: `${productName} 외`,
-        // name: products,
-        amount: totalPrice,
+        amount: finalPrice,
         merchant_uid: merchant_uid,
+        custom_data: { products },
       },
       function (rsp) {
         const { status, imp_uid } = rsp;
@@ -75,12 +75,14 @@ const Payment = ({ points }) => {
             },
             body: JSON.stringify({
               userId: userId,
-              totalPrice: totalPrice,
+              totalPrice: finalPrice,
               shippingMethod: shippingMethod,
               paymentId: paymentId,
               products: products,
               imp_uid: imp_uid,
+              course: course,
             }),
+            // data: { imp_uid: imp_uid, merchant_uid: merchant_uid },
           })
             .then(response => response.json())
             .then(result => {
@@ -105,10 +107,12 @@ const Payment = ({ points }) => {
 
   const refreshUserInfo = () => {
     // const refreshPoint = ;
-    // cosnt refreshCartCount =;
+    // const refreshCartCount =;
     // localStorage.setItem('points', refreshPoint);
     // localStorage.setItem('cartCount', refreshCartCount);
   };
+
+  console.log(finalPrice);
 
   return (
     <Main id="main">
@@ -150,8 +154,11 @@ const Payment = ({ points }) => {
                     {isBuyNow && (
                       <tr>
                         <th>{productName}</th>
-                        <td>{products[0]?.quantity}</td>
-                        <td>{totalPrice.toLocaleString()}원</td>
+                        <td>{products?.quantity}</td>
+                        <td>
+                          {/* {(products?.quantity * finalPrice)?.toLocaleString()} */}
+                          {finalPrice}원
+                        </td>
                       </tr>
                     )}
                   </tbody>
@@ -165,7 +172,7 @@ const Payment = ({ points }) => {
                   <tbody>
                     <tr>
                       <th>상품 금액</th>
-                      <td>{totalPrice.toLocaleString()}원</td>
+                      <td>{finalPrice?.toLocaleString()}원</td>
                     </tr>
                     <tr>
                       <th>배송비&nbsp;(배송 방법)</th>
@@ -175,17 +182,7 @@ const Payment = ({ points }) => {
                     </tr>
                     <tr>
                       <th>총 결제 금액</th>
-                      <td>{totalPrice.toLocaleString()}원</td>
-                    </tr>
-                    <tr>
-                      <th>포인트 차감</th>
-                      <td>
-                        <span>{totalPrice.toLocaleString()}원</span>
-                        <RemainingPoints>
-                          (잔여 포인트:&nbsp;
-                          <strong>{intPoints?.toLocaleString()}</strong>)
-                        </RemainingPoints>
-                      </td>
+                      <td>{finalPrice?.toLocaleString()}원</td>
                     </tr>
                   </tbody>
                 </SectionTable>

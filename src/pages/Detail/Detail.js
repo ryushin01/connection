@@ -39,7 +39,7 @@ const Detail = () => {
     // fetch(`http://10.58.52.203:8000/products/${productId}`, {
     fetch(`${API.LIST}/${productId}`, {
       method: 'GET',
-      header: {
+      headers: {
         'Content-Type': 'application/json',
       },
     })
@@ -57,7 +57,7 @@ const Detail = () => {
     // fetch(`http://10.58.52.203:8000/reviews/${productId}`, {
     fetch(`${API.REVIEWS}/${productId}`, {
       method: 'GET',
-      header: {
+      headers: {
         'Content-Type': 'application/json',
       },
     })
@@ -128,6 +128,7 @@ const Detail = () => {
       state: {
         productData,
         course: 'directly',
+        finalPrice: finalPrice,
       },
     });
   };
