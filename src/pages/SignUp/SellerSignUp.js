@@ -68,10 +68,7 @@ const SellerSignUp = props => {
       },
       body: formData,
     })
-      .then(response => {
-        response.json();
-        throw new Error('[POST] 셀러 회원가입 요청 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         if (result.message === 'SUCCESS') {
           alert('판매자 등록이 완료되었습니다.');
@@ -79,9 +76,6 @@ const SellerSignUp = props => {
         } else {
           alert('판매자 등록에 실패하였습니다.');
         }
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 

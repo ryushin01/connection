@@ -19,12 +19,14 @@ import Order from './pages/Order/Order';
 import Payment from './pages/Payment/Payment';
 import Gateway from './pages/Gateway/Gateway';
 
-const Router = ({ isLogin, isSeller, points, cartCount }) => {
+const Router = ({ isLogin, isKakao, isSeller, points, cartCount }) => {
   return (
     <BrowserRouter>
       {isLogin && <SkipNavigation />}
       {isLogin && !isSeller ? <SellerConversionBanner /> : null}
-      {isLogin && <Header points={points} cartCount={cartCount} />}
+      {isLogin && (
+        <Header isKakao={isKakao} points={points} cartCount={cartCount} />
+      )}
       <Routes>
         <Route path="/" element={<Gateway isLogin={isLogin} />} />
         <Route path="/main" element={<Main />} />

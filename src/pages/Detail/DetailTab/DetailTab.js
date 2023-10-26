@@ -9,43 +9,32 @@ import styled, { css } from 'styled-components';
  * @property {function} selectTabHandler      - 탭 클릭 시 해당 영역으로 스크롤되면서 클릭한 탭을 활성화하는 함수입니다.
  */
 
-const DetailTab = ({ productId, productDetailImages, reviewNumbers }) => {
-  const [reviewData, setReviewData] = useState([]);
+const DetailTab = ({
+  productId,
+  productDetailImages,
+  reviewNumbers,
+  latitude,
+  longitude,
+  reviewData,
+}) => {
   const targetRef = useRef(null);
-  const [currentTab, setTab] = useState(0);
+  const [currentTab, setTab] = useState(1);
 
   const selectTabHandler = index => {
     targetRef.current.scrollIntoView({ behavior: 'smooth' });
     setTab(index);
-    getReviewData();
   };
-
-  function getReviewData() {
-    // fetch(`http://10.58.52.203:8000/reviews/${productId}`, {
-    fetch(`${API.REVIEWS}/${productId}`, {
-      method: 'GET',
-      header: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        response.json();
-        throw new Error('[GET] 리뷰 데이터 통신 실패');
-      })
-      .then(result => {
-        if (result.message === 'Success') {
-          setReviewData(result?.review);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
 
   const TAB_DATA = [
     {
       name: '상품설명',
-      content: <ProductDescription productDetailImages={productDetailImages} />,
+      content: (
+        <ProductDescription
+          productDetailImages={productDetailImages}
+          latitude={latitude}
+          longitude={longitude}
+        />
+      ),
     },
     { name: '상품리뷰', content: <ProductReview reviewData={reviewData} /> },
   ];
@@ -85,7 +74,7 @@ const Tabs = styled.div`
   ${FlexCenter};
   gap: 80px;
   position: sticky;
-  z-index: 1;
+  z-index: 1000;
   top: 160px;
   padding: 20px 0;
   border-bottom: 1px ${props => props.theme.grayscaleC} solid;

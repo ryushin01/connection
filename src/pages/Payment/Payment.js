@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { API } from '../../config';
 import { ReactComponent as CheckIcon } from '../../svg/icon_check.svg';
-import Loading from '../Loading/Loading';
 import Button from '../../components/Button/Button';
 import styled, { css } from 'styled-components';
 
@@ -12,10 +11,10 @@ import styled, { css } from 'styled-components';
  */
 
 const Payment = ({ points }) => {
-  const [loading, setLoading] = useState(false);
   const [paymentComplete, setPaymentComplete] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const intPoints = Number(points);
 
   let userId,
     totalPrice,
@@ -34,10 +33,10 @@ const Payment = ({ points }) => {
     course = location?.state?.course;
   }
 
-  console.log(products);
-
   const isVisiting = shippingMethod === 'visiting';
   const isBuyNow = course === 'directly';
+
+  console.log(products);
 
   let API_URL;
   if (isBuyNow) {
@@ -48,33 +47,55 @@ const Payment = ({ points }) => {
     API_URL = `${API.ORDERS}`;
   }
 
-  // 통합 함수
-  const postPaymentData = () => {
-    fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: localStorage.getItem('accessToken'),
+  let randomValue = Math.random().toString(36).substring(2, 12);
+  const merchant_uid = `2023-10-${randomValue}`;
+  const IMP = window.IMP;
+  IMP.init('imp62852632');
+
+  // 구글 크롬에서 에러 제외 처리 필요(중단점)
+  const requestPay = () => {
+    IMP.request_pay(
+      {
+        pg: 'kakaopay',
+        name: `${productName} 외`,
+        // name: products,
+        amount: totalPrice,
+        merchant_uid: merchant_uid,
       },
-      body: JSON.stringify({
-        userId: userId,
-        totalPrice: totalPrice,
-        shippingMethod: shippingMethod,
-        paymentId: paymentId,
-        products: products,
-      }),
-    })
-      .then(response => {
-        response.json();
-        throw new Error('[POST] 결제 데이터 통신 실패');
-      })
-      .then(result => {
-        setPaymentComplete(true);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      function (rsp) {
+        const { status, imp_uid } = rsp;
+        // if (status === 'paid') {
+        if (rsp.success) {
+          // fetch(`http://10.58.52.138:8000/payments`, {
+          fetch(`${API.PAYMENTS}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              authorization: localStorage.getItem('accessToken'),
+            },
+            body: JSON.stringify({
+              userId: userId,
+              totalPrice: totalPrice,
+              shippingMethod: shippingMethod,
+              paymentId: paymentId,
+              products: products,
+              imp_uid: imp_uid,
+            }),
+          })
+            .then(response => response.json())
+            .then(result => {
+              console.log('결과: ', result);
+              if (result.message === 'PAYMENT_SUCCESS') {
+                // console.log(result.points);
+                setPaymentComplete(true);
+                // refreshUserInfo();
+              }
+            });
+        } else {
+          console.log('결제 실패 로직');
+        }
+      },
+    );
   };
 
   const goToMain = () => {
@@ -82,137 +103,150 @@ const Payment = ({ points }) => {
     window.location.reload();
   };
 
+  const refreshUserInfo = () => {
+    // const refreshPoint = ;
+    // cosnt refreshCartCount =;
+    // localStorage.setItem('points', refreshPoint);
+    // localStorage.setItem('cartCount', refreshCartCount);
+  };
+
   return (
-    <>
-      {loading && <Loading />}
-      <Main id="main">
-        <div>
-          {!paymentComplete && (
-            <Before>
-              <SectionTitle>결제하기</SectionTitle>
-              <Section>
-                <SectionSubtitle>주문 정보</SectionSubtitle>
-                <TableGroup>
-                  <SectionTable>
-                    <colgroup>
-                      <col style={{ width: '50%' }} />
-                      <col style={{ width: '20%' }} />
-                      <col style={{ width: '30%' }} />
-                    </colgroup>
-                    <caption>주문 정보</caption>
-                    <thead>
-                      <tr>
-                        <th>제품명</th>
-                        <td>수량</td>
-                        <td>가격</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {!isBuyNow &&
-                        products?.map(
-                          ({ productName, quantity, totalPrice }, index) => {
-                            return (
-                              <tr key={index}>
-                                <th>{productName}</th>
-                                <td>{quantity}</td>
-                                <td>{totalPrice.toLocaleString()}원</td>
-                              </tr>
-                            );
-                          },
-                        )}
-
-                      {isBuyNow && (
-                        <tr>
-                          <th>{productName}</th>
-                          <td>{products[0]?.quantity}</td>
-                          <td>{totalPrice.toLocaleString()}원</td>
-                        </tr>
+    <Main id="main">
+      <div>
+        {!paymentComplete && (
+          <Before>
+            <SectionTitle>결제하기</SectionTitle>
+            <Section>
+              <SectionSubtitle>주문 정보</SectionSubtitle>
+              <TableGroup>
+                <SectionTable>
+                  <colgroup>
+                    <col style={{ width: '50%' }} />
+                    <col style={{ width: '20%' }} />
+                    <col style={{ width: '30%' }} />
+                  </colgroup>
+                  <caption>주문 정보</caption>
+                  <thead>
+                    <tr>
+                      <th>제품명</th>
+                      <td>수량</td>
+                      <td>가격</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {!isBuyNow &&
+                      products?.map(
+                        ({ productName, quantity, totalPrice }, index) => {
+                          return (
+                            <tr key={index}>
+                              <th>{productName}</th>
+                              <td>{quantity}</td>
+                              <td>{totalPrice.toLocaleString()}원</td>
+                            </tr>
+                          );
+                        },
                       )}
-                    </tbody>
-                  </SectionTable>
-                  <SectionTable>
-                    <colgroup>
-                      <col style={{ width: '20%' }} />
-                      <col style={{ width: '80%' }} />
-                    </colgroup>
-                    <caption>결제 금액</caption>
-                    <tbody>
-                      <tr>
-                        <th>상품 금액</th>
-                        <td>{totalPrice.toLocaleString()}원</td>
-                      </tr>
-                      <tr>
-                        <th>배송비&nbsp;(배송 방법)</th>
-                        <td>
-                          무료&nbsp;({isVisiting ? '직접 수령' : '택배 배송'})
-                        </td>
-                      </tr>
-                      <tr>
-                        <th>총 결제 금액</th>
-                        <td>{totalPrice.toLocaleString()}원</td>
-                      </tr>
-                      <tr>
-                        <th>포인트 차감</th>
-                        <td>
-                          <span>{totalPrice.toLocaleString()}원</span>
-                          <RemainingPoints>
-                            (잔여 포인트: <strong>{points}</strong>)
-                          </RemainingPoints>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </SectionTable>
-                </TableGroup>
-              </Section>
-              <ButtonGroup>
-                <Button
-                  shape="solid"
-                  color="neutral"
-                  size="large"
-                  content="돌아가기"
-                  onClick={() => navigate(-1)}
-                />
-                <Button
-                  shape="solid"
-                  color="primary"
-                  size="large"
-                  content="결제하기"
-                  onClick={postPaymentData}
-                />
-              </ButtonGroup>
-            </Before>
-          )}
 
-          {paymentComplete && (
-            <After>
-              <SectionTitle>결제 완료</SectionTitle>
-              <Section>
-                <SectionInnerWrap>
-                  <CheckIcon />
-                  <OrderNumber>주문 번호: 100-2023-1021</OrderNumber>
-                </SectionInnerWrap>
-              </Section>
-              <ButtonGroup>
-                {/* <Button
+                    {isBuyNow && (
+                      <tr>
+                        <th>{productName}</th>
+                        <td>{products[0]?.quantity}</td>
+                        <td>{totalPrice.toLocaleString()}원</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </SectionTable>
+                <SectionTable>
+                  <colgroup>
+                    <col style={{ width: '30%' }} />
+                    <col style={{ width: '70%' }} />
+                  </colgroup>
+                  <caption>결제 금액</caption>
+                  <tbody>
+                    <tr>
+                      <th>상품 금액</th>
+                      <td>{totalPrice.toLocaleString()}원</td>
+                    </tr>
+                    <tr>
+                      <th>배송비&nbsp;(배송 방법)</th>
+                      <td>
+                        무료&nbsp;({isVisiting ? '직접 수령' : '택배 배송'})
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>총 결제 금액</th>
+                      <td>{totalPrice.toLocaleString()}원</td>
+                    </tr>
+                    <tr>
+                      <th>포인트 차감</th>
+                      <td>
+                        <span>{totalPrice.toLocaleString()}원</span>
+                        <RemainingPoints>
+                          (잔여 포인트:&nbsp;
+                          <strong>{intPoints?.toLocaleString()}</strong>)
+                        </RemainingPoints>
+                      </td>
+                    </tr>
+                  </tbody>
+                </SectionTable>
+              </TableGroup>
+            </Section>
+            <ButtonGroup>
+              <Button
+                shape="solid"
+                color="neutral"
+                size="large"
+                content="돌아가기"
+                onClick={() => navigate(-1)}
+              />
+              {/* <Button
+                shape="solid"
+                color="primary"
+                size="large"
+                content="결제하기"
+                onClick={postPaymentData}
+              /> */}
+
+              <Button
+                shape="solid"
+                color="primary"
+                size="large"
+                content="결제하기"
+                onClick={requestPay}
+              />
+            </ButtonGroup>
+          </Before>
+        )}
+
+        {paymentComplete && (
+          <After>
+            <SectionTitle>결제 완료</SectionTitle>
+            <Section>
+              <SectionInnerWrap>
+                <CheckIcon />
+                <OrderNumber>주문 번호: 100-2023-1021</OrderNumber>
+              </SectionInnerWrap>
+            </Section>
+            <ButtonGroup>
+              {/* <Button
                   shape="solid"
                   color="neutral"
                   size="large"
                   content="주문 내역 확인하러 가기"
                   onClick={() => navigate('/mypage')}
                 /> */}
-                <Button
-                  shape="solid"
-                  color="primary"
-                  size="large"
-                  content="메인 화면으로 돌아가기"
-                  onClick={goToMain}
-                />
-              </ButtonGroup>
-            </After>
-          )}
-        </div>
-      </Main>
-    </>
+              <Button
+                shape="solid"
+                color="primary"
+                size="large"
+                content="메인 화면으로 돌아가기"
+                onClick={goToMain}
+              />
+            </ButtonGroup>
+          </After>
+        )}
+      </div>
+    </Main>
   );
 };
 

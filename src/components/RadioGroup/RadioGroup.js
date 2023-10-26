@@ -9,6 +9,7 @@ function RadioGroup({ data, name, value, defaultChecked, text, onChange }) {
         return (
           <Radio
             key={item.id}
+            id={item.id}
             name={name}
             value={item.value}
             text={item.text}

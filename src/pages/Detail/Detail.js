@@ -18,6 +18,7 @@ const Detail = () => {
   const [loading, setLoading] = useState(false);
   const [detailData, setDetailData] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [reviewData, setReviewData] = useState([]);
   const params = useParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,25 +43,36 @@ const Detail = () => {
         'Content-Type': 'application/json',
       },
     })
-      .then(response => {
-        response.json();
-        throw new Error('[GET] 제품 상세 데이터 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         console.log(result);
         if (result.message === 'Success') {
           setDetailData(result?.product[0]);
           setLoading(false);
         }
-      })
-      .catch(error => {
-        console.log(error);
+      });
+  }
+
+  function getReviewData() {
+    // fetch(`http://10.58.52.203:8000/reviews/${productId}`, {
+    fetch(`${API.REVIEWS}/${productId}`, {
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Success') {
+          setReviewData(result?.review);
+        }
       });
   }
 
   useEffect(() => {
     setLoading(true);
     getDetailData();
+    getReviewData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -74,6 +86,8 @@ const Detail = () => {
     discountAmount,
     totalPrice,
     reviewNumbers,
+    latitude,
+    longitude,
   } = detailData;
 
   const productDetailImages = detailData?.productDetailImages;
@@ -94,16 +108,10 @@ const Detail = () => {
       },
       body: JSON.stringify(productData),
     })
-      .then(response => {
-        response.json();
-        throw new Error('[POST] 장바구니 데이터 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         console.log(result);
         // setCartData(result.data);
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 
@@ -190,6 +198,9 @@ const Detail = () => {
                 productId={productId}
                 productDetailImages={productDetailImages}
                 reviewNumbers={reviewNumbers}
+                latitude={latitude}
+                longitude={longitude}
+                reviewData={reviewData}
               />
             </DetailBottomSection>
           </DetailWrap>

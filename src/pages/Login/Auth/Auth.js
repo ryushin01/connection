@@ -19,10 +19,7 @@ const Auth = () => {
         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
       },
     })
-      .then(response => {
-        response.json();
-        throw new Error('[GET] 소셜 로그인 정보 요청 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         console.log(result);
         if (
@@ -47,9 +44,6 @@ const Auth = () => {
           alert('로그인이 실패하였습니다. 로그인 페이지로 이동합니다.');
           navigate('/login');
         }
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 

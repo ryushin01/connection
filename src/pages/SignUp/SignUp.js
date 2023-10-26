@@ -78,19 +78,13 @@ const SignUp = props => {
         addressDetails: userInfo.addressDetail,
       }),
     })
-      .then(response => {
-        response.json();
-        throw new Error('[POST] 회원가입 요청 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         if (result.message === 'SUCCESS') {
           navigate('/login');
         } else {
           alert('회원가입에 실패하였습니다.');
         }
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 
@@ -111,17 +105,11 @@ const SignUp = props => {
         email: userInfo.email,
       }),
     })
-      .then(res => {
-        res.json();
-        throw new Error('[POST] 이메일 중복체크 요청 통신 실패');
-      })
+      .then(response => response.json())
       .then(result => {
         if (result.message === 'SUCCESS') {
           alert('사용 가능한 이메일입니다.');
         }
-      })
-      .catch(error => {
-        console.log(error);
       });
   };
 
