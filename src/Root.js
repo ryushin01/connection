@@ -25,6 +25,9 @@ const Root = () => {
       // [Redux] ADD 액션이 실행되면 copyValue에 payload를 push합니다. payload 안에는 여러 데이터를 담을 수 있습니다.
       copyValue.push(action.payload);
       return copyValue;
+    } else if (action.type === 'UPDATE') {
+      copyValue.push(action.payload);
+      return copyValue;
     }
   }
 
