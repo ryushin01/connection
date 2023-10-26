@@ -30,17 +30,13 @@ const Order = ({ points }) => {
   let productData,
     productId,
     quantity,
-    course,
-    finalPrice = null;
+    course = null;
   if (location?.state?.productData !== null) {
     productData = location?.state?.productData;
     productId = location?.state?.productData?.productId;
     quantity = location?.state?.productData?.quantity;
     course = location?.state?.course;
-    finalPrice = location?.state?.cartPriceData?.totalPrice;
   }
-
-  console.log(location?.state);
 
   // Payment.js로 전달할 데이터 모음
   let cartPriceData,
@@ -130,7 +126,7 @@ const Order = ({ points }) => {
         }
 
         // 바로구매
-        if (result.message === 'Success') {
+        if (result.message === 'SUCCESS') {
           if (isBuyNow) {
             setCartData(result?.product);
             setLoading(false);
@@ -143,7 +139,6 @@ const Order = ({ points }) => {
     const { id, value } = e.target;
     setShippingMethod(value);
     setPaymentId(id);
-    console.log(e.target.id, e.target.value);
   };
 
   useEffect(() => {
@@ -167,7 +162,7 @@ const Order = ({ points }) => {
     });
   };
 
-  console.log(finalPrice, quantity);
+  const finalPrice = cartData[0]?.totalPrice * quantity;
 
   return (
     <>
@@ -240,8 +235,9 @@ const Order = ({ points }) => {
                         원
                       </td> */}
                       <td>
-                        {finalPrice?.toLocaleString() ||
-                          cartData[0]?.totalPrice?.toLocaleString()}
+                        {totalPrice === undefined
+                          ? finalPrice?.toLocaleString()
+                          : sumCartDataValues?.totalPrice?.toLocaleString()}
                         원
                       </td>
                     </tr>

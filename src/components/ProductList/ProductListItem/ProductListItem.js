@@ -7,17 +7,16 @@ const ProductListItem = ({ item }) => {
   const {
     productId,
     productName,
-    productImage,
+    productImg,
     originalPrice,
     totalPrice,
     rating,
   } = item;
-
   return (
     <ProductListItemWrap>
       <ProductImage
         productId={productId}
-        productImage={productImage}
+        productImage={productImg}
         productName={productName}
         rating={rating}
         totalPrice={totalPrice}
@@ -34,6 +33,7 @@ const ProductListItem = ({ item }) => {
 
 const ProductListItemWrap = styled.div`
   width: 100%;
+  border-radius: 8px;
 `;
 
 export default ProductListItem;
