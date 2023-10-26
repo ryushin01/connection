@@ -14,30 +14,39 @@ const ListTitle = ({ listTitle, categoryId }) => {
 const CATEGORY_IMAGE = {
   1: {
     backgroundImage: `url(/images/list/bg_list_food.jpg)`,
+    backgroundPosition: '50% 50%',
   },
   2: {
     backgroundImage: `url(/images/list/bg_list_digital.jpg)`,
+    backgroundPosition: '50% 80%',
   },
   3: {
     backgroundImage: `url(/images/list/bg_list_living.jpg)`,
+    backgroundPosition: '50% 80%',
   },
   4: {
     backgroundImage: `url(/images/list/bg_list_fashion.jpg)`,
+    backgroundPosition: '50% 30%',
   },
   5: {
     backgroundImage: `url(/images/list/bg_list_beauty.jpg)`,
+    backgroundPosition: '50% 50%',
   },
   6: {
     backgroundImage: `url(/images/list/bg_list_sports.jpg)`,
+    backgroundPosition: '50% 20%',
   },
   7: {
     backgroundImage: `url(/images/list/bg_list_baby.jpg)`,
+    backgroundPosition: '50% 50%',
   },
   8: {
     backgroundImage: `url(/images/list/bg_list_craft.jpg)`,
+    backgroundPosition: '50% 70%',
   },
   9: {
     backgroundImage: `url(/images/list/bg_list_pet.jpg)`,
+    backgroundPosition: '50% 50%',
   },
 };
 
@@ -54,11 +63,13 @@ const ListTitleSection = styled.section`
   margin-top: -40px;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
 
   background-image: ${({ categoryId }) =>
     CATEGORY_IMAGE[categoryId]?.backgroundImage ||
     `url(/images/list/bg_seller.jpg)`};
+
+  background-position: ${({ categoryId }) =>
+    CATEGORY_IMAGE[categoryId]?.backgroundPosition || 'center'};
 
   &::before {
     content: '';
