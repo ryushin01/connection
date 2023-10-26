@@ -59,7 +59,7 @@ const List = () => {
     )
       .then(response => response.json())
       .then(result => {
-        if (result.message === 'Success') {
+        if (result.message === 'SUCCESS') {
           setListTitle(result?.name);
           setListData(result?.data);
           setTotalQuantity(result?.totalQuantity);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { API } from '../../config';
 import Loading from '../../pages/Loading/Loading';
 import BigBanner from './BigBanner/BigBanner';
@@ -14,6 +15,9 @@ const Main = () => {
   const [loading, setLoading] = useState(true);
   const [categoryBandData, setCategoryBandData] = useState([]);
   const [sellerBandData, setSellerBandData] = useState([]);
+  const location = useLocation();
+
+  const globalCartQuantity = location.state;
 
   const getCategoryBandData = () => {
     // fetch('/data/categoryBandData.json', {
@@ -27,7 +31,7 @@ const Main = () => {
       .then(response => response.json())
       .then(result => {
         // real data
-        if (result.message === 'Success') {
+        if (result.message === 'SUCCESS') {
           setCategoryBandData(result.data);
         }
 
@@ -50,7 +54,7 @@ const Main = () => {
       .then(response => response.json())
       .then(result => {
         // real data
-        if (result.message === 'Success') {
+        if (result.message === 'SUCCESS') {
           setSellerBandData(result.data);
         }
 
