@@ -51,8 +51,9 @@ const List = () => {
       API_URL + `&sort=${sort}&offset=${calc_offset || 0}&limit=${limit || 10}`,
       {
         method: 'GET',
-        header: {
+        headers: {
           'Content-Type': 'application/json',
+          authorization: localStorage.getItem('accessToken'),
         },
       },
     )

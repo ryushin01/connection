@@ -15,7 +15,7 @@ const Account = () => {
 
   const postKakaoLogout = () => {
     const accessToken = !!localStorage.getItem('accessToken');
-    const isKakao = !!localStorage.getItem('isKakao');
+    const isKakao = localStorage.getItem('isKakao');
 
     if (!accessToken) {
       alert('로그인이 되어있지 않습니다.');
