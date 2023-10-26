@@ -4,6 +4,7 @@ import { API } from '../../config';
 import { ReactComponent as CheckIcon } from '../../svg/icon_check.svg';
 import Button from '../../components/Button/Button';
 import styled, { css } from 'styled-components';
+import { useDispatch } from 'react-redux';
 
 /**
  * Payment.js logics
@@ -12,9 +13,11 @@ import styled, { css } from 'styled-components';
 
 const Payment = ({ points }) => {
   const [paymentComplete, setPaymentComplete] = useState(false);
+  const [cartQuantity, setCartQuantity] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   const intPoints = Number(points);
+  const dispatch = useDispatch();
 
   let userId,
     finalPrice,
@@ -32,8 +35,6 @@ const Payment = ({ points }) => {
     productName = location?.state?.productName;
     course = location?.state?.course;
   }
-
-  console.log(finalPrice);
 
   const isVisiting = shippingMethod === 'visiting';
   const isBuyNow = course === 'directly';
@@ -89,8 +90,14 @@ const Payment = ({ points }) => {
               console.log('결과: ', result);
               if (result.message === 'PAYMENT_SUCCESS') {
                 // console.log(result.points);
+                setCartQuantity(result.cartQuantity);
                 setPaymentComplete(true);
                 // refreshUserInfo();
+
+                dispatch({
+                  type: 'UPDATE',
+                  payload: cartQuantity,
+                });
               }
             });
         } else {
@@ -101,7 +108,7 @@ const Payment = ({ points }) => {
   };
 
   const goToMain = () => {
-    navigate('/main');
+    navigate('/main', { state: cartQuantity });
     window.location.reload();
   };
 
@@ -111,8 +118,6 @@ const Payment = ({ points }) => {
     // localStorage.setItem('points', refreshPoint);
     // localStorage.setItem('cartCount', refreshCartCount);
   };
-
-  console.log(finalPrice);
 
   return (
     <Main id="main">
