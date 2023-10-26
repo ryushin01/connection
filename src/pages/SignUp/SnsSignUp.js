@@ -44,7 +44,7 @@ const SnsSignUp = props => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('accessToken'),
+        authorization: localStorage.getItem('accessToken'),
       },
       body: JSON.stringify({
         phoneNumber: userInfo.phone,
@@ -55,6 +55,7 @@ const SnsSignUp = props => {
     })
       .then(response => response.json())
       .then(result => {
+        console.log(result);
         if (result.message === 'SUCCESS') {
           navigate('/main');
         } else {

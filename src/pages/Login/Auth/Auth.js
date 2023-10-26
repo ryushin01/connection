@@ -42,6 +42,7 @@ const Auth = () => {
           localStorage.setItem('isSeller', result.accessToken.isSeller);
           localStorage.setItem('points', result.accessToken.points);
           navigate('/main');
+          window.location.reload();
         } else {
           // 로그인 실패 시 로그인 페이지로 이동
           alert('로그인이 실패하였습니다. 로그인 페이지로 이동합니다.');
