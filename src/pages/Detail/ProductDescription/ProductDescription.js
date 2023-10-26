@@ -16,7 +16,12 @@ const ProductDescription = ({ productDetailImages, latitude, longitude }) => {
       </Description>
       <Map
         center={{ lat: latitude, lng: longitude }} // 지도의 중심 좌표
-        style={{ width: '100%', height: '32vw' }} // 지도 크기
+        style={{
+          width: '80%',
+          height: '32vw',
+          margin: '0 auto',
+          border: '1px #ccc solid',
+        }} // 지도 크기
         level={3} // 지도 확대 레벨
       >
         <MapMarker position={{ lat: latitude, lng: longitude }} />
@@ -26,6 +31,7 @@ const ProductDescription = ({ productDetailImages, latitude, longitude }) => {
 };
 
 const Description = styled.div`
+  margin-bottom: 40px;
   font-size: 0;
 `;
 

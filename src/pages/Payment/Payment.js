@@ -4,7 +4,6 @@ import { API } from '../../config';
 import { ReactComponent as CheckIcon } from '../../svg/icon_check.svg';
 import Button from '../../components/Button/Button';
 import styled, { css } from 'styled-components';
-import { useDispatch } from 'react-redux';
 
 /**
  * Payment.js logics
@@ -17,7 +16,6 @@ const Payment = ({ points }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const intPoints = Number(points);
-  const dispatch = useDispatch();
 
   let userId,
     finalPrice,
@@ -89,15 +87,8 @@ const Payment = ({ points }) => {
             .then(result => {
               console.log('결과: ', result);
               if (result.message === 'PAYMENT_SUCCESS') {
-                // console.log(result.points);
                 setCartQuantity(result.cartQuantity);
                 setPaymentComplete(true);
-                // refreshUserInfo();
-
-                dispatch({
-                  type: 'UPDATE',
-                  payload: cartQuantity,
-                });
               }
             });
         } else {
@@ -108,15 +99,16 @@ const Payment = ({ points }) => {
   };
 
   const goToMain = () => {
-    navigate('/main', { state: cartQuantity });
+    navigate('/main');
+    refreshUserInfo();
     window.location.reload();
   };
 
   const refreshUserInfo = () => {
     // const refreshPoint = ;
-    // const refreshCartCount =;
+    const refreshCartCount = cartQuantity;
     // localStorage.setItem('points', refreshPoint);
-    // localStorage.setItem('cartCount', refreshCartCount);
+    localStorage.setItem('cartCount', refreshCartCount);
   };
 
   return (
