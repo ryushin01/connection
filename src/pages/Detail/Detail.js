@@ -46,7 +46,7 @@ const Detail = () => {
       .then(response => response.json())
       .then(result => {
         console.log(result);
-        if (result.message === 'Success') {
+        if (result.message === 'SUCCESS') {
           setDetailData(result?.product[0]);
           setLoading(false);
         }
@@ -63,7 +63,7 @@ const Detail = () => {
     })
       .then(response => response.json())
       .then(result => {
-        if (result.message === 'Success') {
+        if (result.message === 'SUCCESS') {
           setReviewData(result?.review);
         }
       });
