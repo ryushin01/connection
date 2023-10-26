@@ -13,13 +13,17 @@ const kakaoURL = `https://kauth.kakao.com/oauth/logout?client_id=${RestApiKey}&l
 const postKakaoLogout = () => {
   const accessToken = localStorage.getItem('accessToken');
 
+  const isKakao = localStorage.getItem('isKakao');
   if (!accessToken) {
     alert('로그인이 되어있지 않습니다.');
     return;
-  } else {
+  } else if (accessToken && !isKakao) {
     localStorage.clear();
     alert('로그아웃 되었습니다.');
     window.location.reload();
+  } else if (accessToken && isKakao) {
+    localStorage.clear();
+    alert('로그아웃 되었습니다.');
     window.location.href = kakaoURL;
   }
 };

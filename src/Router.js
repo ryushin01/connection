@@ -20,9 +20,11 @@ import Payment from './pages/Payment/Payment';
 import Gateway from './pages/Gateway/Gateway';
 
 const Router = ({ isLogin, isKakao, isSeller, points, cartCount }) => {
+  console.log('isLogin: ', isLogin, 'isSeller: ', isSeller);
   return (
     <BrowserRouter>
       {isLogin && <SkipNavigation />}
+      {/* 디버깅 필요 */}
       {isLogin && !isSeller ? <SellerConversionBanner /> : null}
       {isLogin && (
         <Header isKakao={isKakao} points={points} cartCount={cartCount} />
