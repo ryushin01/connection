@@ -258,6 +258,7 @@ const SignUpContainer = styled.div`
 
 const SignUpLeftSection = styled.section`
   flex: 1;
+  border-radius: 4px;
   background: url(/images/account/bg_signup.jpg) no-repeat center/cover;
   font-size: 0;
 `;

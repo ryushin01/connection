@@ -65,6 +65,7 @@ const Purchase = ({ productId, productName, totalPrice, onClose }) => {
       state: {
         productData,
         course: 'directly',
+        finalPrice: finalPrice,
       },
     });
   };

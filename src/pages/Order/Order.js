@@ -30,13 +30,17 @@ const Order = ({ points }) => {
   let productData,
     productId,
     quantity,
-    course = null;
+    course,
+    finalPrice = null;
   if (location?.state?.productData !== null) {
     productData = location?.state?.productData;
     productId = location?.state?.productData?.productId;
     quantity = location?.state?.productData?.quantity;
     course = location?.state?.course;
+    finalPrice = location?.state?.finalPrice;
   }
+
+  console.log(finalPrice);
 
   // Payment.js로 전달할 데이터 모음
   let cartPriceData,
@@ -156,7 +160,7 @@ const Order = ({ points }) => {
         totalPrice: sumCartDataValues?.totalPrice || totalPrice,
         shippingMethod: shippingMethod,
         paymentId: paymentId,
-        products: cartData || productData,
+        products: productData || cartData,
         // [바로구매] products: productData,
         productName: cartData[0].productName,
         course: course,
@@ -219,10 +223,15 @@ const Order = ({ points }) => {
                         return (
                           <tr key={index}>
                             <th>{productName}</th>
-
-                            {/* 장바구니 로직 */}
-                            <td>{quantity}</td>
-                            <td>{totalPrice.toLocaleString()}원</td>
+                            <td>
+                              {location?.state?.productData?.quantity ||
+                                quantity}
+                            </td>
+                            <td>
+                              {finalPrice?.toLocaleString() ||
+                                totalPrice?.toLocaleString()}
+                              원
+                            </td>
                           </tr>
                         );
                       },
@@ -232,10 +241,9 @@ const Order = ({ points }) => {
                     <tr>
                       <th>총 금액</th>
                       <td>&nbsp;</td>
-                      {/* 장바구니 로직 */}
                       <td>
-                        {sumCartDataValues?.totalPrice.toLocaleString() ||
-                          totalPrice.toLocaleString()}
+                        {finalPrice?.toLocaleString() ||
+                          sumCartDataValues?.totalPrice?.toLocaleString()}
                         원
                       </td>
                     </tr>

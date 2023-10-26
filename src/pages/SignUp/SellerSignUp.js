@@ -194,6 +194,7 @@ const SignUpContainer = styled.div`
 
 const SellerSignUpLeftSection = styled.section`
   flex: 1;
+  border-radius: 4px;
   background: url(/images/account/bg_login.jpg) no-repeat center/cover;
   font-size: 0;
 `;

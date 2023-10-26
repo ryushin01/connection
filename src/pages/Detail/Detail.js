@@ -128,6 +128,7 @@ const Detail = () => {
       state: {
         productData,
         course: 'directly',
+        finalPrice: finalPrice,
       },
     });
   };
