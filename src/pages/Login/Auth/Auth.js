@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { API } from '../../../config';
 
 /**
  * Auth.js logics
@@ -13,7 +14,7 @@ const Auth = () => {
   const searchParam = searchParams.get('code');
 
   const getSnsCode = () => {
-    fetch(`http://10.58.52.126:8000/users/kakao/callback?code=${searchParam}`, {
+    fetch(`${API.KAKAO}?code=${searchParam}`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -28,16 +29,18 @@ const Auth = () => {
         ) {
           // 로그인 성공 시 토큰 저장
           localStorage.setItem('accessToken', result.accessToken.accessToken);
-          localStorage.setItem('seller', result.accessToken.isSeller);
-          localStorage.setItem('point', result.accessToken.points);
+          localStorage.setItem('isKakao', result.accessToken.isKakao);
+          localStorage.setItem('isSeller', result.accessToken.isSeller);
+          localStorage.setItem('points', result.accessToken.points);
           navigate('/snssignup');
         } else if (
           result.message === 'SUCCESS' &&
           result.accessToken.isAddress === true
         ) {
           localStorage.setItem('accessToken', result.accessToken.accessToken);
-          localStorage.setItem('seller', result.accessToken.isSeller);
-          localStorage.setItem('point', result.accessToken.points);
+          localStorage.setItem('isKakao', result.accessToken.isKakao);
+          localStorage.setItem('isSeller', result.accessToken.isSeller);
+          localStorage.setItem('points', result.accessToken.points);
           navigate('/main');
         } else {
           // 로그인 실패 시 로그인 페이지로 이동

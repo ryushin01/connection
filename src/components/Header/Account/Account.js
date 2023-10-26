@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as AdminIcon } from '../../../svg/icon_admin.svg';
 import { ReactComponent as LogoutIcon } from '../../../svg/icon_logout.svg';
 import styled, { css } from 'styled-components';
@@ -10,30 +10,35 @@ const RestApiKey = process.env.REACT_APP_RestApiKey;
 const RedirectUri = process.env.REACT_APP_LOGOUT_REDIRECT_URI;
 const kakaoURL = `https://kauth.kakao.com/oauth/logout?client_id=${RestApiKey}&logout_redirect_uri=${RedirectUri}`;
 
-const postKakaoLogout = () => {
-  const accessToken = localStorage.getItem('accessToken');
+const Account = () => {
+  const navigate = useNavigate();
 
-  if (!accessToken) {
-    alert('로그인이 되어있지 않습니다.');
-    return;
-  } else {
-    localStorage.clear();
-    alert('로그아웃 되었습니다.');
-    window.location.reload();
-    window.location.href = kakaoURL;
-  }
-};
+  const postKakaoLogout = () => {
+    const accessToken = !!localStorage.getItem('accessToken');
+    const isKakao = !!localStorage.getItem('isKakao');
 
-const logout = () => {
-  postKakaoLogout();
-};
+    if (!accessToken) {
+      alert('로그인이 되어있지 않습니다.');
+      return;
+    } else if (accessToken && !isKakao) {
+      localStorage.clear();
+      alert('로그아웃 되었습니다.');
+      navigate('/');
+      window.location.reload();
+    } else if (accessToken && isKakao) {
+      localStorage.clear();
+      alert('로그아웃 되었습니다.');
+      window.location.href = kakaoURL;
+    }
+  };
 
-const Account = ({ isSns }) => {
+  const logout = () => {
+    postKakaoLogout();
+  };
+
   return (
     <AccountList>
-      {/* {isLogin && ( */}
       <>
-        {/* {isSeller && ( */}
         <li>
           <Link to="/">
             <AdminIcon />
@@ -48,7 +53,6 @@ const Account = ({ isSns }) => {
           </button>
         </li>
       </>
-      {/* )} */}
     </AccountList>
   );
 };
