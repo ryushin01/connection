@@ -33,7 +33,7 @@ const Root = () => {
 
   const isLogin = !!localStorage.getItem('accessToken');
   const isKakao = !!localStorage.getItem('isKakao');
-  const isSeller = localStorage.getItem('isSeller');
+  const isSeller = !!localStorage.getItem('isSeller');
   const points = localStorage.getItem('points');
   const cartCount = localStorage.getItem('cartCount');
 

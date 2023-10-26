@@ -74,6 +74,7 @@ const SellerSignUp = props => {
           alert('판매자 등록이 완료되었습니다.');
           localStorage.setItem('isSeller', true);
           navigate('/main');
+          window.location.reload();
         } else {
           alert('판매자 등록에 실패하였습니다.');
         }
