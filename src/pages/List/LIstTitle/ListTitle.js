@@ -13,31 +13,31 @@ const ListTitle = ({ listTitle, categoryId }) => {
 
 const CATEGORY_IMAGE = {
   1: {
-    backgroundImage: `url(/images/bigbanner/food.jpg)`,
+    backgroundImage: `url(/images/list/bg_list_food.jpg)`,
   },
   2: {
-    backgroundImage: `url(/images/bigbanner/digital.jpg)`,
+    backgroundImage: `url(/images/list/bg_list_digital.jpg)`,
   },
   3: {
-    backgroundImage: `url(/images/bigbanner/living.jpg)`,
+    backgroundImage: `url(/images/list/bg_list_living.jpg)`,
   },
   4: {
-    backgroundImage: `url(/images/bigbanner/fashion.jpg)`,
+    backgroundImage: `url(/images/list/bg_list_fashion.jpg)`,
   },
   5: {
-    backgroundImage: `url(/images/bigbanner/beauty.jpg)`,
+    backgroundImage: `url(/images/list/bg_list_beauty.jpg)`,
   },
   6: {
-    backgroundImage: `url(/images/bigbanner/sports.jpg)`,
+    backgroundImage: `url(/images/list/bg_list_sports.jpg)`,
   },
   7: {
-    backgroundImage: `url(/images/bigbanner/baby.jpg)`,
+    backgroundImage: `url(/images/list/bg_list_baby.jpg)`,
   },
   8: {
-    backgroundImage: `url(/images/bigbanner/craft.jpg)`,
+    backgroundImage: `url(/images/list/bg_list_craft.jpg)`,
   },
   9: {
-    backgroundImage: `url(/images/bigbanner/pet.jpg)`,
+    backgroundImage: `url(/images/list/bg_list_pet.jpg)`,
   },
 };
 
@@ -58,7 +58,7 @@ const ListTitleSection = styled.section`
 
   background-image: ${({ categoryId }) =>
     CATEGORY_IMAGE[categoryId]?.backgroundImage ||
-    `url(/images/list/seller.jpg)`};
+    `url(/images/list/bg_seller.jpg)`};
 
   &::before {
     content: '';
