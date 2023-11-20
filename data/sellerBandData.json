@@ -1,0 +1,353 @@
+{
+  "message": "SUCCESS",
+  "data": [
+    {
+      "sellerId": 20,
+      "sellerName": "시헌마켓",
+      "product": [
+        {
+          "productId": 27,
+          "productName": "소화가 잘되는 브라우니",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/food/food_11.jpg",
+          "originalPrice": 60000,
+          "discountRate": 20,
+          "discountAmount": 12000,
+          "totalPrice": 48000,
+          "reviewNumber": 1,
+          "rating": 5
+        },
+        {
+          "productId": 37,
+          "productName": "새콤달콤한 팬케이크",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/food/food_7.jpg",
+          "originalPrice": 40000,
+          "discountRate": 25,
+          "discountAmount": 10000,
+          "totalPrice": 30000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 47,
+          "productName": "오븐",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/digital/digital_5.jpg",
+          "originalPrice": 1000000,
+          "discountRate": 20,
+          "discountAmount": 200000,
+          "totalPrice": 800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 57,
+          "productName": "소파 쿠션",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/living/living_14.jpg",
+          "originalPrice": 20000,
+          "discountRate": 20,
+          "discountAmount": 4000,
+          "totalPrice": 16000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 67,
+          "productName": "가을 코트",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/fashion/fashion_12.jpg",
+          "originalPrice": 2000000,
+          "discountRate": 10,
+          "discountAmount": 200000,
+          "totalPrice": 1800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 77,
+          "productName": "촉촉한 립밤",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/beauty/beauty_10.jpg",
+          "originalPrice": 50000,
+          "discountRate": 10,
+          "discountAmount": 5000,
+          "totalPrice": 45000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 87,
+          "productName": "골키퍼장갑",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/sport/sport_10.png",
+          "originalPrice": 40000,
+          "discountRate": 40,
+          "discountAmount": 16000,
+          "totalPrice": 24000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 97,
+          "productName": "농구공",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/sport/sport_8.jpg",
+          "originalPrice": 170000,
+          "discountRate": 40,
+          "discountAmount": 68000,
+          "totalPrice": 102000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 107,
+          "productName": "기저귀",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/baby/baby_8_1.jpeg",
+          "originalPrice": 40000,
+          "discountRate": 40,
+          "discountAmount": 16000,
+          "totalPrice": 24000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 117,
+          "productName": "구슬 팔찌",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/craft/handicraft_3.jpg",
+          "originalPrice": 200000000,
+          "discountRate": 80,
+          "discountAmount": 160000000,
+          "totalPrice": 40000000,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    },
+    {
+      "sellerId": 22,
+      "sellerName": "류창선의메트로마켓",
+      "product": [
+        {
+          "productId": 29,
+          "productName": "달달한 브라우니",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/food/food_13.jpg",
+          "originalPrice": 40000,
+          "discountRate": 30,
+          "discountAmount": 12000,
+          "totalPrice": 28000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 39,
+          "productName": "마르게리따",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/food/food_9.jpg",
+          "originalPrice": 40000,
+          "discountRate": 20,
+          "discountAmount": 8000,
+          "totalPrice": 32000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 49,
+          "productName": "로봇청소기",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/digital/digitial_7.jpg",
+          "originalPrice": 15000000,
+          "discountRate": 20,
+          "discountAmount": 3000000,
+          "totalPrice": 12000000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 59,
+          "productName": "가족쇼파",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/living/living_16.jpg",
+          "originalPrice": 20000,
+          "discountRate": 10,
+          "discountAmount": 2000,
+          "totalPrice": 18000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 69,
+          "productName": "키여운 맨투맨",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/fashion/fashion_3.jpg",
+          "originalPrice": 2000000,
+          "discountRate": 10,
+          "discountAmount": 200000,
+          "totalPrice": 1800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 79,
+          "productName": "채널향수",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/beauty/beauty_3.jpg",
+          "originalPrice": 170000,
+          "discountRate": 10,
+          "discountAmount": 17000,
+          "totalPrice": 153000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 89,
+          "productName": "바람막이",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/sport/sport_12_1.jpg",
+          "originalPrice": 40000,
+          "discountRate": 10,
+          "discountAmount": 4000,
+          "totalPrice": 36000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 99,
+          "productName": "아이옷",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/baby/baby_1.jpg",
+          "originalPrice": 70000,
+          "discountRate": 40,
+          "discountAmount": 28000,
+          "totalPrice": 42000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 109,
+          "productName": "장인 목걸이",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/craft/handicraft_1.jpg",
+          "originalPrice": 200000000,
+          "discountRate": 80,
+          "discountAmount": 160000000,
+          "totalPrice": 40000000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 119,
+          "productName": "애옹이 밥",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/pet/pet_1.jpg",
+          "originalPrice": 50000,
+          "discountRate": 27,
+          "discountAmount": 13500,
+          "totalPrice": 36500,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    },
+    {
+      "sellerId": 27,
+      "sellerName": "킹요진의코딩교실",
+      "product": [
+        {
+          "productId": 34,
+          "productName": "꾸덕한 크림파스타",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/food/food_4.jpg",
+          "originalPrice": 40000,
+          "discountRate": 25,
+          "discountAmount": 10000,
+          "totalPrice": 30000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 44,
+          "productName": "한국의 자랑 갤럭시",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/digital/digital_2.jpg",
+          "originalPrice": 1000000,
+          "discountRate": 20,
+          "discountAmount": 200000,
+          "totalPrice": 800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 54,
+          "productName": "도자기 그릇",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/living/living_11.jpg",
+          "originalPrice": 20000,
+          "discountRate": 20,
+          "discountAmount": 4000,
+          "totalPrice": 16000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 64,
+          "productName": "패션 반팔",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/fashion/fashion_1.jpg",
+          "originalPrice": 200000,
+          "discountRate": 10,
+          "discountAmount": 20000,
+          "totalPrice": 180000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 74,
+          "productName": "봄옷",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/fashion/fashion_8.jpg",
+          "originalPrice": 200000,
+          "discountRate": 10,
+          "discountAmount": 20000,
+          "totalPrice": 180000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 84,
+          "productName": "기초세트",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/beauty/beauty_8.jpg",
+          "originalPrice": 170000,
+          "discountRate": 10,
+          "discountAmount": 17000,
+          "totalPrice": 153000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 94,
+          "productName": "헬창 프로틴",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/sport/sport_3.jpg",
+          "originalPrice": 40000,
+          "discountRate": 30,
+          "discountAmount": 12000,
+          "totalPrice": 28000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 104,
+          "productName": "곰돌이모자",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/baby/baby_5.jpeg",
+          "originalPrice": 760000,
+          "discountRate": 40,
+          "discountAmount": 304000,
+          "totalPrice": 456000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 114,
+          "productName": "다이아반지",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/craft/handicraft_14.jpg",
+          "originalPrice": 200000000,
+          "discountRate": 80,
+          "discountAmount": 160000000,
+          "totalPrice": 40000000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 124,
+          "productName": "애옹이 캣휠",
+          "productImg": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/pet/pet_6.png",
+          "originalPrice": 50000,
+          "discountRate": 27,
+          "discountAmount": 13500,
+          "totalPrice": 36500,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    }
+  ]
+}

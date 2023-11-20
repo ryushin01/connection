@@ -1,0 +1,13 @@
+{
+  "message": "Order_Item",
+  "data": {
+    "products": [
+      {
+        "quantity": 2,
+        "productId": 42,
+        "totalPrice": 32000000,
+        "productName": "무근본 데스크탑"
+      }
+    ]
+  }
+}

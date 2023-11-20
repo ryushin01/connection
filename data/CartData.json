@@ -1,0 +1,39 @@
+{
+  "message": "Cart_Information",
+  "data": [
+    {
+      "sellerId": 25,
+      "sellerName": "킹정진마켓",
+      "sellerImage": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com//1698332884642_suites-2334090_640.jpg",
+      "products": [
+        {
+          "quantity": 2,
+          "productId": 42,
+          "totalPrice": 32000000,
+          "productName": "무근본 데스크탑",
+          "discountRate": 20,
+          "productImage": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/digital/digital_11.jpg",
+          "originalPrice": 20000000,
+          "discountedAmount": 8000000
+        }
+      ]
+    },
+    {
+      "sellerId": 1,
+      "sellerName": "킹정진마켓",
+      "sellerImage": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com//1698332884642_suites-2334090_640.jpg",
+      "products": [
+        {
+          "quantity": 1,
+          "productId": 12,
+          "totalPrice": 8000,
+          "productName": "무근본 데스크탑",
+          "discountRate": 20,
+          "productImage": "https://wecode-connection.s3.ap-northeast-2.amazonaws.com/test/connection/digital/digital_11.jpg",
+          "originalPrice": 10000,
+          "discountedAmount": 2000
+        }
+      ]
+    }
+  ]
+}

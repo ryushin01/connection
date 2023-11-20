@@ -1,0 +1,36 @@
+{
+  "message": "SUCCESS",
+  "product": [
+    {
+      "productId": 25,
+      "productName": "청송 꿀사과",
+      "productDetailImages": [
+        {
+          "url": "/images/@mockup/detail/1.jpg",
+          "comments": "갓 열린 사과"
+        },
+        {
+          "url": "/images/@mockup/detail/2.jpg",
+          "comments": "수확한 사과"
+        },
+        {
+          "url": "/images/@mockup/detail/3.jpg",
+          "comments": "검수 중인 사과"
+        },
+        {
+          "url": "/images/@mockup/detail/4.jpg",
+          "comments": "고객님에게 전해진 사과"
+        }
+      ],
+      "productImg": "/images/@mockup/food/apple1.png",
+      "originalPrice": 50000,
+      "discountRate": 10,
+      "discountAmount": 5000,
+      "totalPrice": 45000,
+      "reviewNumbers": 4,
+      "rating": 3,
+      "latitude": 36.7527802192018,
+      "longitude": 127.03108119288
+    }
+  ]
+}

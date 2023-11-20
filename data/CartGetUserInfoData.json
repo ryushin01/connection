@@ -1,0 +1,11 @@
+{
+  "message": "userInformation",
+  "data": {
+    "userId": 60,
+    "userName": "류창선",
+    "phoneNumber": "01002830818",
+    "zipCode": "03739",
+    "address": "서울 서대문구 통일로 81",
+    "addressDetail": "100-201"
+  }
+}

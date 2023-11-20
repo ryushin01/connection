@@ -1,0 +1,818 @@
+{
+  "message": "SUCCESS",
+  "data": [
+    {
+      "categoryId": 1,
+      "categoryName": "푸드",
+      "product": [
+        {
+          "productId": 25,
+          "productName": "청송 꿀사과",
+          "productImg": "/images/@mockup/food/apple1.png",
+          "originalPrice": 50000,
+          "discountRate": 10,
+          "discountAmount": 5000,
+          "totalPrice": 45000,
+          "reviewNumber": 4,
+          "rating": 3.5
+        },
+        {
+          "productId": 26,
+          "productName": "장인이 만든 도넛",
+          "productImg": "/images/@mockup/food/donut.png",
+          "originalPrice": 50000,
+          "discountRate": 15,
+          "discountAmount": 7500,
+          "totalPrice": 42500,
+          "reviewNumber": 3,
+          "rating": 2.3333
+        },
+        {
+          "productId": 27,
+          "productName": "소화가 잘되는 브라우니",
+          "productImg": "/images/@mockup/food/brownie1.png",
+          "originalPrice": 60000,
+          "discountRate": 20,
+          "discountAmount": 12000,
+          "totalPrice": 48000,
+          "reviewNumber": 1,
+          "rating": 5
+        },
+        {
+          "productId": 28,
+          "productName": "달지않은 컵케이크",
+          "productImg": "/images/@mockup/food/cupcake.png",
+          "originalPrice": 50000,
+          "discountRate": 25,
+          "discountAmount": 12500,
+          "totalPrice": 37500,
+          "reviewNumber": 1,
+          "rating": 5
+        },
+        {
+          "productId": 29,
+          "productName": "달달한 브라우니",
+          "productImg": "/images/@mockup/food/brownie2.png",
+          "originalPrice": 40000,
+          "discountRate": 30,
+          "discountAmount": 12000,
+          "totalPrice": 28000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 30,
+          "productName": "레인보우 케이크",
+          "productImg": "/images/@mockup/food/cake-slice.png",
+          "originalPrice": 55000,
+          "discountRate": 10,
+          "discountAmount": 5500,
+          "totalPrice": 49500,
+          "reviewNumber": 1,
+          "rating": 5
+        },
+        {
+          "productId": 31,
+          "productName": "바삭한 크로와상",
+          "productImg": "/images/@mockup/food/croissant.png",
+          "originalPrice": 50000,
+          "discountRate": 30,
+          "discountAmount": 15000,
+          "totalPrice": 35000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 32,
+          "productName": "얼음골 사과",
+          "productImg": "/images/@mockup/food/apple2.png",
+          "originalPrice": 60000,
+          "discountRate": 30,
+          "discountAmount": 18000,
+          "totalPrice": 42000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 33,
+          "productName": "이거 먹으면 나한테 바나나",
+          "productImg": "/images/@mockup/food/banana.png",
+          "originalPrice": 60000,
+          "discountRate": 30,
+          "discountAmount": 18000,
+          "totalPrice": 42000,
+          "reviewNumber": 9,
+          "rating": 3.8889
+        },
+        {
+          "productId": 34,
+          "productName": "꾸덕한 크림파스타",
+          "productImg": "/images/@mockup/food/pasta.png",
+          "originalPrice": 40000,
+          "discountRate": 25,
+          "discountAmount": 10000,
+          "totalPrice": 30000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 35,
+          "productName": "매콤한 미트볼파스타",
+          "productImg": "/images/@mockup/food/spaghetti.png",
+          "originalPrice": 40000,
+          "discountRate": 25,
+          "discountAmount": 10000,
+          "totalPrice": 30000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 36,
+          "productName": "고소한 이천쌀밥",
+          "productImg": "/images/@mockup/food/rice.png",
+          "originalPrice": 50000,
+          "discountRate": 25,
+          "discountAmount": 12500,
+          "totalPrice": 37500,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 37,
+          "productName": "새콤달콤한 팬케이크",
+          "productImg": "/images/@mockup/food/pancakes.png",
+          "originalPrice": 40000,
+          "discountRate": 25,
+          "discountAmount": 10000,
+          "totalPrice": 30000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 38,
+          "productName": "짭짤한 페퍼로니핏짜",
+          "productImg": "/images/@mockup/food/pizza1.png",
+          "originalPrice": 50000,
+          "discountRate": 20,
+          "discountAmount": 10000,
+          "totalPrice": 40000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 39,
+          "productName": "마르게리따",
+          "productImg": "/images/@mockup/food/pizza2.png",
+          "originalPrice": 40000,
+          "discountRate": 20,
+          "discountAmount": 8000,
+          "totalPrice": 32000,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    },
+    {
+      "categoryId": 2,
+      "categoryName": "디지털",
+      "product": [
+        {
+          "productId": 40,
+          "productName": "근본 맥북 m2",
+          "productImg": "/images/@mockup/digital/macbook.png",
+          "originalPrice": 1000000,
+          "discountRate": 20,
+          "discountAmount": 200000,
+          "totalPrice": 800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 41,
+          "productName": "근본 투 아이맥",
+          "productImg": "/images/@mockup/digital/imac.png",
+          "originalPrice": 1000000,
+          "discountRate": 20,
+          "discountAmount": 200000,
+          "totalPrice": 800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 42,
+          "productName": "무근본 데스크탑",
+          "productImg": "/images/@mockup/digital/desktop-computer.png",
+          "originalPrice": 20000000,
+          "discountRate": 20,
+          "discountAmount": 4000000,
+          "totalPrice": 16000000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 43,
+          "productName": "근본 아이패드",
+          "productImg": "/images/@mockup/digital/ipad.png",
+          "originalPrice": 30000000,
+          "discountRate": 20,
+          "discountAmount": 6000000,
+          "totalPrice": 24000000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 44,
+          "productName": "한국의 자랑 갤럭시",
+          "productImg": "/images/@mockup/digital/smartphone.png",
+          "originalPrice": 1000000,
+          "discountRate": 20,
+          "discountAmount": 200000,
+          "totalPrice": 800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 45,
+          "productName": "키보드",
+          "productImg": "/images/@mockup/digital/keyboard.png",
+          "originalPrice": 1000000,
+          "discountRate": 20,
+          "discountAmount": 200000,
+          "totalPrice": 800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 46,
+          "productName": "플스",
+          "productImg": "/images/@mockup/digital/play.png",
+          "originalPrice": 2000000,
+          "discountRate": 20,
+          "discountAmount": 400000,
+          "totalPrice": 1600000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 47,
+          "productName": "오븐",
+          "productImg": "/images/@mockup/digital/oven.png",
+          "originalPrice": 1000000,
+          "discountRate": 20,
+          "discountAmount": 200000,
+          "totalPrice": 800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 48,
+          "productName": "전자레인지",
+          "productImg": "/images/@mockup/digital/microwave.png",
+          "originalPrice": 1000000,
+          "discountRate": 20,
+          "discountAmount": 200000,
+          "totalPrice": 800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 49,
+          "productName": "로봇청소기",
+          "productImg": "/images/@mockup/digital/robot-vacuum-cleaner.png",
+          "originalPrice": 15000000,
+          "discountRate": 20,
+          "discountAmount": 3000000,
+          "totalPrice": 12000000,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    },
+    {
+      "categoryId": 3,
+      "categoryName": "리빙",
+      "product": [
+        {
+          "productId": 52,
+          "productName": "친환경 대나무 칫솔",
+          "productImg": "/images/@mockup/living/toothbrush.png",
+          "originalPrice": 20000,
+          "discountRate": 10,
+          "discountAmount": 2000,
+          "totalPrice": 18000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 53,
+          "productName": "화장실 냄새 아웃!",
+          "productImg": "/images/@mockup/living/freshener.png",
+          "originalPrice": 4000,
+          "discountRate": 10,
+          "discountAmount": 400,
+          "totalPrice": 3600,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 54,
+          "productName": "도자기 그릇",
+          "productImg": "/images/@mockup/living/plate.png",
+          "originalPrice": 20000,
+          "discountRate": 20,
+          "discountAmount": 4000,
+          "totalPrice": 16000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 55,
+          "productName": "수면용 배게",
+          "productImg": "/images/@mockup/living/pillow.png",
+          "originalPrice": 20000,
+          "discountRate": 20,
+          "discountAmount": 4000,
+          "totalPrice": 16000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 56,
+          "productName": "그릇 식기 세트",
+          "productImg": "/images/@mockup/living/dish.png",
+          "originalPrice": 4000,
+          "discountRate": 10,
+          "discountAmount": 400,
+          "totalPrice": 3600,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 57,
+          "productName": "소파 쿠션",
+          "productImg": "/images/@mockup/living/cushion.png",
+          "originalPrice": 20000,
+          "discountRate": 20,
+          "discountAmount": 4000,
+          "totalPrice": 16000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 58,
+          "productName": "1인용 소파",
+          "productImg": "/images/@mockup/living/sofa1.png",
+          "originalPrice": 20000,
+          "discountRate": 10,
+          "discountAmount": 2000,
+          "totalPrice": 18000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 59,
+          "productName": "가족쇼파",
+          "productImg": "/images/@mockup/living/sofa2.png",
+          "originalPrice": 20000,
+          "discountRate": 10,
+          "discountAmount": 2000,
+          "totalPrice": 18000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 60,
+          "productName": "파티룸용 소파",
+          "productImg": "/images/@mockup/living/sofa3.png",
+          "originalPrice": 4000,
+          "discountRate": 10,
+          "discountAmount": 400,
+          "totalPrice": 3600,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 61,
+          "productName": "꿀잠침대",
+          "productImg": "/images/@mockup/living/bed.png",
+          "originalPrice": 20000,
+          "discountRate": 20,
+          "discountAmount": 4000,
+          "totalPrice": 16000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 62,
+          "productName": "주방용세제",
+          "productImg": "/images/@mockup/living/foam.png",
+          "originalPrice": 4000,
+          "discountRate": 10,
+          "discountAmount": 400,
+          "totalPrice": 3600,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    },
+    {
+      "categoryId": 4,
+      "categoryName": "패션",
+      "product": [
+        {
+          "productId": 64,
+          "productName": "패션 반팔",
+          "productImg": "/images/@mockup/fashion/tshirt.png",
+          "originalPrice": 200000,
+          "discountRate": 10,
+          "discountAmount": 20000,
+          "totalPrice": 180000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 65,
+          "productName": "레드퍼코트",
+          "productImg": "/images/@mockup/fashion/coat1.png",
+          "originalPrice": 200000,
+          "discountRate": 10,
+          "discountAmount": 20000,
+          "totalPrice": 180000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 66,
+          "productName": "가죽 벨트",
+          "productImg": "/images/@mockup/fashion/belt.png",
+          "originalPrice": 200000,
+          "discountRate": 10,
+          "discountAmount": 20000,
+          "totalPrice": 180000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 67,
+          "productName": "가을 코트",
+          "productImg": "/images/@mockup/fashion/coat2.png",
+          "originalPrice": 2000000,
+          "discountRate": 10,
+          "discountAmount": 200000,
+          "totalPrice": 1800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 68,
+          "productName": "항공 점퍼",
+          "productImg": "/images/@mockup/fashion/bomber.png",
+          "originalPrice": 200000,
+          "discountRate": 20,
+          "discountAmount": 40000,
+          "totalPrice": 160000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 69,
+          "productName": "키여운 맨투맨",
+          "productImg": "/images/@mockup/fashion/sweatshirt.png",
+          "originalPrice": 2000000,
+          "discountRate": 10,
+          "discountAmount": 200000,
+          "totalPrice": 1800000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 70,
+          "productName": "청바지",
+          "productImg": "/images/@mockup/fashion/jeans.png",
+          "originalPrice": 200000,
+          "discountRate": 20,
+          "discountAmount": 40000,
+          "totalPrice": 160000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 72,
+          "productName": "남성 셔츠",
+          "productImg": "/images/@mockup/fashion/cloth.png",
+          "originalPrice": 200000,
+          "discountRate": 10,
+          "discountAmount": 20000,
+          "totalPrice": 180000,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    },
+    {
+      "categoryId": 5,
+      "categoryName": "뷰티",
+      "product": [
+        {
+          "productId": 76,
+          "productName": "고오오급 향수",
+          "productImg": "/images/@mockup/beauty/perfume1.png",
+          "originalPrice": 170000,
+          "discountRate": 10,
+          "discountAmount": 17000,
+          "totalPrice": 153000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 77,
+          "productName": "촉촉한 립밤",
+          "productImg": "/images/@mockup/beauty/lip-balm.png",
+          "originalPrice": 50000,
+          "discountRate": 10,
+          "discountAmount": 5000,
+          "totalPrice": 45000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 78,
+          "productName": "뮤뮤향수",
+          "productImg": "/images/@mockup/beauty/perfume2.png",
+          "originalPrice": 170000,
+          "discountRate": 40,
+          "discountAmount": 68000,
+          "totalPrice": 102000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 79,
+          "productName": "채널향수",
+          "productImg": "/images/@mockup/beauty/perfume3.png",
+          "originalPrice": 170000,
+          "discountRate": 10,
+          "discountAmount": 17000,
+          "totalPrice": 153000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 81,
+          "productName": "발색쩌는 립스틱",
+          "productImg": "/images/@mockup/beauty/lipstick.png",
+          "originalPrice": 170000,
+          "discountRate": 10,
+          "discountAmount": 17000,
+          "totalPrice": 153000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 82,
+          "productName": "오묘한 매니큐어",
+          "productImg": "/images/@mockup/beauty/nail-polish.png",
+          "originalPrice": 40000,
+          "discountRate": 30,
+          "discountAmount": 12000,
+          "totalPrice": 28000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 83,
+          "productName": "앰플",
+          "productImg": "/images/@mockup/beauty/essence.png",
+          "originalPrice": 40000,
+          "discountRate": 10,
+          "discountAmount": 4000,
+          "totalPrice": 36000,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    },
+    {
+      "categoryId": 6,
+      "categoryName": "스포츠",
+      "product": [
+        {
+          "productId": 87,
+          "productName": "골키퍼장갑",
+          "productImg": "/images/@mockup/sports/gloves.png",
+          "originalPrice": 40000,
+          "discountRate": 40,
+          "discountAmount": 16000,
+          "totalPrice": 24000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 88,
+          "productName": "편한 운동화",
+          "productImg": "/images/@mockup/sports/sneakers.png",
+          "originalPrice": 760000,
+          "discountRate": 10,
+          "discountAmount": 76000,
+          "totalPrice": 684000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 89,
+          "productName": "바람막이",
+          "productImg": "/images/@mockup/sports/jacket.png",
+          "originalPrice": 40000,
+          "discountRate": 10,
+          "discountAmount": 4000,
+          "totalPrice": 36000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 90,
+          "productName": "축구유니폼",
+          "productImg": "/images/@mockup/sports/uniform.png",
+          "originalPrice": 760000,
+          "discountRate": 10,
+          "discountAmount": 76000,
+          "totalPrice": 684000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 92,
+          "productName": "고글",
+          "productImg": "/images/@mockup/sports/safety-goggles.png",
+          "originalPrice": 40000,
+          "discountRate": 10,
+          "discountAmount": 4000,
+          "totalPrice": 36000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 93,
+          "productName": "덤벨",
+          "productImg": "/images/@mockup/sports/dumbbells.png",
+          "originalPrice": 760000,
+          "discountRate": 40,
+          "discountAmount": 304000,
+          "totalPrice": 456000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 94,
+          "productName": "헬창 프로틴",
+          "productImg": "/images/@mockup/sports/protein.png",
+          "originalPrice": 40000,
+          "discountRate": 30,
+          "discountAmount": 12000,
+          "totalPrice": 28000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 97,
+          "productName": "농구공",
+          "productImg": "/images/@mockup/sports/basketball-ball.png",
+          "originalPrice": 170000,
+          "discountRate": 40,
+          "discountAmount": 68000,
+          "totalPrice": 102000,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    },
+    {
+      "categoryId": 7,
+      "categoryName": "유아",
+      "product": [
+        {
+          "productId": 99,
+          "productName": "아이옷",
+          "productImg": "/images/@mockup/baby/onesie.png",
+          "originalPrice": 70000,
+          "discountRate": 40,
+          "discountAmount": 28000,
+          "totalPrice": 42000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 100,
+          "productName": "아기침대",
+          "productImg": "/images/@mockup/baby/baby-crib.png",
+          "originalPrice": 40000,
+          "discountRate": 40,
+          "discountAmount": 16000,
+          "totalPrice": 24000,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    },
+    {
+      "categoryId": 8,
+      "categoryName": "공예",
+      "product": [
+        {
+          "productId": 109,
+          "productName": "장인 목걸이",
+          "productImg": "/images/@mockup/craft/necklace.png",
+          "originalPrice": 200000000,
+          "discountRate": 80,
+          "discountAmount": 160000000,
+          "totalPrice": 40000000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 110,
+          "productName": "개꿀잠 드림캐쳐",
+          "productImg": "/images/@mockup/craft/adornment.png",
+          "originalPrice": 200000000,
+          "discountRate": 80,
+          "discountAmount": 160000000,
+          "totalPrice": 40000000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 111,
+          "productName": "100일간의 수작업으로 탄생한 화분",
+          "productImg": "/images/@mockup/craft/plant-pot.png",
+          "originalPrice": 200000000,
+          "discountRate": 80,
+          "discountAmount": 160000000,
+          "totalPrice": 40000000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 112,
+          "productName": "커플링",
+          "productImg": "/images/@mockup/craft/rings.png",
+          "originalPrice": 200000000,
+          "discountRate": 80,
+          "discountAmount": 160000000,
+          "totalPrice": 40000000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 113,
+          "productName": "하트 반지",
+          "productImg": "/images/@mockup/craft/ruby-ring.png",
+          "originalPrice": 200000000,
+          "discountRate": 80,
+          "discountAmount": 160000000,
+          "totalPrice": 40000000,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 116,
+          "productName": "팔찌",
+          "productImg": "/images/@mockup/craft/bracelet.png",
+          "originalPrice": 200000000,
+          "discountRate": 80,
+          "discountAmount": 160000000,
+          "totalPrice": 40000000,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    },
+    {
+      "categoryId": 9,
+      "categoryName": "펫",
+      "product": [
+        {
+          "productId": 119,
+          "productName": "사료",
+          "productImg": "/images/@mockup/pet/pet-food.png",
+          "originalPrice": 50000,
+          "discountRate": 27,
+          "discountAmount": 13500,
+          "totalPrice": 36500,
+          "reviewNumber": 0,
+          "rating": 0
+        },
+        {
+          "productId": 120,
+          "productName": "애완용품",
+          "productImg": "/images/@mockup/pet/toys.png",
+          "originalPrice": 50000,
+          "discountRate": 27,
+          "discountAmount": 13500,
+          "totalPrice": 36500,
+          "reviewNumber": 0,
+          "rating": 0
+        }
+      ]
+    }
+  ]
+}

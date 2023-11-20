@@ -1,0 +1,118 @@
+{
+  "message": "SUCCESS",
+  "name": "푸드",
+  "id": 1,
+  "data": [
+    {
+      "productId": 27,
+      "productName": "소화가 잘되는 브라우니",
+      "productImg": "/images/@mockup/food/brownie1.png",
+      "originalPrice": 60000,
+      "discountRate": 20,
+      "discountAmount": 12000,
+      "totalPrice": 48000,
+      "reviewNumber": 1,
+      "rating": 5
+    },
+    {
+      "productId": 28,
+      "productName": "달지않은 컵케이크",
+      "productImg": "/images/@mockup/food/cupcake.png",
+      "originalPrice": 50000,
+      "discountRate": 25,
+      "discountAmount": 12500,
+      "totalPrice": 37500,
+      "reviewNumber": 1,
+      "rating": 5
+    },
+    {
+      "productId": 30,
+      "productName": "레인보우 케이크",
+      "productImg": "/images/@mockup/food/cake-slice.png",
+      "originalPrice": 55000,
+      "discountRate": 10,
+      "discountAmount": 5500,
+      "totalPrice": 49500,
+      "reviewNumber": 1,
+      "rating": 5
+    },
+    {
+      "productId": 33,
+      "productName": "이거 먹으면 나한테 바나나",
+      "productImg": "/images/@mockup/food/banana.png",
+      "originalPrice": 60000,
+      "discountRate": 30,
+      "discountAmount": 18000,
+      "totalPrice": 42000,
+      "reviewNumber": 9,
+      "rating": 3
+    },
+    {
+      "productId": 25,
+      "productName": "청송 꿀사과",
+      "productImg": "/images/@mockup/food/apple1.png",
+      "originalPrice": 50000,
+      "discountRate": 10,
+      "discountAmount": 5000,
+      "totalPrice": 45000,
+      "reviewNumber": 4,
+      "rating": 3
+    },
+    {
+      "productId": 26,
+      "productName": "장인이 만든 도넛",
+      "productImg": "/images/@mockup/food/donut.png",
+      "originalPrice": 50000,
+      "discountRate": 15,
+      "discountAmount": 7500,
+      "totalPrice": 42500,
+      "reviewNumber": 3,
+      "rating": 2
+    },
+    {
+      "productId": 29,
+      "productName": "달달한 브라우니",
+      "productImg": "/images/@mockup/food/brownie2.png",
+      "originalPrice": 40000,
+      "discountRate": 30,
+      "discountAmount": 12000,
+      "totalPrice": 28000,
+      "reviewNumber": 0,
+      "rating": 0
+    },
+    {
+      "productId": 31,
+      "productName": "바삭한 크로와상",
+      "productImg": "/images/@mockup/food/croissant.png",
+      "originalPrice": 50000,
+      "discountRate": 30,
+      "discountAmount": 15000,
+      "totalPrice": 35000,
+      "reviewNumber": 0,
+      "rating": 0
+    },
+    {
+      "productId": 32,
+      "productName": "얼음골 사과",
+      "productImg": "/images/@mockup/food/apple2.png",
+      "originalPrice": 60000,
+      "discountRate": 30,
+      "discountAmount": 18000,
+      "totalPrice": 42000,
+      "reviewNumber": 0,
+      "rating": 0
+    },
+    {
+      "productId": 34,
+      "productName": "꾸덕한 크림파스타",
+      "productImg": "/images/@mockup/food/pasta.png",
+      "originalPrice": 40000,
+      "discountRate": 25,
+      "discountAmount": 10000,
+      "totalPrice": 30000,
+      "reviewNumber": 0,
+      "rating": 0
+    }
+  ],
+  "totalQuantity": 15
+}
