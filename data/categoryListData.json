@@ -6,7 +6,7 @@
     {
       "productId": 27,
       "productName": "소화가 잘되는 브라우니",
-      "productImg": "/images/@mockup/food/brownie1.png",
+      "productImg": "https://ryushin01.github.io/connection/images/@mockup/food/brownie1.png",
       "originalPrice": 60000,
       "discountRate": 20,
       "discountAmount": 12000,
@@ -17,7 +17,7 @@
     {
       "productId": 28,
       "productName": "달지않은 컵케이크",
-      "productImg": "/images/@mockup/food/cupcake.png",
+      "productImg": "https://ryushin01.github.io/connection/images/@mockup/food/cupcake.png",
       "originalPrice": 50000,
       "discountRate": 25,
       "discountAmount": 12500,
@@ -28,7 +28,7 @@
     {
       "productId": 30,
       "productName": "레인보우 케이크",
-      "productImg": "/images/@mockup/food/cake-slice.png",
+      "productImg": "https://ryushin01.github.io/connection/images/@mockup/food/cake-slice.png",
       "originalPrice": 55000,
       "discountRate": 10,
       "discountAmount": 5500,
@@ -39,7 +39,7 @@
     {
       "productId": 33,
       "productName": "이거 먹으면 나한테 바나나",
-      "productImg": "/images/@mockup/food/banana.png",
+      "productImg": "https://ryushin01.github.io/connection/images/@mockup/food/banana.png",
       "originalPrice": 60000,
       "discountRate": 30,
       "discountAmount": 18000,
@@ -50,7 +50,7 @@
     {
       "productId": 25,
       "productName": "청송 꿀사과",
-      "productImg": "/images/@mockup/food/apple1.png",
+      "productImg": "https://ryushin01.github.io/connection/images/@mockup/food/apple1.png",
       "originalPrice": 50000,
       "discountRate": 10,
       "discountAmount": 5000,
@@ -61,7 +61,7 @@
     {
       "productId": 26,
       "productName": "장인이 만든 도넛",
-      "productImg": "/images/@mockup/food/donut.png",
+      "productImg": "https://ryushin01.github.io/connection/images/@mockup/food/donut.png",
       "originalPrice": 50000,
       "discountRate": 15,
       "discountAmount": 7500,
@@ -72,7 +72,7 @@
     {
       "productId": 29,
       "productName": "달달한 브라우니",
-      "productImg": "/images/@mockup/food/brownie2.png",
+      "productImg": "https://ryushin01.github.io/connection/images/@mockup/food/brownie2.png",
       "originalPrice": 40000,
       "discountRate": 30,
       "discountAmount": 12000,
@@ -83,7 +83,7 @@
     {
       "productId": 31,
       "productName": "바삭한 크로와상",
-      "productImg": "/images/@mockup/food/croissant.png",
+      "productImg": "https://ryushin01.github.io/connection/images/@mockup/food/croissant.png",
       "originalPrice": 50000,
       "discountRate": 30,
       "discountAmount": 15000,
@@ -94,7 +94,7 @@
     {
       "productId": 32,
       "productName": "얼음골 사과",
-      "productImg": "/images/@mockup/food/apple2.png",
+      "productImg": "https://ryushin01.github.io/connection/images/@mockup/food/apple2.png",
       "originalPrice": 60000,
       "discountRate": 30,
       "discountAmount": 18000,
@@ -105,7 +105,7 @@
     {
       "productId": 34,
       "productName": "꾸덕한 크림파스타",
-      "productImg": "/images/@mockup/food/pasta.png",
+      "productImg": "https://ryushin01.github.io/connection/images/@mockup/food/pasta.png",
       "originalPrice": 40000,
       "discountRate": 25,
       "discountAmount": 10000,
