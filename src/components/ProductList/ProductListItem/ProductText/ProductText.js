@@ -27,12 +27,17 @@ const ProductText = ({ productId, productName, originalPrice, totalPrice }) => {
 const ProductProductTextWrap = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   width: 100%;
+
   button {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
     padding: 12px;
+    text-align: left;
+
     h2,
     strong {
       display: block;
@@ -41,11 +46,15 @@ const ProductProductTextWrap = styled.div`
       white-space: nowrap;
       color: ${props => props.theme.grayscaleF};
     }
+
     h2 {
+      width: 100%;
       font-size: 24px;
       font-weight: 700;
     }
+
     strong {
+      width: 100%;
       font-size: 16px;
 
       span:first-child {

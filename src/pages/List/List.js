@@ -46,9 +46,10 @@ const List = () => {
   const calc_offset = (page - 1) * limit;
 
   const getListData = () => {
-    // fetch(
     fetch(
-      API_URL + `&sort=${sort}&offset=${calc_offset || 0}&limit=${limit || 10}`,
+      '/data/categoryListData.json',
+      // fetch(
+      //   API_URL + `&sort=${sort}&offset=${calc_offset || 0}&limit=${limit || 10}`,
       {
         method: 'GET',
         headers: {

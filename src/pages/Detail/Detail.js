@@ -31,13 +31,9 @@ const Detail = () => {
     quantity: quantity,
   };
 
-  console.log(productData);
-
   function getDetailData() {
-    // fetch('/data/detailData.json', {
-    // fetch(`http://10.58.52.203:8000/products/${intId}`, {
-    // fetch(`http://10.58.52.203:8000/products/${productId}`, {
-    fetch(`${API.LIST}/${productId}`, {
+    fetch('/data/detailData.json', {
+      // fetch(`${API.LIST}/${productId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +68,7 @@ const Detail = () => {
   useEffect(() => {
     setLoading(true);
     getDetailData();
-    getReviewData();
+    // getReviewData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

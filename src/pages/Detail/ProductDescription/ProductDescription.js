@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+// import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import styled from 'styled-components';
 
 const ProductDescription = ({ productDetailImages, latitude, longitude }) => {
@@ -14,7 +14,7 @@ const ProductDescription = ({ productDetailImages, latitude, longitude }) => {
           );
         })}
       </Description>
-      <Map
+      {/* <Map
         center={{ lat: latitude, lng: longitude }} // 지도의 중심 좌표
         style={{
           width: '80%',
@@ -25,7 +25,7 @@ const ProductDescription = ({ productDetailImages, latitude, longitude }) => {
         level={3} // 지도 확대 레벨
       >
         <MapMarker position={{ lat: latitude, lng: longitude }} />
-      </Map>
+      </Map> */}
     </>
   );
 };

@@ -20,8 +20,8 @@ const Main = () => {
   const globalCartQuantity = location.state;
 
   const getCategoryBandData = () => {
-    // fetch('/data/categoryBandData.json', {
-    fetch(`${API.CATEGORY_BAND}`, {
+    fetch('/data/categoryBandData.json', {
+      // fetch(`${API.CATEGORY_BAND}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -43,8 +43,8 @@ const Main = () => {
   };
 
   const getSellerBandData = () => {
-    // fetch('/data/sellerBandData.json', {
-    fetch(`${API.SELLER_BAND}`, {
+    fetch('/data/sellerBandData.json', {
+      // fetch(`${API.SELLER_BAND}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ const Main = () => {
   useEffect(() => {
     setLoading(true);
     getCategoryBandData();
-    getSellerBandData();
+    // getSellerBandData();
   }, []);
 
   return (

@@ -103,8 +103,8 @@ const ProductImageWrap = styled.div`
 `;
 
 const ProductImg = styled.img`
-  width: 12vw;
-  height: 12vw;
+  width: 10vw;
+  height: 10vw;
   object-fit: contain;
   transition: transform 0.4s ease-in-out;
 `;

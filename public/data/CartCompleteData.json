@@ -1,35 +1,13 @@
 {
   "message": "Order_Item",
-  "data": [
-    {
-      "userId": 1,
-      "userIsPremium": 1,
-      "products": [
-        {
-          "quantity": 2,
-          "productId": 2,
-          "totalPrice": 9000,
-          "productName": "담배"
-        },
-        {
-          "quantity": 2,
-          "productId": 1,
-          "totalPrice": 9000,
-          "productName": "커피"
-        },
-        {
-          "quantity": 10,
-          "productId": 3,
-          "totalPrice": 90000,
-          "productName": "컴퓨터"
-        },
-        {
-          "quantity": 1,
-          "productId": 4,
-          "totalPrice": 5000,
-          "productName": "전통주"
-        }
-      ]
-    }
-  ]
+  "data": {
+    "products": [
+      {
+        "quantity": 2,
+        "productId": 42,
+        "totalPrice": 32000000,
+        "productName": "무근본 데스크탑"
+      }
+    ]
+  }
 }

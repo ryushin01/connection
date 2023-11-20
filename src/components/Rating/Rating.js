@@ -2,7 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const Rating = ({ rating }) => {
-  return <RatingWrap>{rating}</RatingWrap>;
+  const calcRating = Math.round(rating);
+  return <RatingWrap>{calcRating}</RatingWrap>;
 };
 
 const FlexCenter = css`

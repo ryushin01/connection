@@ -58,8 +58,8 @@ const Order = ({ points }) => {
   }
 
   const getUserData = () => {
-    fetch(`${API.CART}/getuserinfo`, {
-      // fetch(`/data/CartGetUserInfoData.json`, {
+    // fetch(`${API.CART}/getuserinfo`, {
+    fetch(`/data/CartGetUserInfoData.json`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -105,8 +105,8 @@ const Order = ({ points }) => {
 
   // 통합 함수
   const getOrderData = () => {
-    // fetch('http://10.58.52.176:8000/carts/complete', {
-    fetch(`${API_URL}`, {
+    fetch('/data/CartCompleteData.json', {
+      // fetch(`${API_URL}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
