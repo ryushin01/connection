@@ -32,7 +32,7 @@ const Detail = () => {
   };
 
   function getDetailData() {
-    fetch('/data/detailData.json', {
+    fetch('https://ryushin01.github.io/connection/data/detailData.json', {
       // fetch(`${API.LIST}/${productId}`, {
       method: 'GET',
       headers: {
@@ -50,7 +50,6 @@ const Detail = () => {
   }
 
   function getReviewData() {
-    // fetch(`http://10.58.52.203:8000/reviews/${productId}`, {
     fetch(`${API.REVIEWS}/${productId}`, {
       method: 'GET',
       headers: {

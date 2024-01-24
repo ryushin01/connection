@@ -41,11 +41,11 @@ const ThemeSwitcherWrap = styled.div`
     background-position: center;
 
     &[value='LIGHT'] {
-      background-image: url(/images/ic_dark_theme.png);
+      background-image: url(https://ryushin01.github.io/connection/images/ic_dark_theme.png);
     }
 
     &[value='DARK'] {
-      background-image: url(/images/ic_light_theme.png);
+      background-image: url(https://ryushin01.github.io/connection/images/ic_light_theme.png);
     }
   }
 `;

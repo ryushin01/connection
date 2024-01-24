@@ -45,8 +45,6 @@ const SellerSignUp = props => {
     });
   };
 
-  console.log(upLoadedImage);
-
   const postSellerInfoSubmitBtn = e => {
     e.preventDefault();
 

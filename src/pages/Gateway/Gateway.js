@@ -112,32 +112,32 @@ const Section = styled.section`
 
   &:first-child {
     li:nth-child(1) {
-      background-image: url(/images/gateway/bg_food.jpg);
+      background-image: url(https://ryushin01.github.io/connection/images/gateway/bg_food.jpg);
     }
     li:nth-child(2) {
-      background-image: url(/images/gateway/bg_digital.jpg);
+      background-image: url(https://ryushin01.github.io/connection/images/gateway/bg_digital.jpg);
     }
     li:nth-child(3) {
-      background-image: url(/images/gateway/bg_beauty.jpg);
+      background-image: url(https://ryushin01.github.io/connection/images/gateway/bg_beauty.jpg);
     }
     li:nth-child(4) {
-      background-image: url(/images/gateway/bg_baby.jpg);
+      background-image: url(https://ryushin01.github.io/connection/images/gateway/bg_baby.jpg);
     }
   }
 
   &:last-child {
     li:nth-child(1) {
-      background-image: url(/images/gateway/bg_craft.jpg);
+      background-image: url(https://ryushin01.github.io/connection/images/gateway/bg_craft.jpg);
     }
     li:nth-child(2) {
-      background-image: url(/images/gateway/bg_pet.jpg);
+      background-image: url(https://ryushin01.github.io/connection/images/gateway/bg_pet.jpg);
       background-position: center 30%;
     }
     li:nth-child(3) {
-      background-image: url(/images/gateway/bg_sports.jpg);
+      background-image: url(https://ryushin01.github.io/connection/images/gateway/bg_sports.jpg);
     }
     li:nth-child(4) {
-      background-image: url(/images/gateway/bg_living.jpg);
+      background-image: url(https://ryushin01.github.io/connection/images/gateway/bg_living.jpg);
       background-position: center 70%;
     }
   }

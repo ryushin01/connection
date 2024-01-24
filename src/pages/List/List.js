@@ -46,18 +46,15 @@ const List = () => {
   const calc_offset = (page - 1) * limit;
 
   const getListData = () => {
-    fetch(
-      '/data/categoryListData.json',
+    fetch('https://ryushin01.github.io/connection/data/categoryListData.json', {
       // fetch(
       //   API_URL + `&sort=${sort}&offset=${calc_offset || 0}&limit=${limit || 10}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: localStorage.getItem('accessToken'),
-        },
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken'),
       },
-    )
+    })
       .then(response => response.json())
       .then(result => {
         if (result.message === 'SUCCESS') {

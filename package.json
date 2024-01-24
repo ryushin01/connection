@@ -1,7 +1,7 @@
 {
-  "name": "49-3rd-connection-frontend",
+  "name": "connection",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "https://ryushin01.github.io/connection",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -22,6 +22,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -48,6 +50,7 @@
   "devDependencies": {
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "gh-pages": "^6.1.0",
     "prettier": "^3.0.3"
   }
 }

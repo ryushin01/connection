@@ -19,7 +19,10 @@ const Header = ({ isKakao, points, cartCount }) => {
         <LeftSection>
           <Logo>
             <Link to="/main">
-              <img src="/images/logo.png" alt="커넥션 로고" />
+              <img
+                src="https://ryushin01.github.io/connection/images/logo.png"
+                alt="커넥션 로고"
+              />
               <span>커넥션</span>
             </Link>
           </Logo>

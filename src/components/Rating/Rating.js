@@ -25,7 +25,8 @@ const RatingWrap = styled.span`
     display: block;
     width: 24px;
     height: 24px;
-    background: url(/images/common/icon_star.png) no-repeat center/cover;
+    background: url(https://ryushin01.github.io/connection/images/common/icon_star.png)
+      no-repeat center/cover;
   }
 `;
 

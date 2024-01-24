@@ -24,8 +24,6 @@ const Purchase = ({ productId, productName, totalPrice, onClose }) => {
     quantity: quantity,
   };
 
-  console.log(productData);
-
   const finalPrice = totalPrice * quantity;
 
   const cartProcess = () => {

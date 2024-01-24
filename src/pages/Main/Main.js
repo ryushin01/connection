@@ -12,7 +12,7 @@ import Band from '../../components/Band/Band';
  */
 
 const Main = () => {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [categoryBandData, setCategoryBandData] = useState([]);
   const [sellerBandData, setSellerBandData] = useState([]);
   const location = useLocation();
@@ -20,8 +20,8 @@ const Main = () => {
   const globalCartQuantity = location.state;
 
   const getCategoryBandData = () => {
-    fetch('/data/categoryBandData.json', {
-      // fetch(`${API.CATEGORY_BAND}`, {
+    // fetch(`${API.CATEGORY_BAND}`, {
+    fetch('https://ryushin01.github.io/connection/data/categoryBandData.json', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const Main = () => {
         // mock data
         // setCategoryBandData(result);
 
-        setLoading(false);
+        // setLoading(false);
       });
   };
 
@@ -61,19 +61,19 @@ const Main = () => {
         // mock data
         // setSellerBandData(result);
 
-        setLoading(false);
+        // setLoading(false);
       });
   };
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     getCategoryBandData();
     // getSellerBandData();
   }, []);
 
   return (
     <>
-      {loading && <Loading />}
+      {/* {loading && <Loading />} */}
       <main id="main">
         <BigBanner />
         <div>

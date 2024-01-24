@@ -36,8 +36,9 @@ const SelectCounterWrap = styled.div`
     height: 32px;
     font-size: 16px;
     border-radius: 4px;
-    background: #fff url(/images/cart/check-solid.svg) no-repeat left 8px
-      center/16px;
+    background: #fff
+      url(https://ryushin01.github.io/connection/images/cart/check-solid.svg)
+      no-repeat left 8px center/16px;
     appearance: none;
     text-align: center;
   }

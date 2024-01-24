@@ -350,15 +350,6 @@ const SectionTable = styled.table`
   }
 `;
 
-const RemainingPoints = styled.span`
-  margin-left: 8px;
-
-  strong {
-    color: ${props => props.theme.secondaryColor};
-    font-weight: 700;
-  }
-`;
-
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;

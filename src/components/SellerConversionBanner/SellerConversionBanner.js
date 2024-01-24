@@ -31,7 +31,7 @@ const SellerConversionBannerWrap = styled.section`
       content: '';
       width: 32px;
       height: 32px;
-      background-image: url(/images/common/icon_best_seller.png);
+      background-image: url(https://ryushin01.github.io/connection/images/common/icon_best_seller.png);
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
