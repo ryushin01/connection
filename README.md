@@ -1,8 +1,8 @@
 > 이 프로젝트는 위치 기반 쇼핑몰 서비스 구축을 목표로 세웠습니다. 프론트엔드 개발자 2인과 백엔드 개발자 3인이 참여했고, 다양한 기능을 구현하는 것을 최우선 과제로 삼았습니다. 프로젝트 진행에 관한 내용은 아래 회고록 링크를 참고해주시면 됩니다.
 
-- [커넥션 프로젝트 Velog 회고록](https://velog.io/@ryushin0/3%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D)
-
 ![connection_1](https://github.com/ryushin01/connection/assets/141554987/8b947529-5867-46fa-b259-c6f95a54ba89)
+
+- [커넥션 프로젝트 Velog 회고록](https://velog.io/@ryushin0/3%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D)
 
 - 기술 스택
 
